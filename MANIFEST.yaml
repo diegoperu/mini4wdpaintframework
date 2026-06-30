@@ -1,0 +1,254 @@
+# Mini4WD Manual SDK — Manifest
+# Version: 2.2.0
+# Machine-readable SDK descriptor.
+# Reference: ADR-015 (STYLE_DECISIONS.md)
+# Human-readable overview: README.md
+
+manifest_version: "1.0"
+
+sdk:
+  name: "Mini4WD Manual SDK"
+  version: "2.2.0"
+  description: "Open-source framework for generating professional illustrated painting manuals for Tamiya Mini4WD models using any AI model"
+  license: "Apache-2.0"
+  homepage: "https://github.com/diegoperu/mini4wdpaintframework"
+  changelog: "CHANGELOG.md"
+  roadmap: "ROADMAP.md"
+
+# ============================================================
+# DIRECTORY MAP
+# ============================================================
+directory_map:
+  Core/:
+    role: "Authoritative specification layer"
+    authoritative: true
+    modify_requires_adr: true
+    key_documents:
+      - "DESIGN_LANGUAGE.md"
+      - "STYLE_GUIDE.md"
+      - "PAGE_SYSTEM.md"
+      - "COMPONENT_SYSTEM.md"
+      - "AI_OPERATING_RULES.md"
+      - "QA_SYSTEM.md"
+
+  PromptEngine/:
+    role: "AI generation prompt templates"
+    depends_on: ["Core/", "Assets/DesignSystem/Tokens/"]
+    model_agnostic: true
+
+  Templates/:
+    role: "Project initialization templates"
+    copy_before_use: true
+
+  Projects/:
+    role: "Per-model project workspaces"
+    one_directory_per_model: true
+
+  Assets/:
+    role: "Design system, reference imagery, approved outputs"
+    subdirectories:
+      - "DesignSystem/"
+      - "ReferenceModels/"
+      - "ApprovedManual/"
+      - "Examples/"
+
+  Build/:
+    role: "Production pipeline documentation"
+    key_documents: ["Pipeline.md"]
+
+  Config/:
+    role: "Machine-readable runtime configuration"
+    key_files: ["sdk.yaml", "render.yaml", "pdf.yaml", "quality.yaml"]
+
+  Tests/:
+    role: "SDK validation test suites"
+    execution: "human-executable"
+    automated: false  # Planned: v3.0.0
+
+  Knowledge/:
+    role: "Technical painting reference library"
+    model_agnostic: true
+    no_prompts: true
+
+  Docs/:
+    role: "Supplementary documentation and migration guides"
+
+# ============================================================
+# SUPPORTED MANUAL TYPES
+# ============================================================
+supported_manual_types:
+  - id: "standard"
+    pages: ["P001", "P002", "P003", "P004", "P005", "P006", "P007", "P008", "P010"]
+    description: "Standard 9-page painting manual"
+
+  - id: "premium"
+    pages: ["P001", "P002", "P003", "P004", "P005", "P006", "P007", "P008", "P009", "P010"]
+    description: "Full 10-page manual including premium variant"
+    requires: "premiumVariant.enabled: true in PROJECT.yaml"
+
+# ============================================================
+# PAGE REGISTRY (permanent IDs)
+# ============================================================
+pages:
+  - id: "P001"
+    name: "Cover"
+    required: true
+    prompt_file: "PromptEngine/Cover.md"
+  - id: "P002"
+    name: "ColorScheme"
+    required: true
+    prompt_file: "PromptEngine/ColorScheme.md"
+  - id: "P003"
+    name: "Materials"
+    required: true
+    prompt_file: "PromptEngine/Materials.md"
+  - id: "P004"
+    name: "Preparation"
+    required: true
+    prompt_file: "PromptEngine/Preparation.md"
+  - id: "P005"
+    name: "Painting"
+    required: true
+    prompt_file: "PromptEngine/Painting.md"
+  - id: "P006"
+    name: "Masking"
+    required: true
+    prompt_file: "PromptEngine/Masking.md"
+  - id: "P007"
+    name: "Details"
+    required: true
+    prompt_file: "PromptEngine/Details.md"
+  - id: "P008"
+    name: "Decals"
+    required: true
+    prompt_file: "PromptEngine/Decals.md"
+  - id: "P009"
+    name: "PremiumVariant"
+    required: false
+    prompt_file: "PromptEngine/Premium.md"
+    conditional: "PROJECT.yaml premiumVariant.enabled == true"
+  - id: "P010"
+    name: "FinalChecklist"
+    required: true
+    prompt_file: "PromptEngine/FinalChecklist.md"
+
+# ============================================================
+# COMPONENT REGISTRY (permanent IDs)
+# ============================================================
+components:
+  - id: "C001"
+    name: "Header"
+  - id: "C002"
+    name: "Footer"
+  - id: "C003"
+    name: "Palette"
+  - id: "C004"
+    name: "ShoppingList"
+  - id: "C005"
+    name: "PaintSequence"
+  - id: "C006"
+    name: "Callout"
+  - id: "C007"
+    name: "ExplodedView"
+  - id: "C008"
+    name: "Warning"
+  - id: "C009"
+    name: "Tips"
+  - id: "C010"
+    name: "PaintLegend"
+  - id: "C011"
+    name: "PaintCodeBox"
+  - id: "C012"
+    name: "Zoom"
+  - id: "C013"
+    name: "StepNumber"
+  - id: "C014"
+    name: "TimeBox"
+  - id: "C015"
+    name: "Notes"
+next_available_component_id: "C016"
+
+# ============================================================
+# MINIMUM AI REQUIREMENTS
+# ============================================================
+minimum_ai_requirements:
+  prompt_engine:
+    type: "instruction-following LLM"
+    minimum_context_window_tokens: 4000
+    required_capabilities:
+      - "Follow multi-section structured prompts"
+      - "Substitute template tokens consistently"
+      - "Generate structured layout descriptions"
+      - "Respect explicit constraints (no inventing data)"
+    tested_models:
+      - "GPT-4 and later"
+      - "Claude 3 Sonnet and later"
+      - "Gemini 1.5 Pro and later"
+
+  render_engine:
+    type: "AI image generation"
+    required_capabilities:
+      - "White background generation"
+      - "Product photography style"
+      - "Specific camera angle control"
+      - "Resolution control (minimum 2480x3508px for cover)"
+    tested_models:
+      - "DALL-E 3"
+      - "Midjourney v6"
+      - "Stable Diffusion XL"
+      - "Adobe Firefly"
+
+# ============================================================
+# COMPATIBILITY MATRIX
+# ============================================================
+compatibility:
+  project_yaml_versions:
+    - sdk_version: "2.2.0"
+      compatible: true
+    - sdk_version: "2.1.0"
+      compatible: true
+      notes: "All v2.1.0 PROJECT.yaml files work in v2.2.0 without modification"
+    - sdk_version: "2.0.0"
+      compatible: true
+      notes: "Use Docs/migration/v1-to-v2.md for v1.x -> v2.x"
+    - sdk_version: "1.0.0"
+      compatible: false
+      migration: "Docs/migration/v1-to-v2.md"
+
+  breaking_changes_since:
+    "2.0.0": "Component ID format changed (COMP_ to C###), PROJECT.yaml field renames"
+    "2.1.0": "None"
+    "2.2.0": "None"
+
+# ============================================================
+# DESIGN TOKENS
+# ============================================================
+design_tokens:
+  source_file: "Assets/DesignSystem/Tokens/tokens.example.yaml"
+  schema_file: "Assets/DesignSystem/Tokens/tokens.schema.yaml"
+  required_tokens:
+    - "tokens.colors.primary.VioletPrimary"
+    - "tokens.colors.neutral.White"
+    - "tokens.colors.semantic.RedWarning"
+    - "tokens.typography.fonts.TitleFont"
+    - "tokens.typography.fonts.BodyFont"
+    - "tokens.sizing.HeaderHeight"
+    - "tokens.sizing.FooterHeight"
+
+# ============================================================
+# QUALITY ASSURANCE
+# ============================================================
+qa:
+  checklist_file: "Core/QA_SYSTEM.md"
+  total_items: 110
+  blocking_items: 45
+  test_suites:
+    - "Tests/FrameworkIntegrity.md"
+    - "Tests/PromptValidation.md"
+    - "Tests/LayoutValidation.md"
+    - "Tests/NamingValidation.md"
+    - "Tests/ColorValidation.md"
+    - "Tests/PDFValidation.md"
+    - "Tests/AssetsValidation.md"
+  definition_of_done: "Core/DEFINITION_OF_DONE.md"
+  approval_required: true

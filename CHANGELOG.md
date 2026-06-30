@@ -16,6 +16,26 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [2.2.0] - 2024-06-30
+
+### Added
+- `Build/` directory with `Pipeline.md` — complete 7-phase production pipeline documentation
+- `Config/` directory with `sdk.yaml`, `render.yaml`, `pdf.yaml`, `quality.yaml` — machine-readable runtime configuration for all SDK processes
+- `Tests/` directory with 7 validation test suites (FrameworkIntegrity, PromptValidation, LayoutValidation, NamingValidation, ColorValidation, PDFValidation, AssetsValidation)
+- `Core/AI_OPERATING_RULES.md` — 58 mandatory behavioral rules for AI models operating within the SDK
+- `Knowledge/` directory with 10 technical reference documents (Paints, Masking, Preparation, Painting, Decals, ClearCoat, Troubleshooting, Glossary, FAQ, BestPractices)
+- `MANIFEST.yaml` — SDK manifest with directory map, supported types, AI requirements, compatibility matrix
+
+### Changed
+- `STYLE_DECISIONS.md` — converted to full ADR registry format; added ADR-011 through ADR-015
+- All existing documents retain full backward compatibility
+
+### Migration
+No breaking changes. All v2.1.0 projects are fully compatible with v2.2.0.
+Optionally adopt `Config/sdk.yaml` for schema validation of PROJECT.yaml files.
+
+---
+
 ## [2.1.0] - 2024-01-15
 
 ### Added

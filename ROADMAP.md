@@ -14,7 +14,19 @@ The SDK must remain model-agnostic at the AI layer. No feature will be added tha
 
 ---
 
-## v2.2.0 — Planned
+## Status Update — v2.2.0 [RELEASED]
+
+The following v2.2.0 features are now complete:
+- ✅ Build system (Build/Pipeline.md)
+- ✅ Configuration layer (Config/)
+- ✅ Test suite framework (Tests/)
+- ✅ AI Operating Rules (Core/AI_OPERATING_RULES.md)
+- ✅ Knowledge Base (Knowledge/)
+- ✅ MANIFEST.yaml
+
+---
+
+## v2.2.0 — Planned (original scope, partially superseded above)
 
 **Target:** Q3 2024
 
@@ -118,6 +130,69 @@ The SDK must remain model-agnostic at the AI layer. No feature will be added tha
    - **Affected components:** Which Core/ documents, pages, or components are involved?
    - **Breaking?:** Would this require a MAJOR version bump?
 4. Maintainers will triage and assign to a milestone or mark `wontfix` with a reason.
+
+---
+
+## v2.3.0 — Automation & Tooling (Updated Scope)
+
+**Target:** Q4 2024  
+**Theme:** Automation & Tooling
+
+### Features
+- `Build/scripts/` — Shell/Python scripts for token substitution automation
+- `Assets/DesignSystem/Icons/` — SVG icon library (warning, tip, info, brush, airbrush, clock, check, star, sandpaper, decal)
+- Multi-language support: `Templates/PROJECT.yaml` language field activation for EN/JA/FR/DE
+- `Config/environments/` — Local environment overrides (dev, staging, production)
+- CI/CD integration guide (`Build/CI.md`)
+- Automated QA report generator specification
+- Extended Page Set (P011–P015)
+- Component Extensions (C016–C020)
+
+### Breaking Changes
+None planned.
+
+---
+
+## v3.0.0 — Platform & Community
+
+**Target:** 2025  
+**Theme:** Platform & Community
+
+### Features
+- Web-based prompt runner (browser tool for non-technical users)
+- Plugin system for custom page types (P011+)
+- Community model library (centralized approved manuals registry)
+- Video manual support (animated step-by-step)
+- Automated PDF pipeline (headless Chromium or Puppeteer)
+- API specification for SDK integrations
+- Token Inheritance: Projects can override individual tokens without duplicating the full token file
+
+### Breaking Changes
+- Plugin API will require new PROJECT.yaml fields (migration guide will be provided)
+- Component ID namespace may be extended with plugin prefixes
+- `tokenOverrides` block in PROJECT.yaml changes token resolution order
+
+---
+
+## Long-Term Vision (Updated)
+
+The Mini4WD Manual SDK aims to become the definitive open-source editorial platform for scale model painting documentation — not limited to Mini4WD but extensible to any Tamiya kit family.
+
+By v4.0.0, the SDK should support:
+- 500+ approved model manuals
+- 6+ languages
+- Automated end-to-end pipeline (PROJECT.yaml → published PDF in one command)
+- Community governance model
+
+---
+
+## Contributing to the Roadmap
+
+To propose a feature for an upcoming version:
+1. Open a GitHub Issue with label `roadmap`
+2. Describe the feature, use case, and how it fits the SDK philosophy (`Core/DESIGN_LANGUAGE.md`)
+3. Reference any relevant ADRs in `STYLE_DECISIONS.md`
+4. A maintainer will triage and assign to a version milestone
 
 ---
 

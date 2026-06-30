@@ -1,0 +1,155 @@
+# Mini4WD Manual SDK — Render Engine Configuration
+# Version: 2.2.0
+# Reference: Core/RENDER_GUIDE.md, Build/Pipeline.md §Phase 3
+#
+# These parameters encode the numeric values described in RENDER_GUIDE.md.
+# When RENDER_GUIDE.md changes, this file must be updated in the same commit.
+
+render:
+  # ============================================================
+  # GLOBAL RENDER SETTINGS
+  # ============================================================
+  background:
+    color: "#FFFFFF"      # MANDATORY — never change — see ADR-006 in STYLE_DECISIONS.md
+    format: "solid"       # solid only — no gradients, environments, or bokeh
+
+  # ============================================================
+  # RESOLUTION REQUIREMENTS
+  # Reference: Core/RENDER_GUIDE.md §5
+  # ============================================================
+  resolution:
+    cover:
+      width_px: 2480
+      height_px: 3508
+      dpi: 300
+      description: "A4 at 300dpi — minimum for print-ready cover"
+      tolerance_px: 10
+
+    body_page:
+      width_px: 1240
+      height_px: 1754
+      dpi: 150
+      description: "A4 at 150dpi — standard body page"
+      tolerance_px: 5
+
+    detail_render:
+      width_px: 800
+      height_px: 800
+      dpi: 150
+      description: "Square close-up for C012 Zoom panels"
+      tolerance_px: 10
+
+    orthographic:
+      width_px: 1000
+      height_px: 800
+      dpi: 150
+      description: "Front/side/top three-view for P002"
+      tolerance_px: 10
+
+  # ============================================================
+  # CAMERA ANGLES
+  # Reference: Core/RENDER_GUIDE.md §2
+  # ============================================================
+  angles:
+    cover:
+      name: "3/4 front-left"
+      h_rotation_deg: 45      # Horizontal rotation from direct front
+      v_elevation_deg: 15     # Vertical elevation above horizon
+      description: "Standard cover hero shot angle"
+      used_by: ["P001"]
+
+    orthographic_front:
+      name: "orthographic front"
+      h_rotation_deg: 0
+      v_elevation_deg: 0
+      projection: "orthographic"
+      used_by: ["P002"]
+
+    orthographic_side:
+      name: "orthographic right side"
+      h_rotation_deg: 90
+      v_elevation_deg: 0
+      projection: "orthographic"
+      used_by: ["P002"]
+
+    orthographic_top:
+      name: "orthographic top"
+      h_rotation_deg: 0
+      v_elevation_deg: 90
+      projection: "orthographic"
+      used_by: ["P002"]
+
+    detail_45:
+      name: "close-up 45°"
+      h_rotation_deg: 45
+      v_elevation_deg: 30
+      zoom_factor: 3.0
+      description: "Used for detail and masking close-ups"
+      used_by: ["P006", "P007", "P008"]
+
+  # ============================================================
+  # LIGHTING RIGS
+  # Reference: Core/RENDER_GUIDE.md §3
+  # ============================================================
+  lighting_rigs:
+    studio_neutral:
+      key:
+        angle: "45° top-left"
+        intensity: 1.0
+      fill:
+        angle: "45° bottom-right"
+        intensity: 0.5
+      rim:
+        angle: "back-right"
+        intensity: 0.3
+      description: "Default — clean, balanced, professional"
+      use_for: ["P001", "P002", "P003"]
+
+    drama:
+      key:
+        angle: "top-right"
+        intensity: 1.0
+      fill:
+        angle: "minimal"
+        intensity: 0.15
+      rim:
+        angle: "none"
+        intensity: 0.0
+      description: "High contrast for premium/hero renders"
+      use_for: ["P009"]
+
+    detail:
+      key:
+        angle: "front-soft-box"
+        intensity: 0.8
+      fill:
+        angle: "90° left"
+        intensity: 0.6
+      rim:
+        angle: "none"
+        intensity: 0.0
+      description: "Flat, revealing — shows texture and finish clearly"
+      use_for: ["P004", "P005", "P006", "P007", "P008"]
+
+  # ============================================================
+  # OUTPUT FORMAT
+  # ============================================================
+  output:
+    format: "PNG"           # PNG for all manual pages (lossless)
+    reference_format: "JPG" # JPG for reference photography only
+    color_space: "sRGB"
+    bit_depth: 8
+    compression_level: 9    # Maximum PNG compression (lossless)
+    alpha_channel: true     # Required for transparent-background variants
+
+  # ============================================================
+  # QUALITY REJECTION THRESHOLDS
+  # Used by Tests/AssetsValidation.md and QA phase
+  # ============================================================
+  quality:
+    max_background_rgb_deviation: 5    # Max RGB distance from 255,255,255 — reject if exceeded
+    min_sharpness_estimate: 0.7        # Subjective 0–1 scale
+    reject_motion_blur: true
+    reject_visible_artifacts: true
+    reject_colored_background: true    # Any non-white background is an automatic rejection
+    reject_watermarks: true

@@ -1,0 +1,181 @@
+# Mini4WD Manual SDK — Global SDK Configuration
+# Version: 2.2.0
+# Reference: Build/Pipeline.md, Core/WORKFLOW.md, Core/MANUAL_SYSTEM.md
+#
+# This file is the machine-readable registry for all SDK constants.
+# Human-readable specifications live in Core/.
+# Do not duplicate content between this file and Core/ documents.
+
+sdk:
+  name: "Mini4WD Manual SDK"
+  version: "2.2.0"
+
+  # ============================================================
+  # PROJECT SCHEMA VALIDATION
+  # Reference: Templates/PROJECT.yaml (field definitions)
+  # ============================================================
+  project_schema:
+    required_fields:
+      - "sdk_version"
+      - "project.modelName"
+      - "project.modelSlug"
+      - "project.year"
+      - "project.language"
+      - "project.version"
+      - "project.createdAt"
+      - "project.updatedAt"
+      - "paintScheme.name"
+      - "paintScheme.colors"
+      - "paths.coverRenderPath"
+      - "paths.outputDir"
+      - "qa.status"
+      - "qa.qaLogPath"
+
+    # Validation patterns
+    model_slug_pattern: "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+    year_pattern: "^[0-9]{4}$"
+    version_pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    hex_color_pattern: "^#[0-9A-Fa-f]{6}$"
+
+    supported_languages:
+      - "it"    # Italian
+      - "en"    # English
+      - "ja"    # Japanese
+      - "fr"    # French
+      - "de"    # German
+      - "es"    # Spanish
+
+    supported_qa_statuses:
+      - "draft"
+      - "in-review"
+      - "approved"
+
+    supported_finish_types:
+      - "gloss"
+      - "matte"
+      - "satin"
+      - "metallic"
+      - "pearl"
+      - "flat"
+
+  # ============================================================
+  # DIRECTORY CONVENTIONS
+  # Reference: Core/NAMING_CONVENTION.md
+  # ============================================================
+  directories:
+    projects: "Projects/"
+    templates: "Templates/"
+    prompt_engine: "PromptEngine/"
+    core: "Core/"
+    build: "Build/"
+    config: "Config/"
+    tests: "Tests/"
+    knowledge: "Knowledge/"
+    docs: "Docs/"
+    approved_manual: "Assets/ApprovedManual/"
+    reference_models: "Assets/ReferenceModels/"
+    design_system: "Assets/DesignSystem/"
+    design_tokens: "Assets/DesignSystem/Tokens/tokens.example.yaml"
+    token_schema: "Assets/DesignSystem/Tokens/tokens.schema.yaml"
+    examples: "Assets/Examples/"
+
+  # ============================================================
+  # SUPPORTED PAGE IDs
+  # Reference: Core/PAGE_SYSTEM.md
+  # IDs are PERMANENT — never renumber or reuse
+  # ============================================================
+  pages:
+    - id: "P001"
+      name: "Cover"
+      prompt_file: "PromptEngine/Cover.md"
+      required: true
+    - id: "P002"
+      name: "ColorScheme"
+      prompt_file: "PromptEngine/ColorScheme.md"
+      required: true
+    - id: "P003"
+      name: "Materials"
+      prompt_file: "PromptEngine/Materials.md"
+      required: true
+    - id: "P004"
+      name: "Preparation"
+      prompt_file: "PromptEngine/Preparation.md"
+      required: true
+    - id: "P005"
+      name: "Painting"
+      prompt_file: "PromptEngine/Painting.md"
+      required: true
+    - id: "P006"
+      name: "Masking"
+      prompt_file: "PromptEngine/Masking.md"
+      required: true
+    - id: "P007"
+      name: "Details"
+      prompt_file: "PromptEngine/Details.md"
+      required: true
+    - id: "P008"
+      name: "Decals"
+      prompt_file: "PromptEngine/Decals.md"
+      required: true
+    - id: "P009"
+      name: "PremiumVariant"
+      prompt_file: "PromptEngine/Premium.md"
+      required: false     # conditional: premiumVariant.enabled == true
+    - id: "P010"
+      name: "FinalChecklist"
+      prompt_file: "PromptEngine/FinalChecklist.md"
+      required: true
+  next_available_page_id: "P011"
+
+  # ============================================================
+  # SUPPORTED COMPONENT IDs
+  # Reference: Core/COMPONENT_SYSTEM.md
+  # IDs are PERMANENT — never renumber or reuse
+  # ============================================================
+  components:
+    permanent_ids:
+      - id: "C001"
+        name: "Header"
+      - id: "C002"
+        name: "Footer"
+      - id: "C003"
+        name: "Palette"
+      - id: "C004"
+        name: "Shopping List"
+      - id: "C005"
+        name: "Paint Sequence"
+      - id: "C006"
+        name: "Callout"
+      - id: "C007"
+        name: "Exploded View"
+      - id: "C008"
+        name: "Warning"
+      - id: "C009"
+        name: "Tips"
+      - id: "C010"
+        name: "Paint Legend"
+      - id: "C011"
+        name: "Paint Code Box"
+      - id: "C012"
+        name: "Zoom"
+      - id: "C013"
+        name: "Step Number"
+      - id: "C014"
+        name: "Time Box"
+      - id: "C015"
+        name: "Notes"
+    next_available_id: "C016"   # Reserve C016+ for future components
+
+  # ============================================================
+  # FILE NAMING PATTERNS
+  # Reference: Core/NAMING_CONVENTION.md
+  # ============================================================
+  naming:
+    page_output_pattern: "{modelSlug}_{pageId}_{variant}_v{n}.png"
+    cover_render: "cover_3q.png"
+    pdf_screen_pattern: "{modelSlug}_manual_screen_v{n}.pdf"
+    pdf_print_pattern: "{modelSlug}_manual_print_v{n}.pdf"
+    pdf_archive_pattern: "{modelSlug}_manual_archive_v{n}.pdf"
+    qa_log_path: "Notes/qa_log.md"
+    checksum_file: "checksums.sha256"
+    project_config: "PROJECT.yaml"

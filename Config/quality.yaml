@@ -1,0 +1,93 @@
+# Mini4WD Manual SDK — QA Validation Configuration
+# Version: 2.2.0
+# Reference: Core/QA_SYSTEM.md, Core/DEFINITION_OF_DONE.md, Build/Pipeline.md §Phase 4
+#
+# These values are used by Tests/ protocols and the QA phase in Build/Pipeline.md.
+# The authoritative QA checklist is in Core/QA_SYSTEM.md — this file encodes the thresholds.
+
+quality:
+  # ============================================================
+  # FAILURE CLASSIFICATION
+  # Blocking: pipeline cannot advance until fixed
+  # Non-blocking: should fix, can proceed with documented exception
+  # Reference: Core/QA_SYSTEM.md
+  # ============================================================
+  blocking_qa_ids:
+    # Layout
+    - id: "QA-001"
+      description: "Page size must be A4 or US-Letter"
+    - id: "QA-003"
+      description: "All margins within tolerance"
+    # Rendering
+    - id: "QA-017"
+      description: "Background must be pure white #FFFFFF"
+    - id: "QA-018"
+      description: "Resolution meets minimum per Config/render.yaml"
+    - id: "QA-019"
+      description: "No motion blur in renders"
+    # Components
+    - id: "QA-061"
+      description: "C001 Header present on every page"
+    - id: "QA-062"
+      description: "C002 Footer present on every page"
+    # Prompt output
+    - id: "QA-071"
+      description: "No unresolved {{token}} placeholders in output"
+    # Content
+    - id: "QA-101"
+      description: "No placeholder text (Lorem ipsum, TODO, [PLACEHOLDER])"
+
+  non_blocking_qa_ids:
+    - id: "QA-009"
+      description: "Consistent gutter widths — warn only, measure visually"
+    - id: "QA-033"
+      description: "Orphan/widow control in body text — warn only"
+
+  # ============================================================
+  # NUMERIC THRESHOLDS
+  # ============================================================
+  thresholds:
+    # Color
+    background_white_tolerance_rgb: 5      # Max per-channel RGB distance from 255 before fail
+    color_hex_regex: "^#[0-9A-Fa-f]{6}$"  # Pattern all hex values must match
+
+    # Typography
+    min_body_font_size_pt: 9               # QA-032: below this is a fail
+    max_title_font_size_pt: 72             # QA-031: above this is a warning
+
+    # Image resolution (mirrors Config/render.yaml)
+    min_cover_width_px: 2480
+    min_cover_height_px: 3508
+    min_body_width_px: 1240
+    min_body_height_px: 1754
+    min_detail_width_px: 800
+    min_detail_height_px: 800
+
+    # PDF
+    pdf_min_dpi_screen: 150
+    pdf_min_dpi_print: 300
+
+  # ============================================================
+  # APPROVAL REQUIREMENTS
+  # Reference: Core/DEFINITION_OF_DONE.md §Manual Level DoD
+  # ============================================================
+  approval:
+    required_qa_pass_rate: 1.0            # 100% — all items must pass
+    blocking_failures_allowed: 0          # Zero tolerance on blocking items
+    non_blocking_failures_allowed: 3      # Max 3 non-blocking exceptions, each must be documented
+    reviewer_signature_required: true     # README.md in ApprovedManual/ must be signed
+    qa_log_required: true                 # Notes/qa_log.md must exist and record all items
+
+  # ============================================================
+  # CONTENT VALIDATION
+  # ============================================================
+  content:
+    forbidden_strings:
+      - "Lorem ipsum"
+      - "[PLACEHOLDER]"
+      - "TODO"
+      - "FIXME"
+      - "{{project."               # Unresolved token — must not appear in final output
+      - "INSERT MODEL NAME HERE"
+    required_page_count_min: 9    # 9 minimum (P009 optional), 10 standard
+    required_page_count_max: 10

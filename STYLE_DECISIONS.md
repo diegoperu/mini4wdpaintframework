@@ -20,6 +20,11 @@ Before modifying any specification in `Core/`, you must either reference an exis
 | ADR-008 | Render-based illustrations only | Accepted | 1.0.0 |
 | ADR-009 | AI-model-agnostic prompt design | Accepted | 2.0.0 |
 | ADR-010 | Semantic Versioning for all SDK releases | Accepted | 1.0.0 |
+| ADR-011 | Separate Configuration from Specification | Accepted | 2.2.0 |
+| ADR-012 | Human-Executable Tests as First-Class Citizens | Accepted | 2.2.0 |
+| ADR-013 | AI Operating Rules as Mandatory Document | Accepted | 2.2.0 |
+| ADR-014 | Knowledge Base Separate from Prompt Templates | Accepted | 2.2.0 |
+| ADR-015 | MANIFEST.yaml as Machine-Readable SDK Identity | Accepted | 2.2.0 |
 
 ---
 
@@ -223,3 +228,103 @@ The current version is stored in `VERSION` and echoed in `README.md`. Every rele
 - Projects can reference a specific SDK version in their PROJECT.yaml (`sdkVersion` field)
 - Community knows immediately from the version number whether a migration is required
 - Pre-1.0 behavior (arbitrary changes) is explicitly prohibited after the 1.0.0 release
+
+---
+
+## ADR-011 — Separate Configuration from Specification
+
+**ID:** ADR-011
+**Version:** 2.2.0
+**Date:** 2024-06-30
+**Status:** Accepted
+
+### Context
+As the SDK grew beyond documentation, there was a need to distinguish between human-facing specifications (how things SHOULD be) and machine-readable configuration (what values tools USE). Core/ documents mix design philosophy with concrete values, making automation difficult.
+
+### Decision
+Introduce `Config/` directory containing YAML files (`sdk.yaml`, `render.yaml`, `pdf.yaml`, `quality.yaml`) that extract concrete parameters from Core/ specs into machine-readable form. Core/ remains authoritative; Config/ implements Core/.
+
+### Consequences
+- Tools and scripts read Config/ — not Core/ prose documents
+- When Core/ changes, Config/ must be updated in the same commit
+- Config/ files are validated against schemas to prevent drift
+
+---
+
+## ADR-012 — Human-Executable Tests as First-Class Citizens
+
+**ID:** ADR-012
+**Version:** 2.2.0
+**Date:** 2024-06-30
+**Status:** Accepted
+
+### Context
+The QA_SYSTEM.md checklist covers manual-level quality. There was no validation system for the SDK itself — its internal consistency, document completeness, and cross-reference accuracy.
+
+### Decision
+Introduce `Tests/` directory with structured test protocols (`FrameworkIntegrity.md`, `PromptValidation.md`, etc.) as human-executable checklists. These are not automated tests (v3.0.0 goal) but systematic verification guides that can be executed by any contributor.
+
+### Consequences
+- SDK contributors must run `Tests/FrameworkIntegrity.md` before releasing new SDK versions
+- Test suites are maintained alongside the code they test — each Core/ change may require a Tests/ update
+- Automated test conversion planned for v3.0.0
+
+---
+
+## ADR-013 — AI Operating Rules as Mandatory Document
+
+**ID:** ADR-013
+**Version:** 2.2.0
+**Date:** 2024-06-30
+**Status:** Accepted
+
+### Context
+PromptEngine/ prompts instruct AI models what to generate, but did not explicitly forbid incorrect behaviors (inventing paint codes, changing body proportions, adding undocumented colors). AI models would occasionally produce plausible but incorrect data.
+
+### Decision
+Create `Core/AI_OPERATING_RULES.md` as a mandatory document defining 58+ non-negotiable behavioral rules. All PromptEngine/ prompts should reference this document. QA_SYSTEM.md items verify rule compliance post-generation.
+
+### Consequences
+- PromptEngine/ prompts must be updated to reference AI_OPERATING_RULES.md (v2.2.0 update)
+- New rules can be added without breaking changes
+- Rules are numbered permanently — deprecated rules are marked [DEPRECATED] but not removed
+
+---
+
+## ADR-014 — Knowledge Base Separate from Prompt Templates
+
+**ID:** ADR-014
+**Version:** 2.2.0
+**Date:** 2024-06-30
+**Status:** Accepted
+
+### Context
+Technical knowledge about painting techniques (drying times, masking methods, paint compatibility) was scattered across prompt templates and not available as standalone reference material. AI models also needed context injection (RAG) support.
+
+### Decision
+Introduce `Knowledge/` as a standalone technical reference library. Knowledge/ contains timeless factual content. PromptEngine/ contains generation instructions. The two are deliberately separate — Knowledge/ can be used independently of any AI model.
+
+### Consequences
+- Factual updates (e.g., new paint brand codes) are made in Knowledge/ only
+- PromptEngine/ prompts reference Knowledge/ for optional context injection
+- Knowledge/ is accessible to non-SDK users as a standalone reference
+
+---
+
+## ADR-015 — MANIFEST.yaml as Machine-Readable SDK Identity
+
+**ID:** ADR-015
+**Version:** 2.2.0
+**Date:** 2024-06-30
+**Status:** Accepted
+
+### Context
+There was no single machine-readable file describing the SDK's identity, structure, capabilities, and compatibility requirements. Tools and integrations had to parse prose README files.
+
+### Decision
+Introduce `MANIFEST.yaml` at the project root as the authoritative machine-readable SDK descriptor. Contains: name, version, directory map, supported page types, supported component IDs, minimum AI requirements, and compatibility matrix.
+
+### Consequences
+- MANIFEST.yaml must be updated with every SDK release
+- Version in MANIFEST.yaml must match VERSION file (verified by Tests/FrameworkIntegrity.md TEST-FW-005)
+- Future tooling can use MANIFEST.yaml for SDK introspection

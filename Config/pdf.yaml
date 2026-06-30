@@ -1,0 +1,135 @@
+# Mini4WD Manual SDK — PDF Export Global Configuration
+# Version: 2.2.0
+# Reference: Core/PDF_MASTER.md, Build/Pipeline.md §Phase 5
+#
+# Per-project overrides: copy Templates/PDF_CONFIG.yaml to Projects/{ModelName}/pdf_config.yaml
+# This file defines global defaults; project config overrides metadata fields only.
+
+pdf:
+  # ============================================================
+  # GLOBAL DEFAULTS
+  # Reference: Core/PDF_MASTER.md §1
+  # ============================================================
+  defaults:
+    page_size: "A4"               # A4 | US-Letter
+    orientation: "portrait"
+    color_space: "sRGB"           # Default for screen; print overrides to CMYK-FOGRA39
+    standard: "PDF/X-4"           # PDF/X-4 (print) | PDF/A-2b (archive/screen)
+    creator: "Mini4WD Manual SDK v2.2.0"
+    embed_fonts: true
+    subset_fonts: true            # Reduces file size without affecting fidelity
+    compress_images: true
+    generate_bookmarks: true
+    generate_thumbnails: false    # Optional — enable for reader apps
+
+  # ============================================================
+  # PAGE ORDER
+  # Reference: Config/sdk.yaml §pages
+  # Do NOT change order — page IDs are permanent
+  # ============================================================
+  page_order:
+    - page_id: "P001"
+      title: "Cover"
+      bookmark_title: "Cover"
+      conditional: null
+
+    - page_id: "P002"
+      title: "Color Scheme"
+      bookmark_title: "Color Scheme"
+      conditional: null
+
+    - page_id: "P003"
+      title: "Materials"
+      bookmark_title: "Materials & Tools"
+      conditional: null
+
+    - page_id: "P004"
+      title: "Preparation"
+      bookmark_title: "Surface Preparation"
+      conditional: null
+
+    - page_id: "P005"
+      title: "Painting"
+      bookmark_title: "Painting Steps"
+      conditional: null
+
+    - page_id: "P006"
+      title: "Masking"
+      bookmark_title: "Masking Guide"
+      conditional: null
+
+    - page_id: "P007"
+      title: "Details"
+      bookmark_title: "Detail Painting"
+      conditional: null
+
+    - page_id: "P008"
+      title: "Decals"
+      bookmark_title: "Decal Application"
+      conditional: null
+
+    - page_id: "P009"
+      title: "Premium Variant"
+      bookmark_title: "Premium Finish"
+      conditional: "premiumVariant.enabled == true"   # Omit page if false
+
+    - page_id: "P010"
+      title: "Final Checklist"
+      bookmark_title: "Final Checklist"
+      conditional: null
+
+  # ============================================================
+  # EXPORT VARIANTS
+  # Reference: Core/PDF_MASTER.md §Screen vs Print
+  # ============================================================
+  variants:
+    screen:
+      color_space: "sRGB"
+      standard: "PDF/A-2b"
+      bleed_mm: 0
+      image_dpi: 150
+      compression: "medium"
+      file_suffix: "_screen"
+      description: "Optimized for digital reading (tablet, web, email)"
+
+    print:
+      color_space: "CMYK-FOGRA39"
+      standard: "PDF/X-4"
+      bleed_mm: 3
+      image_dpi: 300
+      compression: "maximum"
+      file_suffix: "_print"
+      description: "Print-production ready with crop marks and bleed"
+
+    archive:
+      color_space: "sRGB"
+      standard: "PDF/A-2b"
+      bleed_mm: 0
+      image_dpi: 200
+      compression: "none"
+      file_suffix: "_archive"
+      description: "Long-term preservation — no lossy compression"
+
+  # ============================================================
+  # REQUIRED METADATA FIELDS
+  # Must be set per-project in Projects/{ModelName}/pdf_config.yaml
+  # ============================================================
+  required_metadata:
+    - field: "title"
+      example: "{modelName} Painting Manual"
+    - field: "subject"
+      fixed_value: "Mini4WD Painting Manual"   # Always this value
+    - field: "author"
+      source: "PROJECT.yaml → project.author"
+    - field: "keywords"
+      source: "Auto-generate from: modelName, seriesName, paintScheme.name, 'Mini4WD', 'Tamiya', 'painting'"
+    - field: "creator"
+      fixed_value: "Mini4WD Manual SDK v2.2.0"  # Always this value
+
+  # ============================================================
+  # CHECKSUM
+  # ============================================================
+  checksum:
+    algorithm: "SHA-256"
+    output_file: "checksums.sha256"
+    include_variants: ["screen", "print"]   # archive is optional
