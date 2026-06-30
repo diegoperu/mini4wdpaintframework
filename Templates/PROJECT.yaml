@@ -1,0 +1,218 @@
+# ============================================================
+# Mini4WD Manual SDK — Project Configuration File
+# Version: 2.1.0
+# ============================================================
+# INSTRUCTIONS:
+#   1. Copy this file to Projects/{ModelName}/PROJECT.yaml
+#   2. Fill in all REQUIRED fields
+#   3. Fill in OPTIONAL fields where available
+#   4. Do NOT edit this master template directly
+#
+# Required fields are marked with: # REQUIRED
+# Optional fields are marked with: # OPTIONAL
+#
+# See Templates/README.md for full usage instructions.
+# See Core/NAMING_CONVENTION.md for naming rules.
+# See PromptEngine/README.md for token reference.
+# ============================================================
+
+sdk_version: "2.1.0"            # REQUIRED — must match SDK version (see VERSION file)
+
+# ============================================================
+# PROJECT METADATA
+# ============================================================
+project:
+  modelName: ""                  # REQUIRED — official Tamiya model name, exactly as printed
+                                 #   Example: "Proto Emperor"
+  modelSlug: ""                  # REQUIRED — kebab-case version for file naming
+                                 #   Example: "proto-emperor" (lowercase, hyphens, no spaces)
+  seriesName: ""                 # OPTIONAL — series, edition, or event name
+                                 #   Example: "Championship Series 2024"
+  year: ""                       # REQUIRED — 4-digit production year
+                                 #   Example: "2024"
+  language: "it"                 # REQUIRED — primary language code
+                                 #   Values: it | en | ja | fr | de | es | pt
+  version: "1.0.0"               # REQUIRED — this manual's version (Semantic Versioning)
+                                 #   Start at 1.0.0. Increment for updates.
+  author: ""                     # OPTIONAL — manual creator's name or studio
+                                 #   Example: "Studio Mini4WD"
+  createdAt: ""                  # REQUIRED — ISO 8601 date: YYYY-MM-DD
+  updatedAt: ""                  # REQUIRED — ISO 8601 date: YYYY-MM-DD (same as createdAt for first draft)
+
+# ============================================================
+# PAINT SCHEME
+# ============================================================
+paintScheme:
+  name: ""                       # REQUIRED — descriptive name for this color scheme
+                                 #   Example: "Midnight Violet"
+  description: ""                # OPTIONAL — 1-2 sentence description of the scheme's aesthetic
+                                 #   Example: "Deep violet body with metallic silver accents and black details"
+  colors:                        # REQUIRED — at least one color entry
+    - id: "C001"                 # REQUIRED — color ID within this project (C001, C002, etc.)
+      name: ""                   # REQUIRED — descriptive role name for this color
+                                 #   Example: "Body Base" or "Trim Accent"
+      paintBrand: ""             # REQUIRED — paint manufacturer name
+                                 #   Values: Tamiya | Mr.Hobby | Vallejo | Citadel | Humbrol | Montana | other
+      paintCode: ""              # REQUIRED — manufacturer's product code
+                                 #   Example: "TS-57" or "C-107" or "72.001"
+      paintName: ""              # REQUIRED — manufacturer's official color name
+                                 #   Example: "Blue Violet" or "Character Violet"
+      hex: ""                    # OPTIONAL — approximate hex color for design system rendering
+                                 #   Example: "#5B2D8E" — not for print accuracy, for digital display only
+      finish: ""                 # REQUIRED — surface finish type
+                                 #   Values: gloss | matte | satin | metallic | pearl | flat | semi-gloss
+      coverage: ""               # OPTIONAL — recommended number of coats
+                                 #   Example: "2 coats" or "3 thin coats"
+      notes: ""                  # OPTIONAL — model-specific application notes
+                                 #   Example: "Apply from 30cm distance in thin passes"
+    # Add more colors as needed:
+    # - id: "C002"
+    #   name: ""
+    #   ...
+  colorNotes: ""                 # OPTIONAL — general notes applying to the entire scheme
+                                 #   Example: "All coats applied with Tamiya TS cans at 20-25°C"
+
+# ============================================================
+# MATERIALS
+# ============================================================
+materials:
+  paints: []                     # OPTIONAL — auto-populated from paintScheme.colors by convention
+                                 #   Leave empty; the P003 prompt derives this from paintScheme.colors
+  tools:
+    - name: ""                   # REQUIRED (if listing tools) — tool name
+                                 #   Example: "Hobby knife"
+      type: ""                   # REQUIRED — tool category
+                                 #   Values: brush | airbrush | tool | supply | equipment
+      optional: false            # REQUIRED — is this tool optional?
+                                 #   true = nice to have, false = mandatory
+      notes: ""                  # OPTIONAL — specification or usage note
+                                 #   Example: "Size 000 for detail work"
+    # Add more tools as needed
+  consumables:
+    - name: ""                   # REQUIRED (if listing consumables) — consumable name
+                                 #   Example: "Wet/dry sandpaper"
+      type: ""                   # REQUIRED — consumable category
+                                 #   Values: sandpaper | tape | tissue | thinner | cleaner | primer
+      specification: ""          # OPTIONAL — grit, width, or other spec
+                                 #   Example: "400 grit" or "6mm width"
+      optional: false            # REQUIRED — is this consumable optional?
+    # Add more consumables as needed
+
+# ============================================================
+# PREPARATION STEPS
+# ============================================================
+# Steps are shown in order on P004. Keep sequence logical:
+# 1. Disassembly, 2. Cleaning, 3. Priming, 4. Sanding, 5. Final wipe
+preparationSteps:
+  - id: 1                        # REQUIRED — sequential integer, starting from 1
+    title: ""                    # REQUIRED — short step title (max 40 chars)
+                                 #   Example: "Wash the body shell"
+    description: ""              # REQUIRED — full instruction text (1-3 sentences)
+    duration: ""                 # OPTIONAL — estimated time
+                                 #   Example: "10 min" or "30 min (includes drying)"
+    tools: []                    # OPTIONAL — tool names from materials.tools used in this step
+    warning: ""                  # OPTIONAL — safety or quality warning for this specific step
+    tip: ""                      # OPTIONAL — pro tip for this specific step
+  # Add more steps as needed
+
+# ============================================================
+# PAINT SEQUENCE
+# ============================================================
+# Steps define the exact order of paint application on P005.
+# Order matters: primer first, then base coats, then details.
+paintSequence:
+  - step: 1                      # REQUIRED — sequential integer, starting from 1
+    colorId: ""                  # REQUIRED — must match a paintScheme.colors[].id value
+    area: ""                     # REQUIRED — what area or surface to paint
+                                 #   Example: "Full body exterior"
+    technique: ""                # REQUIRED — application method
+                                 #   Values: brush | airbrush | spray-can | roller
+    coats: 1                     # REQUIRED — number of coats to apply
+    dryingTime: ""               # REQUIRED — wait time between this coat and next step
+                                 #   Example: "30 min touch dry, 2 hours before next coat"
+    notes: ""                    # OPTIONAL — additional application notes
+  # Add more steps as needed
+
+# ============================================================
+# MASKING
+# ============================================================
+# Define all masking zones used in this scheme on P006.
+# maskingOrder determines the sequence of application.
+maskingZones:
+  - id: "M001"                   # REQUIRED — zone ID (M001, M002, etc.)
+    area: ""                     # REQUIRED — descriptive name of the masked area
+                                 #   Example: "Window frames"
+    maskingType: ""              # REQUIRED — masking material type
+                                 #   Values: tape | liquid | pre-cut | frisket | vinyl
+    maskingOrder: 1              # REQUIRED — sequence number (1 = mask first)
+    notes: ""                    # OPTIONAL — specific notes for this zone
+  # Add more zones as needed
+
+# ============================================================
+# DETAILS
+# ============================================================
+# Define all detail painting areas shown on P007.
+detailAreas:
+  - id: "D001"                   # REQUIRED — area ID (D001, D002, etc.)
+    name: ""                     # REQUIRED — descriptive name of the detail area
+                                 #   Example: "Cockpit interior"
+    colorId: ""                  # REQUIRED — must match a paintScheme.colors[].id value
+    technique: ""                # REQUIRED — how to apply paint to this area
+                                 #   Example: "Fine brush, dry-brush technique"
+    notes: ""                    # OPTIONAL — model-specific notes for this area
+  # Add more areas as needed
+
+# ============================================================
+# DECALS
+# ============================================================
+# Define all decals shown on P008.
+decals:
+  - id: "DEC001"                 # REQUIRED — decal ID (DEC001, DEC002, etc.)
+    name: ""                     # REQUIRED — descriptive name of the decal
+                                 #   Example: "Race number '07'"
+    position: ""                 # REQUIRED — clear description of placement location
+                                 #   Example: "Left side of body, 15mm from front, centered vertically"
+    size: ""                     # OPTIONAL — approximate dimensions
+                                 #   Example: "18x10mm"
+    notes: ""                    # OPTIONAL — application-specific notes
+  # Add more decals as needed
+
+# ============================================================
+# PREMIUM VARIANT
+# ============================================================
+# Set enabled: true to generate P009 (Premium Variant page).
+# If false, P009 is skipped and manual goes P008 -> P010.
+premiumVariant:
+  enabled: false                 # REQUIRED — true | false
+  name: ""                       # REQUIRED (if enabled) — premium scheme name
+                                 #   Example: "Midnight Violet Pearl Edition"
+  description: ""                # OPTIONAL — 1-2 sentence description
+  additionalMaterials: []        # OPTIONAL — extra materials needed for premium variant
+                                 #   Format: [{name: "", brand: "", code: "", purpose: ""}]
+  specialTechniques: []          # OPTIONAL — list of technique names/descriptions
+                                 #   Example: ["Pearl topcoat application", "Candy coat layering"]
+
+# ============================================================
+# FILE PATHS
+# ============================================================
+# All paths are relative to this project's directory.
+# Renders must exist before running P001/P002 prompts.
+paths:
+  coverRenderPath: "Images/cover_3q.png"          # REQUIRED — 3/4 front-left angle, min 2480x3508px
+  colorSchemeRenderFront: "Images/P002_front.png" # REQUIRED — orthographic front view
+  colorSchemeRenderSide: "Images/P002_side.png"   # REQUIRED — orthographic side view
+  colorSchemeRenderTop: "Images/P002_top.png"     # REQUIRED — orthographic top view
+  outputDir: "Output/"                            # REQUIRED — where generated page files are saved
+  notesDir: "Notes/"                              # REQUIRED — where QA logs and notes are saved
+
+# ============================================================
+# QA METADATA
+# ============================================================
+# Updated as the manual progresses through QA review.
+qa:
+  status: "draft"                # REQUIRED — current QA status
+                                 #   Values: draft | in-review | approved | archived
+  reviewer: ""                   # OPTIONAL — name of QA reviewer
+  reviewDate: ""                 # OPTIONAL — ISO date of last review: YYYY-MM-DD
+  approvedDate: ""               # OPTIONAL — ISO date of approval: YYYY-MM-DD
+  qaLogPath: "Notes/qa_log.md"   # REQUIRED — path to QA log file

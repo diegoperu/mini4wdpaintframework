@@ -1,0 +1,131 @@
+# Roadmap
+
+This document describes the planned direction for Mini4WD Manual SDK. It is a living document and reflects current intentions, not binding commitments.
+
+To propose a feature, open a GitHub Issue and apply the `roadmap` label. Include: the problem you are solving, your proposed approach, and which existing SDK components would be affected.
+
+---
+
+## Vision
+
+Mini4WD Manual SDK aims to become the canonical open framework for producing professional, archival-quality painting manuals for scale model hobby projects. By 2028, the goal is a library of 200+ approved manuals, a community of contributors across multiple countries, and tooling that makes manual production as fast and consistent as a software build pipeline.
+
+The SDK must remain model-agnostic at the AI layer. No feature will be added that requires a specific AI provider.
+
+---
+
+## v2.2.0 — Planned
+
+**Target:** Q3 2024
+
+### Multi-language Support
+- `Core/DOCUMENTATION_STYLE.md` extended with translation guidelines
+- `Templates/PROJECT.yaml` gains optional `locale` field (e.g., `it`, `en`, `ja`)
+- `PromptEngine/` prompts will include localization token `{{project.locale}}`
+- Initial language packs: Italian (it), English (en), Japanese (ja)
+- No automatic translation — manual localization only
+
+### SVG Icon Library
+- New directory: `Assets/DesignSystem/Icons/svg/`
+- Icons for: Warning, Tip, Note, Step, Time, Check, Brush, Spray, Mask, Decal
+- All icons at 24×24px base, scalable
+- Color variants: white (on violet), violet (on white), gold (on white), red (on white)
+- Usage documented in `Core/COMPONENT_SYSTEM.md` and `Assets/DesignSystem/Icons/README.md`
+
+### Automated PDF Pipeline
+- `Docs/guides/automated-pdf.md` — guide for pandoc + LaTeX pipeline
+- Reference `Makefile` in `Templates/`
+- CSS print stylesheet for browser-based PDF generation
+- Integration guide for Affinity Publisher scripting
+
+---
+
+## v2.3.0 — Planned
+
+**Target:** Q4 2024
+
+### Extended Page Set (P011–P015)
+- P011: Tools & Equipment reference page
+- P012: Common Mistakes & Troubleshooting
+- P013: Advanced Techniques (airbrushing, candy coat, metallics)
+- P014: Custom Part Painting (chassis, rollers, motor cover)
+- P015: Photography & Display guide
+
+### Component Extensions (C016–C020)
+- C016: Comparison Table (before/after paint stages)
+- C017: Difficulty Rating badge
+- C018: Compatibility Matrix (paint brands)
+- C019: QR Code block (links to video companion)
+- C020: Author/Contributor credit block
+
+---
+
+## v3.0.0 — Planned (Breaking)
+
+**Target:** 2025
+
+### Web-Based Prompt Runner
+- Browser application that reads PROJECT.yaml and injects tokens into PromptEngine/ prompts
+- Outputs filled prompts ready to paste into any AI chat interface
+- No server required — runs entirely in-browser via JavaScript
+
+### Plugin System
+- Third-party component definitions via `plugins/` directory
+- Plugin manifest format: `plugin.yaml`
+- Plugin registry documentation
+- Breaking: `COMPONENT_SYSTEM.md` schema extended with `source` field (built-in vs plugin)
+
+### Token Inheritance
+- Projects can override individual tokens without duplicating the full token file
+- `PROJECT.yaml` gains optional `tokenOverrides` block
+- Breaking: token resolution order changes (project overrides → sdk defaults)
+
+---
+
+## Long-Term Goals (No Version Assigned)
+
+### Community Model Library
+- Public repository of approved manuals contributed by the community
+- Submission process: PR to `Assets/ApprovedManual/` with completed PROJECT.yaml and QA log
+- Community review process before merge
+- Web index of all available manuals
+
+### Video Manual Support
+- Page specifications for video companion guides (not just static PDF)
+- Storyboard template: `Templates/STORYBOARD.yaml`
+- Script template: `Templates/SCRIPT.md`
+- Frame-by-frame annotation system
+
+### Tactile/Print-Optimized Variant
+- High-contrast print variant for accessibility
+- Spiral-bound print format (single-page, no spreads)
+- Lamination-safe PDF variant (no dark backgrounds on back of page)
+
+### CLI Tool
+- Command-line interface: `mini4wd-sdk init`, `mini4wd-sdk qa`, `mini4wd-sdk export`
+- Reads PROJECT.yaml and validates against schema
+- Outputs QA report to `Projects/{Model}/Notes/qa_log.md`
+
+---
+
+## How to Propose a Feature
+
+1. Open a GitHub Issue with the title format: `[Feature] Short description`
+2. Apply the `roadmap` label
+3. In the issue body, describe:
+   - **Problem:** What cannot be done today?
+   - **Proposed solution:** What should the SDK support?
+   - **Affected components:** Which Core/ documents, pages, or components are involved?
+   - **Breaking?:** Would this require a MAJOR version bump?
+4. Maintainers will triage and assign to a milestone or mark `wontfix` with a reason.
+
+---
+
+## What Will Not Be Added
+
+The following are explicitly out of scope for this SDK:
+
+- **Model-specific content** — The SDK contains no Mini4WD model data. Models live in `Projects/`.
+- **AI provider integrations** — No API keys, no provider SDKs, no direct AI calls. The SDK is prompt text, not software.
+- **Paint brand recommendations** — The SDK describes how to represent colors; it does not endorse brands.
+- **Racing or performance content** — This SDK covers painting manuals only. Motor tuning, gear ratios, and track setups are out of scope.

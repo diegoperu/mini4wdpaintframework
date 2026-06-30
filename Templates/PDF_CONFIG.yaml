@@ -1,0 +1,164 @@
+# ============================================================
+# Mini4WD Manual SDK — PDF Export Configuration
+# Version: 2.1.0
+# ============================================================
+# INSTRUCTIONS:
+#   Copy to Projects/{ModelName}/PDF_CONFIG.yaml
+#   Fill in metadata fields for this specific project.
+#   Export settings are pre-configured per SDK standard.
+#
+# Reference: Core/PDF_MASTER.md
+# See also: Core/COLOR_SYSTEM.md (color profiles)
+# ============================================================
+
+# ============================================================
+# EXPORT TARGET
+# ============================================================
+pdf:
+  # Primary standard — choose based on intended use
+  standard: "PDF/X-4"            # PDF/X-4 (print-ready) | PDF/A-2b (archive/web)
+
+  # Primary color profile
+  colorProfile: "sRGB"           # sRGB (screen/web) | CMYK-FOGRA39 (professional print)
+
+  # ============================================================
+  # PAGE SETUP
+  # ============================================================
+  page:
+    size: "A4"                   # A4 (210x297mm) | US-Letter (216x279mm)
+    orientation: "portrait"      # portrait | landscape
+    bleed: 3                     # mm — 3mm for print, 0 for screen
+    cropMarks: true              # true for print, false for screen
+
+  # ============================================================
+  # DOCUMENT METADATA
+  # ============================================================
+  # Fill these fields for each project before export.
+  metadata:
+    title: ""                    # REQUIRED — e.g., "Proto Emperor — Violet Phantom Painting Manual"
+    subject: "Mini4WD Painting Manual"
+    author: ""                   # REQUIRED — manual author or studio name
+    keywords:
+      - "Mini4WD"
+      - "Tamiya"
+      - "painting"
+      - "manual"
+      - ""                       # Add model name here
+      - ""                       # Add scheme name here
+    creator: "Mini4WD Manual SDK v2.1.0"
+    producer: ""                 # OPTIONAL — tool used to generate PDF (e.g., "Affinity Publisher 2")
+    language: "it"               # BCP 47 language tag: it | en | ja | fr | de | es
+
+  # ============================================================
+  # FONT EMBEDDING
+  # ============================================================
+  fonts:
+    embedAll: true               # Always true for print-ready PDFs
+    subset: true                 # Subset embedded fonts to used characters only
+    requiredFonts:               # Verify these are available before export
+      - "Bebas Neue"
+      - "Source Sans Pro"
+      - "JetBrains Mono"         # Used for code blocks and product codes
+
+  # ============================================================
+  # BOOKMARKS (PDF Navigation)
+  # ============================================================
+  bookmarks:
+    enabled: true
+    style: "numbered"            # numbered | titled
+    structure:
+      - title: "Cover"
+        pageId: "P001"
+        page: 1
+      - title: "Color Scheme"
+        pageId: "P002"
+        page: 2
+      - title: "Materials"
+        pageId: "P003"
+        page: 3
+      - title: "Preparation"
+        pageId: "P004"
+        page: 4
+      - title: "Painting"
+        pageId: "P005"
+        page: 5
+      - title: "Masking"
+        pageId: "P006"
+        page: 6
+      - title: "Details"
+        pageId: "P007"
+        page: 7
+      - title: "Decals"
+        pageId: "P008"
+        page: 8
+      - title: "Premium Variant"
+        pageId: "P009"
+        page: 9
+        conditional: "premiumVariant.enabled == true"
+      - title: "Final Checklist"
+        pageId: "P010"
+        page: 10   # or 9 if P009 is skipped
+
+  # ============================================================
+  # EXPORT VARIANTS
+  # ============================================================
+  # Three standard export variants. Run all three for each approved manual.
+  variants:
+
+    screen:
+      enabled: true
+      description: "Optimized for screen display and web distribution"
+      standard: "PDF/A-2b"
+      colorProfile: "sRGB"
+      bleed: 0
+      cropMarks: false
+      compression: "medium"      # none | low | medium | high | maximum
+      imageResolution: 150       # dpi — sufficient for screen, keeps file size small
+      outputSuffix: "_screen"
+      # Filename: {modelSlug}_manual_screen.pdf
+
+    print:
+      enabled: true
+      description: "Print-ready for professional offset or digital printing"
+      standard: "PDF/X-4"
+      colorProfile: "CMYK-FOGRA39"
+      bleed: 3
+      cropMarks: true
+      compression: "maximum"
+      imageResolution: 300       # dpi — required for print quality
+      outputSuffix: "_print"
+      # Filename: {modelSlug}_manual_print.pdf
+
+    archive:
+      enabled: true
+      description: "Long-term archival format, no compression"
+      standard: "PDF/A-2b"
+      colorProfile: "sRGB"
+      bleed: 0
+      cropMarks: false
+      compression: "none"
+      imageResolution: 300       # Full resolution for archive
+      outputSuffix: "_archive"
+      # Filename: {modelSlug}_manual_archive.pdf
+
+  # ============================================================
+  # OUTPUT PATHS
+  # ============================================================
+  # All relative to the project root (Projects/{ModelName}/)
+  outputDir: "Output/pdf/"
+  approvedDir: "../../Assets/ApprovedManual/"   # final destination after QA
+
+  # ============================================================
+  # COMPATIBLE TOOLS
+  # ============================================================
+  # PDF export can be performed with any of these tools.
+  # See Core/PDF_MASTER.md for tool-specific instructions.
+  compatibleTools:
+    - name: "Affinity Publisher 2"
+      notes: "Recommended. Native PDF/X-4 and PDF/A-2b export."
+    - name: "Adobe InDesign"
+      notes: "Full PDF/X-4 support. Requires Print Production tools."
+    - name: "Scribus"
+      notes: "Free and open-source. Good PDF/X-4 support."
+    - name: "pandoc + LaTeX (pdflatex/lualatex)"
+      notes: "For text-heavy pages only. Requires custom layout work."

@@ -1,0 +1,367 @@
+# Mini4WD Manual SDK — Token Schema
+# Version: 2.1.0
+# Reference: Core/STYLE_GUIDE.md
+# Use this schema to validate token files (tokens.example.yaml, project overrides).
+#
+# Validation tools:
+#   ajv-cli:    npx ajv validate -s tokens.schema.yaml -d tokens.example.yaml
+#   yajsv:      yajsv -s tokens.schema.yaml tokens.example.yaml
+#   Python:     python -c "import yaml,jsonschema; jsonschema.validate(yaml.safe_load(open('tokens.example.yaml')), yaml.safe_load(open('tokens.schema.yaml')))"
+#
+# Schema version follows SDK SemVer. Schema changes are tracked in CHANGELOG.md.
+
+"$schema": "http://json-schema.org/draft-07/schema#"
+title: "Mini4WD Manual SDK Design Tokens"
+description: >
+  Schema for tokens.yaml files in the Mini4WD Manual SDK v2.1.0.
+  All required fields must be present. Additional fields are allowed
+  (for custom project tokens under the 'custom' key).
+type: object
+
+required:
+  - tokens
+
+additionalProperties: false
+
+properties:
+  tokens:
+    type: object
+    description: "Root token namespace. All token values live under this key."
+    required:
+      - colors
+      - typography
+      - spacing
+      - sizing
+      - borders
+    additionalProperties: true
+
+    properties:
+
+      # ============================================================
+      # COLORS
+      # ============================================================
+      colors:
+        type: object
+        required:
+          - primary
+          - neutral
+          - semantic
+        additionalProperties: true
+
+        properties:
+
+          primary:
+            type: object
+            description: "Brand violet palette. Both fields are required."
+            required:
+              - VioletPrimary
+              - VioletDark
+            additionalProperties: true
+            properties:
+              VioletPrimary:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+                description: "Primary brand color. Hex format required. Used on every page header."
+              VioletDark:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+                description: "Dark variant of VioletPrimary. Must be visually darker."
+              VioletLight:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+                description: "Light variant. Optional but strongly recommended."
+              VioletUltraLight:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+                description: "Ultra-light tint. For background fills only, never for text."
+
+          neutral:
+            type: object
+            description: "Neutral palette. White must always be #FFFFFF — do not override."
+            required:
+              - White
+              - Black
+              - DarkGray
+            additionalProperties: true
+            properties:
+              White:
+                type: string
+                const: "#FFFFFF"
+                description: "Page background. MUST be pure white. This value is immutable."
+              Black:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+                description: "Maximum contrast. Used for headlines only."
+              DarkGray:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+                description: "Primary body text color."
+              OffWhite:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+              LightGray:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+              MidGray:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+
+          accent:
+            type: object
+            additionalProperties: true
+            properties:
+              GoldAccent:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+                description: "Tips box border. Used sparingly."
+              GoldLight:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+                description: "Tips box background fill."
+
+          semantic:
+            type: object
+            description: "Semantic colors for warnings, success, and info states."
+            required:
+              - RedWarning
+              - GreenSuccess
+            additionalProperties: true
+            properties:
+              RedWarning:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+                description: "Warning state only. Never decorative."
+              RedWarningLight:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+              GreenSuccess:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+                description: "Success and completion states."
+              GreenSuccessLight:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+              BlueInfo:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+              BlueInfoLight:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+
+          panel:
+            type: object
+            additionalProperties: true
+            properties:
+              PanelBackground:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+              PanelBorder:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+
+          callout:
+            type: object
+            additionalProperties: true
+            properties:
+              CalloutBackground:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+              CalloutBorder:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+              WarningColor:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+              SuccessColor:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+              ArrowColor:
+                type: string
+                pattern: "^#[0-9A-Fa-f]{6}$"
+                description: "Color for annotation arrows in Zoom (C012) and Exploded View (C007)."
+
+      # ============================================================
+      # TYPOGRAPHY
+      # ============================================================
+      typography:
+        type: object
+        required:
+          - fonts
+          - scale
+        additionalProperties: true
+
+        properties:
+          fonts:
+            type: object
+            required:
+              - TitleFont
+              - BodyFont
+              - MonoFont
+            additionalProperties: false
+            properties:
+              TitleFont:
+                type: string
+                description: "CSS font-family stack for titles and headings. Must include a generic fallback."
+              BodyFont:
+                type: string
+                description: "CSS font-family stack for body text. Must include a generic fallback."
+              MonoFont:
+                type: string
+                description: "CSS font-family stack for codes and part numbers. Must include monospace fallback."
+
+          scale:
+            type: object
+            description: "Type scale — sizes in pt, line-heights as unitless ratios."
+            required:
+              - BodySize
+              - BodyLineHeight
+            additionalProperties: true
+            properties:
+              DisplaySize:
+                type: string
+                pattern: "^[0-9]+pt$"
+              DisplayLineHeight:
+                type: string
+                pattern: "^[0-9]+(\\.[0-9]+)?$"
+              H1Size:
+                type: string
+                pattern: "^[0-9]+pt$"
+              H1LineHeight:
+                type: string
+                pattern: "^[0-9]+(\\.[0-9]+)?$"
+              BodySize:
+                type: string
+                pattern: "^[0-9]+pt$"
+                description: "REQUIRED. Body text size. Recommended: 11pt."
+              BodyLineHeight:
+                type: string
+                pattern: "^[0-9]+(\\.[0-9]+)?$"
+                description: "REQUIRED. Body line-height ratio. Recommended: 1.6."
+
+          FontScale:
+            type: string
+            description: "Compact notation of full type scale. Informational only."
+
+      # ============================================================
+      # SPACING
+      # ============================================================
+      spacing:
+        type: object
+        required:
+          - SpacingBase
+          - PageMargin
+        additionalProperties: true
+        properties:
+          SpacingBase:
+            type: string
+            const: "4px"
+            description: "Base spacing unit. Must always be 4px — SDK assumes 4px grid."
+          PageMargin:
+            type: string
+            description: "Horizontal page margin in mm. Example: 18mm."
+          PageMarginTop:
+            type: string
+          PageMarginBottom:
+            type: string
+          ColumnGap:
+            type: string
+          ImagePadding:
+            type: string
+
+      # ============================================================
+      # SIZING
+      # ============================================================
+      sizing:
+        type: object
+        required:
+          - HeaderHeight
+          - FooterHeight
+          - GridColumns
+        additionalProperties: true
+        properties:
+          HeaderHeight:
+            type: string
+            description: "C001 Header height in mm. Default: 18mm."
+          FooterHeight:
+            type: string
+            description: "C002 Footer height in mm. Default: 12mm."
+          GridColumns:
+            type: string
+            const: "12"
+            description: "Column count. Must be 12 — SDK layout system depends on 12-column grid."
+          PageWidth:
+            type: string
+          PageHeight:
+            type: string
+
+      # ============================================================
+      # BORDERS
+      # ============================================================
+      borders:
+        type: object
+        required:
+          - BorderRadius
+        additionalProperties: true
+        properties:
+          BorderRadius:
+            type: string
+            description: "Standard border radius for components. Default: 4px."
+          BorderThickness:
+            type: string
+          BorderThickAccent:
+            type: string
+          CornerRadius:
+            type: string
+
+      # ============================================================
+      # SHADOWS
+      # ============================================================
+      shadows:
+        type: object
+        additionalProperties: true
+        properties:
+          ShadowSubtle:
+            type: string
+          ShadowMedium:
+            type: string
+          ShadowStrong:
+            type: string
+          ShadowOpacity:
+            type: string
+            pattern: "^0(\\.[0-9]+)?$"
+
+      # ============================================================
+      # RENDER
+      # ============================================================
+      render:
+        type: object
+        additionalProperties: true
+        properties:
+          RenderLighting:
+            type: string
+            enum:
+              - "studio-neutral"
+              - "drama"
+              - "detail"
+            description: "Lighting rig name. See Core/RENDER_GUIDE.md §3 for specifications."
+          RenderBackground:
+            type: string
+            const: "#FFFFFF"
+            description: "Render background must always be pure white."
+          RenderPaddingMin:
+            type: string
+          CoverResolution:
+            type: string
+          BodyResolution:
+            type: string
+          DetailResolution:
+            type: string
+
+      # ============================================================
+      # CUSTOM (project-specific extensions)
+      # ============================================================
+      custom:
+        type: object
+        description: "Project-specific tokens. Must use the 'custom.' prefix in references: {{token.custom.myToken}}"
+        additionalProperties:
+          type: string

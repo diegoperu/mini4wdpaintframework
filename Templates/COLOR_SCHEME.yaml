@@ -1,0 +1,106 @@
+# ============================================================
+# Mini4WD Manual SDK — Color Scheme Template
+# Version: 2.1.0
+# ============================================================
+# INSTRUCTIONS:
+#   Copy to Projects/{ModelName}/COLOR_SCHEME.yaml
+#   This file is the color design document for one scheme.
+#   It complements PROJECT.yaml with fuller color metadata.
+#
+# Reference: Core/COLOR_SYSTEM.md
+# ============================================================
+
+colorScheme:
+  name: ""                       # REQUIRED — descriptive scheme name
+                                 #   Example: "Midnight Violet"
+  baseModel: ""                  # REQUIRED — model this scheme is designed for
+                                 #   Example: "Proto Emperor"
+  style: ""                      # REQUIRED — aesthetic style category
+                                 #   Values: racing | street | fantasy | historical | retro | custom
+
+  # ============================================================
+  # COLOR DEFINITIONS
+  # ============================================================
+  # Provide precise color data for print and digital accuracy.
+  # At least one color required.
+  colors:
+    - id: "CS001"                # REQUIRED — scheme-local color ID
+      role: "primary-body"       # REQUIRED — color's role in the scheme
+                                 #   Values: primary-body | secondary-body | accent |
+                                 #           detail | interior | wheel | chrome | primer
+      paintBrand: ""             # REQUIRED — paint brand
+      paintCode: ""              # REQUIRED — product code
+      paintName: ""              # REQUIRED — official color name
+      finish: "gloss"            # REQUIRED — surface finish
+                                 #   Values: gloss | matte | satin | metallic | pearl | flat | semi-gloss
+      hex: "#000000"             # OPTIONAL — digital display approximation only
+                                 #   Not for print accuracy — use CMYK for print
+      rgb:                       # OPTIONAL — RGB for digital use
+        r: 0
+        g: 0
+        b: 0
+      cmyk:                      # OPTIONAL — CMYK for print color matching
+        c: 0
+        m: 0
+        y: 0
+        k: 100
+      pantone: ""                # OPTIONAL — closest Pantone reference (for print matching)
+                                 #   Example: "PMS 2685 C"
+      coverage: ""               # OPTIONAL — recommended coats
+      notes: ""                  # OPTIONAL — application notes for this specific color
+
+    # Add more colors as needed:
+    # - id: "CS002"
+    #   role: "secondary-body"
+    #   ...
+
+  # ============================================================
+  # FINISHING PRODUCTS
+  # ============================================================
+  finishingProducts:
+    topCoat:
+      enabled: true              # REQUIRED — is a top coat applied?
+      type: ""                   # REQUIRED (if enabled) — finish type
+                                 #   Values: gloss | matte | satin | uv-cut | semi-gloss
+      brand: ""                  # REQUIRED (if enabled) — brand name
+      code: ""                   # REQUIRED (if enabled) — product code
+                                 #   Example: "Tamiya TS-79 Semi Gloss Clear"
+      coats: 2                   # OPTIONAL — recommended number of coats
+      notes: ""                  # OPTIONAL — application notes
+
+    primer:
+      enabled: true              # REQUIRED — is primer used?
+      brand: ""                  # REQUIRED (if enabled)
+      code: ""                   # REQUIRED (if enabled)
+      color: ""                  # OPTIONAL — primer color (affects base coat opacity)
+                                 #   Values: white | gray | black | red-brown | custom
+      notes: ""                  # OPTIONAL
+
+    decalSoftener:
+      enabled: false             # REQUIRED — is decal softener used?
+      brand: ""                  # OPTIONAL
+      code: ""                   # OPTIONAL
+                                 #   Example: "Tamiya Mark Fit (Strong)"
+
+  # ============================================================
+  # SCHEME NOTES
+  # ============================================================
+  notes: ""                      # OPTIONAL — general notes about this color scheme
+                                 #   Example: "All TS spray cans applied at 20-25°C, 
+                                 #   50% humidity maximum, 30cm distance"
+
+  # ============================================================
+  # DESIGN INSPIRATION
+  # ============================================================
+  inspiration:                   # OPTIONAL — design reference information
+    source: ""                   # free text: what inspired this scheme
+    referenceImages: []          # list of reference image filenames or descriptions
+
+  # ============================================================
+  # VERSION HISTORY
+  # ============================================================
+  versionHistory:
+    - version: "1.0.0"
+      date: ""                   # ISO date: YYYY-MM-DD
+      changes: "Initial scheme definition"
+    # Add entries for future revisions

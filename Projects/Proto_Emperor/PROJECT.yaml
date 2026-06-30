@@ -1,0 +1,327 @@
+# ============================================================
+# Mini4WD Manual SDK — Project Configuration
+# Model: Proto Emperor — Violet Phantom
+# Status: EXAMPLE PROJECT (SDK reference, not production)
+# ============================================================
+
+sdk_version: "2.1.0"
+
+# ============================================================
+# PROJECT METADATA
+# ============================================================
+project:
+  modelName: "Proto Emperor"
+  modelSlug: "proto-emperor"
+  seriesName: "Championship Series"
+  year: "2024"
+  language: "it"
+  version: "1.0.0"
+  author: "Mini4WD Manual SDK Team"
+  createdAt: "2024-01-15"
+  updatedAt: "2024-01-15"
+
+# ============================================================
+# PAINT SCHEME: Violet Phantom
+# ============================================================
+paintScheme:
+  name: "Violet Phantom"
+  description: "Un violetto profondo e avvolgente per la carrozzeria principale, con accenti metallizzati argento sulle appendici aerodinamiche e dettagli in nero metallico. Un classico schema racing con carattere."
+  colors:
+    - id: "C001"
+      name: "Body Base"
+      paintBrand: "Tamiya"
+      paintCode: "TS-57"
+      paintName: "Blue Violet"
+      hex: "#4B3A8C"
+      finish: "gloss"
+      coverage: "3 mani sottili"
+      notes: "Applicare a 25-30cm di distanza. Evitare umidità superiore al 60%."
+
+    - id: "C002"
+      name: "Aerodynamic Accents"
+      paintBrand: "Tamiya"
+      paintCode: "TS-40"
+      paintName: "Metal Black"
+      hex: "#2C2C2C"
+      finish: "metallic"
+      coverage: "2 mani"
+      notes: "Metallizzato — applicare sempre nella stessa direzione per uniformità."
+
+    - id: "C003"
+      name: "Wing and Trim Highlights"
+      paintBrand: "Tamiya"
+      paintCode: "TS-30"
+      paintName: "Silver"
+      hex: "#C0C0C0"
+      finish: "metallic"
+      coverage: "2 mani"
+      notes: "Applicare sopra primer grigio chiaro per massima luminosità."
+
+    - id: "C004"
+      name: "Chassis and Interior"
+      paintBrand: "Tamiya"
+      paintCode: "TS-38"
+      paintName: "Gun Metal"
+      hex: "#5C6370"
+      finish: "metallic"
+      coverage: "2 mani"
+      notes: "Usato per il fondo telaio e l'abitacolo interno."
+
+  colorNotes: "Tutte le vernici TS in spray applicare a 20-25°C. Utilizzare TS-79 Semi Gloss Clear come finitura finale su tutta la carrozzeria. Lasciare asciugare 24 ore prima del clear coat."
+
+# ============================================================
+# MATERIALS
+# ============================================================
+materials:
+  paints: []  # Derivato automaticamente da paintScheme.colors
+
+  tools:
+    - name: "Aerografo Tamiya 0.3mm"
+      type: "airbrush"
+      optional: true
+      notes: "Alternativa al pennello per superfici grandi. Risultato superiore."
+
+    - name: "Pennello sintetico piatto n.8"
+      type: "brush"
+      optional: false
+      notes: "Per aree medie e mascherature irregolari."
+
+    - name: "Pennello sintetico tondo n.000"
+      type: "brush"
+      optional: false
+      notes: "Per tutti i dettagli fini: abitacolo, cerchi, accenti."
+
+    - name: "Coltellino da modellismo"
+      type: "tool"
+      optional: false
+      notes: "Per rifilare il nastro di mascheratura sulle linee curve."
+
+    - name: "Bacchette in legno (stecchi)"
+      type: "tool"
+      optional: false
+      notes: "Per tenere la carrozzeria durante la verniciatura senza toccarla."
+
+  consumables:
+    - name: "Carta abrasiva"
+      type: "sandpaper"
+      specification: "400 grit (primo passaggio), 600 grit (secondo passaggio), 1000 grit (finale)"
+      optional: false
+
+    - name: "Nastro di mascheratura Tamiya"
+      type: "tape"
+      specification: "6mm (per curve), 10mm (per linee rette), 18mm (aree ampie)"
+      optional: false
+
+    - name: "Diluente Tamiya X-20A"
+      type: "thinner"
+      specification: "Per aerografo e pulizia pennelli"
+      optional: true
+
+    - name: "Panno per rimozione polvere (tack cloth)"
+      type: "cleaner"
+      specification: "Privo di pelucchi"
+      optional: false
+
+    - name: "Primer grigio Tamiya"
+      type: "primer"
+      specification: "Spray primer 180ml"
+      optional: false
+
+# ============================================================
+# PREPARATION STEPS
+# ============================================================
+preparationSteps:
+  - id: 1
+    title: "Lavaggio della carrozzeria"
+    description: "Lavare la carrozzeria in plastica con acqua tiepida e detergente neutro (detersivo per piatti). Utilizzare uno spazzolino morbido per rimuovere eventuali residui di stampo. Risciacquare abbondantemente con acqua distillata."
+    duration: "15 min"
+    tools: ["spazzolino morbido"]
+    warning: "Non usare detergenti aggressivi o solventi — danneggiano la plastica ABS."
+    tip: "Acqua distillata per il risciacquo finale elimina i depositi calcarei che potrebbero compromettere l'adesione del primer."
+
+  - id: 2
+    title: "Asciugatura completa"
+    description: "Lasciare asciugare la carrozzeria all'aria per almeno 2 ore in ambiente pulito e privo di polvere. Non usare asciugacapelli — il calore può deformare la plastica ABS sottile."
+    duration: "120 min"
+    tools: []
+    warning: "Non procedere al prossimo step finché la carrozzeria non è completamente asciutta. L'umidità intrappolata sotto il primer causa bollicine e distacchi."
+    tip: null
+
+  - id: 3
+    title: "Carteggiatura leggera"
+    description: "Carteggiare delicatamente tutta la superficie con carta abrasiva 400 grit a umido (bagnare sia la carta che la superficie). Questo crea una micro-texture che migliora l'adesione del primer. Procedere in direzione unica, mai circolare."
+    duration: "20 min"
+    tools: ["Carta abrasiva 400 grit"]
+    warning: "Non carteggiare le aree con scritte in rilievo o texture decorative — le rovinereste."
+    tip: "Dopo il 400 grit, passare con 600 grit per levigare ulteriormente. Il risultato finale del clear coat dipende molto da questa fase."
+
+  - id: 4
+    title: "Rimozione della polvere"
+    description: "Eliminare tutta la polvere di carteggiatura con un panno tack cloth. Passare su tutta la superficie con movimenti lenti e delicati. Ispezionare la carrozzeria in controluce per verificare l'assenza di particelle."
+    duration: "10 min"
+    tools: ["Panno tack cloth"]
+    warning: "Non soffiare sulla carrozzeria con la bocca — depositi di saliva causano crateri nella vernice (fish-eye)."
+    tip: "Lavorare in un ambiente con poca circolazione d'aria durante questa fase per evitare che la polvere si depositi nuovamente."
+
+  - id: 5
+    title: "Applicazione del primer"
+    description: "Applicare il primer grigio Tamiya in 2 mani sottili e uniformi, attendendo 10 minuti tra una mano e l'altra. Tenere il barattolo a 25-30cm dalla superficie. Muovere il barattolo continuamente durante l'applicazione. Lasciare asciugare completamente (2 ore) prima di procedere."
+    duration: "15 min (applicazione) + 120 min (asciugatura)"
+    tools: ["Primer grigio Tamiya"]
+    warning: "Non applicare il primer in una sola mano spessa — causerà colature. Due mani sottili sono sempre superiori a una mano spessa."
+    tip: "Il primer grigio è ideale per le tinte scure come il violetto. Se prevedi colori chiari o bianchi, usa un primer bianco."
+
+# ============================================================
+# PAINT SEQUENCE
+# ============================================================
+paintSequence:
+  - step: 1
+    colorId: "C004"
+    area: "Telaio e abitacolo interno"
+    technique: "spray-can"
+    coats: 2
+    dryingTime: "30 min tra le mani, 2 ore prima di procedere"
+    notes: "Iniziare dal telaio per evitare sovra-spray sulla carrozzeria principale già verniciata."
+
+  - step: 2
+    colorId: "C001"
+    area: "Intera carrozzeria esterna"
+    technique: "spray-can"
+    coats: 3
+    dryingTime: "20 min tra le mani, 3 ore prima della mascheratura"
+    notes: "Tre mani sottili. La prima mano è di ancoraggio (leggera). Seconda e terza per coprire completamente."
+
+  - step: 3
+    colorId: "C002"
+    area: "Appendici aerodinamiche superiori (ala posteriore, splitter anteriore)"
+    technique: "spray-can"
+    coats: 2
+    dryingTime: "30 min tra le mani, 2 ore prima di rimuovere la mascheratura"
+    notes: "Applicare dopo mascheratura delle zone body. Metallizzato — applicare in direzione costante."
+
+  - step: 4
+    colorId: "C003"
+    area: "Bordi dell'ala, linee di trim laterali"
+    technique: "brush"
+    coats: 2
+    dryingTime: "1 ora tra le mani, 2 ore prima del clear coat"
+    notes: "Usare pennello piatto n.8 per i bordi. Diluire leggermente per evitare pennellate visibili."
+
+  - step: 5
+    colorId: "C004"
+    area: "Cerchi ruote"
+    technique: "brush"
+    coats: 2
+    dryingTime: "1 ora tra le mani"
+    notes: "Usare pennello tondo n.000. Attenzione a non verniciare le gomme — mascherare con nastro 6mm."
+
+  - step: 6
+    colorId: "C003"
+    area: "Bulloni decorativi e dettagli in rilievo"
+    technique: "brush"
+    coats: 1
+    dryingTime: "2 ore prima del clear coat finale"
+    notes: "Tecnica dry-brush: pennello quasi asciutto, passaggi veloci per depositare solo sui rilievi."
+
+# ============================================================
+# MASKING
+# ============================================================
+maskingZones:
+  - id: "M001"
+    area: "Cornice finestrini"
+    maskingType: "tape"
+    maskingOrder: 1
+    notes: "Usare nastro 6mm per seguire le curve della cornice. Burnishing accurato dei bordi."
+
+  - id: "M002"
+    area: "Appendici aerodinamiche (per verniciatura C002)"
+    maskingType: "tape"
+    maskingOrder: 2
+    notes: "Mascherare dopo la completa asciugatura del C001 (viola base). Usare nastro 10mm per le aree piane, 6mm per i bordi curvi."
+
+  - id: "M003"
+    area: "Cerchi ruote (per verniciatura C004)"
+    maskingType: "tape"
+    maskingOrder: 3
+    notes: "Mascherare le gomme con nastro 6mm avvolto intorno al battistrada. Proteggere il mozzo con cerchio di carta."
+
+# ============================================================
+# DETAILS
+# ============================================================
+detailAreas:
+  - id: "D001"
+    name: "Abitacolo interno"
+    colorId: "C004"
+    technique: "Pennello piatto n.8, 2 mani diluite"
+    notes: "Includere sedile, roll-bar (se presente), piantone sterzo. Evitare di verniciare le pareti esterne già in C001."
+
+  - id: "D002"
+    name: "Cerchi ruote"
+    colorId: "C004"
+    technique: "Pennello tondo n.000, dry-brush per i raggi"
+    notes: "I raggi in rilievo si prestano alla tecnica dry-brush per un effetto metallico realistico."
+
+  - id: "D003"
+    name: "Dettagli aerodinamici (bordi ala e splitter)"
+    colorId: "C003"
+    technique: "Pennello piatto n.8 per i bordi, n.000 per i punti di giunzione"
+    notes: "L'argento sui bordi crea una definizione visiva netta tra l'ala nera e la carrozzeria viola."
+
+# ============================================================
+# DECALS
+# ============================================================
+decals:
+  - id: "DEC001"
+    name: "Numero gara '07'"
+    position: "Entrambi i lati della carrozzeria, zona posteriore, centrato verticalmente, a 8mm dal bordo posteriore"
+    size: "22x18mm"
+    notes: "Numero in bianco su sfondo trasparente. Applicare dopo il primo strato di clear coat."
+
+  - id: "DEC002"
+    name: "Logo Serie Championship"
+    position: "Cofano anteriore, centrato, a 5mm dal bordo del parabrezza"
+    size: "18x8mm"
+    notes: "Logo dorato su trasparente. Applicare con estrema delicatezza — posizionamento simmetrico è critico per l'estetica."
+
+# ============================================================
+# PREMIUM VARIANT
+# ============================================================
+premiumVariant:
+  enabled: true
+  name: "Violet Phantom Pearl Edition"
+  description: "Versione premium dello schema Violet Phantom con l'aggiunta di un topcoat perlato che conferisce profondità cangiante alla tinta viola e un effetto visivo superiore sotto luce diretta e fotografica."
+  additionalMaterials:
+    - name: "Pearl clear coat"
+      brand: "Mr. Hobby"
+      code: "GX-116"
+      purpose: "Topcoat perlato applicato come ultimo strato"
+    - name: "Diluente Mr. Leveling"
+      brand: "Mr. Hobby"
+      code: "T-106"
+      purpose: "Diluente specifico per una stesura uniforme del topcoat perlato"
+  specialTechniques:
+    - "Applicazione del topcoat perlato con aerografo a bassa pressione (0.8 bar)"
+    - "Tre mani sottilissime di pearl coat con asciugatura 45 min tra le mani"
+    - "Direzione di stesura: sempre in una sola direzione (orizzontale) per uniformità della perla"
+    - "Ispezione in luce radente dopo ogni mano per rilevare irregolarità prima che asciughi"
+
+# ============================================================
+# FILE PATHS
+# ============================================================
+paths:
+  coverRenderPath: "Images/cover_3q.png"
+  colorSchemeRenderFront: "Images/P002_front.png"
+  colorSchemeRenderSide: "Images/P002_side.png"
+  colorSchemeRenderTop: "Images/P002_top.png"
+  outputDir: "Output/"
+  notesDir: "Notes/"
+
+# ============================================================
+# QA METADATA
+# ============================================================
+qa:
+  status: "draft"
+  reviewer: ""
+  reviewDate: ""
+  approvedDate: ""
+  qaLogPath: "Notes/qa_log.md"
