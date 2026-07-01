@@ -15,7 +15,7 @@ pdf:
     orientation: "portrait"
     color_space: "sRGB"           # Default for screen; print overrides to CMYK-FOGRA39
     standard: "PDF/X-4"           # PDF/X-4 (print) | PDF/A-2b (archive/screen)
-    creator: "Mini4WD Manual SDK v2.2.0"
+    creator: "Mini4WD Manual SDK v2.4.0"
     embed_fonts: true
     subset_fonts: true            # Reduces file size without affecting fidelity
     compress_images: true
@@ -124,7 +124,7 @@ pdf:
     - field: "keywords"
       source: "Auto-generate from: modelName, seriesName, paintScheme.name, 'Mini4WD', 'Tamiya', 'painting'"
     - field: "creator"
-      fixed_value: "Mini4WD Manual SDK v2.2.0"  # Always this value
+      fixed_value: "Mini4WD Manual SDK v2.4.0"  # Always this value
 
   # ============================================================
   # CHECKSUM

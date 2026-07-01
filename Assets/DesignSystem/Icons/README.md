@@ -1,18 +1,18 @@
 # Assets/DesignSystem/Icons/
 
-**Version:** 2.1.0
-**Status:** Planned for v2.2.0 — not yet included
+**Version:** 2.4.0
+**Status:** Planned for v2.5.0 — not yet included
 **Interim solution:** Unicode symbols (documented below)
 
 ---
 
 ## Status
 
-The icon library for Mini4WD Manual SDK is planned for release in **v2.2.0**. This directory currently contains no SVG files.
+The icon library for Mini4WD Manual SDK is planned for release in **v2.5.0**. This directory currently contains no SVG files.
 
-Until v2.2.0, all components use Unicode symbols as interim icon representations. These symbols are specified in `Core/COMPONENT_SYSTEM.md` for each component that requires an icon.
+Until v2.5.0, all components use Unicode symbols as interim icon representations. These symbols are specified in `Core/COMPONENT_SYSTEM.md` for each component that requires an icon.
 
-See `ROADMAP.md` for the v2.2.0 release timeline.
+See `ROADMAP.md` for the v2.5.0 release timeline.
 
 ---
 
@@ -36,7 +36,7 @@ Use these symbols in the TitleFont or BodyFont SemiBold weight at the component'
 
 ---
 
-## v2.2.0 Icon Specification
+## v2.5.0 Icon Specification
 
 When the icon library is created, every icon must conform to these standards:
 
@@ -58,7 +58,7 @@ Examples:
 - `icon-brush.svg`
 - `icon-airbrush.svg`
 
-### Required Icons for v2.2.0
+### Required Icons for v2.5.0
 
 | File Name | Used In | Description |
 |-----------|---------|-------------|
@@ -94,7 +94,7 @@ Examples:
 
 ## Contribution Process
 
-To contribute an icon for the v2.2.0 library:
+To contribute an icon for the v2.5.0 library:
 
 1. Create the SVG following the specification above
 2. Test at 16px, 24px, and 32px to verify legibility at all sizes

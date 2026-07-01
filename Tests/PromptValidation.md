@@ -1,7 +1,7 @@
 # Prompt Validation Tests
 
 **Test Suite ID:** TEST-PR
-**SDK Version:** 2.2.0
+**SDK Version:** 2.4.0
 **Layer:** PromptEngine
 **Reference:** `PromptEngine/README.md`, `Core/PAGE_SYSTEM.md`, `Core/AI_OPERATING_RULES.md`, `Config/sdk.yaml §project_schema`
 

@@ -1,7 +1,7 @@
 # Clear Coat and Finishing
 
 **Document ID:** KNW-CLR-001
-**SDK Version:** 2.2.0
+**SDK Version:** 2.4.0
 **Category:** Technique Reference
 
 ---

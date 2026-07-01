@@ -4,7 +4,7 @@
 # Enforced by: Tests/TextValidation.md, PromptEngine/ (LOAD sequence)
 
 language_policy:
-  version: "2.3.0"
+  version: "2.4.0"
 
   # ============================================================
   # PRIMARY LANGUAGE

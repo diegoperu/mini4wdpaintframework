@@ -1,7 +1,7 @@
 # ApprovedText — Proto Emperor
 
 **Project:** Proto Emperor
-**SDK Version:** 2.3.0
+**SDK Version:** 2.4.0
 **Status:** Vuoto (progetto di esempio — testo non ancora generato)
 
 ## Scopo

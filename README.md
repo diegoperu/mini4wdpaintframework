@@ -1,6 +1,6 @@
 # Mini4WD Manual SDK
 
-**Version 2.1.0** | Apache 2.0 | Open Source
+**Version 2.4.0** | Apache 2.0 | Open Source
 
 ---
 
@@ -54,7 +54,7 @@ Mini4WD_Manual_SDK/
 │
 ├── README.md                    ← You are here
 ├── CHANGELOG.md                 ← Version history
-├── VERSION                      ← Current version (2.1.0)
+├── VERSION                      ← Current version (2.4.0)
 ├── LICENSE                      ← Apache 2.0
 ├── STYLE_DECISIONS.md           ← Architecture Decision Records (ADRs)
 ├── ROADMAP.md                   ← Planned features and future direction

@@ -1,6 +1,6 @@
 # P001 — Cover Page Prompt
 
-**SDK Version:** 2.1.0
+**SDK Version:** 2.4.0
 **Page ID:** P001
 **Prompt File:** `PromptEngine/Cover.md`
 **Dependencies:** `PROJECT.yaml`, `Core/RENDER_GUIDE.md §2`, `Core/STYLE_GUIDE.md §1`, `Core/COMPONENT_SYSTEM.md §C001`, `Core/COMPONENT_SYSTEM.md §C002`
@@ -158,4 +158,4 @@ Save approved output to: `Assets/ApprovedManual/{{project.modelSlug}}/P001.png`
 
 ---
 
-*Part of Mini4WD Manual SDK v2.1.0 -- PromptEngine. See `Core/PAGE_SYSTEM.md §P001` for page architecture specification.*
+*Part of Mini4WD Manual SDK v2.4.0 -- PromptEngine. See `Core/PAGE_SYSTEM.md §P001` for page architecture specification.*

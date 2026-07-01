@@ -1,7 +1,7 @@
 # PDF Validation Tests
 
 **Test Suite ID:** TEST-PD
-**SDK Version:** 2.2.0
+**SDK Version:** 2.4.0
 **Layer:** Export
 **Reference:** `Core/PDF_MASTER.md`, `Config/pdf.yaml`, `Templates/PDF_CONFIG.yaml`
 
@@ -38,7 +38,7 @@ Verify that exported PDF files meet all technical requirements for screen, print
 - [ ] `Title` = "{ModelName} Painting Manual"
 - [ ] `Subject` = "Mini4WD Painting Manual"
 - [ ] `Author` = value from `PROJECT.yaml §project.author`
-- [ ] `Creator` = "Mini4WD Manual SDK v2.2.0"
+- [ ] `Creator` = "Mini4WD Manual SDK v2.4.0"
 - [ ] `Keywords` includes: model name, "Mini4WD", "painting"
 
 **Print variant:**

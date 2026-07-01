@@ -1,5 +1,5 @@
 # Mini4WD Manual SDK — Token Schema
-# Version: 2.1.0
+# Version: 2.4.0
 # Reference: Core/STYLE_GUIDE.md
 # Use this schema to validate token files (tokens.example.yaml, project overrides).
 #
@@ -13,7 +13,7 @@
 "$schema": "http://json-schema.org/draft-07/schema#"
 title: "Mini4WD Manual SDK Design Tokens"
 description: >
-  Schema for tokens.yaml files in the Mini4WD Manual SDK v2.1.0.
+  Schema for tokens.yaml files in the Mini4WD Manual SDK v2.4.0.
   All required fields must be present. Additional fields are allowed
   (for custom project tokens under the 'custom' key).
 type: object

@@ -1,7 +1,7 @@
 # Text Validation Tests
 
 **Test Suite ID:** TEST-TX
-**SDK Version:** 2.3.0
+**SDK Version:** 2.4.0
 **Layer:** Editorial / Text Engine
 **Reference:** `Core/TEXT_ENGINE.md`, `Config/LANGUAGE_POLICY.yaml`, `Core/AI_OPERATING_RULES.md §TEXT RENDERING RULES`, `Knowledge/GlossaryIT.md`
 

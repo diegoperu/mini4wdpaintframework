@@ -1,5 +1,5 @@
 # Mini4WD Manual SDK — Render Engine Configuration
-# Version: 2.2.0
+# Version: 2.4.0
 # Reference: Core/RENDER_GUIDE.md, Build/Pipeline.md §Phase 3
 #
 # These parameters encode the numeric values described in RENDER_GUIDE.md.

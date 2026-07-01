@@ -1,6 +1,6 @@
 # Assets/DesignSystem/Components/
 
-**Version:** 2.1.0
+**Version:** 2.4.0
 **Authoritative spec:** Core/COMPONENT_SYSTEM.md
 **Token source:** Assets/DesignSystem/Tokens/tokens.example.yaml
 
@@ -110,7 +110,7 @@ VARIANT — Cover (P001):
 ```
 ←──────────────────── Page width ({{token.PageWidth}}) ───────────────────→
 ┌──────────────────────────────────────────────────────────────────────────┐ ↑
-│  [Model Name] Painting Manual                      P001 · SDK v2.1.0   │ {{token.FooterHeight}}
+│  [Model Name] Painting Manual                      P001 · SDK v2.4.0   │ {{token.FooterHeight}}
 │  Caption 9pt {{token.MidGray}}                     Label 8pt right      │ (12mm)
 └──────────────────────────────────────────────────────────────────────────┘
 Background: {{token.LightGray}} (top border 1px {{token.MidGray}})

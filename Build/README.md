@@ -2,7 +2,7 @@
 
 **Role in framework:** The Build directory defines the production pipeline — the end-to-end process that transforms a PROJECT.yaml into a published, approved Mini4WD painting manual.
 
-**SDK Version:** 2.2.0
+**SDK Version:** 2.4.0
 
 **Scope:** Orchestration, pipeline documentation, phase sequencing. Not AI prompts (→ PromptEngine/), not design specs (→ Core/).
 

@@ -1,7 +1,7 @@
 # Editorial Style Guide
 
 **Document ID:** KNW-EDT-001
-**SDK Version:** 2.3.0
+**SDK Version:** 2.4.0
 **Category:** Editorial Reference
 **Reference:** `Core/TEXT_ENGINE.md`, `Config/LANGUAGE_POLICY.yaml`
 

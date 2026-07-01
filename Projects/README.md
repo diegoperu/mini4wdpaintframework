@@ -185,4 +185,4 @@ When a manual is complete and published:
 
 ---
 
-*Projects/ is part of Mini4WD Manual SDK v2.1.0. See `Core/WORKFLOW.md` for the complete pipeline.*
+*Projects/ is part of Mini4WD Manual SDK v2.4.0. See `Core/WORKFLOW.md` for the complete pipeline.*

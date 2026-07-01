@@ -1,7 +1,7 @@
 # Best Practices
 
 **Document ID:** KNW-BPR-001
-**SDK Version:** 2.2.0
+**SDK Version:** 2.4.0
 **Category:** Expert Guidance
 
 ---

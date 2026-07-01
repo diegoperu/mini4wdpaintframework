@@ -6,7 +6,7 @@ version: "{{project.version}}"
 approved: false
 approved_by: ""
 approved_date: ""
-sdk_version: "2.3.0"
+sdk_version: "2.4.0"
 text_engine_version: "1.0"
 ---
 

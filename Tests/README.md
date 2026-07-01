@@ -2,7 +2,7 @@
 
 **Role in framework:** Defines validation protocols for every layer of the SDK.
 
-**SDK Version:** 2.2.0
+**SDK Version:** 2.4.0
 
 Tests/ contains human-executable validation protocols — structured checklists and test procedures that verify the SDK itself is internally consistent and that each generated manual meets quality standards. These are not automated test suites (automation planned for v3.0.0) but systematic, repeatable verification guides.
 

@@ -1,6 +1,6 @@
 # P010 — Final Checklist Prompt
 
-**SDK Version:** 2.1.0
+**SDK Version:** 2.4.0
 **Page ID:** P010
 **Prompt File:** `PromptEngine/FinalChecklist.md`
 **Dependencies:** `PROJECT.yaml`, `Core/COMPONENT_SYSTEM.md §C015`, `Core/DEFINITION_OF_DONE.md`
@@ -39,7 +39,7 @@ This is the last page. The reader has completed the painting. This page guides a
 **FOOTER (C002):** Gray #E8E8E8, 12mm.
 Left: "{{project.modelName}} — {{paintScheme.name}}" Source Sans Pro Regular 8pt #4A4A4A.
 Center: "P010" Source Sans Pro Bold 8pt #5B2D8E.
-Right: "Mini4WD Manual SDK v2.1.0" Source Sans Pro Regular 8pt #9B9B9B.
+Right: "Mini4WD Manual SDK v2.4.0" Source Sans Pro Regular 8pt #9B9B9B.
 
 **PAGE TITLE (22mm from top):**
 "Final Inspection Checklist" in Bebas Neue Bold 28pt #5B2D8E, left margin 18mm.
@@ -121,7 +121,7 @@ Sub-text: "{{paintScheme.name}}" Source Sans Pro Regular 9pt #8B5FBF (VioletLigh
 Gray section background #F8F8F8, full width minus margins, border-radius 3px, padding 8px.
 Two-column metadata grid, Source Sans Pro Regular 8pt #9B9B9B:
 Left: Manual Version: {{project.version}} | Author: {{project.author}} | Language: {{project.language}}
-Right: SDK Version: 2.1.0 | Page Count: 10 | Scheme: {{paintScheme.name}}
+Right: SDK Version: 2.4.0 | Page Count: 10 | Scheme: {{paintScheme.name}}
 
 **REQUIRED ELEMENTS:**
 - Two-column layout: quality checklist (left) + care/storage (right)
@@ -150,4 +150,4 @@ Save output to: `Projects/{{project.modelSlug}}/Output/raw/P010_raw.md`
 
 ---
 
-*Part of Mini4WD Manual SDK v2.1.0 — PromptEngine. This is the last page of every manual.*
+*Part of Mini4WD Manual SDK v2.4.0 — PromptEngine. This is the last page of every manual.*

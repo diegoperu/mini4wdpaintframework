@@ -1,7 +1,7 @@
 # Forbidden Words and Phrases
 
 **Document ID:** KNW-FBD-001
-**SDK Version:** 2.3.0
+**SDK Version:** 2.4.0
 **Category:** Editorial Reference
 **Reference:** `Config/LANGUAGE_POLICY.yaml`, `Core/AI_OPERATING_RULES.md §TEXT RENDERING RULES`
 

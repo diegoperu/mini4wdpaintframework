@@ -1,6 +1,6 @@
 # P006 — Masking Technique Prompt
 
-**SDK Version:** 2.1.0
+**SDK Version:** 2.4.0
 **Page ID:** P006
 **Prompt File:** `PromptEngine/Masking.md`
 **Dependencies:** `PROJECT.yaml`, `Core/COMPONENT_SYSTEM.md §C006`, `Core/COMPONENT_SYSTEM.md §C008`, `Core/COMPONENT_SYSTEM.md §C012`, `Core/COMPONENT_SYSTEM.md §C013`
@@ -116,4 +116,4 @@ Save output to: `Projects/{{project.modelSlug}}/Output/raw/P006_raw.md`
 
 ---
 
-*Part of Mini4WD Manual SDK v2.1.0 — PromptEngine.*
+*Part of Mini4WD Manual SDK v2.4.0 — PromptEngine.*

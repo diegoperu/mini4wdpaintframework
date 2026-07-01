@@ -7,7 +7,7 @@
 
 **Model:** Proto Emperor
 **Scheme:** Violet Phantom
-**SDK Version:** 2.1.0
+**SDK Version:** 2.4.0
 **Language:** Italian (it)
 **Manual Version:** 1.0.0
 **QA Status:** Example (not production QA'd)
@@ -100,4 +100,4 @@ To run QA on your own project, see `Core/QA_SYSTEM.md`.
 
 ---
 
-*Part of Mini4WD Manual SDK v2.1.0 — Example Project. See `Projects/README.md` for project conventions.*
+*Part of Mini4WD Manual SDK v2.4.0 — Example Project. See `Projects/README.md` for project conventions.*

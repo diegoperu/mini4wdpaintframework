@@ -1,6 +1,6 @@
 # P004 — Preparation Page Prompt
 
-**SDK Version:** 2.1.0
+**SDK Version:** 2.4.0
 **Page ID:** P004
 **Prompt File:** `PromptEngine/Preparation.md`
 **Dependencies:** `PROJECT.yaml`, `Core/COMPONENT_SYSTEM.md §C007`, `Core/COMPONENT_SYSTEM.md §C008`, `Core/COMPONENT_SYSTEM.md §C009`, `Core/COMPONENT_SYSTEM.md §C013`, `Core/COMPONENT_SYSTEM.md §C014`
@@ -97,4 +97,4 @@ Save output to: `Projects/{{project.modelSlug}}/Output/raw/P004_raw.md`
 
 ---
 
-*Part of Mini4WD Manual SDK v2.1.0 — PromptEngine.*
+*Part of Mini4WD Manual SDK v2.4.0 — PromptEngine.*

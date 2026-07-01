@@ -155,7 +155,7 @@ Projects/
 A minimal PROJECT.yaml includes:
 
 ```yaml
-sdkVersion: "2.1.0"
+sdkVersion: "2.4.0"
 modelName: "Proto Emperor"
 modelSlug: "proto-emperor"
 series: "Super-II Chassis"

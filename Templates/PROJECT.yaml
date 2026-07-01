@@ -16,7 +16,7 @@
 # See PromptEngine/README.md for token reference.
 # ============================================================
 
-sdk_version: "2.1.0"            # REQUIRED — must match SDK version (see VERSION file)
+sdk_version: "2.4.0"            # REQUIRED — must match SDK version (see VERSION file)
 
 # ============================================================
 # PROJECT METADATA

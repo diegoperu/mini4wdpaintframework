@@ -8,7 +8,7 @@
 
 sdk:
   name: "Mini4WD Manual SDK"
-  version: "2.2.0"
+  version: "2.4.0"
 
   # ============================================================
   # PROJECT SCHEMA VALIDATION

@@ -1,6 +1,6 @@
 # Assets/ReferenceModels/
 
-**Version:** 2.1.0
+**Version:** 2.4.0
 **Used by:** PromptEngine/ prompts during render generation
 **Spec:** Core/RENDER_GUIDE.md §6
 

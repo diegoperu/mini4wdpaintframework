@@ -1,6 +1,6 @@
 # P009 — Premium Variant Prompt
 
-**SDK Version:** 2.1.0
+**SDK Version:** 2.4.0
 **Page ID:** P009
 **Prompt File:** `PromptEngine/Premium.md`
 **Dependencies:** `PROJECT.yaml` (`premiumVariant.enabled` must be `true`), `Core/COMPONENT_SYSTEM.md §C006`, `Core/COMPONENT_SYSTEM.md §C009`, `Core/COMPONENT_SYSTEM.md §C011`, `Core/COMPONENT_SYSTEM.md §C015`
@@ -127,4 +127,4 @@ Save output to: `Projects/{{project.modelSlug}}/Output/raw/P009_raw.md`
 
 ---
 
-*Part of Mini4WD Manual SDK v2.1.0 — PromptEngine. Page is conditional on `premiumVariant.enabled: true`.*
+*Part of Mini4WD Manual SDK v2.4.0 — PromptEngine. Page is conditional on `premiumVariant.enabled: true`.*

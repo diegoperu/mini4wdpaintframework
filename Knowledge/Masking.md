@@ -1,7 +1,7 @@
 # Masking Techniques
 
 **Document ID:** KNW-MAS-001
-**SDK Version:** 2.2.0
+**SDK Version:** 2.4.0
 **Category:** Technique Reference
 
 ---

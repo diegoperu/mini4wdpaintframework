@@ -1,7 +1,7 @@
 # Glossario Italiano
 
 **Document ID:** KNW-GIT-001
-**SDK Version:** 2.3.0
+**SDK Version:** 2.4.0
 **Category:** Terminology Reference
 **Language:** Italian
 **Reference:** `Core/TEXT_ENGINE.md`, `Config/LANGUAGE_POLICY.yaml`

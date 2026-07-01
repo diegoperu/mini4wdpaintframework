@@ -1,7 +1,7 @@
 # Naming Convention Validation Tests
 
 **Test Suite ID:** TEST-NM
-**SDK Version:** 2.2.0
+**SDK Version:** 2.4.0
 **Layer:** Filesystem
 **Reference:** `Core/NAMING_CONVENTION.md`, `Config/sdk.yaml §naming`
 

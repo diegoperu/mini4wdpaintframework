@@ -1,7 +1,7 @@
 # Technical Terminology
 
 **Document ID:** KNW-TRM-001
-**SDK Version:** 2.3.0
+**SDK Version:** 2.4.0
 **Category:** Terminology Reference
 
 ---

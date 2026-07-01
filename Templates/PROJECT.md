@@ -5,7 +5,7 @@
 
 ---
 
-**SDK Version:** 2.1.0
+**SDK Version:** 2.4.0
 **Status:** Draft
 **Author:** [Author Name or Studio]
 **Created:** [YYYY-MM-DD]
@@ -143,4 +143,4 @@
 
 ---
 
-*Generated with Mini4WD Manual SDK v2.1.0 — see `Core/WORKFLOW.md` for the complete pipeline.*
+*Generated with Mini4WD Manual SDK v2.4.0 — see `Core/WORKFLOW.md` for the complete pipeline.*

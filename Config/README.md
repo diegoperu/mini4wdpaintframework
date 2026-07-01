@@ -2,7 +2,7 @@
 
 **Role in framework:** Runtime configuration for all SDK tools and processes.
 
-**SDK Version:** 2.2.0
+**SDK Version:** 2.4.0
 
 Configuration files in this directory drive the behavior of the SDK pipeline, validation tools, and export processes. They are distinct from `Core/` specifications (which are human-facing standards) — Config/ files are machine-readable parameters.
 

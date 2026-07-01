@@ -1,7 +1,7 @@
 # Reference: Proto Emperor
 
 **Status:** Example (SDK demonstration placeholder)
-**SDK Version:** 2.1.0
+**SDK Version:** 2.4.0
 **modelSlug:** `proto-emperor`
 **modelName:** `Proto Emperor`
 

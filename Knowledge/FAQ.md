@@ -1,7 +1,7 @@
 # Frequently Asked Questions
 
 **Document ID:** KNW-FAQ-001
-**SDK Version:** 2.2.0
+**SDK Version:** 2.4.0
 **Category:** Reference
 
 ---

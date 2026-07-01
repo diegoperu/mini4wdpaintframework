@@ -1,7 +1,7 @@
 # Color Validation Tests
 
 **Test Suite ID:** TEST-CL
-**SDK Version:** 2.2.0
+**SDK Version:** 2.4.0
 **Layer:** Color
 **Reference:** `Core/COLOR_SYSTEM.md`, `Core/STYLE_GUIDE.md §1`, `Assets/DesignSystem/Tokens/tokens.example.yaml`, `Knowledge/Paints.md`
 

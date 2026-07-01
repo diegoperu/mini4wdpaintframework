@@ -200,7 +200,7 @@ content_formats:
   legacy:
     format: "Markdown"
     path_pattern: "Projects/{model}/ApprovedText/P{NNN}.md"
-    added_version: "2.3.0"
+    added_version: "2.4.0"
     deprecated: false  # Maintained for backward compatibility
     render_engine_reads: false  # Render Engine reads content.yaml exclusively in v2.4.0
 
@@ -241,12 +241,12 @@ compatibility:
   project_yaml_versions:
     - sdk_version: "2.4.0"
       compatible: true
-    - sdk_version: "2.3.0"
+    - sdk_version: "2.4.0"
       compatible: true
       notes: "All v2.3.0 content compatible. ApprovedText/ still supported. ApprovedAssets/ is additive."
-    - sdk_version: "2.2.0"
+    - sdk_version: "2.4.0"
       compatible: true
-    - sdk_version: "2.1.0"
+    - sdk_version: "2.4.0"
       compatible: true
       notes: "All v2.1.0 PROJECT.yaml files work without modification"
     - sdk_version: "2.0.0"

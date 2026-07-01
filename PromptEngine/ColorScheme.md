@@ -1,6 +1,6 @@
 # P002 — Color Scheme Prompt
 
-**SDK Version:** 2.1.0
+**SDK Version:** 2.4.0
 **Page ID:** P002
 **Prompt File:** `PromptEngine/ColorScheme.md`
 **Dependencies:** `PROJECT.yaml`, `Core/COLOR_SYSTEM.md`, `Core/COMPONENT_SYSTEM.md §C003`, `Core/COMPONENT_SYSTEM.md §C010`, `Core/COMPONENT_SYSTEM.md §C011`, `Core/RENDER_GUIDE.md §2`
@@ -121,4 +121,4 @@ Save output to: `Projects/{{project.modelSlug}}/Output/raw/P002_raw.md`
 
 ---
 
-*Part of Mini4WD Manual SDK v2.1.0 — PromptEngine.*
+*Part of Mini4WD Manual SDK v2.4.0 — PromptEngine.*

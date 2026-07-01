@@ -1,7 +1,7 @@
 # Approved Manual: Proto Emperor
 
 **Status:** Placeholder (no approved manual yet)
-**SDK Version:** 2.1.0
+**SDK Version:** 2.4.0
 **Manual Version:** —
 **Paint Scheme:** Violet Phantom (planned)
 **Approval Date:** Not yet approved

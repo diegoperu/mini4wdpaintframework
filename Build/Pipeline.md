@@ -1,6 +1,6 @@
 # Production Pipeline
 
-**SDK Version:** 2.2.0
+**SDK Version:** 2.4.0
 **Document ID:** BUILD-001
 **Status:** Stable
 **Dependencies:** `Core/WORKFLOW.md`, `Core/QA_SYSTEM.md`, `Core/PDF_MASTER.md`, `Config/sdk.yaml`
@@ -294,7 +294,7 @@ Reviewer: {name}
 ```markdown
 # Approved Manual: {ModelName}
 **Manual Version:** {version}
-**SDK Version:** 2.2.0
+**SDK Version:** 2.4.0
 **Approved:** YYYY-MM-DD
 **Reviewer:** {name}
 **QA Log:** qa_log.md

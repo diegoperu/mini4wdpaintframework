@@ -77,13 +77,13 @@ Always specify the language for syntax highlighting:
 ```yaml
 # Correct
 ```yaml
-sdkVersion: "2.1.0"
+sdkVersion: "2.4.0"
 ```
 
 ```
 # Incorrect (no language specified)
 ```
-sdkVersion: "2.1.0"
+sdkVersion: "2.4.0"
 ```
 ```
 

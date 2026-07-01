@@ -1,7 +1,7 @@
 # Text Engine
 
 **Document ID:** CORE-TXT-001
-**SDK Version:** 2.3.0
+**SDK Version:** 2.4.0
 **Status:** Stable — Mandatory
 **Replaces:** (none — new document)
 **Referenced by:** Build/Pipeline.md, Core/WORKFLOW.md, PromptEngine/README.md, Core/COMPONENT_SYSTEM.md

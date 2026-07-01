@@ -1,6 +1,6 @@
 # Assets/DesignSystem/Typography/
 
-**Version:** 2.1.0
+**Version:** 2.4.0
 **Token source:** Assets/DesignSystem/Tokens/tokens.example.yaml `typography.*`
 **Spec:** Core/STYLE_GUIDE.md §2–3
 

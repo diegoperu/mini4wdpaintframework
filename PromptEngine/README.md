@@ -187,7 +187,7 @@ To add a new page prompt (e.g., P011 for a new page type):
 
 ---
 
-*PromptEngine is part of Mini4WD Manual SDK v2.1.0. See `Core/WORKFLOW.md` for the complete generation pipeline.*
+*PromptEngine is part of Mini4WD Manual SDK v2.4.0. See `Core/WORKFLOW.md` for the complete generation pipeline.*
 
 ---
 
@@ -231,7 +231,7 @@ As of SDK v2.3.0, every prompt must begin with a LOAD sequence that injects the 
 Paste this preamble before each page prompt:
 
 ```
-[CONTEXT LOAD — Mini4WD Manual SDK v2.3.0]
+[CONTEXT LOAD — Mini4WD Manual SDK v2.4.0]
 
 You are an AI model operating within the Mini4WD Manual SDK editorial pipeline.
 Before generating any content, internalize the following constraints:

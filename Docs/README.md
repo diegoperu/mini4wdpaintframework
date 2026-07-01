@@ -1,6 +1,6 @@
 # Docs/
 
-**Version:** 2.1.0
+**Version:** 2.4.0
 **Relationship to Core/:** Supplementary — does NOT override Core/
 
 ---
@@ -36,18 +36,18 @@ If `Core/` and `Docs/` ever conflict, **`Core/` wins**. `Docs/` is always a deri
 
 ---
 
-## Planned Contents (v2.2.0+)
+## Planned Contents (v2.5.0+)
 
 The following documents are planned for future releases:
 
 | File | Description | Target Version |
 |------|-------------|----------------|
-| `tutorial/first-manual.md` | End-to-end tutorial: create your first Mini4WD manual | v2.2.0 |
-| `tutorial/render-generation.md` | How to generate renders using free and paid AI tools | v2.2.0 |
-| `tutorial/pdf-export.md` | Step-by-step PDF export in Affinity Publisher, InDesign, Scribus | v2.2.0 |
-| `faq.md` | Frequently asked questions | v2.2.0 |
-| `contributing.md` | How to contribute to the SDK | v2.2.0 |
-| `glossary.md` | Definitions of SDK-specific terms | v2.2.0 |
+| `tutorial/first-manual.md` | End-to-end tutorial: create your first Mini4WD manual | v2.5.0 |
+| `tutorial/render-generation.md` | How to generate renders using free and paid AI tools | v2.5.0 |
+| `tutorial/pdf-export.md` | Step-by-step PDF export in Affinity Publisher, InDesign, Scribus | v2.5.0 |
+| `faq.md` | Frequently asked questions | v2.5.0 |
+| `contributing.md` | How to contribute to the SDK | v2.5.0 |
+| `glossary.md` | Definitions of SDK-specific terms | v2.5.0 |
 | `migration/v2-to-v3.md` | Migration guide for v3.0.0 (when released) | v3.0.0 |
 
 ---

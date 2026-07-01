@@ -1,7 +1,7 @@
 # Layout Validation Tests
 
 **Test Suite ID:** TEST-LY
-**SDK Version:** 2.2.0
+**SDK Version:** 2.4.0
 **Layer:** Visual Layout
 **Reference:** `Core/STYLE_GUIDE.md §4`, `Assets/DesignSystem/Layout/README.md`, `Core/COMPONENT_SYSTEM.md`, `Config/render.yaml §resolution`
 

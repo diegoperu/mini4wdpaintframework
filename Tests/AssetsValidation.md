@@ -1,7 +1,7 @@
 # Assets Validation Tests
 
 **Test Suite ID:** TEST-AS
-**SDK Version:** 2.2.0
+**SDK Version:** 2.4.0
 **Layer:** Assets
 **Reference:** `Assets/README.md`, `Core/RENDER_GUIDE.md §5`, `Core/NAMING_CONVENTION.md`, `Config/render.yaml §resolution`
 

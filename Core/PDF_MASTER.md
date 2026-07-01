@@ -126,7 +126,7 @@ All metadata fields are required. Missing metadata is a QA failure (QA-096 throu
 | Author | `{{project.author}}` | "Studio Tamiya Fans" |
 | Subject | `Mini4WD painting manual — {{project.series}} chassis` | "Mini4WD painting manual — Super-II chassis" |
 | Keywords | `mini4wd, tamiya, painting, {{project.modelName}}, {{project.paintScheme.name}}` | "mini4wd, tamiya, painting, proto emperor, midnight violet" |
-| Creator | `Mini4WD Manual SDK v{{sdkVersion}}` | "Mini4WD Manual SDK v2.1.0" |
+| Creator | `Mini4WD Manual SDK v{{sdkVersion}}` | "Mini4WD Manual SDK v2.4.0" |
 | Producer | Set by export tool | Set automatically |
 | Creation Date | `{{project.createdDate}}` | "2024-01-20" |
 

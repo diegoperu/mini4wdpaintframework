@@ -6,7 +6,7 @@
 **Model:** [Model Name]
 **Scheme:** [Scheme Name]
 **Started:** [YYYY-MM-DD]
-**SDK Version:** 2.1.0
+**SDK Version:** 2.4.0
 
 ---
 
@@ -186,4 +186,4 @@ For each page: run the PromptEngine prompt, review the output, iterate until app
 
 ---
 
-*Mini4WD Manual SDK v2.1.0 — `Core/WORKFLOW.md` for pipeline details.*
+*Mini4WD Manual SDK v2.4.0 — `Core/WORKFLOW.md` for pipeline details.*

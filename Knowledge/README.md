@@ -2,7 +2,7 @@
 
 **Role in framework:** Technical reference library for Mini4WD painting techniques, materials, and processes.
 
-**SDK Version:** 2.2.0
+**SDK Version:** 2.4.0
 
 Knowledge/ is the SDK's technical knowledge base. It contains objective, factual information about painting, masking, preparation, and finishing techniques for Mini4WD scale models. This information is used by:
 

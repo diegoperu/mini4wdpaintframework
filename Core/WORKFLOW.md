@@ -204,7 +204,7 @@ Does page output satisfy the page-level Definition of Done (DEFINITION_OF_DONE.m
 
 Date: {date}
 Reviewer: {name} (must be different from the contributor who generated the manual)
-SDK Version: 2.1.0
+SDK Version: 2.4.0
 Manual Version: {{project.manualVersion}}
 
 ## Results

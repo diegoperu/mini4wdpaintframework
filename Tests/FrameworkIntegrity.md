@@ -1,7 +1,7 @@
 # Framework Integrity Tests
 
 **Test Suite ID:** TEST-FW
-**SDK Version:** 2.2.0
+**SDK Version:** 2.4.0
 **Layer:** Framework
 **Reference:** All Core/ documents, `Config/sdk.yaml`
 

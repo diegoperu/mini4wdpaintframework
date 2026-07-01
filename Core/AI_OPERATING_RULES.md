@@ -1,7 +1,7 @@
 # AI Operating Rules
 
 **Document ID:** CORE-AIR-001
-**SDK Version:** 2.2.0
+**SDK Version:** 2.4.0
 **Status:** Mandatory
 **Applies To:** All AI models used in Phase 2 (Prompt Engine) and Phase 3 (Render Engine)
 
