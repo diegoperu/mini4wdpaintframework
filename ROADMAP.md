@@ -221,18 +221,36 @@ All v2.3.0 features are complete:
 - ✅ Build/Pipeline.md Text Engine phases (2/2a/2b/2c)
 - ✅ PromptEngine LOAD sequence
 
-## v2.4.0 — Planned
+## Status Update — v2.4.0 [RELEASED]
 
-**Target:** Q4 2026
-**Theme:** Automation & Icon Library
+All v2.4.0 features are complete:
+- ✅ `ApprovedAssets/` CMS layer (P001–P010 page modules × 7 files each)
+- ✅ `ApprovedAssets/index.yaml` — global registry
+- ✅ `Tests/ContentValidation.md` — 7 test suites (CV-001 through CV-007)
+- ✅ `Core/TEXT_ENGINE.md` — content.yaml as primary output
+- ✅ `Core/COMPONENT_SYSTEM.md` — content.yaml field mapping per component
+- ✅ `Core/PAGE_SYSTEM.md` — Page-as-module architecture, lifecycle states
+- ✅ `Build/Pipeline.md` — CMS pipeline phases 2b/2c/2d; Render Engine contract
+- ✅ `PromptEngine/README.md` — 9-step LOAD sequence; content.yaml generation mode
+- ✅ `STYLE_DECISIONS.md` — ADR-019, ADR-020, ADR-021
+- ✅ `MigrationReport_v2.4.md`
+
+---
+
+## v2.5.0 — Planned
+
+**Target:** Q3 2026
+**Theme:** Automation & Tooling
 
 ### Features
-- `Build/scripts/` — Python/Shell scripts for token substitution automation
+- `Build/scripts/` — Python/Shell scripts for token substitution and content.yaml generation
 - `Assets/DesignSystem/Icons/` — SVG icon library (10 icons: warning, tip, info, check, brush, airbrush, clock, star, sandpaper, decal)
-- Automated `Tests/TextValidation.md` execution via script (check for Japanese Unicode ranges)
-- `Config/environments/` — local dev overrides
+- Automated `Tests/ContentValidation.md` runner — validates content.yaml schema, language compliance, component-field mapping via script
+- Automated `Tests/TextValidation.md` execution — checks for Japanese Unicode ranges (U+3000–U+9FFF)
+- `Config/environments/` — local dev overrides (dev/staging/production config switching)
 - CI/CD integration guide (`Build/CI.md`)
 - Expanded `Knowledge/` with airbrush technique guide and color mixing reference
+- Automated `ApprovedAssets/index.yaml` updater — regenerates index from directory scan
 
 ### Non-Breaking Changes Only
-All v2.3.0 projects remain compatible.
+All v2.4.0 projects remain compatible. content.yaml schema is extended only with optional fields.

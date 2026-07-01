@@ -287,3 +287,74 @@ Lorem ipsum dolor sit amet.    ← LOREM — RIFIUTATO
 - `PromptEngine/README.md` — LOAD sequence
 - `Config/LANGUAGE_POLICY.yaml` — language rules
 - `Tests/TextValidation.md` — QA checklist
+
+---
+
+## v2.4.0 — content.yaml as Primary Output
+
+*Added in SDK v2.4.0. The Text Engine now produces `content.yaml` as its primary output format.*
+
+### Output Format Change
+
+| Version | Primary Output | Secondary Output |
+|---------|---------------|-----------------|
+| v2.3.0 | `ApprovedText/P{NNN}.md` (Markdown) | — |
+| v2.4.0 | `ApprovedAssets/Text/P{NNN}/content.yaml` (YAML) | `text.md` (derived) |
+
+### Why content.yaml?
+
+**Structured data over prose.** Markdown is excellent for human reading but poor for machine processing. The Render Engine needs to know exactly which text goes into which component slot — "put this string into C011 at position X" — not "parse this paragraph and figure out the paint code."
+
+`content.yaml` provides explicit field-to-component mappings. The Render Engine reads a field by name, not by parsing prose.
+
+### Generation Workflow (v2.4.0)
+
+```
+Text Engine prompt
+    ↓
+AI generates content.yaml structure
+    ↓
+Tests/ContentValidation.md  ← validates YAML schema
+    ↓
+Tests/TextValidation.md     ← validates language compliance
+    ↓
+metadata.yaml: approved: true
+    ↓
+text.md auto-generated from content.yaml (human review copy)
+    ↓
+Render Engine reads content.yaml
+```
+
+### text.md Generation
+
+`text.md` is generated from `content.yaml` by flattening the YAML structure into readable Markdown. It is:
+- **Derived** — never the source
+- **Regenerated** when content.yaml changes
+- **For review only** — editors read text.md, Render Engine reads content.yaml
+- **Marked with header:** `warning: "This file is DERIVED from content.yaml"`
+
+If text.md and content.yaml disagree: **content.yaml wins. Always.**
+
+### Render Engine Contract (v2.4.0)
+
+The Render Engine:
+1. Opens `ApprovedAssets/Text/P{NNN}/content.yaml`
+2. Checks `metadata.yaml §approved == true` and `§locked == true` (preferred)
+3. Maps each content field to its component per `manifest.yaml §components[].content_fields`
+4. Places content verbatim — no paraphrase, no translation
+5. Falls back to `text.md` if content.yaml parse fails (with error log)
+6. Never falls back to PROJECT.yaml for content
+
+### Page Lifecycle (v2.4.0)
+
+```
+draft        → content.yaml editable, not visible to Render Engine
+review       → content.yaml editable, under editorial review
+approved     → content.yaml sealed (requires reset to edit), Render Engine may read
+locked       → content.yaml immutable, Render Engine reads
+rendered     → render generated from this content version
+released     → published in PDF
+archived     → superseded by new version, not used
+```
+
+Status tracked in `metadata.yaml §status`. Lifecycle transitions logged in `changelog.md`.

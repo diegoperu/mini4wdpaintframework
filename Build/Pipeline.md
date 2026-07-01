@@ -469,3 +469,84 @@ As of SDK v2.3.0, the pipeline includes dedicated Text Engine phases between Pro
 - `Tests/TextValidation.md` — Phase 2b QA protocol
 - `Knowledge/GlossaryIT.md` — Phase 2 terminology reference
 - `Knowledge/EditorialStyle.md` — Phase 2a editorial style
+
+---
+
+## v2.4.0 — CMS Pipeline
+
+*Added in SDK v2.4.0. The pipeline now includes the full Content Management System layer.*
+
+### Full Pipeline v2.4.0
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│            Mini4WD Manual SDK — Full Pipeline v2.4.0               │
+├──────────┬──────────────────────────────────────────────────────────┤
+│ Phase 0  │ Project Setup        PROJECT.yaml + references           │
+│ Phase 1  │ Reference Models     Photography & source art            │
+│ Phase 2  │ Knowledge Load       GlossaryIT, EditorialStyle, Policy  │
+│ Phase 2a │ Text Engine          AI generates content.yaml           │
+│ Phase 2b │ Content QA           Tests/ContentValidation.md          │
+│ Phase 2c │ Text QA              Tests/TextValidation.md             │
+│ Phase 2d │ Approved Assets      ApprovedAssets/Text/ P{NNN}/ sealed │
+│ Phase 3  │ Render Engine        Reads content.yaml → renders        │
+│ Phase 4  │ Image QA             Tests/AssetsValidation.md           │
+│ Phase 4a │ Page QA              Tests/LayoutValidation.md           │
+│ Phase 5  │ PDF Generation       Screen + print + archive            │
+│ Phase 6  │ Approved Manual      Assets/ApprovedManual/              │
+│ Phase 7  │ Release              Tag + CHANGELOG + index.yaml        │
+└──────────┴──────────────────────────────────────────────────────────┘
+```
+
+### Phase 2a — Text Engine (content.yaml output, v2.4.0)
+
+**Change from v2.3.0:** Text Engine now outputs `content.yaml` as primary format, not `text.md`.
+
+**Process:**
+1. Run PromptEngine/{PageName}.md with full LOAD sequence
+2. AI generates structured content.yaml per page template
+3. Save to `ApprovedAssets/Text/P{NNN}/content.yaml`
+4. Text Engine auto-generates `text.md` from content.yaml (human review copy)
+
+**Output:**
+- `ApprovedAssets/Text/P{NNN}/content.yaml` ← PRIMARY
+- `ApprovedAssets/Text/P{NNN}/text.md` ← DERIVED
+
+### Phase 2b — Content QA (NEW in v2.4.0)
+
+**Reference:** `Tests/ContentValidation.md`
+**Checks:** YAML schema validity, required fields, data accuracy, component-field mapping, cross-page consistency
+**Blocking failures:** Must fix before Phase 2c
+
+### Phase 2c — Text QA (was 2b in v2.3.0)
+
+**Reference:** `Tests/TextValidation.md`
+**Checks:** Italian language compliance, forbidden scripts, terminology, tone
+
+### Phase 2d — Approved Assets Sealing (NEW in v2.4.0)
+
+**Process:**
+1. Set `metadata.yaml §approved: true`, `§approved_by`, `§approved_date`
+2. Optionally set `metadata.yaml §locked: true` for production
+3. Update `ApprovedAssets/index.yaml` with page entry
+4. Increment `metadata.yaml §revision`
+5. Log change in `changelog.md`
+
+**Exit criteria:** All pages have `approved: true`. Render Engine may proceed.
+
+### Phase 3 — Render Engine (v2.4.0 changes)
+
+**Change from v2.3.0:** Render Engine reads `content.yaml` — not PROJECT.yaml directly.
+
+**Source priority:**
+1. `ApprovedAssets/Text/P{NNN}/content.yaml` ← PRIMARY
+2. `ApprovedAssets/Text/P{NNN}/text.md` ← FALLBACK (with error log)
+3. PROJECT.yaml ← NEVER (Render Engine does not read PROJECT.yaml in v2.4.0)
+
+### Phase 7 — Release (v2.4.0 additions)
+
+After PDF generation:
+1. Update `ApprovedAssets/index.yaml §manuals` with release entry
+2. Update all page `metadata.yaml §status: "released"`
+3. Tag in git: `v{manualVersion}-{modelSlug}`
+4. Update CHANGELOG.md

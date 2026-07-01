@@ -16,6 +16,44 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [2.4.0] - 2026-07-01
+
+### Added
+- `ApprovedAssets/` directory — CMS layer; pages are now structured content modules, not just images
+- `ApprovedAssets/Text/P001/` through `P010/` — 10 page modules, each containing: `content.yaml`, `text.md`, `metadata.yaml`, `manifest.yaml`, `changelog.md`, `notes.md`, `README.md`
+- `ApprovedAssets/index.yaml` — global content, manual, and image registry
+- `Tests/ContentValidation.md` — 7 content QA test suites (CV-001 through CV-007): schema validation, language compliance, data accuracy, metadata integrity, manifest consistency, component-field mapping, cross-page consistency
+- `MigrationReport_v2.4.md` — detailed migration log from v2.3.0 to v2.4.0
+- Build/Pipeline.md — added §CMS Pipeline v2.4.0: phases 2b (Content QA), 2c (Text QA renamed), 2d (Approved Assets Sealing), updated Phase 3 (Render Engine reads content.yaml not PROJECT.yaml)
+- PromptEngine/README.md — added §content.yaml Generation Mode: updated 9-step LOAD sequence, text-mode vs render-mode distinction, field name vs value rule, sealing workflow
+
+### Changed
+- `Core/TEXT_ENGINE.md` — added §content.yaml as Primary Output (v2.4.0): structured YAML supersedes Markdown; text.md is derived not primary; Render Engine contract updated
+- `Core/COMPONENT_SYSTEM.md` — added §content.yaml Field Mapping (v2.4.0): per-component field declarations, Render Engine access pattern, read-only contract
+- `Core/PAGE_SYSTEM.md` — added §Page-as-Module Architecture (v2.4.0): lifecycle states (draft→review→approved→locked→rendered→released→archived), reusability, module directory structure
+- `VERSION` — bumped from 2.3.0 to 2.4.0
+- `MANIFEST.yaml` — updated version, added ApprovedAssets/ to directory map, added content.yaml to supported formats
+
+### Architecture Change
+SDK evolves from editorial framework to full CMS. Pages are now structured content modules with lifecycle management:
+- `content.yaml` is the primary source of truth for all page content
+- `metadata.yaml` tracks lifecycle state, approval, QA status, lock flag
+- Render Engine reads `ApprovedAssets/Text/P{NNN}/content.yaml` exclusively — never PROJECT.yaml
+- Field names are English (structural keys); field values are Italian (editorial content)
+- Approved Assets Sealing (Phase 2d) is a mandatory gate before rendering
+
+### Migration from v2.3.0
+No breaking changes. All v2.3.0 projects are compatible.
+
+**Optional migration steps:**
+1. Create `ApprovedAssets/Text/P{NNN}/` module directories for each page
+2. Move content from `ApprovedText/` to `ApprovedAssets/Text/` (if using v2.3.0 text modules)
+3. Convert existing `.md` text files to `content.yaml` format (see Templates)
+4. Update prompts to use 9-step LOAD sequence (Step 8 added for updates)
+5. Regenerate pages using Render Engine reading content.yaml (not PROJECT.yaml)
+
+---
+
 ## [2.3.0] - 2026-07-01
 
 ### Added

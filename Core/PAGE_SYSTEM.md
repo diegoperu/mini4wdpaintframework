@@ -381,3 +381,55 @@ New pages can be added to the system without modifying existing pages. Follow th
 7. **Update CHANGELOG.md:** Add to the `[Unreleased]` section, then include in the next MINOR release
 
 > ⚠️ **Warning:** New pages added in a MINOR release must not be required in existing projects. New pages are always optional until a MAJOR release makes them mandatory. Required pages can only be added in MAJOR releases with a migration guide.
+
+---
+
+## v2.4.0 — Page as Content Module
+
+*Added in SDK v2.4.0. Each page is now a self-contained content module with structured data, versioning, and lifecycle management.*
+
+### Module Architecture
+
+Each page (P001–P010) is no longer just a generated image. It is a module stored in `ApprovedAssets/Text/P{NNN}/` containing:
+
+```
+P{NNN}/
+├── content.yaml    ← PRIMARY: structured editorial data
+├── text.md         ← DERIVED: human-readable (from content.yaml)
+├── metadata.yaml   ← Lifecycle state, approval, QA status
+├── manifest.yaml   ← Asset list, components, dependencies
+├── changelog.md    ← Revision history
+├── notes.md        ← Editorial annotations (not rendered)
+└── README.md       ← Page module documentation
+```
+
+### Page Lifecycle States
+
+| State | content.yaml | Render Engine | Description |
+|-------|-------------|---------------|-------------|
+| `draft` | Editable | No access | Initial generation, work in progress |
+| `review` | Editable (tracked) | No access | Under editorial review |
+| `approved` | Sealed* | Read access | Passed ContentValidation + TextValidation |
+| `locked` | Immutable | Read access | Production-ready, no changes allowed |
+| `rendered` | Immutable | Read-only reference | Render generated from this content |
+| `released` | Immutable | Read-only reference | Published in PDF manual |
+| `archived` | Immutable | No access | Superseded by newer version |
+
+*Sealed: requires resetting `metadata.yaml §approved: false` to edit, with changelog entry.
+
+### Reusability
+
+Page modules are designed to be reusable:
+- A locked P002 for "Proto Emperor v1" can be copied and adapted for a new color scheme
+- Reused modules must update: `metadata.yaml §revision`, `page.version`, and `changelog.md`
+- Never reuse a locked module directly — always copy and create a new revision
+
+### Extension: Adding New Pages (P011+)
+
+When adding pages beyond P010:
+1. Assign next available ID: `P011`, `P012`, etc.
+2. Add to `Config/sdk.yaml §pages`
+3. Create `ApprovedAssets/Text/P{NNN}/` with all required files
+4. Create `PromptEngine/{PageName}.md`
+5. Add ADR in `STYLE_DECISIONS.md`
+6. Update `MANIFEST.yaml §pages`

@@ -395,3 +395,73 @@ Introduce `MANIFEST.yaml` at the project root as the authoritative machine-reada
 - MANIFEST.yaml must be updated with every SDK release
 - Version in MANIFEST.yaml must match VERSION file (verified by Tests/FrameworkIntegrity.md TEST-FW-005)
 - Future tooling can use MANIFEST.yaml for SDK introspection
+
+---
+
+## ADR-019
+
+**ID:** ADR-019
+**Title:** content.yaml as Primary Source of Truth for Page Content
+**Version:** 2.4.0
+**Date:** 2026-07-01
+**Status:** Accepted
+
+### Context
+In v2.3.0, the Text Engine output was `ApprovedText/P{NNN}.md` — a Markdown file containing pre-approved Italian content. While this decoupled text from rendering, Markdown has no enforced schema. AI models could generate structurally inconsistent files. Components had no formal mapping to text fields. The Render Engine had to parse unstructured Markdown to extract values.
+
+### Decision
+Introduce `content.yaml` as the primary output format for the Text Engine. Each page module in `ApprovedAssets/Text/P{NNN}/` contains a structured YAML file with page-specific fields. Component-to-field mapping is declared in `Core/COMPONENT_SYSTEM.md`. The Render Engine reads `content.yaml` exclusively; `text.md` is a human-readable derivative, auto-generated for editorial review only.
+
+### Consequences
+- All text content is schema-validated before approval (Tests/ContentValidation.md CV-001)
+- Component-field mapping is machine-verifiable (CV-006)
+- text.md is DERIVED, not primary — editing text.md has no effect on rendering
+- Render Engine reads `ApprovedAssets/Text/P{NNN}/content.yaml` — never PROJECT.yaml
+- Field names: English (structural). Field values: Italian (editorial). Never reversed.
+- Incomplete data uses approved placeholders (`[TITOLO]`, `[TESTO]`) — never invented
+
+---
+
+## ADR-020
+
+**ID:** ADR-020
+**Title:** Page-as-Module Architecture with Lifecycle States
+**Version:** 2.4.0
+**Date:** 2026-07-01
+**Status:** Accepted
+
+### Context
+Pages were previously treated as outputs — files to be generated and approved in one pass. There was no formal lifecycle, no per-page state tracking, no approval history, and no lock mechanism to prevent modification of approved content. In team environments or multi-session AI workflows, approved content could be silently overwritten.
+
+### Decision
+Each page is a self-contained module: a directory containing `content.yaml`, `text.md`, `metadata.yaml`, `manifest.yaml`, `changelog.md`, `notes.md`, and `README.md`. Page state is tracked in `metadata.yaml` through a formal lifecycle: `draft → review → approved → locked → rendered → released → archived`. Locked pages cannot be modified without explicit unlock and re-approval. Revision history is recorded per page.
+
+### Consequences
+- Each page has an auditable lifecycle (status, approvals, dates, revision counter)
+- `locked: true` in metadata.yaml is a hard gate — Render Engine skips locked but unapproved pages
+- Per-page `changelog.md` tracks every revision with date and reason
+- Pages can be reused across manuals (same permanent ID P001–P010, different content.yaml)
+- `notes.md` is editorial scratch space — never rendered, not version-controlled as authoritative
+
+---
+
+## ADR-021
+
+**ID:** ADR-021
+**Title:** Render Engine Reads content.yaml Exclusively — Never PROJECT.yaml
+**Version:** 2.4.0
+**Date:** 2026-07-01
+**Status:** Accepted
+
+### Context
+Prior to v2.4.0, the Render Engine could access PROJECT.yaml directly to supplement missing content. This created a silent bypass of the Text Engine and language validation pipeline. An AI model could generate a page using PROJECT.yaml data that had never been through language QA, potentially introducing English strings, missing Italian terms, or unformatted values.
+
+### Decision
+The Render Engine is contractually prohibited from reading PROJECT.yaml. Its only source of page content is `ApprovedAssets/Text/P{NNN}/content.yaml`. If a field is missing from content.yaml, the Render Engine uses the approved placeholder (`[TESTO]`) and logs a warning — it does not fall back to PROJECT.yaml or any other source.
+
+### Consequences
+- Full language QA pipeline is always exercised — no bypass path exists
+- Text Engine approval is a hard prerequisite for rendering (enforced by metadata.yaml §approved)
+- PROJECT.yaml remains the source of truth for project configuration (metadata, model info, render paths) — not editorial content
+- Render Engine errors are caught early: missing content.yaml fields appear as visible placeholders, not silent data substitutions
+- AI_OPERATING_RULES.md updated with explicit rule: Render Engine reads ApprovedAssets/Text/P{NNN}/content.yaml ONLY

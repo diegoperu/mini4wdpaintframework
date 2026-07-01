@@ -1,0 +1,73 @@
+# Page Manifest — P002
+# SDK Version: 2.4.0
+
+page_id: "P002"
+
+components:
+  - id: "C001"
+    name: "Header"
+    required: true
+    content_fields: ["title"]
+  - id: "C002"
+    name: "Footer"
+    required: true
+    content_fields: ["footer.page_id", "footer.model_name"]
+  - id: "C003"
+    name: "Palette Strip"
+    required: true
+    content_fields: ["colors[].name", "colors[].hex", "palette_overview"]
+  - id: "C006"
+    name: "Callout Box"
+    required: false
+    content_fields: ["color_notes"]
+  - id: "C010"
+    name: "Color Block Grid"
+    required: true
+    content_fields: ["colors[].name", "colors[].paint_code", "colors[].finish"]
+  - id: "C011"
+    name: "Paint Code Box"
+    required: true
+    content_fields: ["colors[].paint_code", "colors[].paint_brand", "colors[].finish", "colors[].name"]
+
+images:
+  - role: "ortho_front"
+    description: "Vista ortogonale frontale della carrozzeria verniciata"
+    file: ""
+    resolution_required: "2480x3508"
+    lighting: "studio-neutral"
+    approved: false
+  - role: "ortho_side"
+    description: "Vista ortogonale laterale destra della carrozzeria verniciata"
+    file: ""
+    resolution_required: "2480x3508"
+    lighting: "studio-neutral"
+    approved: false
+  - role: "ortho_top"
+    description: "Vista ortogonale dall'alto della carrozzeria verniciata"
+    file: ""
+    resolution_required: "2480x3508"
+    lighting: "studio-neutral"
+    approved: false
+
+tokens:
+  - "VioletPrimary"
+  - "White"
+  - "DarkGray"
+  - "TitleFont"
+  - "BodyFont"
+  - "HeaderHeight"
+  - "FooterHeight"
+  - "PaletteSwatchSize"
+
+prompt_file: "PromptEngine/ColorScheme.md"
+prompt_version: "2.4.0"
+palette: []
+
+fonts:
+  - "TitleFont (Bebas Neue)"
+  - "BodyFont (Source Sans Pro)"
+
+dependencies:
+  - "Assets/DesignSystem/Tokens/tokens.example.yaml"
+  - "Config/LANGUAGE_POLICY.yaml"
+  - "Templates/COLOR_SCHEME.yaml"

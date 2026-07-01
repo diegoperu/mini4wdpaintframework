@@ -1,0 +1,63 @@
+# Mini4WD Manual SDK — Page Content
+# Page: P009 — Variante Premium (Premium Variant)
+# SDK Version: 2.4.0
+# SOURCE OF TRUTH
+# CONDITIONAL: only generated when PROJECT.yaml premiumVariant.enabled = true
+
+page:
+  id: "P009"
+  name: "Variante Premium"
+  version: "1.0.0"
+  language: "it"
+  conditional: true          # Requires premiumVariant.enabled: true
+
+title: "Variante Premium"    # REQUIRED
+intro: ""                    # OPTIONAL
+
+variant_name: ""             # REQUIRED — e.g. "Finitura Perlata Oro"
+description: ""              # REQUIRED — Italian description of what makes this premium
+
+# ============================================================
+# ADDITIONAL MATERIALS beyond base manual
+# ============================================================
+additional_materials:
+  - name: ""
+    brand: ""
+    code: ""
+    purpose: ""
+
+# ============================================================
+# SPECIAL TECHNIQUES
+# ============================================================
+special_techniques:
+  - step: 1
+    title: ""                # REQUIRED
+    description: ""          # REQUIRED — Italian imperative
+    duration: ""             # OPTIONAL
+
+comparison_notes: ""         # OPTIONAL — base vs premium comparison text
+
+warnings:
+  - ""
+
+tips:
+  - ""
+
+footer:
+  page_id: "P009"
+  model_name: ""
+  series: ""
+
+component_mapping:
+  C001:
+    uses: ["title"]
+  C002:
+    uses: ["footer.page_id", "footer.model_name"]
+  C006:
+    uses: ["comparison_notes"]
+  C008:
+    uses: ["warnings"]
+  C009:
+    uses: ["tips"]
+  C015:
+    uses: ["description"]

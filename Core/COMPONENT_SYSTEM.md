@@ -449,3 +449,66 @@ The Render Engine must NOT:
 - Translate text
 - Abbreviate text without explicit truncation rules (see STYLE_GUIDE §Max Text Lengths)
 - Use text from any source other than ApprovedText/
+
+---
+
+## v2.4.0 — content.yaml Field Mapping
+
+*Added in SDK v2.4.0. Each component declares which content.yaml fields it consumes.*
+
+As of v2.4.0, the Render Engine reads component content from `ApprovedAssets/Text/P{NNN}/content.yaml` using the field paths declared in each page's `manifest.yaml §components[].content_fields`.
+
+### Component → content.yaml Field Map
+
+| Component | content.yaml Field Path | Notes |
+|-----------|------------------------|-------|
+| C001 Header | `page.name` (for right-side page label) | Label is Italian per GlossaryIT.md §Page Labels |
+| C002 Footer | `footer.page_id`, `footer.model_name` | page_id is fixed; model_name from PROJECT.yaml |
+| C003 Palette | `colors[*].name`, `colors[*].hex` | P002 only |
+| C004 Shopping List | `paints[*]`, `tools[*]`, `consumables[*]` | P003 only |
+| C005 Paint Sequence | `sequence[*].step`, `sequence[*].area`, `sequence[*].color_id` | P005 only |
+| C006 Callout | `callouts[*].title`, `callouts[*].body` | Multiple pages |
+| C007 Exploded View | (no text — visual only) | — |
+| C008 Warning | `warnings[*]` | Must start with "Attenzione:" |
+| C009 Tips | `tips[*]` | Must start with "Suggerimento:" |
+| C010 Paint Legend | `colors[*].name`, `colors[*].paint_code` | P002 only |
+| C011 Paint Code Box | `colors[*].paint_brand`, `colors[*].paint_code`, `colors[*].finish` | P002 only |
+| C012 Zoom | Optional caption from `areas[*].zoom_caption` | P006, P007 |
+| C013 Step Number | `steps[*].id` or `sequence[*].step` | Label: "Passo N" |
+| C014 Time Box | `steps[*].duration` or `sequence[*].drying_time` | Format: "N minuti" |
+| C015 Notes | `notes` field or `sections[*].notes` | Multiple pages |
+
+### Render Engine Access Pattern
+
+```python
+# Pseudocode — Render Engine field access
+content = load_yaml("ApprovedAssets/Text/P002/content.yaml")
+manifest = load_yaml("ApprovedAssets/Text/P002/manifest.yaml")
+
+for component in manifest.components:
+    for field_path in component.content_fields:
+        value = deep_get(content, field_path)
+        if value is None:
+            log_error(f"Missing: {field_path} for {component.id}")
+            value = approved_placeholder(field_path)
+        render_component(component.id, field_path, value)
+```
+
+### Field Access Rules
+
+1. Fields are accessed by dot-path: `colors[0].name`, `steps[2].duration`
+2. Missing fields → approved placeholder, never invented content
+3. Empty string → treated as missing
+4. Arrays → iterate; minimum count per component documented above
+5. Nested objects → access sub-fields by dot notation
+
+### Template System Integration
+
+Layout templates (`ApprovedAssets/Templates/`) define component slots as named zones. The Render Engine maps content.yaml fields to template zones using manifest.yaml as the bridge:
+
+```
+Template zone "color-list" ← manifest component C003 ← content.yaml colors[]
+Template zone "step-1"     ← manifest component C013 ← content.yaml steps[0]
+```
+
+Templates contain **no content** — only structural declarations of which zones exist.

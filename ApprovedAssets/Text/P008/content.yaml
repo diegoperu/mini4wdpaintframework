@@ -1,0 +1,57 @@
+# Mini4WD Manual SDK — Page Content
+# Page: P008 — Decalcomanie (Decals)
+# SDK Version: 2.4.0
+# SOURCE OF TRUTH
+
+page:
+  id: "P008"
+  name: "Decalcomanie"
+  version: "1.0.0"
+  language: "it"
+
+title: "Applicazione Decalcomanie"  # REQUIRED
+intro: ""                           # OPTIONAL
+
+# ============================================================
+# DECALS — from PROJECT.yaml decals[]
+# ============================================================
+decals:
+  - id: ""                   # REQUIRED — e.g. "DEC001"
+    name: ""                 # REQUIRED — Italian decal name
+    position: ""             # REQUIRED — Italian position description
+    size: ""                 # OPTIONAL — e.g. "15×8 mm"
+    notes: ""                # OPTIONAL
+
+# ============================================================
+# APPLICATION STEPS
+# ============================================================
+application_steps:
+  - step: 1
+    description: ""          # REQUIRED — Italian imperative
+
+warnings:
+  - ""                       # C008 — e.g. clear coat after decals
+
+tips:
+  - ""                       # C009 — e.g. use decal softener on curves
+
+footer:
+  page_id: "P008"
+  model_name: ""
+  series: ""
+
+component_mapping:
+  C001:
+    uses: ["title"]
+  C002:
+    uses: ["footer.page_id", "footer.model_name"]
+  C008:
+    uses: ["warnings"]
+  C009:
+    uses: ["tips"]
+  C012:
+    uses: []                 # Placement zoom panels
+  C013:
+    uses: ["application_steps[].step"]
+  C015:
+    uses: ["decals[].notes"]

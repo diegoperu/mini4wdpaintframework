@@ -303,3 +303,75 @@ Paint Scheme: {{project.paintScheme.name}}
 | `{{project.premiumVariant.name}}` | PROJECT.yaml | P009 |
 | `{{token.VioletPrimary}}` | tokens.example.yaml | All (render) |
 | `{{token.HeaderHeight}}` | tokens.example.yaml | C001 (render) |
+
+---
+
+## v2.4.0 — content.yaml Generation Mode
+
+*Added SDK v2.4.0. Text Engine now outputs structured YAML instead of Markdown.*
+
+### Updated LOAD Sequence (v2.4.0)
+
+```
+╔══════════════════════════════════════════════════════╗
+║         MINI4WD MANUAL SDK — LOAD SEQUENCE v2.4.0   ║
+╠══════════════════════════════════════════════════════╣
+║  STEP 1  │  LOAD Core/DESIGN_LANGUAGE.md            ║
+║  STEP 2  │  LOAD Core/COMPONENT_SYSTEM.md           ║
+║  STEP 3  │  LOAD Assets/DesignSystem/Tokens/        ║
+║          │        tokens.example.yaml               ║
+║  STEP 4  │  LOAD Core/TEXT_ENGINE.md                ║
+║  STEP 5  │  LOAD Config/LANGUAGE_POLICY.yaml        ║
+║  STEP 6  │  LOAD Core/AI_OPERATING_RULES.md         ║
+║  STEP 7  │  LOAD Projects/{ModelName}/PROJECT.yaml  ║
+║  STEP 8  │  (if updating) LOAD content.yaml         ║
+║  STEP 9  │  GENERATE                                ║
+╚══════════════════════════════════════════════════════╝
+```
+
+**Step 8 is new in v2.4.0.** Load the existing `ApprovedAssets/Text/P{NNN}/content.yaml` when updating (not generating fresh). Preserves prior approved content; only modifies declared fields.
+
+### Text-Mode vs Render-Mode (v2.4.0 update)
+
+**Text-mode prompts (Phase 2a — content.yaml output):**
+- Generate structured YAML conforming to page content.yaml schema
+- Output saved to `ApprovedAssets/Text/P{NNN}/content.yaml` ← PRIMARY
+- text.md auto-derived from content.yaml — do not generate separately
+- Field names: English. Field values: Italian
+- No visual layout. No hex values. No component dimensions.
+
+**Render-mode prompts (Phase 3 — Render Engine):**
+- Load `ApprovedAssets/Text/P{NNN}/content.yaml` as source (not text.md)
+- Read approved field values verbatim — no rewrite, no paraphrase
+- Generate visual layout description using those values
+- Render Engine never reads PROJECT.yaml directly (v2.4.0 change)
+
+### Field Name vs Field Value Distinction
+
+Critical rule: content.yaml field **names** are English (structural keys). Field **values** are Italian (editorial content).
+
+```yaml
+# CORRECT
+title: "Campione dell'Imperatore"
+subtitle: "Manuale di verniciatura"
+footer:
+  model_name: "Emperor Emperor Special"
+
+# WRONG — Italian field names
+titolo: "Campione dell'Imperatore"
+```
+
+### content.yaml Schema (per page)
+
+Each page has a defined schema. Prompt files for individual pages (Cover.md, ColorScheme.md, etc.) specify required and optional fields. All text values: Italian. All placeholder values: use `[TITOLO]`, `[TESTO]`, `[SOTTOTITOLO]` — never invent data.
+
+### Approved Assets Sealing (Phase 2d)
+
+After text generation and QA:
+1. Set `metadata.yaml §status: "approved"`
+2. Set `metadata.yaml §approved_by` and `§approved_date`
+3. Optional: set `metadata.yaml §locked: true` for production freeze
+4. Update `ApprovedAssets/index.yaml`
+5. Log in `changelog.md`
+
+Render Engine may only begin after sealing.

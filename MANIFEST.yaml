@@ -1,5 +1,5 @@
 # Mini4WD Manual SDK — Manifest
-# Version: 2.2.0
+# Version: 2.4.0
 # Machine-readable SDK descriptor.
 # Reference: ADR-015 (STYLE_DECISIONS.md)
 # Human-readable overview: README.md
@@ -8,7 +8,7 @@ manifest_version: "1.0"
 
 sdk:
   name: "Mini4WD Manual SDK"
-  version: "2.2.0"
+  version: "2.4.0"
   description: "Open-source framework for generating professional illustrated painting manuals for Tamiya Mini4WD models using any AI model"
   license: "Apache-2.0"
   homepage: "https://github.com/diegoperu/mini4wdpaintframework"
@@ -72,6 +72,21 @@ directory_map:
 
   Docs/:
     role: "Supplementary documentation and migration guides"
+
+  ApprovedAssets/:
+    role: "CMS layer — approved content modules per page"
+    added_version: "2.4.0"
+    subdirectories:
+      - "Text/"
+      - "Images/"
+      - "Components/"
+      - "Templates/"
+      - "References/"
+    key_documents: ["README.md", "index.yaml"]
+    page_modules:
+      count: 10
+      ids: ["P001", "P002", "P003", "P004", "P005", "P006", "P007", "P008", "P009", "P010"]
+      files_per_module: ["content.yaml", "text.md", "metadata.yaml", "manifest.yaml", "changelog.md", "notes.md", "README.md"]
 
 # ============================================================
 # SUPPORTED MANUAL TYPES
@@ -169,6 +184,27 @@ components:
 next_available_component_id: "C016"
 
 # ============================================================
+# CONTENT FORMATS (v2.4.0)
+# ============================================================
+content_formats:
+  primary:
+    format: "YAML"
+    path_pattern: "ApprovedAssets/Text/P{NNN}/content.yaml"
+    added_version: "2.4.0"
+    schema_enforced: true  # Via Tests/ContentValidation.md
+  derived:
+    format: "Markdown"
+    path_pattern: "ApprovedAssets/Text/P{NNN}/text.md"
+    generated_from: "content.yaml"
+    render_engine_reads: false
+  legacy:
+    format: "Markdown"
+    path_pattern: "Projects/{model}/ApprovedText/P{NNN}.md"
+    added_version: "2.3.0"
+    deprecated: false  # Maintained for backward compatibility
+    render_engine_reads: false  # Render Engine reads content.yaml exclusively in v2.4.0
+
+# ============================================================
 # MINIMUM AI REQUIREMENTS
 # ============================================================
 minimum_ai_requirements:
@@ -203,11 +239,16 @@ minimum_ai_requirements:
 # ============================================================
 compatibility:
   project_yaml_versions:
+    - sdk_version: "2.4.0"
+      compatible: true
+    - sdk_version: "2.3.0"
+      compatible: true
+      notes: "All v2.3.0 content compatible. ApprovedText/ still supported. ApprovedAssets/ is additive."
     - sdk_version: "2.2.0"
       compatible: true
     - sdk_version: "2.1.0"
       compatible: true
-      notes: "All v2.1.0 PROJECT.yaml files work in v2.2.0 without modification"
+      notes: "All v2.1.0 PROJECT.yaml files work without modification"
     - sdk_version: "2.0.0"
       compatible: true
       notes: "Use Docs/migration/v1-to-v2.md for v1.x -> v2.x"
@@ -219,6 +260,8 @@ compatibility:
     "2.0.0": "Component ID format changed (COMP_ to C###), PROJECT.yaml field renames"
     "2.1.0": "None"
     "2.2.0": "None"
+    "2.3.0": "None"
+    "2.4.0": "None — additive CMS layer only"
 
 # ============================================================
 # DESIGN TOKENS
@@ -250,5 +293,6 @@ qa:
     - "Tests/ColorValidation.md"
     - "Tests/PDFValidation.md"
     - "Tests/AssetsValidation.md"
+    - "Tests/ContentValidation.md"
   definition_of_done: "Core/DEFINITION_OF_DONE.md"
   approval_required: true

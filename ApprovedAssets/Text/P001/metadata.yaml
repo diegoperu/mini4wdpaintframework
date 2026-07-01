@@ -1,0 +1,40 @@
+# Page Metadata — P001
+# SDK Version: 2.4.0
+
+page_id: "P001"
+page_name: "Copertina"
+
+status: "draft"              # draft|review|approved|locked|rendered|released|archived
+locked: false
+
+approved: false
+approved_by: ""
+approved_date: ""
+approval_notes: ""
+
+rendered: false
+render_version: ""
+rendered_date: ""
+rendered_images:
+  - role: "cover_3q"
+    file: ""
+    resolution: ""
+    approved: false
+
+qa_status: "pending"         # pending|in-progress|passed|failed
+qa_log: ""
+content_validation_passed: false
+text_validation_passed: false
+layout_validation_passed: false
+
+sdk_version: "2.4.0"
+design_language: "2.4.0"
+manual_version: "1.0.0"
+revision: 0
+language: "it"
+
+released: false
+released_date: ""
+archived: false
+archived_date: ""
+archived_reason: ""
