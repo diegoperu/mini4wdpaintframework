@@ -1,0 +1,686 @@
+---
+# RepositoryManifest.yaml
+# Mini4WD Manual SDK — Complete Repository Map
+# Machine-readable index of all files, their purpose, type, status, and dependencies.
+# Updated at every release. See MANIFEST.yaml for the full SDK descriptor.
+
+manifest_version: "2.4.0"
+generated: "2026-07-01"
+
+# ─────────────────────────────────────────────
+# ROOT FILES
+# ─────────────────────────────────────────────
+
+root_files:
+
+  - path: "README.md"
+    type: "documentation"
+    role: "project overview for human contributors"
+    status: "current"
+    version: "2.4.0"
+    ai_load_order: null
+    depends_on: []
+
+  - path: "BOOTSTRAP.md"
+    type: "bootstrap"
+    role: "primary AI entry point — read FIRST"
+    status: "current"
+    version: "2.4.0"
+    ai_load_order: 2
+    depends_on: ["SDK_CONTEXT.yaml"]
+
+  - path: "SDK_CONTEXT.yaml"
+    type: "bootstrap"
+    role: "SDK identity card — read before BOOTSTRAP.md"
+    status: "current"
+    version: "2.4.0"
+    ai_load_order: 1
+    depends_on: []
+
+  - path: "STATUS.md"
+    type: "status"
+    role: "implementation status, roadmap, known issues, TODO list"
+    status: "current"
+    version: "2.4.0"
+    ai_load_order: null
+    depends_on: ["SDK_CONTEXT.yaml"]
+
+  - path: "ReleaseInfo.yaml"
+    type: "release"
+    role: "machine-readable release metadata"
+    status: "current"
+    version: "2.4.0"
+    ai_load_order: null
+    depends_on: []
+
+  - path: "RepositoryManifest.yaml"
+    type: "manifest"
+    role: "this file — complete repository map"
+    status: "current"
+    version: "2.4.0"
+    ai_load_order: null
+    depends_on: []
+
+  - path: "MANIFEST.yaml"
+    type: "manifest"
+    role: "full SDK descriptor — components, tokens, prompts, page specs"
+    status: "current"
+    version: "2.4.0"
+    ai_load_order: null
+    depends_on: []
+
+  - path: "CHANGELOG.md"
+    type: "documentation"
+    role: "version history — all changes since v2.1.0"
+    status: "current"
+    ai_load_order: null
+    depends_on: []
+
+  - path: "ROADMAP.md"
+    type: "documentation"
+    role: "planned features and future versions"
+    status: "current"
+    ai_load_order: null
+    depends_on: []
+
+  - path: "STYLE_DECISIONS.md"
+    type: "documentation"
+    role: "Architecture Decision Records — ADR-001 through ADR-021"
+    status: "current"
+    ai_load_order: null
+    depends_on: []
+
+  - path: "MigrationReport_v2.4.md"
+    type: "documentation"
+    role: "migration guide from v2.3.0 to v2.4.0"
+    status: "current"
+    ai_load_order: null
+    depends_on: []
+
+  - path: "VERSION"
+    type: "metadata"
+    role: "plain text version number"
+    status: "current"
+    ai_load_order: null
+    depends_on: []
+
+  - path: "LICENSE"
+    type: "legal"
+    role: "Apache 2.0 license text"
+    status: "current"
+    ai_load_order: null
+    depends_on: []
+
+  - path: "GPT.md"
+    type: "user_document"
+    role: "user-created context document for new chat sessions"
+    status: "current"
+    ai_load_order: null
+    depends_on: []
+    note: "Not SDK-generated. Maintained by the user."
+
+# ─────────────────────────────────────────────
+# CORE/ — Authoritative specification layer
+# ─────────────────────────────────────────────
+
+core:
+  authority: "highest — overrides all other directories"
+  files:
+
+    - path: "Core/AI_OPERATING_RULES.md"
+      type: "specification"
+      role: "100 behavioral rules for AI models (Rules 001–058 design, 059–100 text)"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: 3
+      depends_on: []
+
+    - path: "Core/DESIGN_LANGUAGE.md"
+      type: "specification"
+      role: "65 visual philosophy rules (Rules 55–65: editorial identity)"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: 6
+      depends_on: ["Core/AI_OPERATING_RULES.md"]
+
+    - path: "Core/STYLE_GUIDE.md"
+      type: "specification"
+      role: "color palette, typography, grid, spacing — includes Typography Rules"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: 7
+      depends_on: ["Core/DESIGN_LANGUAGE.md", "Assets/DesignSystem/Tokens/tokens.example.yaml"]
+
+    - path: "Core/COLOR_SYSTEM.md"
+      type: "specification"
+      role: "full color palette and usage rules"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: null
+      depends_on: ["Core/STYLE_GUIDE.md"]
+
+    - path: "Core/TEXT_ENGINE.md"
+      type: "specification"
+      role: "text generation rules, content.yaml schema, Render Engine contract"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: 5
+      depends_on: ["Core/AI_OPERATING_RULES.md", "Config/LANGUAGE_POLICY.yaml"]
+
+    - path: "Core/COMPONENT_SYSTEM.md"
+      type: "specification"
+      role: "C001–C015 specifications with content.yaml field mapping"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: 8
+      depends_on: ["Core/DESIGN_LANGUAGE.md", "Core/STYLE_GUIDE.md", "Core/TEXT_ENGINE.md"]
+
+    - path: "Core/PAGE_SYSTEM.md"
+      type: "specification"
+      role: "P001–P010 specifications — required components, layout zones"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: 9
+      depends_on: ["Core/COMPONENT_SYSTEM.md"]
+
+    - path: "Core/RENDER_GUIDE.md"
+      type: "specification"
+      role: "illustration standards and AI render prompt templates"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: null
+      depends_on: ["Core/DESIGN_LANGUAGE.md", "Core/STYLE_GUIDE.md"]
+
+    - path: "Core/PDF_MASTER.md"
+      type: "specification"
+      role: "PDF export specification — variants, bleed, color profile"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: null
+      depends_on: ["Templates/PDF_CONFIG.yaml"]
+
+    - path: "Core/QA_SYSTEM.md"
+      type: "specification"
+      role: "110-item quality assurance checklist"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: null
+      depends_on: []
+
+    - path: "Core/MANUAL_SYSTEM.md"
+      type: "specification"
+      role: "architecture overview and lifecycle"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: null
+      depends_on: []
+
+    - path: "Core/WORKFLOW.md"
+      type: "specification"
+      role: "end-to-end production workflow"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: null
+      depends_on: ["Core/PAGE_SYSTEM.md", "Core/COMPONENT_SYSTEM.md"]
+
+    - path: "Core/NAMING_CONVENTION.md"
+      type: "specification"
+      role: "file and folder naming rules"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: null
+      depends_on: []
+
+    - path: "Core/DOCUMENTATION_STYLE.md"
+      type: "specification"
+      role: "how to write SDK documentation"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: null
+      depends_on: []
+
+    - path: "Core/DEFINITION_OF_DONE.md"
+      type: "specification"
+      role: "completion criteria for pages, projects, and SDK releases"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: null
+      depends_on: []
+
+# ─────────────────────────────────────────────
+# CONFIG/ — Global SDK configuration
+# ─────────────────────────────────────────────
+
+config:
+  files:
+
+    - path: "Config/sdk.yaml"
+      type: "configuration"
+      role: "global SDK parameters and version"
+      status: "current"
+      version: "2.4.0"
+      depends_on: []
+
+    - path: "Config/LANGUAGE_POLICY.yaml"
+      type: "configuration"
+      role: "Italian-only policy, forbidden languages, approved placeholders"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: 4
+      depends_on: []
+
+    - path: "Config/render.yaml"
+      type: "configuration"
+      role: "camera angles, lighting rigs, resolution requirements"
+      status: "current"
+      version: "2.4.0"
+      depends_on: []
+
+    - path: "Config/pdf.yaml"
+      type: "configuration"
+      role: "export variants — screen, print, archive"
+      status: "current"
+      version: "2.4.0"
+      depends_on: []
+
+    - path: "Config/quality.yaml"
+      type: "configuration"
+      role: "QA thresholds, blocking vs non-blocking classification"
+      status: "current"
+      version: "2.4.0"
+      depends_on: []
+
+# ─────────────────────────────────────────────
+# PROMPTENGINE/ — Page-specific AI prompts
+# ─────────────────────────────────────────────
+
+prompt_engine:
+  model_agnostic: true
+  files:
+
+    - path: "PromptEngine/README.md"
+      type: "documentation"
+      role: "LOAD sequence and prompt usage instructions"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: null
+      depends_on: []
+
+    - path: "PromptEngine/Cover.md"
+      page: "P001"
+      type: "prompt"
+      role: "prompt for page P001 — Copertina"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: 10
+      depends_on: ["Core/PAGE_SYSTEM.md", "Core/COMPONENT_SYSTEM.md", "Core/TEXT_ENGINE.md"]
+
+    - path: "PromptEngine/ColorScheme.md"
+      page: "P002"
+      type: "prompt"
+      role: "prompt for page P002 — Schema Colori"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: 10
+      depends_on: ["Core/PAGE_SYSTEM.md", "Core/COMPONENT_SYSTEM.md"]
+
+    - path: "PromptEngine/Materials.md"
+      page: "P003"
+      type: "prompt"
+      role: "prompt for page P003 — Materiali"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: 10
+      depends_on: ["Core/PAGE_SYSTEM.md"]
+
+    - path: "PromptEngine/Preparation.md"
+      page: "P004"
+      type: "prompt"
+      role: "prompt for page P004 — Preparazione"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: 10
+      depends_on: ["Core/PAGE_SYSTEM.md"]
+
+    - path: "PromptEngine/Painting.md"
+      page: "P005"
+      type: "prompt"
+      role: "prompt for page P005 — Verniciatura"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: 10
+      depends_on: ["Core/PAGE_SYSTEM.md"]
+
+    - path: "PromptEngine/Masking.md"
+      page: "P006"
+      type: "prompt"
+      role: "prompt for page P006 — Mascheratura"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: 10
+      depends_on: ["Core/PAGE_SYSTEM.md"]
+
+    - path: "PromptEngine/Details.md"
+      page: "P007"
+      type: "prompt"
+      role: "prompt for page P007 — Dettagli"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: 10
+      depends_on: ["Core/PAGE_SYSTEM.md"]
+
+    - path: "PromptEngine/Decals.md"
+      page: "P008"
+      type: "prompt"
+      role: "prompt for page P008 — Decal"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: 10
+      depends_on: ["Core/PAGE_SYSTEM.md"]
+
+    - path: "PromptEngine/Premium.md"
+      page: "P009"
+      type: "prompt"
+      role: "prompt for page P009 — Variante Premium"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: 10
+      depends_on: ["Core/PAGE_SYSTEM.md"]
+
+    - path: "PromptEngine/FinalChecklist.md"
+      page: "P010"
+      type: "prompt"
+      role: "prompt for page P010 — Checklist Finale"
+      status: "current"
+      version: "2.4.0"
+      ai_load_order: 10
+      depends_on: ["Core/PAGE_SYSTEM.md"]
+
+# ─────────────────────────────────────────────
+# APPROVEDASSETS/ — CMS layer (NEW v2.4.0)
+# ─────────────────────────────────────────────
+
+approved_assets:
+  description: "CMS layer — sealed content modules per page"
+  added_in: "2.4.0"
+  files:
+
+    - path: "ApprovedAssets/index.yaml"
+      type: "registry"
+      role: "global registry of all page module lifecycle states"
+      status: "current"
+      depends_on: []
+
+    - path: "ApprovedAssets/README.md"
+      type: "documentation"
+      role: "CMS layer documentation"
+      status: "current"
+      depends_on: []
+
+  page_modules:
+    structure: "ApprovedAssets/Text/P00x/"
+    files_per_module:
+      - "content.yaml    ← PRIMARY source of truth"
+      - "text.md         ← derived from content.yaml, read-only after approval"
+      - "metadata.yaml   ← lifecycle state (draft/review/approved/locked/rendered/released/archived)"
+      - "manifest.yaml   ← components, images, tokens, prompt_file, dependencies"
+      - "changelog.md    ← revision history"
+      - "notes.md        ← editorial annotations, not rendered"
+      - "README.md       ← module documentation"
+    pages: ["P001", "P002", "P003", "P004", "P005", "P006", "P007", "P008", "P009", "P010"]
+
+# ─────────────────────────────────────────────
+# TESTS/ — QA test suites
+# ─────────────────────────────────────────────
+
+tests:
+  files:
+
+    - path: "Tests/ContentValidation.md"
+      type: "test_suite"
+      suites: 7
+      role: "validates content.yaml schema, language, data, metadata, manifest, component mapping, cross-page"
+      added_in: "2.4.0"
+      blocking: true
+      depends_on: ["Core/TEXT_ENGINE.md"]
+
+    - path: "Tests/TextValidation.md"
+      type: "test_suite"
+      tests: 9
+      role: "Italian language compliance validation"
+      added_in: "2.3.0"
+      blocking: true
+      depends_on: ["Config/LANGUAGE_POLICY.yaml"]
+
+    - path: "Tests/FrameworkIntegrity.md"
+      type: "test_suite"
+      role: "SDK self-consistency validation"
+      depends_on: []
+
+    - path: "Tests/PromptValidation.md"
+      type: "test_suite"
+      role: "validates PromptEngine/ files"
+      depends_on: ["PromptEngine/"]
+
+    - path: "Tests/LayoutValidation.md"
+      type: "test_suite"
+      role: "validates page layout and component placement"
+      depends_on: ["Core/COMPONENT_SYSTEM.md", "Core/PAGE_SYSTEM.md"]
+
+    - path: "Tests/NamingValidation.md"
+      type: "test_suite"
+      role: "validates file and folder naming"
+      depends_on: ["Core/NAMING_CONVENTION.md"]
+
+    - path: "Tests/ColorValidation.md"
+      type: "test_suite"
+      role: "validates color token usage — no hardcoded values"
+      depends_on: ["Core/STYLE_GUIDE.md", "Assets/DesignSystem/Tokens/tokens.example.yaml"]
+
+    - path: "Tests/PDFValidation.md"
+      type: "test_suite"
+      role: "validates PDF export compliance"
+      depends_on: ["Core/PDF_MASTER.md"]
+
+    - path: "Tests/AssetsValidation.md"
+      type: "test_suite"
+      role: "validates Assets/ directory integrity"
+      depends_on: []
+
+# ─────────────────────────────────────────────
+# KNOWLEDGE/ — Technical and editorial knowledge base
+# ─────────────────────────────────────────────
+
+knowledge:
+  files:
+
+    - path: "Knowledge/Paints.md"
+      type: "knowledge"
+      role: "paint types, properties, Tamiya line compatibility"
+
+    - path: "Knowledge/Masking.md"
+      type: "knowledge"
+      role: "masking techniques — tape, liquid, dry masking"
+
+    - path: "Knowledge/Preparation.md"
+      type: "knowledge"
+      role: "surface preparation — cleaning, priming, sanding"
+
+    - path: "Knowledge/Painting.md"
+      type: "knowledge"
+      role: "painting techniques — airbrush, can, brush"
+
+    - path: "Knowledge/Decals.md"
+      type: "knowledge"
+      role: "decal application — water slide, vinyl, dry transfer"
+
+    - path: "Knowledge/ClearCoat.md"
+      type: "knowledge"
+      role: "clear coat finishing — gloss, matte, satin"
+
+    - path: "Knowledge/Troubleshooting.md"
+      type: "knowledge"
+      role: "common issues and fixes"
+
+    - path: "Knowledge/Glossary.md"
+      type: "knowledge"
+      role: "technical glossary in English"
+
+    - path: "Knowledge/GlossaryIT.md"
+      type: "knowledge"
+      role: "technical glossary in Italian"
+
+    - path: "Knowledge/FAQ.md"
+      type: "knowledge"
+      role: "frequently asked questions"
+
+    - path: "Knowledge/BestPractices.md"
+      type: "knowledge"
+      role: "recommended practices for best results"
+
+    - path: "Knowledge/EditorialStyle.md"
+      type: "knowledge"
+      role: "Italian editorial voice and style rules"
+      added_in: "2.3.0"
+
+    - path: "Knowledge/Terminology.md"
+      type: "knowledge"
+      role: "approved Italian terminology for all technical concepts"
+      added_in: "2.3.0"
+
+    - path: "Knowledge/ForbiddenWords.md"
+      type: "knowledge"
+      role: "words and phrases never to use in editorial text"
+      added_in: "2.3.0"
+
+# ─────────────────────────────────────────────
+# BUILD/ — Pipeline documentation
+# ─────────────────────────────────────────────
+
+build:
+  files:
+
+    - path: "Build/Pipeline.md"
+      type: "documentation"
+      role: "8-phase production pipeline — Phase 0 through Phase 7"
+      version: "2.4.0"
+      depends_on: ["Core/WORKFLOW.md", "Core/TEXT_ENGINE.md"]
+
+# ─────────────────────────────────────────────
+# TEMPLATES/ — Starter files
+# ─────────────────────────────────────────────
+
+templates:
+  files:
+
+    - path: "Templates/PROJECT.yaml"
+      type: "template"
+      role: "project configuration template — copy to Projects/{ModelName}/"
+
+    - path: "Templates/PROJECT.md"
+      type: "template"
+      role: "human-readable project brief template"
+
+    - path: "Templates/CHECKLIST.md"
+      type: "template"
+      role: "per-project QA checklist"
+
+    - path: "Templates/COLOR_SCHEME.yaml"
+      type: "template"
+      role: "paint scheme definition template"
+
+    - path: "Templates/PDF_CONFIG.yaml"
+      type: "template"
+      role: "PDF export configuration"
+
+    - path: "Templates/APPROVED_TEXT.md"
+      type: "template"
+      role: "approved text module template"
+
+# ─────────────────────────────────────────────
+# PROJECTS/ — Per-model project folders
+# ─────────────────────────────────────────────
+
+projects:
+  files:
+
+    - path: "Projects/PROJECT_BOOTSTRAP.md"
+      type: "guide"
+      role: "step-by-step guide for starting a new project"
+      added_in: "2.4.0"
+      depends_on: ["BOOTSTRAP.md", "Docs/LOAD_ORDER.md"]
+
+  reference_project:
+    path: "Projects/Proto_Emperor/"
+    status: "reference"
+    notes: "Read-only reference project — do not modify"
+
+# ─────────────────────────────────────────────
+# ASSETS/ — Design system and approved output
+# ─────────────────────────────────────────────
+
+assets:
+  design_system:
+    - path: "Assets/DesignSystem/Tokens/tokens.example.yaml"
+      type: "design_token"
+      role: "all design tokens with example values"
+
+    - path: "Assets/DesignSystem/Tokens/tokens.schema.yaml"
+      type: "schema"
+      role: "JSON schema for token validation"
+
+    - path: "Assets/DesignSystem/Icons/"
+      type: "icon_library"
+      status: "planned_v2.5.0"
+      interim: "Unicode symbol fallbacks documented in COMPONENT_SYSTEM.md"
+
+# ─────────────────────────────────────────────
+# DOCS/ — Extended documentation
+# ─────────────────────────────────────────────
+
+docs:
+  files:
+
+    - path: "Docs/LOAD_ORDER.md"
+      type: "documentation"
+      role: "explicit context loading order with rationale"
+      added_in: "2.4.0"
+      ai_load_order: null
+      depends_on: ["BOOTSTRAP.md", "SDK_CONTEXT.yaml"]
+
+    - path: "Docs/AI_BOOTSTRAP_PROMPT.md"
+      type: "documentation"
+      role: "official ready-to-use prompts for ChatGPT, Claude, Gemini"
+      added_in: "2.4.0"
+      depends_on: ["BOOTSTRAP.md"]
+
+    - path: "Docs/migration/v1-to-v2.md"
+      type: "documentation"
+      role: "migration guide from SDK v1.x to v2.x"
+      depends_on: []
+
+# ─────────────────────────────────────────────
+# DEPENDENCY GRAPH (summary)
+# ─────────────────────────────────────────────
+
+dependency_graph:
+  root: "SDK_CONTEXT.yaml"
+  level_1:
+    - "BOOTSTRAP.md"
+  level_2:
+    - "Core/AI_OPERATING_RULES.md"
+    - "Config/LANGUAGE_POLICY.yaml"
+  level_3:
+    - "Core/TEXT_ENGINE.md"
+    - "Core/DESIGN_LANGUAGE.md"
+  level_4:
+    - "Core/STYLE_GUIDE.md"
+    - "Core/COMPONENT_SYSTEM.md"
+  level_5:
+    - "Core/PAGE_SYSTEM.md"
+  level_6:
+    - "PromptEngine/{page}.md"
+    - "Projects/{ModelName}/PROJECT.yaml"
+  level_7:
+    - "ApprovedAssets/Text/{page}/"
+    - "reference_images"

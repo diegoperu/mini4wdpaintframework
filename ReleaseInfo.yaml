@@ -1,0 +1,66 @@
+---
+# ReleaseInfo.yaml
+# Mini4WD Manual SDK — Release Metadata
+# Updated at every release. See CHANGELOG.md for full history.
+
+version: "2.4.0"
+release_date: "2026-07-01"
+release_type: "minor"
+codename: "CMS"
+
+breaking_changes: []
+
+migration_notes:
+  from: "2.3.0"
+  to: "2.4.0"
+  guide: "MigrationReport_v2.4.md"
+  summary: >
+    Purely additive. All v2.3.0 PROJECT.yaml files and PromptEngine prompts work
+    without modification. New ApprovedAssets/ CMS layer is optional for existing
+    projects. Projects/{model}/ApprovedText/ retained for backward compatibility.
+  required_actions: []
+
+new_in_this_version:
+  - "ApprovedAssets/ — CMS layer with 7-file content modules per page (P001–P010)"
+  - "content.yaml — primary source of truth, replacing text.md as primary output"
+  - "Page lifecycle — draft → review → approved → locked → rendered → released → archived"
+  - "Tests/ContentValidation.md — 7 validation suites for content.yaml"
+  - "ApprovedAssets/index.yaml — global registry of all page module lifecycle states"
+  - "MigrationReport_v2.4.md — migration guide with full workflow diagram"
+  - "Bootstrap System — SDK_CONTEXT.yaml, BOOTSTRAP.md, LOAD_ORDER.md, STATUS.md"
+
+compatibility:
+  backward_compatible_with:
+    - "2.1.0"
+    - "2.2.0"
+    - "2.3.0"
+  project_yaml_schema: "unchanged — all existing PROJECT.yaml files work without modification"
+  page_ids: "P001–P010 unchanged"
+  component_ids: "C001–C015 unchanged"
+  token_names: "unchanged"
+  prompt_files: "unchanged — all PromptEngine/ files work as before"
+  approved_text: "Projects/{model}/ApprovedText/ retained — still functional"
+
+previous_releases:
+  - version: "2.3.0"
+    date: "2026-07-01"
+    codename: "Editorial"
+    key: "Text Engine, Italian-only language policy, LOAD sequence, editorial knowledge base"
+  - version: "2.2.0"
+    date: "2026-06-30"
+    codename: "Pipeline"
+    key: "Build pipeline, Config layer, Test suites, Knowledge base, AI Operating Rules"
+  - version: "2.1.0"
+    date: "2026-06-30"
+    codename: "Foundation"
+    key: "Initial release — Core framework, PromptEngine, Design Tokens, Component System"
+
+next_release:
+  version: "2.5.0"
+  planned_features:
+    - "Compiler/ — automated pipeline executor"
+    - "Prompt Orchestrator"
+    - "Icon Library (15 SVG icons)"
+    - "Docs/tutorial/ — end-to-end tutorials"
+    - "Release System automation"
+  see: "ROADMAP.md"

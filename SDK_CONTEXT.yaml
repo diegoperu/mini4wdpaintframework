@@ -1,0 +1,149 @@
+---
+# SDK_CONTEXT.yaml
+# Mini4WD Manual SDK — Identity Card
+# This file is the primary bootstrap entry point for AI models.
+# Read this file FIRST, then BOOTSTRAP.md.
+# Updated at every release — do not edit manually between releases.
+
+sdk:
+  name: "Mini4WD Manual SDK"
+  version: "2.4.0"
+  codename: "CMS"
+  maturity: "beta"
+  status: "active"
+  language: "it"
+  license: "Apache 2.0"
+  description: >
+    Open-source framework enabling any AI model to generate professional illustrated
+    painting manuals for Tamiya Mini4WD scale models with consistent editorial and
+    graphic standards across all projects and all contributors.
+  scope: "Tamiya Mini4WD scale models — painting and finishing manuals only"
+
+repository:
+  url: "https://github.com/diegoperu/mini4wdpaintframework"
+  default_branch: "main"
+  current_release: "v2.4.0"
+  github_repository: "diegoperu/mini4wdpaintframework"
+  releases_url: "https://github.com/diegoperu/mini4wdpaintframework/releases"
+
+compatibility:
+  chatgpt: true
+  claude: true
+  gemini: true
+  future_models: true
+  notes: >
+    All PromptEngine/ prompts are model-agnostic. No model-specific syntax is used.
+    Any instruction-following language model can execute this framework.
+
+pipeline:
+  sequence: ["text_engine", "qa_engine", "render_engine", "pdf_builder"]
+  text_engine:
+    description: "Generates all editorial text from PROJECT.yaml + Knowledge/ inputs"
+    input:
+      - "Projects/{ModelName}/PROJECT.yaml"
+      - "Knowledge/"
+    output: "ApprovedAssets/Text/P00x/content.yaml"
+    primary_output: "content.yaml"
+    spec: "Core/TEXT_ENGINE.md"
+  qa_engine:
+    description: "Validates content.yaml — BLOCKING gate before render"
+    suites:
+      - "Tests/ContentValidation.md"
+      - "Tests/TextValidation.md"
+    blocking: true
+    gate: "All 16 validation checks must pass before proceeding to render"
+  render_engine:
+    description: "Generates illustrated page from locked content.yaml"
+    input: "ApprovedAssets/Text/P00x/content.yaml"
+    output: "ApprovedAssets/Images/P00x/"
+    constraint: "Reads content.yaml ONLY — never reads text.md directly"
+    spec: "Core/RENDER_GUIDE.md"
+  pdf_builder:
+    description: "Assembles all 10 approved pages into the final manual PDF"
+    input: "ApprovedAssets/"
+    output: "Assets/ApprovedManual/{ModelName}/"
+    spec: "Core/PDF_MASTER.md"
+    config: "Templates/PDF_CONFIG.yaml"
+
+architecture:
+  modular: true
+  versioned: true
+  editor_first: true
+  model_agnostic: true
+  additive_only: true
+  separation:
+    text_engine: "generates editorial content independently of visual rendering"
+    render_engine: "generates visual pages from sealed content — never invents text"
+    qa_engine: "validates at every stage transition — blocking"
+  principles:
+    - "content.yaml is the primary source of truth for every page"
+    - "Core/ is authoritative — nothing in any other directory overrides it"
+    - "Design Tokens drive all visual values — no hardcoded hex, px, or pt"
+    - "Page IDs P001–P010 and Component IDs C001–C015 are permanent and never change"
+    - "All editorial text is Italian (it) — zero tolerance for Japanese, English body text, Lorem ipsum"
+    - "The Render Engine never invents text — it reads only from content.yaml"
+
+source_of_truth:
+  sdk: "Core/"
+  project_yaml: "Projects/{ModelName}/PROJECT.yaml"
+  approved_assets: "ApprovedAssets/Text/P00x/content.yaml"
+  design_tokens: "Assets/DesignSystem/Tokens/tokens.example.yaml"
+  hierarchy:
+    - "Core/ overrides everything else"
+    - "content.yaml overrides text.md (text.md is derived, read-only after approval)"
+    - "PROJECT.yaml overrides prompt defaults"
+
+load_order:
+  description: "AI models MUST load context in this exact order. See Docs/LOAD_ORDER.md."
+  sequence:
+    1: "SDK_CONTEXT.yaml"
+    2: "BOOTSTRAP.md"
+    3: "Core/AI_OPERATING_RULES.md"
+    4: "Config/LANGUAGE_POLICY.yaml"
+    5: "Core/TEXT_ENGINE.md"
+    6: "Core/DESIGN_LANGUAGE.md"
+    7: "Core/STYLE_GUIDE.md"
+    8: "Core/COMPONENT_SYSTEM.md"
+    9: "Core/PAGE_SYSTEM.md"
+    10: "PromptEngine/{page}.md"
+    11: "Projects/{ModelName}/PROJECT.yaml"
+    12: "ApprovedAssets/Text/{page}/"
+    13: "reference_images"
+
+roadmap:
+  current_version: "2.4.0"
+  next_version: "2.5.0"
+  next_planned:
+    - "Compiler/ — Project Loader, Context Builder, Page Generator, QA Engine, PDF Assembler"
+    - "Prompt Orchestrator — manages LOAD sequence automatically"
+    - "Icon Library — 15 SVG icons (currently using Unicode fallbacks)"
+    - "Docs/tutorial/ — end-to-end tutorial documents"
+    - "Release System automation"
+  see: "ROADMAP.md"
+
+golden_project:
+  available: true
+  name: "Proto_Emperor"
+  path: "Projects/Proto_Emperor/"
+  status: "reference"
+  notes: "Use as structural reference for PROJECT.yaml layout and folder organization"
+
+documentation:
+  completion_percentage: 85
+  core_specs: "complete"
+  prompts: "complete"
+  knowledge_base: "complete"
+  cms_layer: "complete"
+  build_pipeline: "complete"
+  tutorials: "planned_v2.5.0"
+  icon_library: "planned_v2.5.0"
+
+bootstrap:
+  entry_point: "BOOTSTRAP.md"
+  context_file: "SDK_CONTEXT.yaml"
+  manifest: "RepositoryManifest.yaml"
+  status: "STATUS.md"
+  load_order: "Docs/LOAD_ORDER.md"
+  ai_prompt: "Docs/AI_BOOTSTRAP_PROMPT.md"
+  project_guide: "Projects/PROJECT_BOOTSTRAP.md"
+  release_info: "ReleaseInfo.yaml"

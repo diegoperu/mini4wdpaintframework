@@ -9,6 +9,20 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added — Bootstrap System
+- `BOOTSTRAP.md` — primary AI entry point; non-negotiable rules, pipeline, page/component index, common errors, key document map
+- `SDK_CONTEXT.yaml` — machine-readable SDK identity card; version, pipeline, architecture, source-of-truth hierarchy, load order, roadmap
+- `STATUS.md` — implementation status, feature matrix by version, roadmap, known issues, TODO list
+- `ReleaseInfo.yaml` — machine-readable release metadata; version, date, breaking changes, migration notes, compatibility
+- `RepositoryManifest.yaml` — complete file and dependency map; every file with type, role, AI load order, and dependencies
+- `Docs/LOAD_ORDER.md` — explicit 13-step context loading order with rationale; phase-specific requirements
+- `Docs/AI_BOOTSTRAP_PROMPT.md` — 6 ready-to-use prompts for ChatGPT, Claude, Gemini (Prompt A–F: full bootstrap, single page, QA, render, minimal, continuity)
+- `Projects/PROJECT_BOOTSTRAP.md` — step-by-step guide for creating a new Mini4WD project
+
+### Changed — Bootstrap System
+- `README.md` — added "Quick Start for AI Models" section; added Bootstrap System to directory tree and documentation table; updated Docs/ tree
+- `Core/WORKFLOW.md` — added BOOTSTRAP.md as recommended entry point in overview section
+
 ### Planned
 - Multi-language support (Italian, Japanese, English)
 - SVG icon library for C006 Callout and C008 Warning components

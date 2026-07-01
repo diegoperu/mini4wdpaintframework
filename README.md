@@ -114,15 +114,50 @@ For the full pipeline with all phases, see `Build/Pipeline.md`.
 
 ---
 
+## Quick Start — For an AI Model
+
+> If you are an AI model (ChatGPT, Claude, Gemini, or any other), read these files in order before generating anything. Do not skip steps.
+
+**Step 1 — Read `BOOTSTRAP.md`**
+
+The primary entry point for AI models. Contains the 10 non-negotiable rules, the full pipeline, component and page index, expected output, and common errors to avoid. Read this before any other document.
+
+**Step 2 — Read `SDK_CONTEXT.yaml`**
+
+Machine-readable SDK identity card. Confirms the version, pipeline sequence, source-of-truth hierarchy, and load order. Use this to verify you have the correct version of the SDK.
+
+**Step 3 — Read `Projects/{ModelName}/PROJECT.yaml`**
+
+Project configuration for the current model. Contains the model name, paint colors (Tamiya codes + Italian names), and render paths. All content.yaml fields are populated from this file.
+
+**Step 4 — Read `ApprovedAssets/Text/{page}/`**
+
+Existing sealed content for each page. If `metadata.yaml → status: locked`, the page is already approved — proceed directly to rendering. Never regenerate locked content.
+
+**Step 5 — Load Reference Images**
+
+Photography of the physical Mini4WD model. Required by the Render Engine to ensure renders match the real product exactly. Do not modify the model's shape.
+
+For the full AI context loading order with rationale, see `Docs/LOAD_ORDER.md`.
+For ready-to-use prompts (ChatGPT, Claude, Gemini), see `Docs/AI_BOOTSTRAP_PROMPT.md`.
+For step-by-step project creation, see `Projects/PROJECT_BOOTSTRAP.md`.
+
+---
+
 ## Directory Structure
 
 ```
 mini4wdpaintframework/
 │
-├── README.md                    ← You are here
+├── README.md                    ← You are here (human contributors)
+├── BOOTSTRAP.md                 ← AI entry point — read THIS first (AI models)
+├── SDK_CONTEXT.yaml             ← SDK identity card — version, pipeline, load order
+├── STATUS.md                    ← Implementation status, roadmap, known issues
+├── ReleaseInfo.yaml             ← Machine-readable release metadata
+├── RepositoryManifest.yaml      ← Complete file and dependency map
 ├── CHANGELOG.md                 ← Version history
 ├── VERSION                      ← Current version (2.4.0)
-├── MANIFEST.yaml                ← Machine-readable SDK descriptor
+├── MANIFEST.yaml                ← Full SDK descriptor (components, tokens, pages)
 ├── LICENSE                      ← Apache 2.0
 ├── STYLE_DECISIONS.md           ← Architecture Decision Records (ADR-001–ADR-021)
 ├── ROADMAP.md                   ← Planned features and future direction
@@ -185,7 +220,8 @@ mini4wdpaintframework/
 │   └── PDF_CONFIG.yaml          ← PDF export configuration
 │
 ├── Projects/                    ← One subfolder per Mini4WD model
-│   └── Proto_Emperor/           ← Reference project
+│   ├── PROJECT_BOOTSTRAP.md     ← Step-by-step guide for starting a new project
+│   └── Proto_Emperor/           ← Reference project (read-only)
 │       ├── PROJECT.yaml
 │       ├── Images/
 │       ├── Output/
@@ -235,6 +271,8 @@ mini4wdpaintframework/
 │   └── ForbiddenWords.md        ← Words and phrases never to use
 │
 └── Docs/                        ← Extended documentation and guides
+    ├── LOAD_ORDER.md            ← Explicit AI context loading order with rationale
+    ├── AI_BOOTSTRAP_PROMPT.md   ← Ready-to-use prompts for ChatGPT, Claude, Gemini
     └── migration/
         └── v1-to-v2.md          ← Migration guide: SDK v1.x → v2.x
 ```
@@ -242,6 +280,21 @@ mini4wdpaintframework/
 ---
 
 ## Core Documentation
+
+### Bootstrap System
+
+| Document | Purpose |
+|---|---|
+| [BOOTSTRAP.md](BOOTSTRAP.md) | **AI entry point** — rules, pipeline, page index, errors to avoid |
+| [SDK_CONTEXT.yaml](SDK_CONTEXT.yaml) | SDK identity card — version, pipeline, source of truth |
+| [Docs/LOAD_ORDER.md](Docs/LOAD_ORDER.md) | Explicit context loading order with rationale |
+| [Docs/AI_BOOTSTRAP_PROMPT.md](Docs/AI_BOOTSTRAP_PROMPT.md) | Ready-to-use prompts for ChatGPT, Claude, Gemini |
+| [Projects/PROJECT_BOOTSTRAP.md](Projects/PROJECT_BOOTSTRAP.md) | Step-by-step new project guide |
+| [STATUS.md](STATUS.md) | Implementation status, roadmap, known issues |
+| [ReleaseInfo.yaml](ReleaseInfo.yaml) | Machine-readable release metadata |
+| [RepositoryManifest.yaml](RepositoryManifest.yaml) | Complete file and dependency map |
+
+### Core Specifications
 
 | Document | Purpose |
 |---|---|
