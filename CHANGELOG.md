@@ -16,6 +16,44 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [2.3.0] - 2026-07-01
+
+### Added
+- `Core/TEXT_ENGINE.md` — complete Text Engine specification; establishes editorial layer as fully independent from Render Engine
+- `Config/LANGUAGE_POLICY.yaml` — machine-readable language enforcement; zero tolerance for Japanese scripts, English body text, and fake text; approved placeholder system
+- `Tests/TextValidation.md` — 40-item editorial QA suite (TEST-TX-001 through TEST-TX-009); blocking/non-blocking classification
+- `Knowledge/EditorialStyle.md` — Italian editorial style guide: voice, tone, register, sentence structure, abbreviations, number formatting
+- `Knowledge/GlossaryIT.md` — authoritative Italian terminology with page labels, component labels, and finish type translations
+- `Knowledge/Terminology.md` — technical term Italian equivalents with usage notes
+- `Knowledge/ForbiddenWords.md` — explicit forbidden words/phrases/scripts catalog with replacements
+- `Templates/APPROVED_TEXT.md` — template for Text Engine output files with YAML frontmatter
+- `Projects/Proto_Emperor/ApprovedText/README.md` — ApprovedText directory for example project
+
+### Changed
+- `Core/DESIGN_LANGUAGE.md` — added Rules 55–65: editorial identity principles (visual Japanese aesthetic + Italian editorial language)
+- `Core/STYLE_GUIDE.md` — added §Typography Rules: full type hierarchy table, capitalization rules, max text lengths, spacing, forbidden typography
+- `Core/COMPONENT_SYSTEM.md` — added §Text Source Declaration: per-component text source mapping to ApprovedText sections
+- `Core/AI_OPERATING_RULES.md` — added Rules 059–100: TEXT RENDERING RULES (42 new rules governing Italian-only output, fake text prohibition, Render Engine behavior)
+- `Build/Pipeline.md` — added §Extended Pipeline v2.3.0: phases 2/2a/2b/2c (Knowledge Load, Text Engine, Editorial QA, Approved Text)
+- `PromptEngine/README.md` — added LOAD Sequence definition, text-mode vs render-mode distinction, updated token reference table
+- `Templates/PROJECT.yaml` — added `text:` section with language enforcement fields
+
+### Architecture Change
+SDK evolves from documentation framework to editorial framework. Text and rendering are now fully decoupled:
+- Text Engine generates and validates Italian content independently
+- Render Engine receives only pre-approved text from `ApprovedText/`
+- Language policy is machine-enforced via `Config/LANGUAGE_POLICY.yaml`
+
+### Migration from v2.2.0
+No breaking changes. All v2.2.0 projects are compatible.
+
+**Optional migration steps:**
+1. Add `text:` section to existing `PROJECT.yaml` files (see `Templates/PROJECT.yaml`)
+2. Create `ApprovedText/` directory in project folder
+3. Regenerate pages using updated LOAD sequence (better language compliance)
+
+---
+
 ## [2.2.0] - 2024-06-30
 
 ### Added

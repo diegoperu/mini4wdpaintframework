@@ -135,3 +135,31 @@ Before working on any SDK component, read this document. If a design question is
 **Rule 53.** The palette components (C003 Palette, C010 Paint Legend, C011 Paint Code Box) use exact swatch representations of real paint colors. These swatches are calibrated in `COLOR_SYSTEM.md` §7. They are the only elements on a page that may introduce colors outside the SDK palette.
 
 **Rule 54.** When in doubt, use white. The default background is always white. The default text is always Black (#1A1A1A). Color is added only when it serves communication, not composition.
+
+---
+
+## v2.3.0 — Editorial Identity Principles (Rules 55–65)
+
+*Added in SDK v2.3.0. These rules govern the relationship between visual Japanese aesthetic and Italian editorial identity.*
+
+**RULE-055** The visual language is inspired by Japanese technical craftsmanship. The editorial language belongs to an Italian publisher. These are two distinct, coexisting layers that never interfere.
+
+**RULE-056** The manual aesthetically references Tamiya's catalog tradition: clean layout, technical callouts, precise diagrams. It does NOT imitate the original Japanese manual — it reinterprets it through an Italian editorial lens.
+
+**RULE-057** Japanese visual elements (clean lines, precision, the concept of *monozukuri* — the art of making things) inform the design philosophy, not the content. Content is always Italian.
+
+**RULE-058** A reader who does not understand Japanese must understand every word in this manual. There are zero Japanese characters in any text element.
+
+**RULE-059** The typography conveys Italian technical authority. Not a translation. Not an approximation. Native Italian technical communication.
+
+**RULE-060** Visual references to Japanese aesthetics are expressed through layout, proportion, and use of white space — never through script imitation or decorative pseudo-characters.
+
+**RULE-061** The design must never look like a machine translation. It must look like it was designed and written by an Italian publisher who loves Mini4WD.
+
+**RULE-062** The Tamiya aesthetic is the visual starting point. Italian technical publishing is the editorial destination.
+
+**RULE-063** Any visual element that could be mistaken for Japanese text is forbidden. This includes: simulated kana shapes, decorative elements resembling kanji, brushstroke-style type treatments intended to evoke Japanese writing.
+
+**RULE-064** The manual is not a Japanese product adapted for Italy. It is an Italian product inspired by Japanese product culture.
+
+**RULE-065** When in doubt: would an Italian technical editor approve this? If yes — publish. If no — redesign.

@@ -206,6 +206,73 @@ All PromptEngine/ prompts are written in provider-neutral language. Prompts desc
 
 ---
 
+## ADR-016
+
+**ID:** ADR-016
+**Title:** Text Engine as Independent Editorial Layer
+**Version:** 2.3.0
+**Date:** 2026-07-01
+**Status:** Accepted
+
+### Context
+Previous SDK versions treated text as part of the rendering process. AI models would generate visual layouts and text simultaneously, leading to language contamination (Japanese characters, English phrases, Lorem ipsum placeholders) that was difficult to detect before rendering.
+
+### Decision
+Introduce a dedicated Text Engine phase that generates all editorial content independently of visual rendering. Text is validated via `Tests/TextValidation.md` and sealed in `ApprovedText/` before the Render Engine begins. The Render Engine receives pre-approved, language-validated text as read-only input.
+
+### Consequences
+- Text quality is independently verifiable
+- Language violations are caught before any rendering occurs
+- AI models can focus on one task at a time (text OR layout — not both)
+- ApprovedText files serve as version-controlled editorial record
+- Slight increase in production steps (phases 2a/2b/2c added)
+
+---
+
+## ADR-017
+
+**ID:** ADR-017
+**Title:** Italian-Only Language Policy with Zero Japanese Tolerance
+**Version:** 2.3.0
+**Date:** 2026-07-01
+**Status:** Accepted
+
+### Context
+Mini4WD models are Japanese products. AI models, when generating content about Japanese products, have a tendency to include Japanese text as "aesthetic decoration" — kanji in headers, katakana as design elements, Japanese-inspired pseudo-characters. This is a language contamination problem, not a design problem.
+
+### Decision
+Enforce a strict Italian-only language policy via `Config/LANGUAGE_POLICY.yaml`. Zero tolerance for any Japanese scripts (kanji, hiragana, katakana). The visual aesthetic references Japan; the editorial language belongs exclusively to Italy. These are separate layers that never intersect.
+
+### Consequences
+- All prompts must load LANGUAGE_POLICY.yaml before generating
+- AI Operating Rules expanded with 42 TEXT RENDERING RULES (Rules 059–100)
+- Tests/TextValidation.md includes Unicode range checks for CJK scripts
+- Approved placeholders defined for uncertain content (never fake text)
+
+---
+
+## ADR-018
+
+**ID:** ADR-018
+**Title:** Approved Placeholders Over Invented Content
+**Version:** 2.3.0
+**Date:** 2026-07-01
+**Status:** Accepted
+
+### Context
+When PROJECT.yaml data is incomplete, AI models would invent plausible-sounding content (fake paint codes, guessed drying times, fabricated color names). This produced manuals that appeared complete but contained inaccurate technical data.
+
+### Decision
+When data is missing, AI models must use approved placeholder strings from `Config/LANGUAGE_POLICY.yaml §approved_placeholders` (`[TITOLO]`, `[TESTO]`, `[VALORE NON SPECIFICATO]`) and add an inline comment pointing to the missing field. Invented content is explicitly forbidden by `Core/AI_OPERATING_RULES.md RULE-063`.
+
+### Consequences
+- Incomplete manuals are visually identifiable (placeholders are visible)
+- Authors must resolve placeholders before approval
+- No silent data fabrication in any approved manual
+- Quality is verified by Tests/TextValidation.md TEST-TX-002
+
+---
+
 ## ADR-010 — Semantic Versioning for All SDK Releases
 
 **Version:** 1.0.0

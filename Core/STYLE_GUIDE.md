@@ -234,3 +234,97 @@ Shadows are used only on floating elements (rendered car images, callout boxes t
 - Color: matches component role (white on violet, gold on white, red for warnings)
 - Format: SVG preferred, PNG fallback at 2× resolution
 - No icon may be recolored outside its defined role
+
+---
+
+## Typography Rules (v2.3.0)
+
+*Added in SDK v2.3.0. These rules govern all text elements across all pages. Reference `Core/TEXT_ENGINE.md` and `Config/LANGUAGE_POLICY.yaml` for enforcement details.*
+
+### Language
+- **Primary language:** Italian (it) — mandatory, non-overridable
+- **Forbidden scripts:** Japanese (kanji, hiragana, katakana), Chinese, Korean, Arabic, Cyrillic
+- **Accepted exceptions:** Paint codes (TS-57), component IDs (C001), untranslatable technical terms in *italic* (*airbrush*, *primer*, *spray*)
+- **Reference:** `Config/LANGUAGE_POLICY.yaml`
+
+### Type Hierarchy
+
+| Level | Size | Font | Weight | Usage |
+|-------|------|------|--------|-------|
+| Display / H1 | 48pt | TitleFont | Regular | Page title (Cover, section opener) |
+| H2 | 28pt | TitleFont | Regular | Page section titles |
+| H3 | 22pt | BodyFont | SemiBold | Subsection headers, step titles |
+| H4 | 16pt | BodyFont | SemiBold | Component labels (ATTENZIONE, SUGGERIMENTO) |
+| Body | 11pt | BodyFont | Regular | All body text |
+| Caption | 9pt | BodyFont | Regular | Image captions, paint code labels |
+| Label | 8pt | BodyFont | Regular | Component UI labels, footer text |
+| Code / Part# | 10pt | MonoFont | Regular | Paint codes, product codes |
+
+### Capitalization Rules (Italian)
+
+| Context | Rule | Example |
+|---------|------|---------|
+| Page H1 (cover) | Title Case | "Schema Colori" |
+| H2 sections | Sentence case | "Preparazione della carrozzeria" |
+| H3 subsections | Sentence case | "Materiali necessari" |
+| Component labels | ALL CAPS | "ATTENZIONE:", "SUGGERIMENTO:" |
+| Page labels (C001) | ALL CAPS | "VERNICIATURA", "MATERIALI" |
+| Body text | Normal Italian | Standard sentence capitalization |
+| Paint codes | Manufacturer format | "TS-57", "C-5" |
+
+### Maximum Text Lengths
+
+| Component | Max characters | Behavior if exceeded |
+|-----------|---------------|---------------------|
+| C001 Header — page label | 20 chars | Abbreviate per GlossaryIT.md |
+| C002 Footer — model name | 40 chars | Truncate with "…" |
+| C006 Callout title | 35 chars | Wrap to 2 lines max |
+| C006 Callout body | 200 chars | Split into two callouts |
+| C008 Warning body | 150 chars | One sentence only |
+| C009 Tip body | 180 chars | Two sentences max |
+| C013 Step number label | 10 chars | "Passo N" always fits |
+| C014 Time box | 12 chars | "N minuti" or "N ore" |
+| C015 Notes body | 300 chars | Split if exceeded |
+
+### Spacing
+
+- **After H1:** 24px
+- **After H2:** 16px
+- **After H3:** 12px
+- **Paragraph spacing (body):** 8px between paragraphs
+- **Line height (body):** 1.6
+- **Line height (headings):** 1.1–1.2
+- **Letter spacing (H1/H2 TitleFont):** 0.02em
+- **Letter spacing (ALL CAPS labels):** 0.08em
+
+### Callout and Warning Box Typography
+
+**C006 Callout:**
+- Lead-in: H4 (16pt, BodyFont SemiBold, VioletPrimary)
+- Body: 11pt BodyFont Regular, DarkGray (#4A4A4A)
+
+**C008 Warning:**
+- Lead-in: "ATTENZIONE:" H4, RedWarning (#D32F2F)
+- Body: 11pt BodyFont Regular, DarkGray
+
+**C009 Tips:**
+- Lead-in: "SUGGERIMENTO:" H4, GoldAccent (#C8A838)
+- Body: 11pt BodyFont Regular, DarkGray
+
+### Footnote and Caption Rules
+
+- Captions: 9pt, BodyFont Regular, MidGray (#9B9B9B), below image at 4px spacing
+- Footnotes: 8pt, BodyFont Regular, MidGray, bottom of content column
+- No footnotes on cover page (P001)
+- Maximum 2 footnotes per page
+
+### Forbidden Typography
+
+- ❌ No italic in TitleFont (Bebas Neue has no italic)
+- ❌ No bold in Caption (8–9pt bold is illegible at print resolution)
+- ❌ No underline in body text
+- ❌ No colored body text (body text is always DarkGray #4A4A4A)
+- ❌ No text over renders without contrast background strip
+- ❌ No font-size smaller than 8pt on any element
+- ❌ No script or novelty fonts
+- ❌ No ALL CAPS body text paragraphs

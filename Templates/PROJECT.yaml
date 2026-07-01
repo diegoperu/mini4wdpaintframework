@@ -206,6 +206,22 @@ paths:
   notesDir: "Notes/"                              # REQUIRED — where QA logs and notes are saved
 
 # ============================================================
+# TEXT ENGINE (v2.3.0)
+# ============================================================
+text:
+  language: "it"               # REQUIRED — primary language (must be "it" per LANGUAGE_POLICY.yaml)
+  strict_language: true        # REQUIRED — enforce language policy at all times
+  allow_english: false         # REQUIRED — no English body text
+  allow_japanese: false        # REQUIRED — zero tolerance for any Japanese script
+  allow_fake_text: false       # REQUIRED — no lorem ipsum, no random characters
+  placeholders_if_uncertain: true   # REQUIRED — use approved placeholders when data missing
+  typography_profile: "technical_manual"  # REQUIRED — see Core/STYLE_GUIDE.md §Typography Rules
+
+  # Approved text output paths
+  approved_text_dir: "ApprovedText/"        # REQUIRED
+  approved_text_raw_dir: "ApprovedText/raw/" # REQUIRED
+
+# ============================================================
 # QA METADATA
 # ============================================================
 # Updated as the manual progresses through QA review.

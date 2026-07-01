@@ -1,0 +1,115 @@
+# Mini4WD Manual SDK — Language Policy
+# Version: 2.3.0
+# Reference: Core/TEXT_ENGINE.md, Core/AI_OPERATING_RULES.md §TEXT RENDERING RULES
+# Enforced by: Tests/TextValidation.md, PromptEngine/ (LOAD sequence)
+
+language_policy:
+  version: "2.3.0"
+
+  # ============================================================
+  # PRIMARY LANGUAGE
+  # ============================================================
+  primary: "it"                    # Italian — mandatory, non-overridable
+  display_name: "Italiano"
+
+  # ============================================================
+  # ALLOWED LANGUAGES
+  # ============================================================
+  allowed:
+    - "it"                         # Italian only
+
+  # ============================================================
+  # FORBIDDEN LANGUAGES (zero tolerance)
+  # ============================================================
+  forbidden:
+    - code: "ja"
+      name: "Japanese"
+      scripts: ["kanji", "hiragana", "katakana", "romaji"]
+      reason: "Japanese text will never appear in Italian manuals, even as decoration"
+    - code: "en"
+      name: "English"
+      reason: "Technical terms must use Italian equivalents from Knowledge/GlossaryIT.md"
+    - code: "fr"
+      name: "French"
+    - code: "de"
+      name: "German"
+    - code: "es"
+      name: "Spanish"
+    - code: "zh"
+      name: "Chinese"
+      scripts: ["simplified", "traditional"]
+    - code: "ko"
+      name: "Korean"
+      scripts: ["hangul"]
+    - code: "ar"
+      name: "Arabic"
+    - code: "ru"
+      name: "Russian"
+
+  # ============================================================
+  # RENDERING RULES
+  # ============================================================
+  rendering:
+    never_mix_languages: true
+    never_fake_text: true              # No random or invented text
+    never_placeholder_lorem: true      # No "Lorem ipsum"
+    never_simulate_japanese: true      # No pseudo-kanji, no Japanese-style decoration
+    never_simulate_asian_scripts: true # No CJK characters of any kind
+    all_text_must_be_italian: true
+    headings_only_italian: true
+    body_only_italian: true
+    callouts_only_italian: true
+    notes_only_italian: true
+    warnings_only_italian: true
+    footnotes_only_italian: true
+    labels_only_italian: true
+    button_text_only_italian: true
+    unit_labels_italian: true          # "minuti" not "minutes"; "cm" OK (universal)
+
+  # ============================================================
+  # APPROVED PLACEHOLDERS
+  # ============================================================
+  # When content is missing or uncertain, use these — never invent
+  approved_placeholders:
+    title: "[TITOLO]"
+    subtitle: "[SOTTOTITOLO]"
+    body_text: "[TESTO]"
+    step_description: "[DESCRIZIONE PASSO]"
+    warning_text: "[AVVERTENZA]"
+    tip_text: "[SUGGERIMENTO]"
+    note_text: "[NOTA]"
+    color_name: "[NOME COLORE]"
+    material_name: "[NOME MATERIALE]"
+    unknown_value: "[VALORE NON SPECIFICATO]"
+
+  # ============================================================
+  # TYPOGRAPHY
+  # ============================================================
+  typography:
+    sentence_case_body: true           # Normal sentence casing in body
+    title_case_h1: true                # First letter uppercase for main titles
+    uppercase_labels: true             # Component labels (P001, C001) in caps
+    no_all_caps_body: true             # Never all-caps in body text
+    decimal_separator: ","             # Italian: virgola (1,5 not 1.5)
+    thousand_separator: "."            # Italian: punto (1.000 not 1,000)
+    quote_style: "«»"                  # Italian guillemets, not "quotation marks"
+
+  # ============================================================
+  # TECHNICAL TERMS
+  # ============================================================
+  technical_terms:
+    use_italian_where_available: true
+    accept_untranslatable_english: true    # "airbrush", "spray" — no Italian equivalent
+    reference: "Knowledge/GlossaryIT.md"
+    forbidden_reference: "Knowledge/ForbiddenWords.md"
+    require_consistency: true              # Same term used consistently across all pages
+
+  # ============================================================
+  # EXCEPTIONS (language-neutral elements)
+  # ============================================================
+  exceptions:
+    paint_codes: "language-neutral"        # TS-57, C-5, etc.
+    numeric_values: "language-neutral"
+    component_ids: "language-neutral"      # C001, P001, etc.
+    code_blocks: "language-neutral"        # SDK internals in fenced blocks
+    unit_symbols: "language-neutral"       # cm, mm, g, ml

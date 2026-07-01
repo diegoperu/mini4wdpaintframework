@@ -404,3 +404,48 @@ Metallic   Chrome    Flat    Pearl
 **Token References:** `{{token.OffWhite}}`, `{{token.LightGray}}`, `{{token.VioletPrimary}}`
 
 **Common Errors:** Too few lines for meaningful notes; no header label (reader doesn't know what this space is for); placing C015 in the middle of a page (it is always at the bottom).
+
+---
+
+## v2.3.0 — Text Source Declaration
+
+*Added in SDK v2.3.0. All components that render text must declare their text source.*
+
+### Text Engine Integration
+
+As of SDK v2.3.0, every component that contains text receives that text exclusively from the Text Engine output (`Projects/{ModelName}/ApprovedText/`). Components do not generate text independently.
+
+**Text-bearing components and their source sections:**
+
+| Component | Text Source in ApprovedText | Text Elements |
+|-----------|---------------------------|---------------|
+| C001 Header | P{NNN}.md `page_label` field | Page label (right side) |
+| C002 Footer | P{NNN}.md frontmatter `model` field | Model name, page number |
+| C003 Palette | P002.md `§ Colori` section | Color names, paint codes |
+| C004 Shopping List | P003.md `§ Materiali` section | Item names, quantities |
+| C005 Paint Sequence | P005.md `§ Sequenza` section | Step labels, color assignments |
+| C006 Callout | P{NNN}.md `§ Note` or `§ Informazioni` | Title and body text |
+| C007 Exploded View | (no text — visual only) | — |
+| C008 Warning | P{NNN}.md `§ Avvertenze` | "ATTENZIONE:" + body |
+| C009 Tips | P{NNN}.md `§ Suggerimenti` | "SUGGERIMENTO:" + body |
+| C010 Paint Legend | P002.md `§ Legenda` | Code + name pairs |
+| C011 Paint Code Box | P002.md `§ Colori` | Code, brand, finish type |
+| C012 Zoom | (optional caption from ApprovedText) | Caption only |
+| C013 Step Number | P{NNN}.md step frontmatter | "Passo N" label |
+| C014 Time Box | P{NNN}.md `duration` fields | "N minuti" / "N ore" |
+| C015 Notes | P{NNN}.md `§ Note finali` | Notes body text |
+
+### Render Engine Contract
+
+The Render Engine must:
+1. Read ApprovedText/P{NNN}.md before rendering each page
+2. Extract text for each component using the mapping table above
+3. Place extracted text verbatim — no paraphrase, no translation
+4. Log `<!-- RENDER ERROR: missing text for C{NNN} -->` if source is absent
+5. Use approved placeholder if source is absent: `[TESTO]`
+
+The Render Engine must NOT:
+- Generate any body text
+- Translate text
+- Abbreviate text without explicit truncation rules (see STYLE_GUIDE §Max Text Lengths)
+- Use text from any source other than ApprovedText/

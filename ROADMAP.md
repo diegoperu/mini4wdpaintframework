@@ -204,3 +204,35 @@ The following are explicitly out of scope for this SDK:
 - **AI provider integrations** — No API keys, no provider SDKs, no direct AI calls. The SDK is prompt text, not software.
 - **Paint brand recommendations** — The SDK describes how to represent colors; it does not endorse brands.
 - **Racing or performance content** — This SDK covers painting manuals only. Motor tuning, gear ratios, and track setups are out of scope.
+
+---
+
+## Status Update — v2.3.0 [RELEASED]
+
+All v2.3.0 features are complete:
+- ✅ Text Engine (Core/TEXT_ENGINE.md)
+- ✅ Language Policy (Config/LANGUAGE_POLICY.yaml)
+- ✅ Text Validation suite (Tests/TextValidation.md)
+- ✅ Italian Knowledge Base (GlossaryIT, EditorialStyle, Terminology, ForbiddenWords)
+- ✅ DESIGN_LANGUAGE update (editorial identity rules 55–65)
+- ✅ STYLE_GUIDE Typography Rules
+- ✅ COMPONENT_SYSTEM text source mapping
+- ✅ AI_OPERATING_RULES TEXT RENDERING RULES (Rules 059–100)
+- ✅ Build/Pipeline.md Text Engine phases (2/2a/2b/2c)
+- ✅ PromptEngine LOAD sequence
+
+## v2.4.0 — Planned
+
+**Target:** Q4 2026
+**Theme:** Automation & Icon Library
+
+### Features
+- `Build/scripts/` — Python/Shell scripts for token substitution automation
+- `Assets/DesignSystem/Icons/` — SVG icon library (10 icons: warning, tip, info, check, brush, airbrush, clock, star, sandpaper, decal)
+- Automated `Tests/TextValidation.md` execution via script (check for Japanese Unicode ranges)
+- `Config/environments/` — local dev overrides
+- CI/CD integration guide (`Build/CI.md`)
+- Expanded `Knowledge/` with airbrush technique guide and color mixing reference
+
+### Non-Breaking Changes Only
+All v2.3.0 projects remain compatible.

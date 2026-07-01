@@ -370,3 +370,102 @@ Phase 6 → Maintainer approved?
 - `PromptEngine/README.md` — Phase 2 prompt usage guide
 - `Assets/ApprovedManual/README.md` — Phase 6 governance
 - `Tests/README.md` — validation protocols per phase
+
+---
+
+## v2.3.0 — Extended Pipeline with Text Engine
+
+As of SDK v2.3.0, the pipeline includes dedicated Text Engine phases between Project Setup and Render Engine. The updated sequence:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│         Mini4WD Manual SDK — Full Pipeline v2.3.0              │
+├─────────┬───────────────────────────────────────────────────────┤
+│ Phase 0 │ Project Setup        PROJECT.yaml + references        │
+│ Phase 1 │ Reference Models     Photography & source art         │
+│ Phase 2 │ Knowledge Load       Terminology, style, glossary     │
+│ Phase 2a│ Text Engine          Italian editorial content        │
+│ Phase 2b│ Editorial QA         Tests/TextValidation.md          │
+│ Phase 2c│ Approved Text        ApprovedText/ P001–P010           │
+│ Phase 3 │ Render Engine        AI illustration generation        │
+│ Phase 4 │ Page QA              QA_SYSTEM.md 110-item checklist  │
+│ Phase 5 │ PDF Generation       Screen + print + archive         │
+│ Phase 6 │ Approved Manual      Archive & publication            │
+│ Phase 7 │ Release              Version tag + changelog          │
+└─────────┴───────────────────────────────────────────────────────┘
+```
+
+### Phase 2 — Knowledge Load (NEW in v2.3.0)
+
+**Purpose:** Load all editorial reference material before text generation.
+
+**Input:**
+- `Knowledge/GlossaryIT.md`
+- `Knowledge/EditorialStyle.md`
+- `Knowledge/Terminology.md`
+- `Knowledge/ForbiddenWords.md`
+- `Config/LANGUAGE_POLICY.yaml`
+
+**Process:** Inject relevant Knowledge/ sections as context into the Text Engine prompts. This ensures terminology consistency and language compliance without relying on the AI's internal knowledge.
+
+**Output:** Knowledge context ready for Text Engine prompts.
+
+### Phase 2a — Text Engine (NEW in v2.3.0)
+
+**Purpose:** Generate all Italian editorial content for P001–P010, decoupled from visual rendering.
+
+**Actor:** Manual author + AI model (text-only mode)
+
+**Input:**
+- `Projects/{ModelName}/PROJECT.yaml`
+- `PromptEngine/{PageName}.md` (LOAD sequence preamble)
+- Knowledge context from Phase 2
+
+**Process:**
+1. For each page P001–P010, run text-mode prompt from PromptEngine/
+2. The prompt uses the full LOAD sequence (see `PromptEngine/README.md §Load Sequence`)
+3. Generate Italian text content only — no visual layout descriptions
+4. Save raw output to `Projects/{ModelName}/ApprovedText/raw/P{NNN}_raw.md`
+
+**Output:** Raw Italian text files in ApprovedText/raw/
+
+### Phase 2b — Editorial QA (NEW in v2.3.0)
+
+**Purpose:** Validate text quality before it enters the Render Engine.
+
+**Actor:** Manual author (editor role)
+
+**Input:** `ApprovedText/raw/P{NNN}_raw.md` files
+**Reference:** `Tests/TextValidation.md`
+
+**Process:**
+1. Run all TEST-TX checks against each raw text file
+2. Fix any blocking failures (language violations, fake text, unresolved tokens)
+3. Document non-blocking warnings in qa_log.md
+4. Iterate until all blocking checks pass
+
+**Output:** Verified text ready for approval.
+
+### Phase 2c — Approved Text (NEW in v2.3.0)
+
+**Purpose:** Seal approved text as the authoritative source for rendering.
+
+**Actor:** Manual author
+
+**Process:**
+1. Set `approved: true` in YAML frontmatter
+2. Set `approved_by` and `approved_date`
+3. Save to `Projects/{ModelName}/ApprovedText/P{NNN}.md`
+
+**Exit Criteria:** All 10 ApprovedText files present with `approved: true`.
+
+**Critical:** The Render Engine (Phase 3) must not begin until all required ApprovedText files are sealed.
+
+---
+
+## Related Documents (updated v2.3.0)
+- `Core/TEXT_ENGINE.md` — Text Engine specification
+- `Config/LANGUAGE_POLICY.yaml` — Language enforcement
+- `Tests/TextValidation.md` — Phase 2b QA protocol
+- `Knowledge/GlossaryIT.md` — Phase 2 terminology reference
+- `Knowledge/EditorialStyle.md` — Phase 2a editorial style

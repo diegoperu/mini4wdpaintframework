@@ -267,3 +267,146 @@ Every generated page description must specify that C002 Footer contains the corr
 - `Config/render.yaml` — render configuration
 - `PromptEngine/README.md` — how rules are injected into prompts
 - `Tests/PromptValidation.md` — prompt compliance tests
+
+---
+
+## [TEXT] Text Rendering Rules (v2.3.0)
+
+*Added in SDK v2.3.0. These rules govern all AI behavior during the Text Engine phase (Phase 2a) and the Render Engine phase (Phase 2b). See `Core/TEXT_ENGINE.md` for architecture context.*
+
+**RULE-059 [TEXT] Text is content, not decoration.**
+Every character visible in a generated manual page is editorial content. It has language, meaning, and authorship. Never treat text as a visual element, filler, or background decoration.
+
+**RULE-060 [TEXT] Never generate text in Japanese — under any circumstances.**
+This applies to: kanji (漢字), hiragana (ひらがな), katakana (カタカナ), and all CJK punctuation. Even if the Mini4WD model is a Japanese product, all manual text is Italian. Japanese scripts must never appear in any generated output, including labels, decorations, background elements, or simulated textures.
+
+**RULE-061 [TEXT] Never simulate Japanese characters using other scripts.**
+Do not create pseudo-Japanese text using Latin characters, symbols, or any other script to "look like" Japanese. Examples of forbidden output: "テスト" using ASCII art, "katakana-style" invented characters, or any visual approximation of CJK scripts.
+
+**RULE-062 [TEXT] Never use Lorem Ipsum.**
+"Lorem ipsum dolor sit amet" and all its variants are absolutely forbidden. If content is missing or uncertain, use the approved placeholders from `Config/LANGUAGE_POLICY.yaml §approved_placeholders`: [TITOLO], [SOTTOTITOLO], [TESTO]. Always.
+
+**RULE-063 [TEXT] Never invent text when data is missing.**
+If `PROJECT.yaml` does not provide a value needed for a page, insert the appropriate approved placeholder and add an inline comment: `<!-- MISSING: project.fieldName — add to PROJECT.yaml -->`. Do not guess, invent, or fill with plausible-sounding content.
+
+**RULE-064 [TEXT] All text in generated pages must be Italian.**
+Body text, headings, section titles, callout text, warning text, tip text, footnotes, labels, and all other visible text must be in Italian. Exceptions per `Config/LANGUAGE_POLICY.yaml §exceptions`: paint codes (TS-57), component IDs (C001), and untranslatable technical terms (airbrush, spray, primer) in code context.
+
+**RULE-065 [TEXT] Never mix languages within a single page.**
+A page must not contain Italian headings with English body text, or Italian sentences with embedded Japanese labels. Language mixing is always a failure.
+
+**RULE-066 [TEXT] Technical terms must use Italian equivalents when available.**
+Reference `Knowledge/GlossaryIT.md`. If an Italian equivalent exists, use it. If no Italian equivalent exists (e.g., "airbrush"), the English term is accepted but must be italicized on first use: *airbrush*.
+
+**RULE-067 [TEXT] Instructions must be in the second-person singular imperative.**
+Step descriptions and instructions use the imperative: "Applica il primer" (not "Il primer va applicato" or "Si applica il primer"). This applies to all procedural content in P004, P005, P006, P007, P008.
+
+**RULE-068 [TEXT] Quantities must be specific — never vague.**
+Write "30 minuti" not "qualche minuto." Write "2 mani sottili" not "alcune mani." If the quantity is not in PROJECT.yaml, use the placeholder [VALORE NON SPECIFICATO] and note the missing field.
+
+**RULE-069 [TEXT] Paint code formatting is strict.**
+Paint codes must appear exactly as in PROJECT.yaml. Never abbreviate (TS57 instead of TS-57). Never expand (Tamiya Spray Color 57 instead of TS-57). The code is a precise technical identifier.
+
+**RULE-070 [TEXT] Decimal separator is the Italian comma.**
+Write "1,5 mm" not "1.5 mm". Write "30,5°" not "30.5°". Exception: paint codes and part numbers use their native format.
+
+**RULE-071 [TEXT] Never use straight quotation marks in Italian body text.**
+Use «guillemets» for quotations: «verniciatura a smalto». Not "verniciatura a smalto". This applies to all body text. Code blocks and technical identifiers are exempt.
+
+**RULE-072 [TEXT] The Render Engine never generates text — it only places text.**
+During the Render Engine phase, do not produce any new body text, rewrite existing text, paraphrase for brevity, or translate. The text in `ApprovedText/` files is read-only. Place it as-is.
+
+**RULE-073 [TEXT] If ApprovedText text is too long for a visual component, truncate with "…" — never rewrite.**
+The editorial content is authoritative. If it does not fit a visual component, report the overflow: `<!-- OVERFLOW: text exceeds component height — reduce text or resize component -->`. Do not silently shorten or paraphrase.
+
+**RULE-074 [TEXT] Component labels must be in Italian.**
+C006 Callout label: "NOTA" not "NOTE". C008 Warning label: "ATTENZIONE" not "WARNING". C009 Tip label: "SUGGERIMENTO" not "TIP". Reference: `Knowledge/GlossaryIT.md §Component Labels`.
+
+**RULE-075 [TEXT] Section headers use sentence case in Italian.**
+First word capitalized, rest lowercase: "Preparazione della superficie" not "PREPARAZIONE DELLA SUPERFICIE" and not "Preparazione Della Superficie". Exception: page-level H1 titles may use title case per design spec.
+
+**RULE-076 [TEXT] Time values use Italian units.**
+"30 minuti" not "30 minutes" or "30 min." (abbreviated form "min" is acceptable only in Time Box component C014). "1 ora" not "1 hour".
+
+**RULE-077 [TEXT] Finish type names must be in Italian.**
+"Lucido" not "Gloss". "Opaco" not "Matte". "Satinato" not "Satin". "Metallizzato" not "Metallic". "Perlato" not "Pearl". Reference: `Knowledge/GlossaryIT.md §Finish Types`.
+
+**RULE-078 [TEXT] Step numbering in ApprovedText uses "Passo N".**
+Not "Step N", "Fase N", or "Punto N". Use "Passo 1", "Passo 2", etc. consistently across all pages. Exception: if the design system specifies "Fase" for a different semantic (e.g., phases vs steps), document the distinction in PROJECT.yaml notes.
+
+**RULE-079 [TEXT] Warning boxes (C008) must not use English.**
+"ATTENZIONE:" not "WARNING:". The warning icon may be universal (⚠️), but all text is Italian.
+
+**RULE-080 [TEXT] Tip boxes (C009) must not use English.**
+"SUGGERIMENTO:" not "TIP:". "PRO TIP:" is explicitly forbidden.
+
+**RULE-081 [TEXT] Paint color names in text must match PROJECT.yaml exactly.**
+If PROJECT.yaml defines a color as "Viola Primario", the manual must say "Viola Primario" — not "violet", "viola scuro", or "colore principale". Exact match, always.
+
+**RULE-082 [TEXT] Approved placeholders are only valid in unapproved drafts.**
+`[TITOLO]`, `[TESTO]`, etc. are valid only when `approved: false` in the ApprovedText frontmatter. An ApprovedText file with `approved: true` must contain zero placeholders.
+
+**RULE-083 [TEXT] Never render the model name in a language other than Italian.**
+"Proto Emperor" (the official name) is acceptable as-is (it is a proper noun). "プロトエンペラー" (Japanese transliteration) is forbidden. "Proto Imperatore" (Italian translation of proper noun) is also forbidden — proper nouns are not translated.
+
+**RULE-084 [TEXT] All warnings must be specific and actionable in Italian.**
+"Attenzione: applicare il nastro di mascheratura solo su vernice completamente asciutta (minimo 24 ore)" — not "Fare attenzione con il nastro" (vague) or "Be careful with tape" (English).
+
+**RULE-085 [TEXT] Number formatting follows Italian conventions.**
+Integers: "1.000" (punto per migliaia). Decimals: "1,5" (virgola decimale). Percentages: "75%" (no space before %). Dimensions: "210 × 297 mm" (spazio intorno all'×).
+
+**RULE-086 [TEXT] Material quantities use metric units.**
+"15 mm" not "15 mm approx." (if the value is known). "300 ml" not "a bottle". "P400" for sandpaper grit (grana 400). "PSI" is accepted for airbrush pressure (no Italian equivalent in common use).
+
+**RULE-087 [TEXT] The final checklist (P010) must be in Italian.**
+Checklist items use the infinitive form: "Verificare che la carrozzeria sia completamente asciutta." Not "Check body is dry." Not "Body dry?".
+
+**RULE-088 [TEXT] Page type labels in C001 Header are in Italian.**
+"SCHEMA COLORI" not "COLOR SCHEME". "MATERIALI" not "MATERIALS". "PREPARAZIONE" not "PREPARATION". Reference: `Knowledge/GlossaryIT.md §Page Labels`.
+
+**RULE-089 [TEXT] Series name and edition names are preserved as proper nouns.**
+"Championship Series" — if this is the official series name, it is preserved as-is (proper noun). It is not translated to "Serie Campionato". Proper nouns from official product names are exempt from the Italian-only rule.
+
+**RULE-090 [TEXT] Never insert AI meta-commentary into editorial content.**
+Text like "Ecco il testo per questa pagina:", "Come richiesto:", or "Nota: ho generato il seguente testo" must not appear in ApprovedText files. Output only the editorial content, in the format specified by the template.
+
+**RULE-091 [TEXT] Callout boxes (C006) use specific Italian lead-in phrases.**
+"Nota tecnica:", "Informazione:", "Da sapere:" — not "Note:", "Info:", "FYI:".
+
+**RULE-092 [TEXT] The model's official Japanese product name is a proper noun exception.**
+"Mini 4WD" and official Tamiya model names (e.g., "Proto Emperor") are proper nouns and are used verbatim. This does not exempt any other content from the Italian-only rule.
+
+**RULE-093 [TEXT] Apostrophes in Italian contractions are standard.**
+"dell'airbrush", "l'smalto" → "lo smalto" (apply correct Italian article elision). Grammar must be correct Italian — the AI must not ignore Italian grammar rules for articles, prepositions, and contractions.
+
+**RULE-094 [TEXT] No bullet-point placeholder text like "• [item]" in approved files.**
+If list items are not yet available from PROJECT.yaml, the entire list section uses [TESTO] as placeholder — not individual `• [item]` placeholders which would produce empty-looking lists.
+
+**RULE-095 [TEXT] The Render Engine must log any missing ApprovedText section.**
+If the Render Engine cannot find the text for a component, it writes: `<!-- RENDER ERROR: missing ApprovedText for P{NNN} §{section} -->` in its output and uses the approved placeholder. It does not generate new text.
+
+**RULE-096 [TEXT] ApprovedText files are immutable once approved.**
+Once `approved: true` is set, the file must not be edited without resetting `approved: false` and running `Tests/TextValidation.md` again. An approved file with unreported edits is considered corrupted.
+
+**RULE-097 [TEXT] Font and style are not text engine concerns.**
+The Text Engine produces plain content. It does not specify font sizes, weights, or colors. Those are determined by Design Tokens and the Render Engine. Do not embed style instructions in ApprovedText content.
+
+**RULE-098 [TEXT] Every ApprovedText file must end with the TEXT_ENGINE_MARKER.**
+`<!-- TEXT_ENGINE_MARKER: end -->` is required as the last line. This allows tooling to detect complete vs truncated files.
+
+**RULE-099 [TEXT] Cross-page terminology must be consistent.**
+If "Passo 1" is the label for the first preparation step in P004, then P005's step label must also use "Passo" — not "Fase" or "Punto". Audit terminology consistency across all pages before final approval.
+
+**RULE-100 [TEXT] The language policy supersedes all other instructions.**
+If any PromptEngine prompt, PROJECT.yaml note, or author instruction conflicts with `Config/LANGUAGE_POLICY.yaml`, the language policy wins. No exception, no override.
+
+---
+
+## Compliance Summary — Text Rules
+
+| Rule Range | Category | Blocking |
+|-----------|----------|----------|
+| RULE-059 to RULE-067 | Core text philosophy | All |
+| RULE-068 to RULE-078 | Formatting and precision | RULE-069, RULE-072 |
+| RULE-079 to RULE-092 | Component and content rules | RULE-079 to RULE-084 |
+| RULE-093 to RULE-100 | Workflow and governance | RULE-096, RULE-100 |

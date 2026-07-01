@@ -188,3 +188,118 @@ To add a new page prompt (e.g., P011 for a new page type):
 ---
 
 *PromptEngine is part of Mini4WD Manual SDK v2.1.0. See `Core/WORKFLOW.md` for the complete generation pipeline.*
+
+---
+
+## v2.3.0 — LOAD Sequence (Mandatory)
+
+As of SDK v2.3.0, every prompt must begin with a LOAD sequence that injects the full framework context. This replaces ad-hoc context injection and ensures consistent AI behavior across all models.
+
+### LOAD Sequence Definition
+
+```
+╔══════════════════════════════════════════════════════╗
+║         MINI4WD MANUAL SDK — LOAD SEQUENCE          ║
+╠══════════════════════════════════════════════════════╣
+║  STEP 1  │  LOAD Core/DESIGN_LANGUAGE.md            ║
+║  STEP 2  │  LOAD Core/COMPONENT_SYSTEM.md           ║
+║  STEP 3  │  LOAD Assets/DesignSystem/Tokens/        ║
+║          │        tokens.example.yaml               ║
+║  STEP 4  │  LOAD Core/TEXT_ENGINE.md                ║
+║  STEP 5  │  LOAD Config/LANGUAGE_POLICY.yaml        ║
+║  STEP 6  │  LOAD Core/AI_OPERATING_RULES.md         ║
+║  STEP 7  │  LOAD Projects/{ModelName}/PROJECT.yaml  ║
+║  STEP 8  │  GENERATE: [page-specific instruction]   ║
+╚══════════════════════════════════════════════════════╝
+```
+
+### Why This Order Matters
+
+1. **DESIGN_LANGUAGE** first — establishes editorial philosophy before any specifics
+2. **COMPONENT_SYSTEM** second — defines the visual vocabulary available
+3. **TOKENS** third — provides concrete visual values
+4. **TEXT_ENGINE** fourth — establishes text authorship rules before language policy
+5. **LANGUAGE_POLICY** fifth — enforces Italian-only AFTER text rules are loaded
+6. **AI_OPERATING_RULES** sixth — applies all 100 rules as hard constraints
+7. **PROJECT.yaml** seventh — injects project-specific data
+8. **GENERATE** last — only after all context is loaded
+
+### How to Use in Practice
+
+**For ChatGPT / Claude / Gemini (conversational injection):**
+
+Paste this preamble before each page prompt:
+
+```
+[CONTEXT LOAD — Mini4WD Manual SDK v2.3.0]
+
+You are an AI model operating within the Mini4WD Manual SDK editorial pipeline.
+Before generating any content, internalize the following constraints:
+
+1. DESIGN PHILOSOPHY: The manual aesthetically references Tamiya technical catalogs.
+   The visual style is Japanese-influenced. The editorial content is entirely Italian.
+   Never confuse visual aesthetic with language. No Japanese text — ever.
+
+2. LANGUAGE POLICY (Config/LANGUAGE_POLICY.yaml):
+   - Primary language: Italian (it) — all body text, headings, labels, warnings, tips
+   - Forbidden: Japanese (kanji, hiragana, katakana), English paragraphs, Lorem ipsum
+   - Accepted exceptions: paint codes (TS-57), airbrush, spray, primer (in italic)
+   - Approved placeholders when data missing: [TITOLO], [TESTO], [SOTTOTITOLO]
+
+3. TEXT ENGINE RULES (Core/AI_OPERATING_RULES.md — RULES 059–100):
+   - Text is editorial content, not decoration
+   - Never invent paint codes, colors, or materials not in PROJECT.yaml
+   - Never generate fake text, random characters, or pseudo-Japanese
+   - Instructions use second-person singular imperative in Italian
+
+4. COMPONENT SYSTEM: Use only approved components C001–C015.
+   C001 Header and C002 Footer mandatory on every page.
+
+5. DESIGN TOKENS: All visual values from tokens.example.yaml.
+   VioletPrimary #5B2D8E, White #FFFFFF, DarkGray #4A4A4A.
+
+[PROJECT DATA]
+Model: {{project.modelName}}
+Language: {{project.language}}
+Paint Scheme: {{project.paintScheme.name}}
+[...remaining PROJECT.yaml fields...]
+
+[GENERATE]
+```
+
+### Text-Mode vs Render-Mode Prompts
+
+**Text-mode prompts (Phase 2a — Text Engine):**
+- Generate ONLY Italian editorial text
+- Output structured Markdown per `Templates/APPROVED_TEXT.md` format
+- No visual layout descriptions
+- No color hex values
+- No component dimensions
+
+**Render-mode prompts (Phase 3 — Render Engine):**
+- Load ApprovedText/P{NNN}.md as source
+- Generate visual layout description using text from ApprovedText/
+- All text content from ApprovedText/ — verbatim, no rewrite
+- Describe component placement, sizes, visual relationships
+
+### Updated Token Reference Table
+
+| Token | Source | Page(s) |
+|-------|--------|---------|
+| `{{project.modelName}}` | PROJECT.yaml | All |
+| `{{project.language}}` | PROJECT.yaml | All (must be "it") |
+| `{{project.paintScheme.name}}` | PROJECT.yaml | P001, P002 |
+| `{{project.paintScheme.colors[N].paintCode}}` | PROJECT.yaml | P002, P003 |
+| `{{project.paintScheme.colors[N].name}}` | PROJECT.yaml | P002 |
+| `{{project.paintScheme.colors[N].finish}}` | PROJECT.yaml | P002 |
+| `{{project.preparationSteps[N].title}}` | PROJECT.yaml | P004 |
+| `{{project.preparationSteps[N].description}}` | PROJECT.yaml | P004 |
+| `{{project.preparationSteps[N].duration}}` | PROJECT.yaml | P004 |
+| `{{project.paintSequence[N].area}}` | PROJECT.yaml | P005 |
+| `{{project.paintSequence[N].colorId}}` | PROJECT.yaml | P005 |
+| `{{project.maskingZones[N].area}}` | PROJECT.yaml | P006 |
+| `{{project.decals[N].name}}` | PROJECT.yaml | P008 |
+| `{{project.decals[N].position}}` | PROJECT.yaml | P008 |
+| `{{project.premiumVariant.name}}` | PROJECT.yaml | P009 |
+| `{{token.VioletPrimary}}` | tokens.example.yaml | All (render) |
+| `{{token.HeaderHeight}}` | tokens.example.yaml | C001 (render) |
