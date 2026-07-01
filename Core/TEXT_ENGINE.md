@@ -4,6 +4,8 @@
 **SDK Version:** 2.4.0
 **Status:** Stable — Mandatory
 **Replaces:** (none — new document)
+
+> **AI models:** Read `AI_ENTRYPOINT.md` → `SDK_CONTEXT.yaml` → `BOOTSTRAP.md` → `Core/AI_OPERATING_RULES.md` → `Config/LANGUAGE_POLICY.yaml` before this document. See `Docs/LOAD_ORDER.md` for the full sequence.
 **Referenced by:** Build/Pipeline.md, Core/WORKFLOW.md, PromptEngine/README.md, Core/COMPONENT_SYSTEM.md
 
 ---

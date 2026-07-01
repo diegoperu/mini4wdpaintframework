@@ -13,6 +13,7 @@
 
 Each document in the LOAD sequence builds on the previous ones:
 
+- `AI_ENTRYPOINT.md` establishes the Bootstrap Contract — the binding agreement that governs everything
 - `AI_OPERATING_RULES.md` establishes behavioral constraints that govern how all other documents are interpreted
 - `LANGUAGE_POLICY.yaml` must be active before any text is generated
 - `TEXT_ENGINE.md` defines the output format — must be loaded before generating `content.yaml`
@@ -24,6 +25,17 @@ Each document in the LOAD sequence builds on the previous ones:
 ---
 
 ## Full LOAD Sequence
+
+### Step 0 — AI_ENTRYPOINT.md
+**Type:** Markdown | **Path:** `AI_ENTRYPOINT.md`
+
+The official SDK entry point. Contains the Bootstrap Contract (YAML block), mission, source-of-truth hierarchy, workflow overview, AI operating mode, editorial philosophy, language rules, Golden Rules, completion checklist, and First Response Policy.
+
+**Why first:** The Bootstrap Contract at the top of this file defines the binding rules for everything that follows. No other document can be correctly interpreted without first accepting this contract. After reading this file, produce the Bootstrap Report and wait for user approval before generating any content.
+
+**What you learn:** The 10 Golden Rules, the complete pipeline, the First Response Policy (Bootstrap Report + wait for approval), and the exact read order for all subsequent documents.
+
+---
 
 ### Step 1 — SDK_CONTEXT.yaml
 **Type:** YAML | **Path:** `SDK_CONTEXT.yaml`
@@ -37,9 +49,9 @@ SDK identity card. Provides version, pipeline overview, architecture principles,
 ### Step 2 — BOOTSTRAP.md
 **Type:** Markdown | **Path:** `BOOTSTRAP.md`
 
-Primary AI entry point. Covers non-negotiable rules, pipeline overview, page and component index, common errors to avoid. Must be internalized before loading any specification.
+Operational guide — expands on the rules and workflow introduced in AI_ENTRYPOINT.md. Covers pipeline detail, page and component index, common errors to avoid, and the document map.
 
-**What you learn:** The 10 non-negotiable rules, the full pipeline sequence, pages P001–P010, components C001–C015 overview, content.yaml structure, expected output.
+**What you learn:** Detailed pipeline steps, pages P001–P010 with prompt files, components C001–C015 with roles, content.yaml structure, expected output format, complete error table.
 
 ---
 
@@ -159,6 +171,7 @@ Photography of the physical Mini4WD model. Used by the Render Engine to ensure r
 If context window is limited and you must prioritize, load in this minimum-viable order:
 
 ```
+0. AI_ENTRYPOINT.md           ← Cannot be skipped — contains Bootstrap Contract
 1. SDK_CONTEXT.yaml           ← Cannot be skipped
 2. BOOTSTRAP.md               ← Cannot be skipped
 3. Core/AI_OPERATING_RULES.md ← Cannot be skipped
@@ -176,18 +189,20 @@ Steps 6–9 (Design Language, Style Guide, Component System, Page System) are re
 
 | Phase | Minimum Required Documents |
 |-------|---------------------------|
-| Phase 2a — Text Engine | Steps 1–7 + 10–11 |
-| Phase 2b/2c — QA | Steps 1–4 + Tests/ContentValidation.md + Tests/TextValidation.md |
-| Phase 3 — Render Engine | Steps 1–12 (full load) |
-| Phase 4 — Page QA | Steps 1–4 + Core/QA_SYSTEM.md |
-| Phase 5 — PDF | Steps 1–4 + Core/PDF_MASTER.md + Templates/PDF_CONFIG.yaml |
+| Phase 0 — Bootstrap | Step 0 (AI_ENTRYPOINT.md) + Step 1 (SDK_CONTEXT.yaml) |
+| Phase 2a — Text Engine | Steps 0–7 + 10–11 |
+| Phase 2b/2c — QA | Steps 0–4 + Tests/ContentValidation.md + Tests/TextValidation.md |
+| Phase 3 — Render Engine | Steps 0–13 (full load) |
+| Phase 4 — Page QA | Steps 0–4 + Core/QA_SYSTEM.md |
+| Phase 5 — PDF | Steps 0–4 + Core/PDF_MASTER.md + Templates/PDF_CONFIG.yaml |
 
 ---
 
 ## Cross References
 
+- `AI_ENTRYPOINT.md` → Bootstrap Contract and First Response Policy
 - `SDK_CONTEXT.yaml` → `load_order` field summarizes this document
-- `BOOTSTRAP.md` → "Context Loading Order" section
+- `BOOTSTRAP.md` → operational guide — detailed pipeline and error table
 - `Core/WORKFLOW.md` → detailed workflow using this load order
 - `Build/Pipeline.md` → phase-by-phase pipeline with load requirements
 - `PromptEngine/README.md` → LOAD sequence for prompt execution

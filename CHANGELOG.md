@@ -9,19 +9,27 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-### Added — Bootstrap System
-- `BOOTSTRAP.md` — primary AI entry point; non-negotiable rules, pipeline, page/component index, common errors, key document map
+### Added — Bootstrap System v2
+- `AI_ENTRYPOINT.md` — official AI entry point; Bootstrap Contract (YAML), mission, source-of-truth hierarchy, pipeline, AI operating mode (Text/Render), editorial philosophy, language rules, Golden Rules (G01–G10), completion checklist, First Response Policy with Bootstrap Report format
+- `BOOTSTRAP.md` — AI operational guide; detailed pipeline, page/component index, common errors, document map
 - `SDK_CONTEXT.yaml` — machine-readable SDK identity card; version, pipeline, architecture, source-of-truth hierarchy, load order, roadmap
 - `STATUS.md` — implementation status, feature matrix by version, roadmap, known issues, TODO list
 - `ReleaseInfo.yaml` — machine-readable release metadata; version, date, breaking changes, migration notes, compatibility
-- `RepositoryManifest.yaml` — complete file and dependency map; every file with type, role, AI load order, and dependencies
-- `Docs/LOAD_ORDER.md` — explicit 13-step context loading order with rationale; phase-specific requirements
+- `RepositoryManifest.yaml` — complete file and dependency map; every file with type, role, AI load order, and dependency graph
+- `Docs/LOAD_ORDER.md` — explicit 14-step context loading order (Step 0: AI_ENTRYPOINT.md) with rationale; phase-specific minimum requirements
 - `Docs/AI_BOOTSTRAP_PROMPT.md` — 6 ready-to-use prompts for ChatGPT, Claude, Gemini (Prompt A–F: full bootstrap, single page, QA, render, minimal, continuity)
 - `Projects/PROJECT_BOOTSTRAP.md` — step-by-step guide for creating a new Mini4WD project
 
-### Changed — Bootstrap System
-- `README.md` — added "Quick Start for AI Models" section; added Bootstrap System to directory tree and documentation table; updated Docs/ tree
-- `Core/WORKFLOW.md` — added BOOTSTRAP.md as recommended entry point in overview section
+### Changed — Bootstrap System v2
+- `README.md` — "Quick Start for AI Models" updated: AI_ENTRYPOINT.md as Step 1, Bootstrap Report requirement added; Bootstrap System in directory tree and documentation table
+- `BOOTSTRAP.md` — subtitle changed from "Primary AI Entry Point" to "AI Operational Guide"; header updated to point to AI_ENTRYPOINT.md
+- `SDK_CONTEXT.yaml` — `bootstrap.official_entrypoint` set to `AI_ENTRYPOINT.md`
+- `Docs/LOAD_ORDER.md` — AI_ENTRYPOINT.md added as Step 0; Abbreviated LOAD updated; Phase table updated
+- `RepositoryManifest.yaml` — AI_ENTRYPOINT.md added; dependency_graph root updated
+- `STATUS.md` — Bootstrap System section updated with AI_ENTRYPOINT.md
+- `Core/WORKFLOW.md` — cross-reference to AI_ENTRYPOINT.md
+- `Core/TEXT_ENGINE.md` — cross-reference to AI_ENTRYPOINT.md in header
+- `Config/LANGUAGE_POLICY.yaml` — bootstrap note added to header
 
 ### Planned
 - Multi-language support (Italian, Japanese, English)

@@ -21,13 +21,22 @@ root_files:
     ai_load_order: null
     depends_on: []
 
+  - path: "AI_ENTRYPOINT.md"
+    type: "bootstrap"
+    role: "official AI entry point — read BEFORE EVERYTHING ELSE"
+    status: "current"
+    version: "2.4.0"
+    ai_load_order: 0
+    depends_on: []
+    contains: ["Bootstrap Contract (YAML)", "Golden Rules", "First Response Policy", "Bootstrap Report format"]
+
   - path: "BOOTSTRAP.md"
     type: "bootstrap"
-    role: "primary AI entry point — read FIRST"
+    role: "AI operational guide — detailed pipeline, error table, document map"
     status: "current"
     version: "2.4.0"
     ai_load_order: 2
-    depends_on: ["SDK_CONTEXT.yaml"]
+    depends_on: ["AI_ENTRYPOINT.md", "SDK_CONTEXT.yaml"]
 
   - path: "SDK_CONTEXT.yaml"
     type: "bootstrap"
@@ -664,10 +673,12 @@ docs:
 # ─────────────────────────────────────────────
 
 dependency_graph:
-  root: "SDK_CONTEXT.yaml"
+  root: "AI_ENTRYPOINT.md"
   level_1:
-    - "BOOTSTRAP.md"
+    - "SDK_CONTEXT.yaml"
   level_2:
+    - "BOOTSTRAP.md"
+  level_3:
     - "Core/AI_OPERATING_RULES.md"
     - "Config/LANGUAGE_POLICY.yaml"
   level_3:

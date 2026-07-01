@@ -118,25 +118,31 @@ For the full pipeline with all phases, see `Build/Pipeline.md`.
 
 > If you are an AI model (ChatGPT, Claude, Gemini, or any other), read these files in order before generating anything. Do not skip steps.
 
-**Step 1 — Read `BOOTSTRAP.md`**
+**Step 1 — Read `AI_ENTRYPOINT.md`**
 
-The primary entry point for AI models. Contains the 10 non-negotiable rules, the full pipeline, component and page index, expected output, and common errors to avoid. Read this before any other document.
+The official SDK entry point. Contains the Bootstrap Contract (binding rules for the entire session), mission, source-of-truth hierarchy, pipeline overview, Golden Rules, and the First Response Policy. After reading this file, produce a Bootstrap Report and wait for user approval before generating any content.
 
 **Step 2 — Read `SDK_CONTEXT.yaml`**
 
 Machine-readable SDK identity card. Confirms the version, pipeline sequence, source-of-truth hierarchy, and load order. Use this to verify you have the correct version of the SDK.
 
-**Step 3 — Read `Projects/{ModelName}/PROJECT.yaml`**
+**Step 3 — Follow `BOOTSTRAP.md`**
+
+Operational guide — expands on the rules and workflow from AI_ENTRYPOINT.md. Contains the detailed pipeline, page/component index, common errors to avoid, and document map.
+
+**Step 4 — Read `Projects/{ModelName}/PROJECT.yaml`**
 
 Project configuration for the current model. Contains the model name, paint colors (Tamiya codes + Italian names), and render paths. All content.yaml fields are populated from this file.
 
-**Step 4 — Read `ApprovedAssets/Text/{page}/`**
+**Step 5 — Read `ApprovedAssets/Text/{page}/`**
 
 Existing sealed content for each page. If `metadata.yaml → status: locked`, the page is already approved — proceed directly to rendering. Never regenerate locked content.
 
-**Step 5 — Load Reference Images**
+**Step 6 — Load Reference Images**
 
 Photography of the physical Mini4WD model. Required by the Render Engine to ensure renders match the real product exactly. Do not modify the model's shape.
+
+After loading all documents: produce a **Bootstrap Report** (format defined in `AI_ENTRYPOINT.md`) and wait for user approval before generating any content.
 
 For the full AI context loading order with rationale, see `Docs/LOAD_ORDER.md`.
 For ready-to-use prompts (ChatGPT, Claude, Gemini), see `Docs/AI_BOOTSTRAP_PROMPT.md`.

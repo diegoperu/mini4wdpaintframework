@@ -1,5 +1,6 @@
 # Mini4WD Manual SDK — Language Policy
-# Version: 2.3.0
+# Version: 2.4.0
+# Bootstrap: Read AI_ENTRYPOINT.md first — language rules are part of the Bootstrap Contract
 # Reference: Core/TEXT_ENGINE.md, Core/AI_OPERATING_RULES.md §TEXT RENDERING RULES
 # Enforced by: Tests/TextValidation.md, PromptEngine/ (LOAD sequence)
 

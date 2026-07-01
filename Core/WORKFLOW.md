@@ -2,7 +2,7 @@
 
 This document describes the complete end-to-end process for producing a Mini4WD painting manual using the SDK. Every manual follows this workflow. Skipping phases is not permitted — each phase's output is the input to the next.
 
-**AI models:** Read `BOOTSTRAP.md` and `SDK_CONTEXT.yaml` before this document. Load context in the order defined in `Docs/LOAD_ORDER.md`.
+**AI models:** Read `AI_ENTRYPOINT.md` first (contains Bootstrap Contract and First Response Policy), then `SDK_CONTEXT.yaml` and `BOOTSTRAP.md`. Load context in the full order defined in `Docs/LOAD_ORDER.md`.
 
 See also: `MANUAL_SYSTEM.md` for architecture context, `QA_SYSTEM.md` for the QA checklist.
 

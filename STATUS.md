@@ -68,12 +68,13 @@
 - MigrationReport_v2.4.md — migration guide from v2.3.0 with workflow diagram
 
 ### Bootstrap System (v2.4.0)
+- AI_ENTRYPOINT.md — official AI entry point with Bootstrap Contract, Golden Rules, First Response Policy
 - SDK_CONTEXT.yaml — machine-readable SDK identity card
-- BOOTSTRAP.md — primary AI entry point document
-- Docs/LOAD_ORDER.md — explicit context loading order
-- RepositoryManifest.yaml — complete file and dependency map
+- BOOTSTRAP.md — AI operational guide (detailed pipeline, error table, document map)
+- Docs/LOAD_ORDER.md — explicit 13-step context loading order with rationale
+- RepositoryManifest.yaml — complete file and dependency map with AI load order
 - Projects/PROJECT_BOOTSTRAP.md — new project guide
-- Docs/AI_BOOTSTRAP_PROMPT.md — official prompts for ChatGPT / Claude / Gemini
+- Docs/AI_BOOTSTRAP_PROMPT.md — 6 official prompts for ChatGPT / Claude / Gemini (Prompt A–F)
 - STATUS.md — this document
 - ReleaseInfo.yaml — machine-readable release metadata
 

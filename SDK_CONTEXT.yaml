@@ -139,6 +139,7 @@ documentation:
   icon_library: "planned_v2.5.0"
 
 bootstrap:
+  official_entrypoint: "AI_ENTRYPOINT.md"
   entry_point: "BOOTSTRAP.md"
   context_file: "SDK_CONTEXT.yaml"
   manifest: "RepositoryManifest.yaml"
@@ -147,3 +148,4 @@ bootstrap:
   ai_prompt: "Docs/AI_BOOTSTRAP_PROMPT.md"
   project_guide: "Projects/PROJECT_BOOTSTRAP.md"
   release_info: "ReleaseInfo.yaml"
+  note: "AI models must read AI_ENTRYPOINT.md FIRST — it contains the Bootstrap Contract"

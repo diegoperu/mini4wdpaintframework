@@ -1,9 +1,10 @@
 # BOOTSTRAP.md
-# Mini4WD Manual SDK — Primary AI Entry Point
+# Mini4WD Manual SDK — AI Operational Guide
 
-> Read this document FIRST before loading any other file in this repository.
-> If you are an AI model, this document gives you everything you need to understand
-> the framework, load the right context, and start generating a manual correctly.
+> **AI models: read `AI_ENTRYPOINT.md` before this document.**
+> `AI_ENTRYPOINT.md` is the official entry point — it contains the Bootstrap Contract,
+> Golden Rules, and First Response Policy. This document expands on the operational
+> details after you have read the entrypoint.
 
 ---
 
