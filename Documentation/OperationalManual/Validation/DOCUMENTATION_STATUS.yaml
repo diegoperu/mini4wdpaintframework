@@ -1,0 +1,90 @@
+# DOCUMENTATION_STATUS.yaml
+# Manuale Operativo — Mini4WD Manual SDK
+# Stato macchina-leggibile della documentazione operativa.
+# Generato da: Documentation/OperationalManual/Validation/ (QA System)
+# Aggiornare ad ogni release SDK secondo UPDATE_GUIDE.md § 6.
+
+documentation:
+  version: "1.3.0"                 # MINOR: 8 delle 11 inconsistenze framework (C10,C12,C13,C15,C16,C18,C19,C20) corrette nel codice sorgente SDK, non solo documentate; ADR-022 aggiunta a STYLE_DECISIONS.md per le modifiche a Core/ — vedi UPDATE_GUIDE.md § 5
+  generated_from_sdk: "2.4.0"      # Versione SDK al momento della generazione di questo sistema di validazione
+  sdk_version: "2.4.0"             # Versione SDK corrente al momento dell'ultimo controllo
+  completion: 1.0                  # 20/20 capitoli scritti in Documentation/OperationalManual/
+  reviewed: true                   # CONSISTENCY_CHECK.md Parte 1 (8 criteri) eseguita formalmente su tutti i 20 capitoli da 4 agenti paralleli, con verifica incrociata contro le fonti SDK
+  validated: true                  # 20/20 capitoli PASS su tutti gli 8 criteri di Parte 1. 8/11 inconsistenze framework risolte alla fonte (2026-07-02); 3 restano aperte per decisione del maintainer (vedi status.pending_review)
+
+coverage:
+  chapters:
+    total_planned: 20
+    written: 20
+    mapped_with_source_docs: 20    # tutti i 20 capitoli hanno documenti SDK assegnati in DOCUMENT_COVERAGE.md
+    percentage_written: 100.0
+    percentage_mapped: 100.0
+
+  sdk_documents:
+    total_canonical: 105           # vedi TRACEABILITY_MATRIX.md — esclude GPT.md e istanze per-progetto/per-pagina
+    mapped_to_chapter: 105
+    unmapped: 0
+    excluded:
+      - path: "GPT.md"
+        reason: "non generato dallo SDK, mantenuto dall'utente (vedi RepositoryManifest.yaml)"
+
+  traceability:
+    primary_documents_with_full_chain: 24   # documenti con catena completa in TRACEABILITY_MATRIX.md Parte 1
+    secondary_documents_in_summary_table: 46
+    total_traced: 70
+    percentage_traced: 100.0        # rispetto ai 105 documenti canonici (24 catene + 46 righe tabella + resto per-pagina PromptEngine aggregato)
+
+status:
+  consistent: true                  # riferito al Manuale Operativo stesso (20/20 capitoli PASS su CONSISTENCY_CHECK.md Parte 1 e Parte 5) — le 11 inconsistenze rimaste sono nel framework SDK, documentate esplicitamente in ⚠️ Warning inline nei capitoli interessati, non nascoste
+  missing_sections: []              # tutti i 20 capitoli sono stati scritti
+  resolved:
+    - item: "C10 — Core/WORKFLOW.md § Phase 2 riscritta al flusso CMS v2.4.0 (content.yaml, ApprovedAssets/, lifecycle draft→...→archived)"
+      resolved_in: "Core/WORKFLOW.md (2026-07-02)"
+    - item: "C12 — Schema PROJECT.yaml disallineato in Core/MANUAL_SYSTEM.md § 5 e Projects/PROJECT_BOOTSTRAP.md § Step 2, riscritto per matchare Templates/PROJECT.yaml"
+      resolved_in: "Core/MANUAL_SYSTEM.md, Projects/PROJECT_BOOTSTRAP.md (2026-07-02)"
+    - item: "C13 — Core/NAMING_CONVENTION.md § 2.1 correlato: esempio file inesistente sostituito, regola divisa Docs/ top-level vs Docs/migration/"
+      resolved_in: "Core/NAMING_CONVENTION.md (2026-07-02)"
+    - item: "C15 — Core/PDF_MASTER.md non documentava la variante 'archive' — aggiunta (5 sezioni: intro, tabella §1, sottosezione dedicata, tabella §3, nota §10)"
+      resolved_in: "Core/PDF_MASTER.md (2026-07-02)"
+    - item: "C16 — Projects/Proto_Emperor/README.md dichiarava 4 file inesistenti come '✓ Filled' — corretto a stato reale; corretta anche la stessa collisione C00N/PC00N trovata indipendentemente nella sua tabella Paint Scheme"
+      resolved_in: "Projects/Proto_Emperor/README.md (2026-07-02)"
+    - item: "C18 — Tests/README.md elencava 7 suite invece di 9 — aggiunte righe ContentValidation.md/TextValidation.md, corretto il conteggio"
+      resolved_in: "Tests/README.md (2026-07-02)"
+    - item: "C19 — ID colore vernice C00N rinominati PC00N in Templates/PROJECT.yaml (2 occorrenze) e Projects/Proto_Emperor/PROJECT.yaml (17 occorrenze, verificate 0 residue)"
+      resolved_in: "Templates/PROJECT.yaml, Projects/Proto_Emperor/PROJECT.yaml (2026-07-02)"
+    - item: "C20 — Core/RENDER_GUIDE.md § 5 sincronizzato a Config/render.yaml per la risoluzione dei render ortografici (800×600px/96dpi → 1000×800px/150dpi)"
+      resolved_in: "Core/RENDER_GUIDE.md (2026-07-02)"
+    - item: "Ulteriore istanza dello stesso bug C11 (percorso Output/raw/ obsoleto) trovata in PromptEngine/README.md § How to Run a Prompt, fuori dallo scope originale dei 10 file prompt — corretta a content.yaml + gate QA"
+      resolved_in: "PromptEngine/README.md (2026-07-02)"
+  partially_resolved:
+    - item: "C11 — PromptEngine/*.md (10 file): percorso di output corretto in tutti e 10 (content.yaml); 248/269 valori hex sostituiti con Design Token (13 mapping puliti)"
+      still_open: "3 colori hex (21 occorrenze: #F5F0FA, #FFFDF0, #FFF8F8, #E8C84A) non hanno un token corrispondente — non toccati, nessun token inventato. I gradient (violazione RULE-016 separata) non toccati. Il mismatch strutturale — questi file contengono layout/hex completi quando PromptEngine/README.md dichiara che i prompt Text-mode v2.4.0 non devono averne — resta interamente irrisolto: serve una decisione di restructuring, non un fix di sync"
+      flagged_in: "07_TextEngine.md"
+    - item: "C14 — Config/quality.yaml + Knowledge/FAQ.md: scambio QA-017/QA-021 corretto in entrambi i file"
+      still_open: "Core/QA_SYSTEM.md non ha alcun marcatore bloccante/non-bloccante per nessuno dei 110 item — il valore 'qa.blocking_items: 45' in MANIFEST.yaml non ha base tracciabile in nessun documento del repository. Le voci QA-001 (page size) e QA-019 (motion blur) in quality.yaml non corrispondono a nessun item reale in QA_SYSTEM.md; QA-018 è ambiguo (4 candidati possibili). Impossibile ricostruire una lista di 45 item bloccanti corretta senza che il maintainer la definisca da zero — non è un errore di sincronizzazione, è una specifica mai scritta"
+      flagged_in: "11_QA.md"
+  still_open:
+    - item: "C17 — Scope v2.5.0 discorde tra STATUS.md/SDK_CONTEXT.yaml/ReleaseInfo.yaml (Compiler/, Prompt Orchestrator, 15 icone, Docs/tutorial/) e ROADMAP.md/MigrationReport_v2.4.md (script automazione, 10 icone, Config/environments, CI guide) — zero sovrapposizione tra le due liste. ROADMAP.md colloca inoltre v3.0.0 (2025, due sezioni duplicate) prima di v2.5.0 (Q3 2026) cronologicamente, e contiene sezioni v2.2.0/v2.3.0 duplicate/superate mai ripulite — probabile causa radice della discordanza. CHANGELOG.md e ReleaseInfo.yaml discordano sulle date di 2.1.0/2.2.0 (2024 vs 2026)"
+      flagged_in: "14_Roadmap.md, 15_Versioning.md"
+      why_not_fixed: "Nessuna delle due versioni di scope ha priorità oggettiva nel repository — è una decisione di prodotto, non un errore di sincronizzazione documentale. Richiede che il maintainer scelga (o fonda) lo scope reale di v2.5.0 e la cronologia corretta"
+  warnings:
+    - "20/20 capitoli scritti da 4 agenti paralleli (fork), ciascuno con lettura diretta delle fonti SDK elencate in DOCUMENT_COVERAGE.md — nessun contenuto inventato, ogni capitolo apre con tabella 'Documenti di riferimento'."
+    - "TODO-D05 completato: CONSISTENCY_CHECK.md Parte 1 (8 criteri) eseguita formalmente su tutti i 20 capitoli — 20/20 PASS dopo correzione di 3 difetti editoriali minori (dettaglio in CONSISTENCY_CHECK.md Parte 5)."
+    - "2026-07-02: 8 delle 11 inconsistenze framework (C10,C12,C13,C15,C16,C18,C19,C20) corrette alla fonte su richiesta esplicita dell'utente, con piano presentato e approvato prima dell'esecuzione. ADR-022 aggiunta a STYLE_DECISIONS.md per le 5 modifiche a Core/ (modify_requires_adr: true in MANIFEST.yaml). 2 inconsistenze (C11, C14) parzialmente risolte — la parte rimanente richiede decisioni di specifica/restructuring che questo task non può prendere unilateralmente. 1 (C17) resta interamente aperta — decisione di prodotto pura."
+    - "Nessuna automazione CI/CD (.github/workflows/) verifica questo file: la validazione è manuale, eseguita secondo UPDATE_GUIDE.md."
+
+# ============================================================
+# METADATA DI TRACCIABILITÀ DI QUESTO STESSO FILE
+# ============================================================
+meta:
+  generated_by: "Claude Code — Documentation QA System task"
+  generated_date: "2026-07-02"
+  next_review_trigger: "prossima release SDK (v2.5.0) o prima stesura di un capitolo del Manuale Operativo"
+  related_files:
+    - "DOCUMENT_COVERAGE.md"
+    - "TRACEABILITY_MATRIX.md"
+    - "COVERAGE_CHECKLIST.md"
+    - "CONSISTENCY_CHECK.md"
+    - "UPDATE_GUIDE.md"
+    - "CHANGE_IMPACT.md"
+    - "REPORT_FINALE.md"
