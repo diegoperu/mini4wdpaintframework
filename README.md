@@ -4,18 +4,21 @@
 
 ---
 
-> ## 🚀 Sei un utente nuovo? Parti da **[START_HERE.md](START_HERE.md)**
+> ## 🚀 New user? Start from **[START_HERE.md](START_HERE.md)**
 >
-> Non serve leggere questo README per produrre un manuale. Il percorso operatore è:
+> You do not need to read this README to produce a manual. The operator path is:
 > `START_HERE.md` → `OperatorGuide/01_Primo_Manuale.md` → `FIRST_PROJECT.md`.
-> Questo README descrive l'architettura, per contributor e sviluppatori.
+> This README describes the architecture, for contributors and developers.
 >
-> Documenti operatore (v2.4.1): [START_HERE.md](START_HERE.md) ·
+> Operator documents (v2.4.1): [START_HERE.md](START_HERE.md) ·
 > [OperatorGuide/](OperatorGuide/) · [WORKFLOW.md](WORKFLOW.md) ·
 > [LIFECYCLE.md](LIFECYCLE.md) · [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) ·
 > [FILE_MATRIX.md](FILE_MATRIX.md) · [WHO_MODIFIES_WHAT.md](WHO_MODIFIES_WHAT.md) ·
-> [OPERATOR_PROFILE.md](OPERATOR_PROFILE.md) · tutorial [FIRST_PROJECT.md](FIRST_PROJECT.md),
+> [OPERATOR_PROFILE.md](OPERATOR_PROFILE.md) · tutorials [FIRST_PROJECT.md](FIRST_PROJECT.md),
 > [FIRST_RENDER.md](FIRST_RENDER.md), [FIRST_PDF.md](FIRST_PDF.md)
+>
+> Note: operator-facing guides are written in Italian — the working language of the
+> manuals and their operators. Framework and architecture docs are in English.
 
 ---
 
