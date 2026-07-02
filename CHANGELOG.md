@@ -9,6 +9,16 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added — Quality Management System
+- `Documentation/QualityManagement/` — 20-document Quality Management System:
+  release policy and criteria (01–02), feedback templates (03–06, 13–15),
+  living registers (07–12, 17), operator feedback process (16), documentation
+  policy (18), README and index (19–20). The framework is now STABLE: every
+  future change must be justified by documented evidence (confirmed bugs, UAT,
+  unachievable Golden Projects, AI model changes, or approved functional
+  requirements). No functional change to the framework: Prompt Engine, Text
+  Engine, Rendering Engine, and pipeline are untouched.
+
 ### Planned
 - Compiler/ and Prompt Orchestrator (v2.5.0)
 - Multi-language support (Italian, Japanese, English)
