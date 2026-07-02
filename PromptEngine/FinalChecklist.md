@@ -33,26 +33,26 @@ You are generating the FINAL CHECKLIST page (P010) of a Mini4WD painting manual 
 
 This is the last page. The reader has completed the painting. This page guides a systematic final inspection and closes the manual with care instructions and manual metadata.
 
-**Page Layout: A4 (210x297mm), white background #FFFFFF**
+**Page Layout: A4 (210x297mm), white background White**
 
-**HEADER (C001):** Violet band #5B2D8E, 18mm. Left: "Mini4WD Manual". Right: "FINAL CHECK".
-**FOOTER (C002):** Gray #E8E8E8, 12mm.
-Left: "{{project.modelName}} — {{paintScheme.name}}" Source Sans Pro Regular 8pt #4A4A4A.
-Center: "P010" Source Sans Pro Bold 8pt #5B2D8E.
-Right: "Mini4WD Manual SDK v2.4.0" Source Sans Pro Regular 8pt #9B9B9B.
+**HEADER (C001):** Violet band VioletPrimary, 18mm. Left: "Mini4WD Manual". Right: "FINAL CHECK".
+**FOOTER (C002):** LightGray, 12mm.
+Left: "{{project.modelName}} — {{paintScheme.name}}" Source Sans Pro Regular 8pt DarkGray.
+Center: "P010" Source Sans Pro Bold 8pt VioletPrimary.
+Right: "Mini4WD Manual SDK v2.4.0" Source Sans Pro Regular 8pt MidGray.
 
 **PAGE TITLE (22mm from top):**
-"Final Inspection Checklist" in Bebas Neue Bold 28pt #5B2D8E, left margin 18mm.
-Subtitle: "Verify every item before reassembly." Source Sans Pro Regular 11pt #4A4A4A, 32mm from top.
+"Final Inspection Checklist" in Bebas Neue Bold 28pt VioletPrimary, left margin 18mm.
+Subtitle: "Verify every item before reassembly." Source Sans Pro Regular 11pt DarkGray, 32mm from top.
 
 **TWO-COLUMN LAYOUT (from 42mm to 200mm):**
 
 Left column (18mm to 101mm): QUALITY INSPECTION
 
-Section heading: "QUALITY CHECKS" Source Sans Pro SemiBold 10pt #5B2D8E uppercase, violet underline.
+Section heading: "QUALITY CHECKS" Source Sans Pro SemiBold 10pt VioletPrimary uppercase, violet underline.
 
 Checklist items — render each as a checkbox row:
-Checkbox style: open square 12x12mm, border 1.5px #5B2D8E, border-radius 2px. Text to right: Source Sans Pro Regular 9pt #1A1A1A.
+Checkbox style: open square 12x12mm, border 1.5px VioletPrimary, border-radius 2px. Text to right: Source Sans Pro Regular 9pt Black.
 
 Paint Quality:
 - [ ] Base coat fully opaque (no body color showing through)
@@ -87,11 +87,11 @@ Top Coat:
 
 Right column (109mm to 192mm): CARE & STORAGE
 
-Section heading: "CARE & STORAGE" Source Sans Pro SemiBold 10pt #5B2D8E uppercase, violet underline.
+Section heading: "CARE & STORAGE" Source Sans Pro SemiBold 10pt VioletPrimary uppercase, violet underline.
 
 **CARE INSTRUCTIONS list (C015 style, compact):**
-Icon: shield symbol or [S], 10pt #388E3C.
-Body items (Source Sans Pro Regular 9pt #4A4A4A, bullet #388E3C 3px circle):
+Icon: shield symbol or [S], 10pt GreenSuccess.
+Body items (Source Sans Pro Regular 9pt DarkGray, bullet GreenSuccess 3px circle):
 - Do not use solvents or alcohol-based cleaners on painted surfaces
 - Clean with a dry or slightly damp lint-free microfiber cloth only
 - Avoid prolonged exposure to direct sunlight (UV causes color shift)
@@ -105,21 +105,21 @@ Body items (Source Sans Pro Regular 9pt #4A4A4A, bullet #388E3C 3px circle):
 - Avoid high humidity storage (above 70% RH risks decal lifting)
 
 **PHOTOGRAPHER'S TIPS C015:**
-Notes box: background #F8F8F8, border 1px #E8E8E8, border-radius 3px, padding 8px.
-Heading: "PHOTOGRAPHY TIPS" Source Sans Pro SemiBold 9pt #4A4A4A.
+Notes box: background OffWhite, border 1px LightGray, border-radius 3px, padding 8px.
+Heading: "PHOTOGRAPHY TIPS" Source Sans Pro SemiBold 9pt DarkGray.
 Body:
 "For best photos: use a white sweep background, place two soft box lights at 45 degrees from front-left and front-right, shoot at model eye level with a 50mm equivalent lens, set aperture to f/8 for sharpness across the full model. Avoid direct flash — it flattens the finish and eliminates the depth of metallic and pearl paints."
-Source Sans Pro Regular 9pt #4A4A4A.
+Source Sans Pro Regular 9pt DarkGray.
 
 **COMPLETION BADGE (center, 210mm from top):**
-Badge rectangle: 120x32mm, background gradient from #5B2D8E to #3D1E60, border-radius 8px, centered horizontally.
-Left: checkmark icon [V] 18pt #FFFFFF.
-Center text: "SCHEME COMPLETE" Bebas Neue Bold 16pt #FFFFFF, letter-spacing 3px.
-Sub-text: "{{paintScheme.name}}" Source Sans Pro Regular 9pt #8B5FBF (VioletLight), below main text.
+Badge rectangle: 120x32mm, background gradient from VioletPrimary to VioletDark, border-radius 8px, centered horizontally.
+Left: checkmark icon [V] 18pt White.
+Center text: "SCHEME COMPLETE" Bebas Neue Bold 16pt White, letter-spacing 3px.
+Sub-text: "{{paintScheme.name}}" Source Sans Pro Regular 9pt VioletLight, below main text.
 
 **MANUAL METADATA (240mm from top, below badge):**
-Gray section background #F8F8F8, full width minus margins, border-radius 3px, padding 8px.
-Two-column metadata grid, Source Sans Pro Regular 8pt #9B9B9B:
+Gray section background OffWhite, full width minus margins, border-radius 3px, padding 8px.
+Two-column metadata grid, Source Sans Pro Regular 8pt MidGray:
 Left: Manual Version: {{project.version}} | Author: {{project.author}} | Language: {{project.language}}
 Right: SDK Version: 2.4.0 | Page Count: 10 | Scheme: {{paintScheme.name}}
 
@@ -146,7 +146,7 @@ Right: SDK Version: 2.4.0 | Page Count: 10 | Scheme: {{paintScheme.name}}
 | SDK version correct in footer | VERSION file |
 | Page level DoD | `Core/DEFINITION_OF_DONE.md` |
 
-Save output to: `Projects/{{project.modelSlug}}/Output/raw/P010_raw.md`
+Save output to: `ApprovedAssets/Text/P010/content.yaml`
 
 ---
 

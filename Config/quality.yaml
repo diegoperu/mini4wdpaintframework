@@ -19,7 +19,7 @@ quality:
     - id: "QA-003"
       description: "All margins within tolerance"
     # Rendering
-    - id: "QA-017"
+    - id: "QA-021"
       description: "Background must be pure white #FFFFFF"
     - id: "QA-018"
       description: "Resolution meets minimum per Config/render.yaml"

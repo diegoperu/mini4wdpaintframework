@@ -51,39 +51,42 @@ Open `Projects/{ModelName}/PROJECT.yaml` and fill in every field:
 
 ```yaml
 project:
-  modelName: "Proto Emperor"          # Official Tamiya name (Italian: keep as-is)
-  series: "Super II"                  # Chassis series
-  scale: "1:32"
-  year: 2024                          # Production year of this manual
+  modelName: "Proto Emperor"          # Official Tamiya name, exactly as printed
+  modelSlug: "proto-emperor"          # kebab-case, used for file naming
+  seriesName: "Super II"              # Chassis series
+  year: "2024"                        # Production year of this manual (string, not integer)
+  language: "it"
+  version: "1.0.0"
 
-paint_scheme:
-  primary_color:
-    tamiya_code: "PS-18"
-    tamiya_name: "Metallic Purple"
-    italian_name: "Viola Metallizzato"
-  secondary_color:
-    tamiya_code: "PS-1"
-    tamiya_name: "White"
-    italian_name: "Bianco"
+paintScheme:
+  name: "Midnight Violet"
+  colors:
+    - id: "PC001"                     # Paint-color ID — never reuse the C00N pattern (that's the Component ID registry, see COMPONENT_SYSTEM.md)
+      paintBrand: "Tamiya"
+      paintCode: "PS-18"
+      paintName: "Metallic Purple"
+      finish: "metallic"
+    - id: "PC002"
+      paintBrand: "Tamiya"
+      paintCode: "PS-1"
+      paintName: "White"
+      finish: "gloss"
   # Add all colors in the scheme
 
-renders:
-  cover: "Images/cover_3q_front.jpg"
-  color_scheme: "Images/color_scheme_flat.jpg"
-  # ... one per page
-
-reference_images:
-  - "Images/ref_front.jpg"
-  - "Images/ref_side.jpg"
-  - "Images/ref_top.jpg"
-  - "Images/ref_rear.jpg"
+paths:
+  coverRenderPath: "Images/cover_3q_front.jpg"
+  colorSchemeRenderFront: "Images/P002_front.png"
+  colorSchemeRenderSide: "Images/P002_side.png"
+  colorSchemeRenderTop: "Images/P002_top.png"
 ```
 
+Reference images live in `Assets/ReferenceModels/{ModelName}/`, not in `PROJECT.yaml` (see `Build/Pipeline.md` Phase 1).
+
 **Rules:**
-- `italian_name` must be in Italian for every paint color
+- Every color must have a Tamiya/manufacturer `paintCode` — no invented codes
 - All file paths are relative to the project folder
 - Use `TODO:` for any unknown values — never invent data
-- Every field in the template has a comment explaining it
+- Every field in `Templates/PROJECT.yaml` has a comment explaining it
 
 Reference: `Projects/Proto_Emperor/PROJECT.yaml`
 

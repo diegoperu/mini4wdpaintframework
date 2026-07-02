@@ -465,3 +465,40 @@ The Render Engine is contractually prohibited from reading PROJECT.yaml. Its onl
 - PROJECT.yaml remains the source of truth for project configuration (metadata, model info, render paths) — not editorial content
 - Render Engine errors are caught early: missing content.yaml fields appear as visible placeholders, not silent data substitutions
 - AI_OPERATING_RULES.md updated with explicit rule: Render Engine reads ApprovedAssets/Text/P{NNN}/content.yaml ONLY
+
+---
+
+## ADR-022
+
+**ID:** ADR-022
+**Title:** Documentation QA Pass — Sync Core/ Specs to v2.4.0 CMS Architecture
+**Version:** 2.4.0
+**Date:** 2026-07-02
+**Status:** Accepted
+
+### Context
+While authoring a 20-chapter Manuale Operativo (`Documentation/OperationalManual/`) for the SDK, systematic cross-referencing of every `Core/` document against its actual dependents (`Config/`, `PromptEngine/`, `Templates/`, `Projects/Proto_Emperor/`) surfaced several places where `Core/` had drifted from the v2.4.0 CMS architecture (ADR-019, ADR-020, ADR-021) or contained internally inconsistent examples. Full audit trail: `Documentation/OperationalManual/Validation/CONSISTENCY_CHECK.md` (findings C10–C20) and `Documentation/OperationalManual/Validation/REPORT_FINALE.md`.
+
+### Decision
+Apply the following corrections to `Core/` documents, bringing them in line with the CMS architecture and internal consistency already established elsewhere in the SDK:
+
+- `Core/WORKFLOW.md` — Phase 2 rewritten from the pre-CMS flow (`Output/raw/`, freeform `qa_log.md` entries) to the current flow: `content.yaml` generation, `Tests/ContentValidation.md`/`Tests/TextValidation.md` gates, sealing via `ApprovedAssets/Text/P{NNN}/metadata.yaml → status: locked`, and the full page lifecycle `draft → review → approved → locked → rendered → released → archived` (ADR-020).
+- `Core/MANUAL_SYSTEM.md` §5 — the illustrative PROJECT.yaml example rewritten to match the real, current `Templates/PROJECT.yaml` schema (the previous example had drifted to a schema shape that no longer existed anywhere in the SDK).
+- `Core/NAMING_CONVENTION.md` §2.1 — corrected an example that cited a nonexistent file (`automated-pdf.md`); the naming rule for `Docs/` is now split into top-level guides (`SCREAMING_SNAKE_CASE.md`, e.g. `LOAD_ORDER.md`) versus `Docs/migration/` guides (`kebab-case.md`, e.g. `v1-to-v2.md`), matching what the directory actually contains.
+- `Core/PDF_MASTER.md` — added the "Archive" PDF export variant, which `Config/pdf.yaml` and `Templates/PDF_CONFIG.yaml` already implemented but this spec never documented (variant table, color profile table, and a dedicated parameters subsection, consistent with how Screen/Print are documented).
+- `Core/RENDER_GUIDE.md` §5 — the three-view/orthographic render resolution requirement (P002) updated from 800×600px/96dpi to 1000×800px/150dpi to match `Config/render.yaml → resolution.orthographic`, whose own header states it is a direct numeric encoding of this guide (ADR-011) — every other row in the table already matched exactly; only this one had drifted.
+
+Two related fixes were applied outside `Core/` as part of the same pass and don't require an ADR: `Templates/PROJECT.yaml` and `Projects/Proto_Emperor/PROJECT.yaml` had paint-color IDs using the `C00N` pattern, colliding visually with the permanent Component ID registry (`C001`–`C015`, ADR-004); they now use `PC00N`. `PromptEngine/*.md` output-path instructions were updated from the pre-CMS `Output/raw/P{NNN}_raw.md` to `ApprovedAssets/Text/P{NNN}/content.yaml`, and 14 of the hardcoded hex values found in those files were replaced with their matching Design Token names (ADR-005).
+
+### Explicitly not resolved by this ADR
+Three related findings were deliberately left unfixed because they require a maintainer/product decision this pass cannot make on its own — see `CONSISTENCY_CHECK.md` for detail:
+
+- `PromptEngine/*.md` still contain 3 hex values with no matching Design Token (21 occurrences) and 2 files contain gradients (a separate RULE-016 violation); more fundamentally, all 10 files are full visual/layout specs even though `PromptEngine/README.md`'s own v2.4.0 section states Text Mode prompts should contain no layout, hex, or dimension content — a structural mismatch, not a sync error.
+- `Config/quality.yaml` declares 9 blocking QA IDs against `MANIFEST.yaml`'s claim of 45; `Core/QA_SYSTEM.md`'s 110 items carry no blocking/non-blocking marker at all, so the 45-item figure has no traceable basis anywhere in the SDK. Reconstructing it would mean inventing 36 classifications, which ADR-018/RULE-063 (no invented content) forbids.
+- `ROADMAP.md`, `STATUS.md`, `SDK_CONTEXT.yaml`, and `ReleaseInfo.yaml` describe two non-overlapping feature sets for v2.5.0, and `ROADMAP.md` contains duplicate/superseded draft sections placing v3.0.0 chronologically before v2.5.0.
+
+### Consequences
+- `Core/WORKFLOW.md`, `Core/RENDER_GUIDE.md`, and `Config/render.yaml` are now mutually consistent, satisfying the "Config/ must be updated in the same commit as Core/" rule from ADR-011 (applied in reverse here: Core/ updated to match an already-correct Config/)
+- The PROJECT.yaml schema shown in `Core/MANUAL_SYSTEM.md` and `Projects/PROJECT_BOOTSTRAP.md` can now be copy-pasted without producing a file that fails validation against `Templates/PROJECT.yaml`
+- `Core/PDF_MASTER.md` is now a complete specification for all three variants actually implemented in `Config/pdf.yaml`
+- The three explicitly-unresolved findings remain open and are tracked in `Documentation/OperationalManual/Validation/DOCUMENTATION_STATUS.yaml → status.pending_review` pending a maintainer decision

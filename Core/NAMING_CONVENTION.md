@@ -25,7 +25,8 @@ Violations are tracked in `Core/QA_SYSTEM.md` §9 (QA-091 to QA-095).
 |---|---|---|
 | Core specification documents | `SCREAMING_SNAKE_CASE.md` | `DESIGN_LANGUAGE.md`, `QA_SYSTEM.md` |
 | Project READMEs | `README.md` (exact case) | `README.md` |
-| Guide documents in Docs/ | `kebab-case.md` | `automated-pdf.md`, `v1-to-v2.md` |
+| Top-level guides in Docs/ | `SCREAMING_SNAKE_CASE.md` | `LOAD_ORDER.md`, `AI_BOOTSTRAP_PROMPT.md` |
+| Migration guides in Docs/migration/ | `kebab-case.md` | `v1-to-v2.md` |
 | Changelog and meta-docs | `SCREAMING_SNAKE_CASE.md` | `CHANGELOG.md`, `ROADMAP.md` |
 
 ### 2.2 Configuration Files (YAML)

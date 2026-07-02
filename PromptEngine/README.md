@@ -60,8 +60,8 @@ All prompts use `{{token.path}}` syntax, mirroring the structure of `PROJECT.yam
 3. Copy the **Prompt Template** section.
 4. Replace every `{{token}}` with the corresponding value from `PROJECT.yaml`.
 5. Paste the substituted prompt into your AI model of choice.
-6. Save the AI output to `Projects/{ModelName}/Output/raw/P001_raw.md` (or appropriate page ID).
-7. Run QA against `Core/QA_SYSTEM.md`.
+6. Save the AI output to `ApprovedAssets/Text/P001/content.yaml` (or appropriate page ID).
+7. Run `Tests/ContentValidation.md` and `Tests/TextValidation.md` — both must pass before sealing (`metadata.yaml → status: locked`), then run `Core/QA_SYSTEM.md` at render stage.
 
 ### Automation
 

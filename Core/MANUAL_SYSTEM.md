@@ -155,31 +155,38 @@ Projects/
 A minimal PROJECT.yaml includes:
 
 ```yaml
-sdkVersion: "2.4.0"
-modelName: "Proto Emperor"
-modelSlug: "proto-emperor"
-series: "Super-II Chassis"
-manufacturer: "Tamiya"
+sdk_version: "2.4.0"
+
+project:
+  modelName: "Proto Emperor"
+  modelSlug: "proto-emperor"
+  seriesName: "Championship Series"
+  year: "2024"
+  language: "it"
+  version: "1.0.0"
+  author: "Contributor Name"
+  createdAt: "2024-01-20"
+  updatedAt: "2024-01-20"
 
 paintScheme:
   name: "Midnight Violet"
-  style: "metallic"
-  primaryColor: "Metallic Violet"
-  secondaryColor: "Chrome Silver"
-  accentColor: "Flat Black"
+  colors:
+    - id: "PC001"
+      name: "Body Base"
+      paintBrand: "Tamiya"
+      paintCode: "TS-57"
+      paintName: "Blue Violet"
+      hex: "#5B2D8E"
+      finish: "gloss"
 
-renders:
-  cover: "Images/cover_v1.png"
-  colorFront: "Images/colorscheme_front_v1.png"
-  colorSide: "Images/colorscheme_side_v1.png"
-  colorTop: "Images/colorscheme_top_v1.png"
-
-author: "Contributor Name"
-createdDate: "2024-01-20"
-manualVersion: "1.0.0"
+paths:
+  coverRenderPath: "Images/cover_3q.png"
+  colorSchemeRenderFront: "Images/P002_front.png"
+  colorSchemeRenderSide: "Images/P002_side.png"
+  colorSchemeRenderTop: "Images/P002_top.png"
 ```
 
-The full schema is documented in `Templates/PROJECT.yaml`. All fields marked `required: true` in the schema must be present and non-empty for a manual to pass QA.
+The full schema is documented in `Templates/PROJECT.yaml`. Every field marked `# REQUIRED` in the template's inline comments must be present and non-empty for a manual to pass QA.
 
 ---
 

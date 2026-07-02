@@ -48,7 +48,7 @@ paintScheme:
   description: ""                # OPTIONAL — 1-2 sentence description of the scheme's aesthetic
                                  #   Example: "Deep violet body with metallic silver accents and black details"
   colors:                        # REQUIRED — at least one color entry
-    - id: "C001"                 # REQUIRED — color ID within this project (C001, C002, etc.)
+    - id: "PC001"                # REQUIRED — color ID within this project (PC001, PC002, etc. — never C0NN, that pattern is reserved for the Component ID registry, see Core/COMPONENT_SYSTEM.md)
       name: ""                   # REQUIRED — descriptive role name for this color
                                  #   Example: "Body Base" or "Trim Accent"
       paintBrand: ""             # REQUIRED — paint manufacturer name
@@ -66,7 +66,7 @@ paintScheme:
       notes: ""                  # OPTIONAL — model-specific application notes
                                  #   Example: "Apply from 30cm distance in thin passes"
     # Add more colors as needed:
-    # - id: "C002"
+    # - id: "PC002"
     #   name: ""
     #   ...
   colorNotes: ""                 # OPTIONAL — general notes applying to the entire scheme

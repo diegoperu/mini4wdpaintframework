@@ -27,7 +27,7 @@ paintScheme:
   name: "Violet Phantom"
   description: "Un violetto profondo e avvolgente per la carrozzeria principale, con accenti metallizzati argento sulle appendici aerodinamiche e dettagli in nero metallico. Un classico schema racing con carattere."
   colors:
-    - id: "C001"
+    - id: "PC001"
       name: "Body Base"
       paintBrand: "Tamiya"
       paintCode: "TS-57"
@@ -37,7 +37,7 @@ paintScheme:
       coverage: "3 mani sottili"
       notes: "Applicare a 25-30cm di distanza. Evitare umidità superiore al 60%."
 
-    - id: "C002"
+    - id: "PC002"
       name: "Aerodynamic Accents"
       paintBrand: "Tamiya"
       paintCode: "TS-40"
@@ -47,7 +47,7 @@ paintScheme:
       coverage: "2 mani"
       notes: "Metallizzato — applicare sempre nella stessa direzione per uniformità."
 
-    - id: "C003"
+    - id: "PC003"
       name: "Wing and Trim Highlights"
       paintBrand: "Tamiya"
       paintCode: "TS-30"
@@ -57,7 +57,7 @@ paintScheme:
       coverage: "2 mani"
       notes: "Applicare sopra primer grigio chiaro per massima luminosità."
 
-    - id: "C004"
+    - id: "PC004"
       name: "Chassis and Interior"
       paintBrand: "Tamiya"
       paintCode: "TS-38"
@@ -176,7 +176,7 @@ preparationSteps:
 # ============================================================
 paintSequence:
   - step: 1
-    colorId: "C004"
+    colorId: "PC004"
     area: "Telaio e abitacolo interno"
     technique: "spray-can"
     coats: 2
@@ -184,7 +184,7 @@ paintSequence:
     notes: "Iniziare dal telaio per evitare sovra-spray sulla carrozzeria principale già verniciata."
 
   - step: 2
-    colorId: "C001"
+    colorId: "PC001"
     area: "Intera carrozzeria esterna"
     technique: "spray-can"
     coats: 3
@@ -192,7 +192,7 @@ paintSequence:
     notes: "Tre mani sottili. La prima mano è di ancoraggio (leggera). Seconda e terza per coprire completamente."
 
   - step: 3
-    colorId: "C002"
+    colorId: "PC002"
     area: "Appendici aerodinamiche superiori (ala posteriore, splitter anteriore)"
     technique: "spray-can"
     coats: 2
@@ -200,7 +200,7 @@ paintSequence:
     notes: "Applicare dopo mascheratura delle zone body. Metallizzato — applicare in direzione costante."
 
   - step: 4
-    colorId: "C003"
+    colorId: "PC003"
     area: "Bordi dell'ala, linee di trim laterali"
     technique: "brush"
     coats: 2
@@ -208,7 +208,7 @@ paintSequence:
     notes: "Usare pennello piatto n.8 per i bordi. Diluire leggermente per evitare pennellate visibili."
 
   - step: 5
-    colorId: "C004"
+    colorId: "PC004"
     area: "Cerchi ruote"
     technique: "brush"
     coats: 2
@@ -216,7 +216,7 @@ paintSequence:
     notes: "Usare pennello tondo n.000. Attenzione a non verniciare le gomme — mascherare con nastro 6mm."
 
   - step: 6
-    colorId: "C003"
+    colorId: "PC003"
     area: "Bulloni decorativi e dettagli in rilievo"
     technique: "brush"
     coats: 1
@@ -234,13 +234,13 @@ maskingZones:
     notes: "Usare nastro 6mm per seguire le curve della cornice. Burnishing accurato dei bordi."
 
   - id: "M002"
-    area: "Appendici aerodinamiche (per verniciatura C002)"
+    area: "Appendici aerodinamiche (per verniciatura PC002)"
     maskingType: "tape"
     maskingOrder: 2
-    notes: "Mascherare dopo la completa asciugatura del C001 (viola base). Usare nastro 10mm per le aree piane, 6mm per i bordi curvi."
+    notes: "Mascherare dopo la completa asciugatura del PC001 (viola base). Usare nastro 10mm per le aree piane, 6mm per i bordi curvi."
 
   - id: "M003"
-    area: "Cerchi ruote (per verniciatura C004)"
+    area: "Cerchi ruote (per verniciatura PC004)"
     maskingType: "tape"
     maskingOrder: 3
     notes: "Mascherare le gomme con nastro 6mm avvolto intorno al battistrada. Proteggere il mozzo con cerchio di carta."
@@ -251,19 +251,19 @@ maskingZones:
 detailAreas:
   - id: "D001"
     name: "Abitacolo interno"
-    colorId: "C004"
+    colorId: "PC004"
     technique: "Pennello piatto n.8, 2 mani diluite"
-    notes: "Includere sedile, roll-bar (se presente), piantone sterzo. Evitare di verniciare le pareti esterne già in C001."
+    notes: "Includere sedile, roll-bar (se presente), piantone sterzo. Evitare di verniciare le pareti esterne già in PC001."
 
   - id: "D002"
     name: "Cerchi ruote"
-    colorId: "C004"
+    colorId: "PC004"
     technique: "Pennello tondo n.000, dry-brush per i raggi"
     notes: "I raggi in rilievo si prestano alla tecnica dry-brush per un effetto metallico realistico."
 
   - id: "D003"
     name: "Dettagli aerodinamici (bordi ala e splitter)"
-    colorId: "C003"
+    colorId: "PC003"
     technique: "Pennello piatto n.8 per i bordi, n.000 per i punti di giunzione"
     notes: "L'argento sui bordi crea una definizione visiva netta tra l'ala nera e la carrozzeria viola."
 

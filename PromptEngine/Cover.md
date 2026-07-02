@@ -35,7 +35,7 @@ Before running this prompt, verify:
 - [ ] `paths.coverRenderPath` points to an approved render (see `Core/RENDER_GUIDE.md §7`)
 - [ ] Cover render is 3/4 front-left angle (see `Core/RENDER_GUIDE.md §2`)
 - [ ] Cover render resolution is minimum 2480x3508px (see `Core/RENDER_GUIDE.md §5`)
-- [ ] Cover render has pure white background (#FFFFFF)
+- [ ] Cover render has pure white background (White)
 - [ ] All tokens above are substituted before sending the prompt
 
 ---
@@ -52,27 +52,27 @@ You are a professional graphic designer generating the COVER PAGE (P001) of a Mi
 - Page size: A4 -- 210x297mm
 - Resolution: 300 dpi
 - Color mode: sRGB
-- Background: pure white #FFFFFF
+- Background: pure white (White)
 
 **COMPONENT C001 -- HEADER (top of page)**
 
 Position: top edge, full width, height 18mm
-Background: solid #5B2D8E (VioletPrimary)
-Left zone (from left margin, 18mm in): logotype "Mini4WD Manual" in Bebas Neue Bold, 16pt, color #FFFFFF, vertically centered
-Right zone (from right margin, 18mm in): label "COVER" in Source Sans Pro SemiBold, 9pt, uppercase, color #FFFFFF, letter-spacing 2px, vertically centered
+Background: solid VioletPrimary
+Left zone (from left margin, 18mm in): logotype "Mini4WD Manual" in Bebas Neue Bold, 16pt, color White, vertically centered
+Right zone (from right margin, 18mm in): label "COVER" in Source Sans Pro SemiBold, 9pt, uppercase, color White, letter-spacing 2px, vertically centered
 No dividers, no gradient, no shadow on header band.
 
 **COMPONENT C002 -- FOOTER (bottom of page)**
 
 Position: bottom edge, full width, height 12mm
-Background: #E8E8E8 (LightGray)
-Center: text "{{project.modelName}} Painting Manual  --  P001" in Source Sans Pro Regular, 8pt, color #4A4A4A (DarkGray), vertically centered
-Right zone (from right margin, 18mm in): text "2024" in Source Sans Pro Regular, 8pt, color #9B9B9B (MidGray)
+Background: LightGray
+Center: text "{{project.modelName}} Painting Manual  --  P001" in Source Sans Pro Regular, 8pt, color DarkGray, vertically centered
+Right zone (from right margin, 18mm in): text "2024" in Source Sans Pro Regular, 8pt, color MidGray
 
 **MAIN AREA (between header and footer)**
 
 The main area spans from 18mm top (below header) to 285mm (above footer).
-Background: pure white #FFFFFF.
+Background: pure white (White).
 
 RENDER PLACEMENT:
 - Load image from: {{paths.coverRenderPath}}
@@ -85,29 +85,29 @@ SERIES LABEL (text overlay, upper-left zone of main area):
 - Position: left margin (18mm from left), 24mm from top edge (6mm below header bottom)
 - Text: "{{project.seriesName}}"
 - Font: Source Sans Pro Regular, 13pt
-- Color: #8B5FBF (VioletLight)
+- Color: VioletLight
 - Letter-spacing: 1px
 
 MODEL NAME (text overlay, lower-center zone of main area):
 - Position: horizontally centered, 242mm from top (approximately 40mm above footer)
 - Text: "{{project.modelName}}"
 - Font: Bebas Neue Bold, 52pt
-- Color: #5B2D8E (VioletPrimary)
+- Color: VioletPrimary
 - Letter-spacing: 3px
 
 PAINT SCHEME NAME (text overlay, below model name):
 - Position: horizontally centered, 258mm from top
 - Text: "{{paintScheme.name}}"
 - Font: Source Sans Pro Light Italic, 17pt
-- Color: #4A4A4A (DarkGray)
+- Color: DarkGray
 
 VIOLET ACCENT LINE (decorative, above model name):
 - Position: horizontally centered, width 60mm, height 2px, at 238mm from top
-- Color: #5B2D8E (VioletPrimary)
+- Color: VioletPrimary
 
 REQUIRED ELEMENTS CHECKLIST -- verify all are present:
-- C001 Header: full width, 18mm, solid #5B2D8E, "Mini4WD Manual" left, "COVER" right
-- C002 Footer: full width, 12mm, #E8E8E8, centered model name and page number
+- C001 Header: full width, 18mm, solid VioletPrimary, "Mini4WD Manual" left, "COVER" right
+- C002 Footer: full width, 12mm, LightGray, centered model name and page number
 - Model render: white background, 3/4 front-left angle, centered
 - Series label: VioletLight, 13pt, upper-left
 - Model name: VioletPrimary, Bebas Neue 52pt, lower-center
@@ -140,7 +140,7 @@ After the AI produces output, verify against:
 | Render QA-016 to QA-030 | `Core/QA_SYSTEM.md §Rendering` |
 | Page level Definition of Done | `Core/DEFINITION_OF_DONE.md §Page Level DoD` |
 
-Save raw output to: `Projects/{{project.modelSlug}}/Output/raw/P001_raw.md`
+Save output to: `ApprovedAssets/Text/P001/content.yaml`
 Save approved output to: `Assets/ApprovedManual/{{project.modelSlug}}/P001.png`
 
 ---
@@ -152,7 +152,7 @@ Save approved output to: `Assets/ApprovedManual/{{project.modelSlug}}/P001.png`
 | Gray background on render | Visual inspection | Regenerate render with white background |
 | Missing series name label | Check element table | Add VioletLight text overlay |
 | Model name in wrong font | Check font spec | Must be Bebas Neue, not Source Sans Pro |
-| Header gradient instead of solid | Visual inspection | Replace with flat #5B2D8E |
+| Header gradient instead of solid | Visual inspection | Replace with flat VioletPrimary |
 | Page number missing in footer | Check C002 spec | Footer must contain "P001" |
 | Render too small (<50% page width) | Measure in output | Scale render to 70% page width |
 

@@ -30,51 +30,51 @@ You are generating the DECALS page (P008) of a Mini4WD painting manual for "{{pr
 
 This page guides the application of all decals: numbers, logos, stripes, sponsor markings. Placement must be shown visually and described precisely. The application technique steps are mandatory.
 
-**Page Layout: A4 (210x297mm), white background #FFFFFF**
+**Page Layout: A4 (210x297mm), white background White**
 
-**HEADER (C001):** Violet band #5B2D8E, 18mm. Left: "Mini4WD Manual". Right: "DECALS".
-**FOOTER (C002):** Gray #E8E8E8, 12mm. Center: "{{project.modelName}} — Decals  |  P008".
+**HEADER (C001):** Violet band VioletPrimary, 18mm. Left: "Mini4WD Manual". Right: "DECALS".
+**FOOTER (C002):** LightGray, 12mm. Center: "{{project.modelName}} — Decals  |  P008".
 
 **PAGE TITLE (22mm from top):**
-"Decal Application Guide" in Bebas Neue Bold 28pt #5B2D8E, left margin 18mm.
-Subtitle: "Apply decals only after the top coat is fully cured (minimum 24 hours)." Source Sans Pro Regular 11pt #4A4A4A, 32mm from top.
+"Decal Application Guide" in Bebas Neue Bold 28pt VioletPrimary, left margin 18mm.
+Subtitle: "Apply decals only after the top coat is fully cured (minimum 24 hours)." Source Sans Pro Regular 11pt DarkGray, 32mm from top.
 
 **PLACEMENT OVERVIEW RENDER (upper area, 42mm to 140mm):**
 Annotated top-view or 3/4 view render of the model showing all decal positions numbered.
 
 Annotation style:
-- Each decal position: filled circle 14x14mm #1976D2 (BlueInfo), Bebas Neue Bold 11pt #FFFFFF with decal ID number inside.
-- Leader lines: 1px #1976D2, dashed.
-- Placement area indicators: dashed rectangle outline #1976D2, 1.5px, around each decal's approximate footprint on the model.
+- Each decal position: filled circle 14x14mm BlueInfo, Bebas Neue Bold 11pt White with decal ID number inside.
+- Leader lines: 1px BlueInfo, dashed.
+- Placement area indicators: dashed rectangle outline BlueInfo, 1.5px, around each decal's approximate footprint on the model.
 - Background: white.
 - Note: if render not available: [DECAL PLACEMENT OVERVIEW PLACEHOLDER - show model outline with numbered positions]
 
 **DECAL REFERENCE TABLE (from 144mm):**
-Section heading: "DECAL REFERENCE" Source Sans Pro SemiBold 10pt #5B2D8E uppercase, violet underline.
+Section heading: "DECAL REFERENCE" Source Sans Pro SemiBold 10pt VioletPrimary uppercase, violet underline.
 
 Table columns: | # | Decal Name | Position Description | Size | Application Notes |
 
 For each decal in {{decals}}:
-- #: filled circle 14x14mm #1976D2, Bebas Neue Bold 11pt #FFFFFF (matching overview render).
-- Decal Name: Source Sans Pro SemiBold 10pt #1A1A1A.
-- Position Description: Source Sans Pro Regular 9pt #4A4A4A. Use decal.position field.
-- Size: Source Sans Pro Regular 9pt #4A4A4A. Use decal.size field, or "--" if not specified.
-- Application Notes: Source Sans Pro Regular 9pt #4A4A4A. Use decal.notes, or SDK standard: "Soak 30 sec, slide onto surface, position, absorb excess water."
+- #: filled circle 14x14mm BlueInfo, Bebas Neue Bold 11pt White (matching overview render).
+- Decal Name: Source Sans Pro SemiBold 10pt Black.
+- Position Description: Source Sans Pro Regular 9pt DarkGray. Use decal.position field.
+- Size: Source Sans Pro Regular 9pt DarkGray. Use decal.size field, or "--" if not specified.
+- Application Notes: Source Sans Pro Regular 9pt DarkGray. Use decal.notes, or SDK standard: "Soak 30 sec, slide onto surface, position, absorb excess water."
 
-Row separator: 1px #E8E8E8 hairline.
+Row separator: 1px LightGray hairline.
 
 Decals from PROJECT.yaml:
 {{decals}}
 
 **ZOOM DETAILS C012 (below table, for first 2 decals or most critical):**
 Two zoom panels side by side (88mm each, 14mm gutter):
-Each panel: border 1.5px #1976D2, border-radius 3px, label "DETAIL: [decal name]" Source Sans Pro SemiBold 8pt #1976D2.
+Each panel: border 1.5px BlueInfo, border-radius 3px, label "DETAIL: [decal name]" Source Sans Pro SemiBold 8pt BlueInfo.
 Content: close-up of the model surface showing decal placement in context. If not available: [ZOOM PLACEHOLDER: {{decal.name}} placement detail].
 
 **APPLICATION TECHNIQUE STEPS C009 (Tips box, after zoom panels):**
-Gold-left-border box: border-left 4px #C8A838, background #FFFDF0, padding 10px.
-Icon: [*] #C8A838.
-Heading: "APPLICATION TECHNIQUE" Source Sans Pro Bold 9pt #C8A838.
+Gold-left-border box: border-left 4px GoldAccent, background #FFFDF0, padding 10px.
+Icon: [*] GoldAccent.
+Heading: "APPLICATION TECHNIQUE" Source Sans Pro Bold 9pt GoldAccent.
 Body (SDK-standard decal application steps, always include):
 "Step 1 — PREPARE THE SURFACE: The surface must be clean, dry, and fully cured. Wipe with a lint-free cloth dampened with distilled water.
 Step 2 — CUT THE DECAL: Cut close around the decal with sharp scissors. Leave 0.5mm of clear film around the printed area.
@@ -83,17 +83,17 @@ Step 4 — POSITION: Slide the decal off the backing paper onto the model surfac
 Step 5 — ABSORB EXCESS WATER: Use a soft tissue or cotton swab to absorb water from the edges. Work from center outward.
 Step 6 — DECAL SOFTENER: Apply a small amount of decal softener (e.g., Tamiya Mark Fit) over the decal with a soft brush. This helps the decal conform to curved surfaces.
 Step 7 — WAIT AND SEAL: Allow 12 hours to fully dry. Apply clear top coat over all decals to protect and integrate them with the paint surface."
-Source Sans Pro Regular 9pt #4A4A4A.
+Source Sans Pro Regular 9pt DarkGray.
 
 **DECAL SOFTENER WARNING C008:**
-Border-left 4px #D32F2F, background #FFF8F8, padding 8px.
-Icon: [!] #D32F2F.
-Heading: "DECAL SOFTENER CAUTION" Source Sans Pro Bold 9pt #D32F2F.
-Body: "Do not apply excess decal softener — it will wrinkle and destroy the decal. Use only one thin coat applied with a soft brush. Do not brush over the decal after applying softener — let it work on its own. Do not use decal solvent (a stronger chemical) unless the surface is already sealed." Source Sans Pro Regular 9pt #4A4A4A.
+Border-left 4px RedWarning, background #FFF8F8, padding 8px.
+Icon: [!] RedWarning.
+Heading: "DECAL SOFTENER CAUTION" Source Sans Pro Bold 9pt RedWarning.
+Body: "Do not apply excess decal softener — it will wrinkle and destroy the decal. Use only one thin coat applied with a soft brush. Do not brush over the decal after applying softener — let it work on its own. Do not use decal solvent (a stronger chemical) unless the surface is already sealed." Source Sans Pro Regular 9pt DarkGray.
 
 **NOTES BOX C015 (if any decal has specific notes not covered above):**
-Background #F8F8F8, border 1px #E8E8E8, border-radius 3px, padding 8px.
-Heading: "MODEL-SPECIFIC DECAL NOTES" Source Sans Pro SemiBold 9pt #4A4A4A.
+Background OffWhite, border 1px LightGray, border-radius 3px, padding 8px.
+Heading: "MODEL-SPECIFIC DECAL NOTES" Source Sans Pro SemiBold 9pt DarkGray.
 Body: aggregated notes from decals[], or: "No model-specific decal notes."
 
 **REQUIRED ELEMENTS:**
@@ -120,7 +120,7 @@ Body: aggregated notes from decals[], or: "No model-specific decal notes."
 | C015 notes present | `Core/COMPONENT_SYSTEM.md §C015` |
 | Page level DoD | `Core/DEFINITION_OF_DONE.md` |
 
-Save output to: `Projects/{{project.modelSlug}}/Output/raw/P008_raw.md`
+Save output to: `ApprovedAssets/Text/P008/content.yaml`
 
 ---
 

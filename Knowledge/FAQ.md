@@ -38,7 +38,7 @@ A: P001, P002, P003, P004, P005, P006, P007, P008, and P010 are required. P009 (
 ## Quality
 
 **Q: My render has a slightly off-white background. Will it pass QA?**
-A: No. QA-017 requires exact #FFFFFF. Regenerate with explicit white background instruction. See `Config/quality.yaml §thresholds.background_white_tolerance_rgb`.
+A: No. QA-021 requires exact #FFFFFF. Regenerate with explicit white background instruction. See `Config/quality.yaml §thresholds.background_white_tolerance_rgb`.
 
 **Q: How many QA failures are allowed?**
 A: Zero blocking failures. Maximum 3 non-blocking exceptions (documented in qa_log.md). See `Config/quality.yaml §approval`.

@@ -1,6 +1,6 @@
 # PDF Master
 
-This document specifies all requirements for the PDF export of Mini4WD manuals. A manual PDF is the final deliverable. The specifications here define two variants: one optimized for screen viewing and one ready for professional offset printing.
+This document specifies all requirements for the PDF export of Mini4WD manuals. A manual PDF is the final deliverable. The specifications here define three variants: one optimized for screen viewing, one ready for professional offset printing, and one for long-term archival preservation.
 
 Configuration for the export is set in `Templates/PDF_CONFIG.yaml`.
 
@@ -8,17 +8,19 @@ Configuration for the export is set in `Templates/PDF_CONFIG.yaml`.
 
 ## 1. PDF Variants
 
-Every approved manual must be exported in both variants before it can be published.
+Every approved manual must be exported in the Screen and Print variants before it can be published. The Archive variant is optional — recommended for long-term SDK-side preservation, not required for publication (`Config/pdf.yaml → checksum.include_variants` lists archive as optional).
 
 | Variant | File Suffix | Standard | Use Case |
 |---|---|---|---|
 | Screen | `_screen` | PDF/A-2b | Digital distribution, web download |
 | Print | `_print` | PDF/X-4 | Professional offset printing |
+| Archive | `_archive` | PDF/A-2b | Long-term preservation, no lossy compression |
 
 Example file names:
 ```
 proto-emperor_manual_screen_v1.pdf
 proto-emperor_manual_print_v1.pdf
+proto-emperor_manual_archive_v1.pdf
 ```
 
 ---
@@ -42,6 +44,17 @@ proto-emperor_manual_print_v1.pdf
 - **PDF version:** 1.6 minimum
 - **Output intent:** ISO Coated v2 300% (FOGRA39)
 
+### Archive Variant: PDF/A-2b
+- **Purpose:** Long-term preservation — same archival standard as Screen, but with no lossy compression, for SDK-side record-keeping independent of distribution use
+- **Color space:** sRGB
+- **Fonts:** All fonts embedded as subsets
+- **Images:** 300 dpi, no compression (lossless) — full-resolution source images preserved as-is
+- **Encryption:** None (PDF/A prohibits encryption)
+- **PDF version:** 1.7
+- **Optional:** not required for publication; recommended for the SDK's own archival record
+
+> ⚠️ **Note:** `Config/pdf.yaml → variants.archive.image_dpi` currently specifies `200`, while `Templates/PDF_CONFIG.yaml → variants.archive.imageResolution` specifies `300`. This spec documents `300 dpi, no compression` as canonical (consistent with "no lossy compression"); the two config files disagree with each other and should be reconciled separately — this note does not resolve that.
+
 ---
 
 ## 3. Color Profiles
@@ -50,6 +63,7 @@ proto-emperor_manual_print_v1.pdf
 |---|---|---|
 | Screen | sRGB IEC61966-2.1 | n/a |
 | Print | n/a | ISO Coated v2 300% (FOGRA39) |
+| Archive | sRGB IEC61966-2.1 | n/a |
 
 > ⚠️ **Warning:** Converting RGB violet (#5B2D8E) to CMYK FOGRA39 produces approximately C:64 M:84 Y:0 K:12. The CMYK equivalent is slightly less saturated than the sRGB original. Always request a print proof before mass printing. The Pantone reference (2627 C) may be used as a spot color specification for the violet if the printer supports it.
 
@@ -210,5 +224,7 @@ Full configuration examples are provided in `Docs/guides/pdf-export.md`.
 | Bookmarks | Required | Optional |
 | Hyperlinks | Active (if included) | Inactive (print ignores) |
 | Black text rendering | sRGB composite | 100K black (no rich black for text) |
+
+> 📝 **Note:** Archive is not shown as a column above — it shares all Screen properties except image resolution (300 dpi, no downsampling, per §2) and compression (none vs Screen's medium).
 
 > ⚠️ **Warning:** Rich black (#1A1A1A body text) in the screen variant converts to approximately C:0 M:0 Y:0 K:90 in CMYK. This is correct for body text. Do NOT use rich black (e.g., C:60 M:40 Y:40 K:100) for body text — it causes misregistration and text fringing in offset printing.

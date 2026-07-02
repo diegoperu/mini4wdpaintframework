@@ -135,7 +135,7 @@ Are all required renders in Images/ and referenced in PROJECT.yaml?
 
 ## Phase 2: Manual Generation
 
-**Goal:** Generate all 10 manual pages using the PromptEngine/ prompts and the PROJECT.yaml data.
+**Goal:** Generate the Italian editorial content for all 10 pages as `content.yaml`, validate it, seal it in `ApprovedAssets/`, then render the final illustrated pages from that sealed content. This follows the `editorial_pipeline.sequence` in `AI_ENTRYPOINT.md`: `text_engine → qa_engine → render_engine → pdf_builder` — text is always generated and validated before rendering (`editor_first: true`).
 
 ### Steps
 
@@ -153,43 +153,40 @@ PromptEngine/FinalChecklist.md (for P010)
 ```
 If P009 is included: `PromptEngine/Premium.md`
 
-**2.2** Inject PROJECT.yaml data into `{{project.X}}` tokens.
+**2.2** Load the LOAD sequence context (`Docs/LOAD_ORDER.md`) and inject `PROJECT.yaml` data into `{{project.X}}` tokens.
 
-Replace each `{{project.X}}` token with the corresponding value from PROJECT.yaml. Replace each `{{token.X}}` with the corresponding value from `Assets/DesignSystem/Tokens/tokens.example.yaml`.
+Design values are never injected as raw text into the prompt — the Render Engine (step 2.6) resolves Design Tokens directly from `Assets/DesignSystem/Tokens/tokens.example.yaml` at render time, per Golden Rule G06.
 
-> 📝 **Note:** Manual token injection is the current process. A future CLI tool (see ROADMAP.md) will automate this. For now, search and replace each `{{token.X}}` and `{{project.X}}` in the prompt text before submitting to the AI.
+> 📝 **Note:** Manual token injection is the current process. A future CLI tool (see ROADMAP.md) will automate this.
 
-**2.3** Submit the filled prompt to your chosen AI model.
+**2.3** Submit the filled prompt to your chosen AI model in Text Mode (`AI_ENTRYPOINT.md § AI Operating Mode`).
 
-The SDK is AI-model-agnostic. Any capable text-generation AI may be used. The prompt has been designed to produce consistent output regardless of which model processes it.
+The SDK is AI-model-agnostic. Text Mode produces structured content only — no layout decisions, no images.
 
-**2.4** Review the raw output.
-
-Does the output match the page specification in PAGE_SYSTEM.md?
-- If the AI produced a textual description of the page, use it as a specification for layout in your design tool (Affinity Publisher, InDesign, Scribus)
-- If the AI produced image output directly, review against the QA_SYSTEM.md checklist for that page
-
-**2.5** Save raw output:
+**2.4** Save the generated content:
 ```
-Projects/{ModelName}/Output/raw/P001_raw.{ext}
-Projects/{ModelName}/Output/raw/P002_raw.{ext}
-...
+ApprovedAssets/Text/P{NNN}/content.yaml   ← PRIMARY output
 ```
+`content.yaml` is the sole source of truth for page content (Golden Rule G02). A `text.md` human-review copy is derived automatically from it — never edit `text.md` directly.
 
-**2.6** Produce the final page file.
+**2.5** Run the blocking QA gates before sealing:
+- `Tests/ContentValidation.md` (7 suites) — schema, required fields, data accuracy
+- `Tests/TextValidation.md` (9 tests) — Italian language compliance, forbidden scripts, terminology
 
-Using the AI output as content and the component specs as layout guidelines, produce the final page file (PNG, PDF, or source file). Save to:
+Both suites must return zero failures before proceeding.
+
+**2.6** Seal the page and render.
+
+Once QA passes, set `ApprovedAssets/Text/P{NNN}/metadata.yaml → status: locked`. The Render Engine (`Core/RENDER_GUIDE.md`) then reads `content.yaml` exclusively and produces the illustrated page — it never invents or modifies text (Golden Rule G03). Save the rendered page to:
 ```
-Projects/{ModelName}/Output/approved/P001.png
+ApprovedAssets/Images/P{NNN}/
 ```
-
-Wait to move to `approved/` until individual page QA passes.
 
 **Decision point per page:**
 ```
-Does page output satisfy the page-level Definition of Done (DEFINITION_OF_DONE.md §2)?
-├── YES → Save to Output/approved/
-└── NO  → Identify failure, revise, regenerate
+Does the page satisfy the page-level Definition of Done (DEFINITION_OF_DONE.md §2)?
+├── YES → metadata.yaml → status: rendered
+└── NO  → Identify failure, revise content.yaml (never text.md), re-run QA
 ```
 
 ---
@@ -222,8 +219,8 @@ QA-002: PASS
 - Document the specific failure in qa_log.md (what is wrong, where it appears)
 - Return to the appropriate phase:
   - Render failure → Return to Phase 1, step 1.2
-  - Page content failure → Return to Phase 2, step 2.2
-  - Layout failure → Return to Phase 2, step 2.6 (layout revision)
+  - Page content failure → Return to Phase 2, step 2.1–2.4 (regenerate content.yaml — never edit text.md directly, Golden Rule G02)
+  - Layout failure → Return to Phase 2, step 2.6 (re-render from content.yaml)
   - PDF metadata failure → Correct in PDF_CONFIG.yaml and re-export
 
 **Decision point:**

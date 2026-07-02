@@ -167,7 +167,7 @@ Minimum resolution is specified per use case. Images that do not meet the minimu
 |---|---|---|---|
 | Cover render (P001) | 2480 × 3508 px | 300 dpi (A4) | `{{token.RenderResolutionCover}}` |
 | Full-page body renders | 1240 × 1754 px | 150 dpi (A4) | — |
-| Three-view renders (each) | 800 × 600 px minimum | 96 dpi minimum | — |
+| Three-view renders (each) | 1000 × 800 px minimum | 150 dpi minimum | — |
 | Detail/zoom renders (C012) | 800 × 800 px | 150 dpi | — |
 | Comparison renders (P009) | 1240 × 620 px per side | 150 dpi | — |
 

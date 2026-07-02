@@ -33,10 +33,10 @@ This project demonstrates:
 
 | ID | Role | Brand | Code | Color Name | Finish | Hex |
 |----|------|-------|------|-----------|--------|-----|
-| C001 | Body Base | Tamiya | TS-57 | Blue Violet | Gloss | #4B3A8C |
-| C002 | Aerodynamic Accents | Tamiya | TS-40 | Metal Black | Metallic | #2C2C2C |
-| C003 | Trim & Wing Highlights | Tamiya | TS-30 | Silver | Metallic | #C0C0C0 |
-| C004 | Chassis & Interior | Tamiya | TS-38 | Gun Metal | Metallic | #5C6370 |
+| PC001 | Body Base | Tamiya | TS-57 | Blue Violet | Gloss | #4B3A8C |
+| PC002 | Aerodynamic Accents | Tamiya | TS-40 | Metal Black | Metallic | #2C2C2C |
+| PC003 | Trim & Wing Highlights | Tamiya | TS-30 | Silver | Metallic | #C0C0C0 |
+| PC004 | Chassis & Interior | Tamiya | TS-38 | Gun Metal | Metallic | #5C6370 |
 
 **Top Coat:** Tamiya TS-79 Semi Gloss Clear
 
@@ -47,19 +47,20 @@ This project demonstrates:
 ```
 Projects/Proto_Emperor/
 ├── PROJECT.yaml          ✓ Filled — example configuration
-├── PROJECT.md            ✓ Human-readable brief
-├── CHECKLIST.md          ✓ Progress tracker
-├── COLOR_SCHEME.yaml     ✓ Full color definitions
-├── PDF_CONFIG.yaml       ✓ Export configuration
 ├── README.md             ✓ This file
+├── PROJECT.md            [NOT PRESENT — optional human-readable brief, see Templates/PROJECT.md]
+├── CHECKLIST.md          [NOT PRESENT — optional progress tracker, see Templates/CHECKLIST.md]
+├── COLOR_SCHEME.yaml     [NOT PRESENT — paint scheme is defined directly in PROJECT.yaml]
+├── PDF_CONFIG.yaml       [NOT PRESENT — optional, see Templates/PDF_CONFIG.yaml]
 ├── Images/               → Place render images here
 │   ├── cover_3q.png      [PLACEHOLDER — cover render not included]
 │   ├── P002_front.png    [PLACEHOLDER]
 │   ├── P002_side.png     [PLACEHOLDER]
 │   └── P002_top.png      [PLACEHOLDER]
 ├── Output/               → AI-generated page outputs
-│   ├── raw/              → Raw outputs from PromptEngine prompts
-│   └── pdf/              → Exported PDFs
+│   └── raw/              → Raw outputs from PromptEngine prompts [no pdf/ yet — PDF export not run]
+├── ApprovedText/         → Approved text modules
+│   └── raw/
 └── Notes/                → QA logs and notes
 ```
 

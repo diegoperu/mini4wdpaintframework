@@ -17,6 +17,8 @@ Tests/ contains human-executable validation protocols — structured checklists 
 | `ColorValidation.md` | TEST-CL | Color accuracy, token usage, paint code validity | Color |
 | `PDFValidation.md` | TEST-PD | PDF metadata, font embedding, bookmarks, checksums | Export |
 | `AssetsValidation.md` | TEST-AS | Asset presence, format compliance, no orphaned files | Assets |
+| `ContentValidation.md` | TEST-CV | content.yaml schema, language, data, metadata, manifest, component mapping, cross-page consistency (7 suites) | Content / CMS |
+| `TextValidation.md` | TEST-TX | Italian language compliance, forbidden words, terminology, editorial style (9 tests) | Editorial |
 
 ## Test Execution Order
 
@@ -59,7 +61,7 @@ Blocking/non-blocking classification is defined in `Config/quality.yaml §blocki
 |-|--------|-------------------|
 | **Scope** | SDK validity + manual quality | Manual quality only |
 | **When** | Per-phase checkpoints | Before approval |
-| **Depth** | Layer-by-layer (7 suites) | Single flat checklist (110 items) |
+| **Depth** | Layer-by-layer (9 suites) | Single flat checklist (110 items) |
 | **Runs on** | SDK + project files | Generated manual pages |
 
 Both must pass before a manual can be moved to `Assets/ApprovedManual/`.
