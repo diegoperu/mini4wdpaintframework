@@ -1,8 +1,12 @@
 # Config/
 
+> **A cosa serve questa cartella:** configurazione globale dell'SDK — language policy, soglie QA, parametri render e PDF.
+> **Chi la modifica:** solo Developer.
+> **Quando:** solo a release SDK. L'Operatore non la modifica mai: se un validatore sbaglia, si segnala al Maintainer.
+
 **Role in framework:** Runtime configuration for all SDK tools and processes.
 
-**SDK Version:** 2.4.0
+**SDK Version:** 2.4.1
 
 Configuration files in this directory drive the behavior of the SDK pipeline, validation tools, and export processes. They are distinct from `Core/` specifications (which are human-facing standards) — Config/ files are machine-readable parameters.
 

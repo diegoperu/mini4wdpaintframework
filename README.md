@@ -1,6 +1,21 @@
 # Mini4WD Manual SDK
 
-**Version 2.4.0** | Apache 2.0 | Open Source | Language: Italian (it)
+**Version 2.4.1** | Apache 2.0 | Open Source | Language: Italian (it)
+
+---
+
+> ## 🚀 Sei un utente nuovo? Parti da **[START_HERE.md](START_HERE.md)**
+>
+> Non serve leggere questo README per produrre un manuale. Il percorso operatore è:
+> `START_HERE.md` → `OperatorGuide/01_Primo_Manuale.md` → `FIRST_PROJECT.md`.
+> Questo README descrive l'architettura, per contributor e sviluppatori.
+>
+> Documenti operatore (v2.4.1): [START_HERE.md](START_HERE.md) ·
+> [OperatorGuide/](OperatorGuide/) · [WORKFLOW.md](WORKFLOW.md) ·
+> [LIFECYCLE.md](LIFECYCLE.md) · [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) ·
+> [FILE_MATRIX.md](FILE_MATRIX.md) · [WHO_MODIFIES_WHAT.md](WHO_MODIFIES_WHAT.md) ·
+> [OPERATOR_PROFILE.md](OPERATOR_PROFILE.md) · tutorial [FIRST_PROJECT.md](FIRST_PROJECT.md),
+> [FIRST_RENDER.md](FIRST_RENDER.md), [FIRST_PDF.md](FIRST_PDF.md)
 
 ---
 
@@ -334,6 +349,7 @@ Version is stored in `VERSION` and `MANIFEST.yaml`. Every release is documented 
 | 2.2.0 | Build pipeline, Config layer, Test suites, AI Operating Rules, Knowledge base |
 | 2.3.0 | Text Engine, Editorial Pipeline, Italian language policy, LOAD sequence |
 | 2.4.0 | CMS layer (ApprovedAssets/), content.yaml as source of truth, page lifecycle |
+| 2.4.1 | UX & Operator Workflow Update: START_HERE, OperatorGuide/, tutorials, single image convention, validation scoping |
 
 ---
 

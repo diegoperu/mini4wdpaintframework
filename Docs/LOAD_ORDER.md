@@ -1,7 +1,7 @@
 # LOAD_ORDER.md
 # Mini4WD Manual SDK — Context Loading Order
 
-**Version:** 2.4.0
+**Version:** 2.4.1
 
 > This document defines the exact order in which an AI model must load SDK documents
 > before generating any page. Skipping steps or loading out of order produces incomplete

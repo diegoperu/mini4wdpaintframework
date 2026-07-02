@@ -1,15 +1,37 @@
 # Content Validation Tests
 
 **Test Suite ID:** TEST-CV
-**SDK Version:** 2.4.0
+**SDK Version:** 2.4.1
 **Layer:** Content / CMS
 **Reference:** `ApprovedAssets/Text/README.md`, `Core/TEXT_ENGINE.md`, `Config/LANGUAGE_POLICY.yaml`
 
 ## Purpose
 Verify that `content.yaml` files in `ApprovedAssets/Text/P{NNN}/` are complete, correctly structured, language-compliant, and ready for rendering.
 
+## Validation Scope (v2.4.1) — Template vs Draft vs Approved
+
+This suite validates **generated content only**. The lifecycle position of the file
+determines what may be validated:
+
+| State | What it is | Validate? |
+|---|---|---|
+| **Template** | Page module as shipped by the SDK: `status: draft` AND empty fields / schema comments only. No Text Engine run has populated it. | **NO — never.** A template is not final content. Running this suite on a template produces FAIL by construction and means the pipeline order was skipped (generate first — Phase 2a — then validate). |
+| **Draft (generated)** | Text Engine has produced content; `status: draft` or `review`, fields populated (possibly with `TODO:`). | **YES** — this is the normal input of this suite. `TODO:` values are reported as WARNING, not blocking, unless the field is REQUIRED for approval. |
+| **Approved / Locked** | `status: approved` or `locked`. | YES for re-validation after a formal revision; otherwise already validated. Placeholders of any kind are BLOCKING here. |
+
+**How to tell a template from generated content:** a template has `status: draft` in
+`metadata.yaml` **and** its REQUIRED string fields are empty (`""`). Generated content
+has populated fields. If in doubt, check whether `changelog.md` records a Text Engine
+generation entry.
+
+Additionally, per `Config/LANGUAGE_POLICY.yaml §exceptions` (v2.4.1), the following are
+**never** language violations: manufacturer paint codes (TS-37, XF-1, X-10, X-11…),
+commercial product names (Chrome Silver, Gun Metal, Semi Gloss Black, Flat Black,
+Primer, Topcoat, Masking Tape…), YAML keys and schema values (`finish: gloss`),
+structural/metadata terms (Header, Footer, draft, locked) used as metadata.
+
 ## When to Run
-- After Text Engine generates content.yaml for any page
+- After Text Engine generates content.yaml for any page — **never before**
 - Before setting `metadata.yaml §approved: true`
 - After any edit to a content.yaml (resets approval)
 - Before Render Engine phase begins

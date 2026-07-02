@@ -1,5 +1,9 @@
 # PromptEngine
 
+> **A cosa serve questa cartella:** i prompt ufficiali per generare ogni pagina (P001–P010). L'Operatore li ALLEGA in chat, uno per pagina, in Fase 2.
+> **Chi la modifica:** solo Developer.
+> **Quando:** solo a release SDK. Mai adattarli a un singolo progetto: i dati di progetto stanno in PROJECT.yaml.
+
 ## Purpose
 
 PromptEngine is the bridge between the Core specification layer and AI-driven page generation. Each file in this directory contains a fully specified, model-agnostic prompt for generating one page of a Mini4WD painting manual.

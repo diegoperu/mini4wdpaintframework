@@ -1,8 +1,12 @@
 # ApprovedAssets/
 
+> **A cosa serve questa cartella:** il CMS dell'SDK — contenuti editoriali e visivi approvati, un modulo per pagina.
+> **Chi la modifica:** l'**AI via prompt** (contenuti), Reviewer/Maintainer (approvazioni e `index.yaml`). **Mai l'Operatore a mano.**
+> **Quando:** Fasi 2–4 del workflow (testi, QA, render). I moduli nascono come TEMPLATE in stato `draft`: campi vuoti = normale, non è contenuto difettoso (vedi `Tests/ContentValidation.md §Validation Scope`).
+
 **Role in framework:** The single source of truth for all approved editorial and visual content in the Mini4WD Manual SDK.
 
-**SDK Version:** 2.4.0
+**SDK Version:** 2.4.1
 **Supersedes:** `Projects/{ModelName}/ApprovedText/` (v2.3.0) — retained for backward compatibility
 
 ---

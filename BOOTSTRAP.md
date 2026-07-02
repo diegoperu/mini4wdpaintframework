@@ -14,7 +14,7 @@ The **Mini4WD Manual SDK** is an open-source editorial framework that enables an
 
 It is a **specification-first system**: the SDK defines every design rule, editorial rule, component, and workflow in authoritative documents. The AI's role is to execute these specifications, not to invent them.
 
-The current version is **2.4.0** (codename: CMS).
+The current version is **2.4.1** (codename: Operator — UX & Operator Workflow Update; 2.4.x family: CMS).
 
 ---
 

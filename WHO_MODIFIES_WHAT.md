@@ -1,0 +1,52 @@
+# WHO_MODIFIES_WHAT.md — Chi Modifica Cosa
+
+**Mini4WD Manual SDK v2.4.1** · Documento operatore
+**Ruoli:** definiti in `OPERATOR_PROFILE.md` · **Dettaglio per file:** `FILE_MATRIX.md`
+
+---
+
+## Tabella principale
+
+| Artefatto | Chi lo modifica | Come | Quando |
+|---|---|---|---|
+| `PROJECT.yaml` (nel tuo progetto) | **Operatore** | Editor di testo | Setup progetto; correzioni dopo QA FAIL |
+| `Projects/{Modello}/Images/` | **Operatore** | Copia file | Setup progetto |
+| `Projects/{Modello}/Notes/qa_log.md` | **Operatore** | Editor di testo | Durante QA |
+| `ApprovedAssets/Text/P00x/content.yaml` | **AI** | Prompt Fase 2 (Text Engine) | Generazione testi |
+| `ApprovedAssets/Text/P00x/metadata.yaml` | **AI / Reviewer** | Prompt QA + conferma | Approvazione e seal |
+| `ApprovedAssets/Images/` | **AI** | Prompt Fase 4 (Render) | Rendering |
+| `ApprovedAssets/index.yaml` | **Reviewer / Maintainer** | Editor / prompt | Seal e release |
+| `Assets/ApprovedManual/{Modello}/` | **Maintainer** | Copia file + firma | Pubblicazione |
+| `Templates/` (master) | **Developer** | Pull request | Release SDK |
+| `PromptEngine/` | **Developer** | Pull request + ADR | Release SDK |
+| `Core/` | **Developer** | Pull request + ADR obbligatorio | Release SDK |
+| `Config/` (incl. LANGUAGE_POLICY) | **Developer** | Pull request | Release SDK |
+| `Knowledge/`, `Tests/`, `Docs/` | **Developer** | Pull request | Release SDK |
+| `CHANGELOG.md`, `VERSION`, `ReleaseInfo.yaml` | **Maintainer** | Commit di release | Release SDK |
+| `UAT/` | **Maintainer** | Nuovo report UAT | Dopo ogni test utente |
+
+---
+
+## Vista per ruolo
+
+### Operatore
+Modifica **solo** `Projects/{SuoModello}/`. Non tocca mai framework, template master,
+ApprovedAssets (ci pensa l'AI via prompt), Assets.
+
+### AI (in chat)
+Scrive `content.yaml`, `text.md` (derivato), `metadata.yaml`, `manifest.yaml`,
+`changelog.md`, `notes.md` dei moduli pagina e i render. Non modifica mai `Core/`,
+`PROJECT.yaml`, né gli asset già `locked` (Bootstrap Contract, regole
+`never_modify_approved_assets` e `never_modify_project_yaml`).
+
+### Reviewer
+Approva: imposta `approved/locked` nei `metadata.yaml`, firma i QA log, aggiorna
+`ApprovedAssets/index.yaml`. Non genera contenuti.
+
+### Maintainer
+Pubblica: `Assets/ApprovedManual/`, tag di release, CHANGELOG, VERSION, UAT.
+Unico che può concedere lo status Approved finale (niente self-approval).
+
+### Developer
+Evolve il framework: `Core/`, `Config/`, `PromptEngine/`, `Templates/`, `Tests/`,
+`Knowledge/`, `Docs/`. Ogni modifica a `Core/` richiede un ADR in `STYLE_DECISIONS.md`.

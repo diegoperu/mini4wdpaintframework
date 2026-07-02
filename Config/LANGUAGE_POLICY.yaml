@@ -1,11 +1,22 @@
 # Mini4WD Manual SDK — Language Policy
-# Version: 2.4.0
+# Version: 2.4.1
 # Bootstrap: Read AI_ENTRYPOINT.md first — language rules are part of the Bootstrap Contract
 # Reference: Core/TEXT_ENGINE.md, Core/AI_OPERATING_RULES.md §TEXT RENDERING RULES
 # Enforced by: Tests/TextValidation.md, PromptEngine/ (LOAD sequence)
+#
+# v2.4.1 — SCOPE CLARIFICATION (UAT-001):
+# The Italian-only rule applies to EDITORIAL CONTENT — the text a reader sees on
+# the manual pages. It does NOT apply to:
+#   - technical terms with no Italian equivalent      → §exceptions.technical_terms
+#   - commercial paint/product names                  → §exceptions.commercial_names
+#   - manufacturer paint codes (TS-37, XF-1, X-10…)   → §exceptions.paint_codes
+#   - YAML keys and schema values (finish: gloss)     → §exceptions.yaml_schema
+#   - structural/metadata terms (Header, Footer, draft, locked)
+#                                                     → §exceptions.structural_metadata
+# A validator MUST NOT flag those categories as language violations.
 
 language_policy:
-  version: "2.4.0"
+  version: "2.4.1"
 
   # ============================================================
   # PRIMARY LANGUAGE
@@ -29,7 +40,7 @@ language_policy:
       reason: "Japanese text will never appear in Italian manuals, even as decoration"
     - code: "en"
       name: "English"
-      reason: "Technical terms must use Italian equivalents from Knowledge/GlossaryIT.md"
+      reason: "English sentences/headings forbidden in editorial body text. Does NOT apply to §exceptions: technical terms, commercial names, paint codes, YAML keys, metadata. Italian equivalents: Knowledge/GlossaryIT.md"
     - code: "fr"
       name: "French"
     - code: "de"
@@ -108,9 +119,70 @@ language_policy:
   # ============================================================
   # EXCEPTIONS (language-neutral elements)
   # ============================================================
+  # v2.4.1: expanded into explicit categories. Everything below is
+  # language-neutral and MUST NOT be reported as a language violation
+  # by any validation suite.
   exceptions:
-    paint_codes: "language-neutral"        # TS-57, C-5, etc.
+    # --- Manufacturer product codes (never translated) ---
+    paint_codes: "language-neutral"        # TS-57, TS-37, PS-1, XF-1, X-10, X-11, C-5, 72.001, etc.
     numeric_values: "language-neutral"
-    component_ids: "language-neutral"      # C001, P001, etc.
+    component_ids: "language-neutral"      # C001, P001, PC001, M001, D001, DEC001
     code_blocks: "language-neutral"        # SDK internals in fenced blocks
     unit_symbols: "language-neutral"       # cm, mm, g, ml
+
+    # --- Technical terms without an established Italian equivalent ---
+    # Used inside Italian sentences; kept as-is (see §technical_terms).
+    technical_terms: "language-neutral"
+    technical_terms_whitelist:
+      - "Primer"
+      - "Topcoat"
+      - "Clear coat"
+      - "Masking Tape"
+      - "Spray"
+      - "Airbrush"
+      - "Decal"
+
+    # --- Commercial names (paints, finishes, products) ---
+    # Official manufacturer color/product names are proper nouns:
+    # never translated, never flagged.
+    commercial_names: "language-neutral"
+    commercial_names_examples:
+      - "Chrome Silver"
+      - "Gun Metal"
+      - "Semi Gloss Black"
+      - "Flat Black"
+      - "Metallic Purple"
+      - "Tamiya Surface Primer"
+
+    # --- YAML keys and schema values ---
+    # Structural keys (title:, subtitle:, footer:) and enumerated schema
+    # values (finish: gloss|matte|metallic, technique: spray-can) are part
+    # of the file format, not editorial content. English here is CORRECT.
+    # The Italian rendering of these values ("Lucido", "Opaco") belongs to
+    # the editorial fields that the Text Engine generates from them.
+    yaml_schema: "language-neutral"
+
+    # --- Structural / metadata terms ---
+    # Component names (Header, Footer), lifecycle states (draft, review,
+    # approved, locked, rendered, released, archived) and QA statuses are
+    # metadata, not page text. Never flagged when used as metadata.
+    structural_metadata: "language-neutral"
+    structural_metadata_examples:
+      - "Header"
+      - "Footer"
+      - "draft"
+      - "locked"
+      - "PASS"
+      - "FAIL"
+
+  # ============================================================
+  # SCOPE OF VALIDATION (v2.4.1)
+  # ============================================================
+  # What the language validator checks, and against what:
+  validation_scope:
+    editorial_content: "italian-only"      # titles, subtitles, step text, callouts, captions
+    metadata_and_keys: "not-validated"     # YAML keys, schema values, lifecycle states
+    proper_nouns: "not-validated"          # model names, paint names, brand names
+    templates: "not-validated"             # files with status: draft and empty/placeholder fields
+                                           # are templates — see Tests/ContentValidation.md
+                                           # §Validation Scope

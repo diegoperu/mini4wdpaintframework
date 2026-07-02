@@ -1,8 +1,12 @@
 # Knowledge/
 
+> **A cosa serve questa cartella:** base di conoscenza tecnica ed editoriale che alimenta il Text Engine (glossari, terminologia, tecniche).
+> **Chi la modifica:** solo Developer.
+> **Quando:** solo a release SDK. L'Operatore la consulta; l'AI la usa come riferimento.
+
 **Role in framework:** Technical reference library for Mini4WD painting techniques, materials, and processes.
 
-**SDK Version:** 2.4.0
+**SDK Version:** 2.4.1
 
 Knowledge/ is the SDK's technical knowledge base. It contains objective, factual information about painting, masking, preparation, and finishing techniques for Mini4WD scale models. This information is used by:
 

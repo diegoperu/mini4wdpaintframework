@@ -1,19 +1,41 @@
 # Text Validation Tests
 
 **Test Suite ID:** TEST-TX
-**SDK Version:** 2.4.0
+**SDK Version:** 2.4.1
 **Layer:** Editorial / Text Engine
 **Reference:** `Core/TEXT_ENGINE.md`, `Config/LANGUAGE_POLICY.yaml`, `Core/AI_OPERATING_RULES.md §TEXT RENDERING RULES`, `Knowledge/GlossaryIT.md`
 
 ## Purpose
 
-Verify that all text content in `ApprovedText/` files is linguistically correct, editorially consistent, and compliant with the language policy before it enters the Render Engine.
+Verify that all generated editorial text is linguistically correct, editorially consistent, and compliant with the language policy before it enters the Render Engine.
+
+In v2.4.x the primary target is `ApprovedAssets/Text/P{NNN}/content.yaml` (and its
+derived `text.md`). References to `ApprovedText/` files apply to legacy v2.3.0
+projects only.
+
+## Validation Scope (v2.4.1) — Template vs Draft vs Approved
+
+Same scoping rules as `Tests/ContentValidation.md §Validation Scope`:
+
+- **Templates are never validated.** A page module in `status: draft` with empty
+  fields is a template, not content. Generate first (Phase 2a), validate after.
+- **Generated drafts** are the normal input of this suite. Approved placeholders and
+  `TODO:` markers are allowed while `approved: false`; all must be resolved before
+  `approved: true`.
+- **Language exceptions** (`Config/LANGUAGE_POLICY.yaml §exceptions`, v2.4.1) are
+  NEVER violations, in any test below: manufacturer paint codes (TS-37, XF-1, X-10,
+  X-11, PS-1…), commercial product names (Chrome Silver, Gun Metal, Semi Gloss Black,
+  Flat Black, Metallic Purple…), untranslatable technical terms (Primer, Topcoat,
+  Masking Tape, spray, airbrush, clear coat), YAML keys and schema values, and
+  structural/metadata terms (Header, Footer, draft, locked, PASS/FAIL) used as
+  metadata. TX-001-J/K/L target editorial sentences and headings, not these
+  categories.
 
 ## When to Run
 
-- After Text Engine generates raw text (before approval)
-- Before setting `approved: true` in ApprovedText frontmatter
-- After any text edit to an ApprovedText file
+- After Text Engine generates content for a page — **never on untouched templates**
+- Before setting `approved: true` (metadata.yaml in v2.4.x; frontmatter in legacy v2.3.0)
+- After any text edit to generated content
 - Before running any PromptEngine/ render prompts
 
 ## Blocking vs Non-Blocking
@@ -42,7 +64,7 @@ Verify all text is Italian. Run for each ApprovedText file.
 
 ### English
 - [ ] TX-001-J: No English sentences or paragraphs — ❌ BLOCKING
-- [ ] TX-001-K: Accepted English technical terms only: "spray", "airbrush", "primer", "clear coat" — ⚠️ verify per `Config/LANGUAGE_POLICY.yaml §exceptions`
+- [ ] TX-001-K: Accepted English technical terms: "spray", "airbrush", "primer", "topcoat", "clear coat", "masking tape" — plus all commercial names and paint codes — ⚠️ verify per `Config/LANGUAGE_POLICY.yaml §exceptions` (never BLOCKING for whitelisted categories)
 - [ ] TX-001-L: No English headings or section titles — ❌ BLOCKING
 
 ### Other Latin Languages

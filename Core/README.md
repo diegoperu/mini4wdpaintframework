@@ -1,5 +1,9 @@
 # Core
 
+> **A cosa serve questa cartella:** specifica autoritativa del framework — design, componenti, pagine, regole AI, QA. Tutto il resto dell'SDK dipende da qui.
+> **Chi la modifica:** solo Developer, con ADR in `STYLE_DECISIONS.md`.
+> **Quando:** solo a release SDK. **Mai durante un progetto.** L'Operatore la legge/allega, non la tocca.
+
 The `Core/` directory is the authoritative specification layer of the Mini4WD Manual SDK. Every other directory in this SDK depends on Core. No component, prompt, template, or asset may contradict a Core specification.
 
 ---

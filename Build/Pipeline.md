@@ -1,6 +1,6 @@
 # Production Pipeline
 
-**SDK Version:** 2.4.0
+**SDK Version:** 2.4.1
 **Document ID:** BUILD-001
 **Status:** Stable
 **Dependencies:** `Core/WORKFLOW.md`, `Core/QA_SYSTEM.md`, `Core/PDF_MASTER.md`, `Config/sdk.yaml`
@@ -78,18 +78,21 @@ The Mini4WD Manual SDK production pipeline transforms a `PROJECT.yaml` configura
 - Tamiya box art (if available and licensed)
 - Official render references
 
-**Process:**
-1. Create `Assets/ReferenceModels/{ModelName}/` directory
-2. Photograph model from all required angles (see `Assets/ReferenceModels/README.md` §Required Angles)
+**Process (single convention, v2.4.1 — operator images live in the project folder):**
+1. Photograph the model from all required angles
+2. Place the photos in `Projects/{ModelName}/Images/`
 3. Name files per `Core/NAMING_CONVENTION.md`
-4. Validate images meet minimum resolution (800×600px)
-5. Add reference listing to `Assets/ReferenceModels/{ModelName}/README.md`
+4. Validate images meet minimum resolution (800×600px; 2048px long edge recommended per `Config/render.yaml`)
+
+`Assets/ReferenceModels/{ModelName}/` is used only by the Maintainer for SDK reference
+projects (Golden Projects) — operators never create directories there. See
+`PROJECT_STRUCTURE.md`.
 
 **Output:**
-- `Assets/ReferenceModels/{ModelName}/reference_front.jpg`
-- `Assets/ReferenceModels/{ModelName}/reference_side.jpg`
-- `Assets/ReferenceModels/{ModelName}/reference_top.jpg`
-- `Assets/ReferenceModels/{ModelName}/README.md`
+- `Projects/{ModelName}/Images/ref_front.jpg`
+- `Projects/{ModelName}/Images/ref_side_left.jpg` / `ref_side_right.jpg`
+- `Projects/{ModelName}/Images/ref_top.jpg`
+- `Projects/{ModelName}/Images/ref_3q_front.jpg`
 
 **Validation:**
 - Minimum 3 reference images present (front, side, top)
@@ -145,7 +148,7 @@ For each page P001–P010:
 **Actor:** Manual author + AI image generation model
 
 **Input:**
-- `Assets/ReferenceModels/{ModelName}/` (Phase 1 output)
+- `Projects/{ModelName}/Images/` (Phase 1 output — single convention v2.4.1)
 - `Core/RENDER_GUIDE.md` (angle, lighting, resolution specs)
 - `Projects/{ModelName}/PROJECT.yaml` (paint scheme)
 

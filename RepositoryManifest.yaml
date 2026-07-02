@@ -4,8 +4,8 @@
 # Machine-readable index of all files, their purpose, type, status, and dependencies.
 # Updated at every release. See MANIFEST.yaml for the full SDK descriptor.
 
-manifest_version: "2.4.0"
-generated: "2026-07-01"
+manifest_version: "2.4.1"
+generated: "2026-07-02"
 
 # ─────────────────────────────────────────────
 # ROOT FILES
@@ -667,6 +667,91 @@ docs:
       type: "documentation"
       role: "migration guide from SDK v1.x to v2.x"
       depends_on: []
+
+# ─────────────────────────────────────────────
+# OPERATOR LAYER (added in v2.4.1 — UX & Operator Workflow Update)
+# Human-facing documentation. ai_load_order: null for all (not part of the AI LOAD sequence).
+# ─────────────────────────────────────────────
+
+operator_layer:
+
+  - path: "START_HERE.md"
+    type: "onboarding"
+    role: "first document for human operators — checklist, diagram, chat map"
+    status: "current"
+    version: "2.4.1"
+
+  - path: "WORKFLOW.md"
+    type: "onboarding"
+    role: "operational state machine (Nuovo Progetto → … → Golden Project)"
+    status: "current"
+    version: "2.4.1"
+
+  - path: "LIFECYCLE.md"
+    type: "onboarding"
+    role: "manual (macro) and page (micro) lifecycle"
+    status: "current"
+    version: "2.4.1"
+
+  - path: "PROJECT_STRUCTURE.md"
+    type: "onboarding"
+    role: "folders to create/not create; single image convention (Projects/{Model}/Images/)"
+    status: "current"
+    version: "2.4.1"
+
+  - path: "FILE_MATRIX.md"
+    type: "onboarding"
+    role: "per-file matrix: editable yes/no, when, by whom, phase"
+    status: "current"
+    version: "2.4.1"
+
+  - path: "WHO_MODIFIES_WHAT.md"
+    type: "onboarding"
+    role: "artifact → role responsibility table"
+    status: "current"
+    version: "2.4.1"
+
+  - path: "OPERATOR_PROFILE.md"
+    type: "onboarding"
+    role: "roles: Operatore, Reviewer, Maintainer, Developer"
+    status: "current"
+    version: "2.4.1"
+
+  - path: "FIRST_PROJECT.md"
+    type: "tutorial"
+    role: "tutorial: clone → Bootstrap OK"
+    status: "current"
+    version: "2.4.1"
+
+  - path: "FIRST_RENDER.md"
+    type: "tutorial"
+    role: "tutorial: approved text → first rendered page"
+    status: "current"
+    version: "2.4.1"
+
+  - path: "FIRST_PDF.md"
+    type: "tutorial"
+    role: "tutorial: rendering → PDF (3 variants)"
+    status: "current"
+    version: "2.4.1"
+
+  - path: "OperatorGuide/"
+    type: "onboarding"
+    role: "7-document operator guide (01_Primo_Manuale … 07_FAQ) + README"
+    status: "current"
+    version: "2.4.1"
+
+  - path: "UAT/UAT-001.md"
+    type: "report"
+    role: "first external-operator test: 8 errors with cause and applied fix"
+    status: "current"
+    version: "2.4.1"
+
+  - path: "MigrationReport_v2.4.1.md"
+    type: "report"
+    role: "v2.4.0 → v2.4.1 migration report (UX-only release)"
+    status: "current"
+    version: "2.4.1"
 
 # ─────────────────────────────────────────────
 # DEPENDENCY GRAPH (summary)

@@ -7,8 +7,8 @@
 
 sdk:
   name: "Mini4WD Manual SDK"
-  version: "2.4.0"
-  codename: "CMS"
+  version: "2.4.1"
+  codename: "Operator"       # 2.4.x family codename: CMS; 2.4.1 = UX & Operator Workflow Update
   maturity: "beta"
   status: "active"
   language: "it"
@@ -22,7 +22,7 @@ sdk:
 repository:
   url: "https://github.com/diegoperu/mini4wdpaintframework"
   default_branch: "main"
-  current_release: "v2.4.0"
+  current_release: "v2.4.1"
   github_repository: "diegoperu/mini4wdpaintframework"
   releases_url: "https://github.com/diegoperu/mini4wdpaintframework/releases"
 
@@ -111,7 +111,7 @@ load_order:
     13: "reference_images"
 
 roadmap:
-  current_version: "2.4.0"
+  current_version: "2.4.1"
   next_version: "2.5.0"
   next_planned:
     - "Compiler/ — Project Loader, Context Builder, Page Generator, QA Engine, PDF Assembler"
@@ -140,6 +140,9 @@ documentation:
 
 bootstrap:
   official_entrypoint: "AI_ENTRYPOINT.md"
+  human_entrypoint: "START_HERE.md"        # v2.4.1 — first document for human operators
+  operator_guide: "OperatorGuide/"
+  operator_workflow: "WORKFLOW.md"
   entry_point: "BOOTSTRAP.md"
   context_file: "SDK_CONTEXT.yaml"
   manifest: "RepositoryManifest.yaml"

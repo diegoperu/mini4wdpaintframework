@@ -69,7 +69,7 @@ A manual passes through four states. State transitions require explicit action.
 ### State 1: Draft
 
 - `Projects/{ModelName}/PROJECT.yaml` has been created and populated
-- Reference images are present in `Assets/ReferenceModels/{ModelName}/`
+- Reference images are present in `Projects/{ModelName}/Images/` (single convention, v2.4.1 — see PROJECT_STRUCTURE.md)
 - At least one page has been generated but QA is not complete
 - Files live in `Projects/{ModelName}/Output/raw/`
 

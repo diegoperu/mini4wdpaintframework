@@ -1,8 +1,12 @@
 # ApprovedAssets/Text/
 
+> **A cosa serve questa cartella:** un modulo per pagina (P001–P010) con content.yaml, metadata, changelog. I moduli sono spediti come TEMPLATE (`status: draft`, campi vuoti) e vengono riempiti dall'AI in Fase 2.
+> **Chi la modifica:** AI via prompt; Reviewer per le approvazioni.
+> **Quando:** Fase 2 (generazione), Fase 3 (QA/seal). Mai a mano; mai validare un template non generato.
+
 **Role:** Structured editorial content store. One subdirectory per page (P001–P010).
 
-**SDK Version:** 2.4.0
+**SDK Version:** 2.4.1
 
 Each page directory is a self-contained content module with full lifecycle tracking, versioning, and editorial metadata.
 

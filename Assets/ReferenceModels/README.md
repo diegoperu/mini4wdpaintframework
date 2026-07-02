@@ -1,6 +1,12 @@
 # Assets/ReferenceModels/
 
-**Version:** 2.4.0
+> **A cosa serve questa cartella:** fotografia di riferimento dei **progetti di riferimento dell'SDK** (es. Proto_Emperor).
+> **Chi la modifica:** solo Maintainer.
+> **Quando:** quando un progetto diventa Golden Project.
+>
+> ⚠️ **Operatore: NON creare qui la cartella del tuo modello.** Convenzione unica v2.4.1: le foto del TUO progetto vanno in `Projects/{Modello}/Images/` (vedi `PROJECT_STRUCTURE.md`).
+
+**Version:** 2.4.1
 **Used by:** PromptEngine/ prompts during render generation
 **Spec:** Core/RENDER_GUIDE.md §6
 

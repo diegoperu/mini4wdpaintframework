@@ -1,5 +1,9 @@
 # Assets/
 
+> **A cosa serve questa cartella:** design system (token, componenti, palette), riferimenti dei progetti SDK e manuali pubblicati.
+> **Chi la modifica:** Developer (DesignSystem), Maintainer (ReferenceModels, ApprovedManual).
+> **Quando:** release SDK e pubblicazione manuali. **L'Operatore non ci crea nulla:** le sue immagini vanno in `Projects/{Modello}/Images/`.
+
 **Version:** 2.1.0
 **Maintainer:** Mini4WD Manual SDK Core Team
 **Depends on:** Core/STYLE_GUIDE.md, Core/NAMING_CONVENTION.md, Core/RENDER_GUIDE.md

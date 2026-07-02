@@ -21,7 +21,7 @@
   - [ ] `Projects/{ModelName}/Images/`
   - [ ] `Projects/{ModelName}/Output/raw/`
   - [ ] `Projects/{ModelName}/Notes/`
-- [ ] Reference images gathered in `Assets/ReferenceModels/{ModelName}/`
+- [ ] Reference images gathered in `Projects/{ModelName}/Images/` (single convention, v2.4.1)
 - [ ] `qa.status` in PROJECT.yaml set to `draft`
 
 **Phase 0 Complete:** [ ]

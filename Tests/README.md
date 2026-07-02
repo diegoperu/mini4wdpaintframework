@@ -1,8 +1,12 @@
 # Tests/
 
+> **A cosa serve questa cartella:** le suite di validazione QA. L'Operatore le ALLEGA in chat in Fase 3 (QA); non le esegue a mano né le modifica.
+> **Chi la modifica:** solo Developer, a release SDK.
+> **Quando:** se un test fallisce si corregge il CONTENUTO, mai il test. I template `draft` non si validano (`ContentValidation.md §Validation Scope`).
+
 **Role in framework:** Defines validation protocols for every layer of the SDK.
 
-**SDK Version:** 2.4.0
+**SDK Version:** 2.4.1
 
 Tests/ contains human-executable validation protocols — structured checklists and test procedures that verify the SDK itself is internally consistent and that each generated manual meets quality standards. These are not automated test suites (automation planned for v3.0.0) but systematic, repeatable verification guides.
 

@@ -1,266 +1,138 @@
-# PROJECT_BOOTSTRAP.md
-# Mini4WD Manual SDK — New Project Guide
+# PROJECT_BOOTSTRAP.md — Creazione Nuovo Progetto
 
-**Version:** 2.4.0
-**Entry point:** `BOOTSTRAP.md`
+**Mini4WD Manual SDK v2.4.1** · Guida operativa
+**Prerequisito:** `START_HERE.md` (root del repository)
 
-> This document guides you through creating a new Mini4WD manual project
-> from scratch. Read `BOOTSTRAP.md` and `SDK_CONTEXT.yaml` before this document.
-
----
-
-## Prerequisites
-
-Before starting, ensure you have:
-
-- [ ] The Mini4WD Manual SDK (this repository)
-- [ ] The official Tamiya model name (exact spelling)
-- [ ] Tamiya paint codes for the intended color scheme
-- [ ] Reference photography of the physical model (multiple angles)
-- [ ] An AI model with sufficient context window (recommended: 100K+ tokens)
+> Guida operativa, non descrittiva: esegui i PASSI in ordine, uno alla volta.
+> Al termine avrai un progetto pronto e il Bootstrap approvato.
+> Versione estesa con esempi reali: `FIRST_PROJECT.md`.
 
 ---
 
-## Step 1 — Create the Project Folder
+## Prima di iniziare — cosa ti serve
+
+- [ ] Nome ufficiale Tamiya del modello (grafia esatta)
+- [ ] Codici vernice del produttore (es. TS-57, PS-1)
+- [ ] Foto del modello fisico: minimo front, 2 lati, top, 3/4 frontale
+- [ ] Un modello AI con contesto ampio (100K+ token consigliati)
+
+---
+
+## PASSO 1 — Crea la cartella progetto
 
 ```bash
-mkdir -p Projects/{ModelName}/Images
-mkdir -p Projects/{ModelName}/Output
-mkdir -p Projects/{ModelName}/Notes
+MODEL="Nome_Modello"        # spazi → underscore. MAI trattini nel nome cartella.
+mkdir -p "Projects/${MODEL}/Images"
+mkdir -p "Projects/${MODEL}/Output/raw" "Projects/${MODEL}/Output/pdf"
+mkdir -p "Projects/${MODEL}/Notes"
 ```
 
-Replace `{ModelName}` with the model name using underscores (e.g., `Proto_Emperor`).
+Regole nome (da `Core/NAMING_CONVENTION.md`):
 
-**Naming rules (`Core/NAMING_CONVENTION.md`):**
-- Use the official Tamiya model name
-- Replace spaces with underscores
-- No special characters, no lowercase-only names
-- Examples: `Proto_Emperor`, `Avante_Mk3`, `Dash_001_Shadow`
+- `Proto Emperor` → `Proto_Emperor` ✓
+- `Dash 01 Shadow Emperor` → `Dash_01_Shadow_Emperor` ✓ (non `Dash-01_...` ✗)
+- Maiuscole conservate, niente abbreviazioni, niente caratteri speciali
 
----
+**Non creare altre cartelle**, in particolare niente sotto `Assets/` o `ApprovedAssets/`.
 
-## Step 2 — Create PROJECT.yaml
-
-Copy the template and fill in your model data:
+## PASSO 2 — Copia e compila PROJECT.yaml
 
 ```bash
-cp Templates/PROJECT.yaml Projects/{ModelName}/PROJECT.yaml
+cp Templates/PROJECT.yaml "Projects/${MODEL}/PROJECT.yaml"
 ```
 
-Open `Projects/{ModelName}/PROJECT.yaml` and fill in every field:
+Apri la copia (MAI il master in `Templates/`) e compila ogni campo REQUIRED seguendo i
+commenti nel file. Regole:
 
-```yaml
-project:
-  modelName: "Proto Emperor"          # Official Tamiya name, exactly as printed
-  modelSlug: "proto-emperor"          # kebab-case, used for file naming
-  seriesName: "Super II"              # Chassis series
-  year: "2024"                        # Production year of this manual (string, not integer)
-  language: "it"
-  version: "1.0.0"
+1. Codici vernice reali del produttore — mai inventati
+2. Dato mancante → `TODO:` — mai un valore inventato
+3. `modelSlug` in kebab-case: `dash-01-shadow-emperor`
+4. Percorsi in `paths:` relativi alla cartella progetto (`Images/...`)
+5. I valori-chiave dello schema (`finish: gloss`, `technique: spray-can`) restano in
+   inglese: sono chiavi tecniche, non testo editoriale. L'italiano è per i contenuti
+   che finiranno sulle pagine.
 
-paintScheme:
-  name: "Midnight Violet"
-  colors:
-    - id: "PC001"                     # Paint-color ID — never reuse the C00N pattern (that's the Component ID registry, see COMPONENT_SYSTEM.md)
-      paintBrand: "Tamiya"
-      paintCode: "PS-18"
-      paintName: "Metallic Purple"
-      finish: "metallic"
-    - id: "PC002"
-      paintBrand: "Tamiya"
-      paintCode: "PS-1"
-      paintName: "White"
-      finish: "gloss"
-  # Add all colors in the scheme
+Esempio compilato di riferimento: `Projects/Proto_Emperor/PROJECT.yaml` (sola lettura).
 
-paths:
-  coverRenderPath: "Images/cover_3q_front.jpg"
-  colorSchemeRenderFront: "Images/P002_front.png"
-  colorSchemeRenderSide: "Images/P002_side.png"
-  colorSchemeRenderTop: "Images/P002_top.png"
-```
+## PASSO 3 — Inserisci le foto di riferimento
 
-Reference images live in `Assets/ReferenceModels/{ModelName}/`, not in `PROJECT.yaml` (see `Build/Pipeline.md` Phase 1).
+Copia le foto in `Projects/{Modello}/Images/` — **unica posizione valida** (v2.4.1;
+`Assets/ReferenceModels/` è riservata al Maintainer):
 
-**Rules:**
-- Every color must have a Tamiya/manufacturer `paintCode` — no invented codes
-- All file paths are relative to the project folder
-- Use `TODO:` for any unknown values — never invent data
-- Every field in `Templates/PROJECT.yaml` has a comment explaining it
+| File | Vista | Obbligatoria |
+|---|---|---|
+| `ref_front.jpg` | Frontale | Sì |
+| `ref_side_left.jpg` | Lato sinistro | Sì |
+| `ref_side_right.jpg` | Lato destro | Sì |
+| `ref_top.jpg` | Dall'alto | Sì |
+| `ref_3q_front.jpg` | 3/4 frontale-sinistra | Sì (copertina) |
+| `ref_rear.jpg` | Posteriore | Consigliata |
+| `ref_detail_*.jpg` | Dettagli | Se servono |
 
-Reference: `Projects/Proto_Emperor/PROJECT.yaml`
+Qualità: min 2048px lato lungo, sfondo bianco/neutro, fuoco nitido (`Config/render.yaml`).
 
----
-
-## Step 3 — Prepare Reference Images
-
-Place your reference photography in `Projects/{ModelName}/Images/`:
-
-| File | Content | Required |
-|------|---------|----------|
-| `ref_front.jpg` | Front view, white background | Yes |
-| `ref_side_left.jpg` | Left side view | Yes |
-| `ref_side_right.jpg` | Right side view | Yes |
-| `ref_top.jpg` | Top-down view | Yes |
-| `ref_rear.jpg` | Rear view | Recommended |
-| `ref_3q_front.jpg` | 3/4 front-left view | Yes (for cover) |
-| `ref_detail_*.jpg` | Close-ups of key details | As needed |
-
-**Image requirements (`Config/render.yaml`):**
-- Minimum resolution: 2048px on the long edge
-- White or neutral background preferred
-- Sharp focus, no motion blur
-- Multiple lighting conditions if available
-
----
-
-## Step 4 — Initialize ApprovedAssets
-
-The CMS layer for your project is at `ApprovedAssets/Text/`. Each page module
-is pre-created by the SDK. Check the current state:
-
-```bash
-cat ApprovedAssets/index.yaml
-```
-
-All pages start in `draft` status. You will advance each page through the
-lifecycle as you generate and validate content.
-
----
-
-## Step 5 — Load the SDK Context (AI Session)
-
-Open your AI session and use the prompt from `Docs/AI_BOOTSTRAP_PROMPT.md`.
-
-**Recommended: Prompt A (Full Session Bootstrap)**
-
-Attach files in this order:
-1. `SDK_CONTEXT.yaml`
-2. `BOOTSTRAP.md`
-3. `Core/AI_OPERATING_RULES.md`
-4. `Config/LANGUAGE_POLICY.yaml`
-5. `Core/TEXT_ENGINE.md`
-6. `Core/DESIGN_LANGUAGE.md`
-7. `Core/STYLE_GUIDE.md`
-8. `Core/COMPONENT_SYSTEM.md`
-9. `Core/PAGE_SYSTEM.md`
-10. `Projects/{ModelName}/PROJECT.yaml`
-11. Reference images
-
----
-
-## Step 6 — Generate Pages (P001–P010)
-
-Generate one page at a time. For each page:
-
-### 6a — Text Engine (Phase 2a)
-Attach `PromptEngine/{page}.md` and use Prompt B from `Docs/AI_BOOTSTRAP_PROMPT.md`.
-
-Output: `ApprovedAssets/Text/P00x/content.yaml`
-
-### 6b — Content QA (Phase 2b)
-Attach `Tests/ContentValidation.md` and validate the content.yaml.
-Fix all FAIL results before proceeding.
-
-### 6c — Text QA (Phase 2c)
-Attach `Tests/TextValidation.md` and validate Italian compliance.
-Zero tolerance for non-Italian text or Lorem ipsum.
-
-### 6d — Seal the Page (Phase 2d)
-Update `ApprovedAssets/Text/P00x/metadata.yaml`:
-```yaml
-lifecycle:
-  status: "locked"
-  locked_at: "2026-07-01"
-  locked_by: "AI model name + session"
-```
-
-### 6e — Render (Phase 3)
-Use Prompt D from `Docs/AI_BOOTSTRAP_PROMPT.md`.
-Input: locked `content.yaml` + reference images.
-Output: illustrated page image.
-
-### 6f — Visual QA (Phase 4)
-Validate the render against `Core/QA_SYSTEM.md`.
-Check all relevant items in the 110-item checklist.
-
----
-
-## Step 7 — Assemble PDF (Phase 5)
-
-Once all 10 pages pass QA:
-
-1. Verify all pages are in `rendered` lifecycle status
-2. Use `Templates/PDF_CONFIG.yaml` for export settings
-3. Follow `Core/PDF_MASTER.md` for the full export specification
-4. Generate three variants: screen, print, archive
-
-Output: `Assets/ApprovedManual/{ModelName}/{ModelName}_Manual.pdf`
-
----
-
-## Step 8 — Release (Phase 7)
-
-1. Move all pages to `released` status in `metadata.yaml`
-2. Update `ApprovedAssets/index.yaml` with final states
-3. Archive source files per `Core/PDF_MASTER.md` §Archive
-
----
-
-## Project Checklist
-
-Use this checklist to track progress:
+## PASSO 4 — Verifica pre-bootstrap
 
 ```
-PROJECT SETUP
-[ ] Project folder created: Projects/{ModelName}/
-[ ] PROJECT.yaml filled — no TODO: fields (or all TODOs documented)
-[ ] Reference images loaded (minimum 4 angles)
-[ ] AI session bootstrapped with full LOAD sequence
-
-PAGE GENERATION (repeat for each page)
-[ ] P001 Copertina — content.yaml generated
-[ ] P001 — ContentValidation: PASS
-[ ] P001 — TextValidation: PASS
-[ ] P001 — metadata: locked
-[ ] P001 — render generated
-[ ] P001 — QA_SYSTEM: PASS
-[ ] P002 ... (repeat)
-[ ] P003 ...
-[ ] P004 ...
-[ ] P005 ...
-[ ] P006 ...
-[ ] P007 ...
-[ ] P008 ...
-[ ] P009 ...
-[ ] P010 ...
-
-ASSEMBLY
-[ ] All 10 pages in rendered status
-[ ] PDF screen variant generated
-[ ] PDF print variant generated
-[ ] PDF archive variant generated
-[ ] ApprovedAssets/index.yaml updated to released
+[ ] PROJECT.yaml senza campi REQUIRED vuoti (o TODO: motivati)
+[ ] Foto presenti (min 5)
+[ ] Nome cartella con underscore, modelSlug in kebab-case
+[ ] Nessun file toccato fuori da Projects/{Modello}/
 ```
 
+Non serve inizializzare `ApprovedAssets/`: i moduli pagina P001–P010 esistono già in
+stato `draft` (sono template — verranno riempiti dall'AI in Fase 2).
+
+## PASSO 5 — Bootstrap della sessione AI
+
+1. Apri una **nuova chat**.
+2. Vai a `Docs/AI_BOOTSTRAP_PROMPT.md → Fase 1 — Bootstrap`.
+3. Allega i file nell'ordine elencato (framework + il TUO PROJECT.yaml + le TUE foto).
+4. Incolla il prompt Fase 1 e invia.
+
+## PASSO 6 — Approva il Bootstrap Report
+
+L'AI produce un Bootstrap Report (formato: `AI_ENTRYPOINT.md`). Verifica che citi il
+TUO modello, i TUOI colori, e le pagine P001–P010 in `draft`. Poi scrivi in chat:
+
+```
+Bootstrap approvato. Inizia dalla pagina P001.
+```
+
+**Il progetto è avviato.** Da qui:
+
+- Percorso completo: `OperatorGuide/01_Primo_Manuale.md`
+- State machine: `WORKFLOW.md` (root)
+- Prompt per le fasi successive: `Docs/AI_BOOTSTRAP_PROMPT.md` (Fasi 2–5)
+
+## PASSO 7 — Loop di generazione (sintesi)
+
+Per ogni pagina P001 → P010, nella stessa chat del bootstrap:
+
+```
+PASSO 7a  Genera   → Prompt Fase 2 + PromptEngine/{pagina}.md → content.yaml
+PASSO 7b  Valida   → Prompt Fase 3 + Tests/ContentValidation.md + Tests/TextValidation.md
+PASSO 7c  Correggi → se REJECTED: applica le correzioni, torna a 7b
+PASSO 7d  Sigilla  → metadata.yaml → status: locked + riga di changelog
+```
+
+⚠️ Mai validare una pagina non ancora generata: i template `draft` falliscono il QA
+per costruzione (`Tests/ContentValidation.md §Validation Scope`).
+
+## PASSO 8 — Fasi successive
+
+| Fase | Guida | Chat |
+|---|---|---|
+| Rendering | `FIRST_RENDER.md` | Nuova (chat #2) |
+| PDF | `FIRST_PDF.md` | Nuova (chat #3) |
+| Pubblicazione | `LIFECYCLE.md` — la esegue il Maintainer | — |
+
 ---
 
-## Reference Project
+## Riferimenti
 
-The `Projects/Proto_Emperor/` folder is the reference project for this SDK.
-Use it as a structural guide for folder layout and PROJECT.yaml format.
-
-Do not modify the Proto_Emperor project — it is a read-only reference.
-
----
-
-## Cross References
-
-- `BOOTSTRAP.md` → non-negotiable rules and pipeline overview
-- `SDK_CONTEXT.yaml` → SDK identity and pipeline summary
-- `Docs/LOAD_ORDER.md` → exact context loading order
-- `Docs/AI_BOOTSTRAP_PROMPT.md` → ready-to-use prompts for ChatGPT, Claude, Gemini
-- `Templates/PROJECT.yaml` → project configuration template
-- `Core/WORKFLOW.md` → detailed workflow documentation
-- `Build/Pipeline.md` → full 8-phase pipeline specification
-- `Core/QA_SYSTEM.md` → 110-item quality checklist
+- `START_HERE.md` — punto di partenza assoluto
+- `PROJECT_STRUCTURE.md` — struttura cartelle e convenzione immagini
+- `FILE_MATRIX.md` — cosa puoi modificare
+- `OperatorGuide/06_Errori_Comuni.md` — se qualcosa fallisce
+- `Projects/Proto_Emperor/` — progetto di riferimento (sola lettura)

@@ -1,6 +1,10 @@
 # Docs/
 
-**Version:** 2.4.0
+> **A cosa serve questa cartella:** documentazione supplementare — ordine di caricamento AI e prompt ufficiali per fase (`AI_BOOTSTRAP_PROMPT.md`).
+> **Chi la modifica:** solo Developer, a release SDK.
+> **Quando:** l'Operatore la usa in ogni fase (copia i prompt), non la modifica.
+
+**Version:** 2.4.1
 **Relationship to Core/:** Supplementary — does NOT override Core/
 
 ---

@@ -51,17 +51,18 @@ cp Templates/PROJECT.yaml Projects/{ModelName}/PROJECT.yaml
 
 Open the file and complete every field that has a `required: true` comment. Do not submit the prompt for any page until all required fields are complete. Required fields that are missing will produce unfilled `{{project.X}}` tokens in page output.
 
-**0.4** Gather reference images:
+**0.4** Gather reference images (single convention, v2.4.1):
 ```
-Assets/ReferenceModels/{ModelName}/
-├── reference_front.jpg
-├── reference_side.jpg
-├── reference_top.jpg
-├── box_art.jpg          (optional but recommended)
-└── official_render.jpg  (optional)
+Projects/{ModelName}/Images/
+├── ref_front.jpg
+├── ref_side_left.jpg
+├── ref_side_right.jpg
+├── ref_top.jpg
+├── ref_3q_front.jpg
+└── ref_rear.jpg         (recommended)
 ```
 
-Reference images are not used in the manual — they guide render generation and design decisions. See `Assets/ReferenceModels/README.md` for source and usage guidelines.
+Reference images are not used in the manual — they guide render generation and design decisions. They live in the project's own `Images/` folder together with the approved renders. `Assets/ReferenceModels/` is reserved for SDK reference projects and is maintained by the Maintainer only (see `PROJECT_STRUCTURE.md`).
 
 **0.5** Define the color scheme:
 ```bash

@@ -1,5 +1,9 @@
 # Templates
 
+> **A cosa serve questa cartella:** i master dei file di configurazione per nuovi progetti. Si COPIANO in `Projects/{Modello}/`, non si compilano qui.
+> **Chi la modifica:** i master solo il Developer (a release); le COPIE nel progetto le compila l'Operatore.
+> **Quando:** copia al setup del progetto (Fase 0).
+
 ## Purpose
 
 Templates are the entry point for every new Mini4WD manual project. This directory contains blank, fully commented master copies of all configuration files needed to start a project from scratch.

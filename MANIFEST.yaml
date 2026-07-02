@@ -1,5 +1,5 @@
 # Mini4WD Manual SDK — Manifest
-# Version: 2.4.0
+# Version: 2.4.1
 # Machine-readable SDK descriptor.
 # Reference: ADR-015 (STYLE_DECISIONS.md)
 # Human-readable overview: README.md
@@ -8,7 +8,7 @@ manifest_version: "1.0"
 
 sdk:
   name: "Mini4WD Manual SDK"
-  version: "2.4.0"
+  version: "2.4.1"
   description: "Open-source framework for generating professional illustrated painting manuals for Tamiya Mini4WD models using any AI model"
   license: "Apache-2.0"
   homepage: "https://github.com/diegoperu/mini4wdpaintframework"

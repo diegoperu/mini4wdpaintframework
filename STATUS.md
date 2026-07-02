@@ -1,6 +1,6 @@
 # Mini4WD Manual SDK — Status
 
-**Version:** 2.4.0 | **Status:** Active | **Maturity:** Beta
+**Version:** 2.4.1 | **Status:** Active | **Maturity:** Beta
 
 > This document is updated at every release. For machine-readable metadata see `ReleaseInfo.yaml` and `SDK_CONTEXT.yaml`.
 
@@ -10,12 +10,14 @@
 
 | Field | Value |
 |-------|-------|
-| Version | 2.4.0 |
-| Codename | CMS |
-| Release date | 2026-07-01 |
+| Version | 2.4.1 |
+| Codename | Operator (2.4.x family: CMS) |
+| Release name | UX & Operator Workflow Update |
+| Release date | 2026-07-02 |
 | Branch | main |
 | Repository | https://github.com/diegoperu/mini4wdpaintframework |
-| Bootstrap entry | BOOTSTRAP.md |
+| Bootstrap entry (AI) | AI_ENTRYPOINT.md |
+| Entry point (human) | START_HERE.md |
 
 ---
 
@@ -27,6 +29,7 @@
 | 2.2.0 | Released 2026-06-30 | Build pipeline, Config layer, Test suites, Knowledge base, AI Operating Rules |
 | 2.3.0 | Released 2026-07-01 | Text Engine, Editorial Pipeline, Italian-only language policy, LOAD sequence |
 | 2.4.0 | Released 2026-07-01 | CMS layer (ApprovedAssets/), content.yaml as source of truth, page lifecycle |
+| 2.4.1 | Released 2026-07-02 | UX & Operator Workflow Update — START_HERE, OperatorGuide/, tutorials, single image convention, validation scoping (UAT-001) |
 | **2.5.0** | **Planned** | Compiler/, Prompt Orchestrator, Icon Library, Tutorials |
 
 ---

@@ -9,7 +9,56 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-### Added — Bootstrap System v2
+### Planned
+- Compiler/ and Prompt Orchestrator (v2.5.0)
+- Multi-language support (Italian, Japanese, English)
+- SVG icon library for C006 Callout and C008 Warning components
+- Automated PDF pipeline via pandoc + LaTeX
+
+---
+
+## [2.4.1] - 2026-07-02 — UX & Operator Workflow Update
+
+UX-only release driven by UAT-001 (first external-operator test). No framework
+behavior, architecture, Prompt Engine, Text Engine, Component System, Page System,
+or ApprovedAssets structure changes. Documentation, onboarding, and validation
+scoping only.
+
+### Added — Operator Layer
+- `START_HERE.md` — first document for new users: checklist, diagram, do/don't table, chat map (max 2 pages)
+- `OperatorGuide/` — 7-document operator guide: `01_Primo_Manuale.md`, `02_Workflow.md`, `03_File_da_Modificare.md`, `04_File_da_NON_Modificare.md`, `05_Checklist.md`, `06_Errori_Comuni.md`, `07_FAQ.md` (+ README)
+- `WORKFLOW.md` (root) — operational state machine: Nuovo Progetto → Bootstrap → Testi → QA → Approved Text → Rendering → QA → Approved Images → PDF → Golden Project, with obiettivo/input/output/prossimo stato per state
+- `FILE_MATRIX.md` — per-file matrix: modificabile SÌ/NO, quando, da chi, in quale fase
+- `PROJECT_STRUCTURE.md` — folders to create / NOT create; **single image convention**: all operator images in `Projects/{Model}/Images/`; `Assets/ReferenceModels/` reserved to Maintainer
+- `FIRST_PROJECT.md` — tutorial: folder creation → Bootstrap OK, with real examples
+- `FIRST_RENDER.md` — tutorial: Approved Text → first rendered page
+- `FIRST_PDF.md` — tutorial: rendering → 3 PDF variants
+- `WHO_MODIFIES_WHAT.md` — artifact → role responsibility table
+- `LIFECYCLE.md` — manual (macro) and page (micro) lifecycle
+- `OPERATOR_PROFILE.md` — roles: Operatore, Reviewer, Maintainer, Developer (responsibilities, editable files, required skills)
+- `UAT/UAT-001.md` — real-world operator test report: 8 errors with descrizione/causa/correzione/documento aggiornato
+
+### Changed — Documentation & Onboarding
+- `Projects/PROJECT_BOOTSTRAP.md` — fully rewritten as operational guide (PASSO 1…8), Italian, single image convention, explicit "generate before validate" rule
+- `Docs/AI_BOOTSTRAP_PROMPT.md` — restructured by phase (Bootstrap → Testi → QA → Rendering → PDF); each phase declares Input, Output, Prompt, Nuova chat SÌ/NO; summary table; Prompt E/F retained as service prompts
+- `README.md` — operator entry banner (START_HERE.md), v2.4.1, version table
+- Folder READMEs (`Core/`, `Config/`, `PromptEngine/`, `ApprovedAssets/`, `ApprovedAssets/Text/`, `Templates/`, `Projects/`, `Assets/`, `Assets/ReferenceModels/`, `Build/`, `Tests/`, `Knowledge/`, `Docs/`) — standard header: a cosa serve / chi la modifica / quando
+- `Core/WORKFLOW.md` §0.4 and `Build/Pipeline.md` §Phase 1 — aligned to the single image convention (`Projects/{Model}/Images/`)
+- `AI_ENTRYPOINT.md` — `required_read_order` reference-images path aligned to `Projects/{ModelName}/Images/`
+- `Projects/README.md` — minimal file set defined (`PROJECT.yaml` + `Images/` + `Output/` + `Notes/`); image convention note
+- `Templates/PROJECT.yaml` — `text.approved_text_dir` marked LEGACY (v2.3.0 compatibility); v2.4.x output path documented
+
+### Changed — Language Policy & Validation Scoping (UAT-001 fixes)
+- `Config/LANGUAGE_POLICY.yaml` (v2.4.1) — §exceptions split into 5 explicit language-neutral categories: paint codes (TS-37, XF-1, X-10, X-11…), technical terms (Primer, Topcoat, Masking Tape…), commercial names (Chrome Silver, Gun Metal, Semi Gloss Black, Flat Black…), YAML keys/schema values, structural metadata (Header, Footer, draft…); new §validation_scope; scope clarification header
+- `Tests/ContentValidation.md` — new **§Validation Scope**: Template vs Draft vs Approved; templates (status draft + empty fields) are never validated as final content; language exceptions restated
+- `Tests/TextValidation.md` — same §Validation Scope; v2.4.x target clarified (content.yaml; `ApprovedText/` legacy-only); TX-001-K whitelist extended
+
+### Release metadata
+- `VERSION` → 2.4.1; `MANIFEST.yaml`, `SDK_CONTEXT.yaml`, `ReleaseInfo.yaml` updated
+
+---
+
+### Added — Bootstrap System v2 (pre-2.4.1, previously Unreleased)
 - `AI_ENTRYPOINT.md` — official AI entry point; Bootstrap Contract (YAML), mission, source-of-truth hierarchy, pipeline, AI operating mode (Text/Render), editorial philosophy, language rules, Golden Rules (G01–G10), completion checklist, First Response Policy with Bootstrap Report format
 - `BOOTSTRAP.md` — AI operational guide; detailed pipeline, page/component index, common errors, document map
 - `SDK_CONTEXT.yaml` — machine-readable SDK identity card; version, pipeline, architecture, source-of-truth hierarchy, load order, roadmap
@@ -30,11 +79,6 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - `Core/WORKFLOW.md` — cross-reference to AI_ENTRYPOINT.md
 - `Core/TEXT_ENGINE.md` — cross-reference to AI_ENTRYPOINT.md in header
 - `Config/LANGUAGE_POLICY.yaml` — bootstrap note added to header
-
-### Planned
-- Multi-language support (Italian, Japanese, English)
-- SVG icon library for C006 Callout and C008 Warning components
-- Automated PDF pipeline via pandoc + LaTeX
 
 ---
 

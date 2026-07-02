@@ -38,7 +38,7 @@ python3 -c "import yaml; yaml.safe_load(open('Assets/DesignSystem/Tokens/tokens.
 
 ## TEST-AS-002: Project Reference Images
 
-**Input:** `Assets/ReferenceModels/{ModelName}/`
+**Input:** `Projects/{ModelName}/Images/` (operator projects — single convention v2.4.1; `Assets/ReferenceModels/{ModelName}/` for SDK reference projects only)
 **Reference:** `Assets/ReferenceModels/README.md §Required Angles`
 
 For each project being validated:

@@ -23,7 +23,7 @@ bootstrap:
     - "PromptEngine/{page}.md"
     - "Projects/{ModelName}/PROJECT.yaml"
     - "ApprovedAssets/Text/{page}/"
-    - "Assets/ReferenceModels/{ModelName}/ or provided images"
+    - "Projects/{ModelName}/Images/ or provided images"
 
 output_mode:
   bootstrap_report_first: true

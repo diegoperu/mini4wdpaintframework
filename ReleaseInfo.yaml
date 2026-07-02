@@ -3,37 +3,45 @@
 # Mini4WD Manual SDK — Release Metadata
 # Updated at every release. See CHANGELOG.md for full history.
 
-version: "2.4.0"
-release_date: "2026-07-01"
-release_type: "minor"
-codename: "CMS"
+version: "2.4.1"
+release_date: "2026-07-02"
+release_type: "patch"
+codename: "Operator"
+release_name: "UX & Operator Workflow Update"
 
 breaking_changes: []
 
 migration_notes:
-  from: "2.3.0"
-  to: "2.4.0"
-  guide: "MigrationReport_v2.4.md"
+  from: "2.4.0"
+  to: "2.4.1"
+  guide: "MigrationReport_v2.4.1.md"
   summary: >
-    Purely additive. All v2.3.0 PROJECT.yaml files and PromptEngine prompts work
-    without modification. New ApprovedAssets/ CMS layer is optional for existing
-    projects. Projects/{model}/ApprovedText/ retained for backward compatibility.
+    UX-only release driven by UAT-001. No framework behavior changes: architecture,
+    Prompt Engine, Text Engine, Component System, Page System and ApprovedAssets
+    structure are untouched. Adds the operator documentation layer (START_HERE.md,
+    OperatorGuide/, tutorials, WORKFLOW state machine), unifies the reference-image
+    convention (Projects/{Model}/Images/), and scopes validation (templates are never
+    validated as final content; language-neutral categories whitelisted).
   required_actions: []
 
 new_in_this_version:
-  - "ApprovedAssets/ — CMS layer with 7-file content modules per page (P001–P010)"
-  - "content.yaml — primary source of truth, replacing text.md as primary output"
-  - "Page lifecycle — draft → review → approved → locked → rendered → released → archived"
-  - "Tests/ContentValidation.md — 7 validation suites for content.yaml"
-  - "ApprovedAssets/index.yaml — global registry of all page module lifecycle states"
-  - "MigrationReport_v2.4.md — migration guide with full workflow diagram"
-  - "Bootstrap System — SDK_CONTEXT.yaml, BOOTSTRAP.md, LOAD_ORDER.md, STATUS.md"
+  - "START_HERE.md — human operator entry point"
+  - "OperatorGuide/ — 7-document operator guide"
+  - "WORKFLOW.md (root) — operational state machine"
+  - "FILE_MATRIX.md, PROJECT_STRUCTURE.md, WHO_MODIFIES_WHAT.md, LIFECYCLE.md, OPERATOR_PROFILE.md"
+  - "FIRST_PROJECT.md, FIRST_RENDER.md, FIRST_PDF.md — end-to-end tutorials"
+  - "UAT/UAT-001.md — first external-operator test report (8 errors documented and fixed)"
+  - "Docs/AI_BOOTSTRAP_PROMPT.md — restructured by phase with Input/Output/Prompt/Nuova chat"
+  - "Projects/PROJECT_BOOTSTRAP.md — rewritten as operational PASSO-based guide"
+  - "Config/LANGUAGE_POLICY.yaml — 5 language-neutral exception categories + validation_scope"
+  - "Tests/ContentValidation.md, Tests/TextValidation.md — §Validation Scope (Template vs Draft vs Approved)"
 
 compatibility:
   backward_compatible_with:
     - "2.1.0"
     - "2.2.0"
     - "2.3.0"
+    - "2.4.0"
   project_yaml_schema: "unchanged — all existing PROJECT.yaml files work without modification"
   page_ids: "P001–P010 unchanged"
   component_ids: "C001–C015 unchanged"
@@ -42,6 +50,10 @@ compatibility:
   approved_text: "Projects/{model}/ApprovedText/ retained — still functional"
 
 previous_releases:
+  - version: "2.4.0"
+    date: "2026-07-01"
+    codename: "CMS"
+    key: "CMS layer (ApprovedAssets/), content.yaml as source of truth, page lifecycle, Bootstrap System"
   - version: "2.3.0"
     date: "2026-07-01"
     codename: "Editorial"

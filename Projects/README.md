@@ -1,5 +1,9 @@
 # Projects
 
+> **A cosa serve questa cartella:** lo spazio di lavoro dell'Operatore — una sottocartella per modello. È l'UNICA area del repository che l'Operatore modifica.
+> **Chi la modifica:** l'Operatore (il proprio progetto). `Proto_Emperor/` è sola lettura (riferimento). `PROJECT_BOOTSTRAP.md` solo Developer.
+> **Quando:** dal setup (Fase 0) alla consegna del PDF.
+
 ## Purpose
 
 Every Mini4WD model that has a painting manual lives in its own subdirectory here. The `Projects/` directory is the workspace — it contains in-progress and active project files. Approved, published manuals are **moved** (not copied) to `Assets/ApprovedManual/` when QA passes.
@@ -26,8 +30,11 @@ Every Mini4WD model that has a painting manual lives in its own subdirectory her
 
 - Final approved PDF files (belong in `Assets/ApprovedManual/`)
 - Design system assets (belong in `Assets/DesignSystem/`)
-- Reference photography (belongs in `Assets/ReferenceModels/`)
 - Template master files (belong in `Templates/`)
+
+> **Nota v2.4.1 — convenzione immagini:** le foto di riferimento del TUO modello vanno
+> QUI, in `Projects/{Modello}/Images/`, insieme ai render. `Assets/ReferenceModels/` è
+> riservata al Maintainer per i progetti di riferimento SDK. Vedi `PROJECT_STRUCTURE.md`.
 
 ---
 
@@ -52,7 +59,10 @@ The project folder name must follow these rules:
 
 ## Project Folder Structure
 
-Every project folder must contain this exact structure:
+**Set MINIMO per il bootstrap (v2.4.1):** `PROJECT.yaml` + `Images/` + `Output/` +
+`Notes/`. Tutti gli altri file sotto sono opzionali (utili, non bloccanti).
+
+The complete structure looks like this:
 
 ```
 Projects/{ModelName}/
@@ -62,7 +72,8 @@ Projects/{ModelName}/
 ├── COLOR_SCHEME.yaml     # Color definitions (from Templates/COLOR_SCHEME.yaml)
 ├── PDF_CONFIG.yaml       # PDF export config (from Templates/PDF_CONFIG.yaml)
 ├── README.md             # Project-specific README
-├── Images/               # All render images for this project
+├── Images/               # ALL images for this project: reference photos + renders
+│   ├── ref_front.jpg     # Reference photo (see PROJECT_STRUCTURE.md for full list)
 │   ├── cover_3q.png      # Cover render: 3/4 front-left, min 2480x3508px
 │   ├── P002_front.png    # Color scheme: orthographic front view
 │   ├── P002_side.png     # Color scheme: orthographic side view

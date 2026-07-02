@@ -1,21 +1,23 @@
-# AI_BOOTSTRAP_PROMPT.md
-# Mini4WD Manual SDK — Official AI Bootstrap Prompts
+# AI_BOOTSTRAP_PROMPT.md — Prompt Ufficiali per Fase
 
-**Version:** 2.4.0
+**Mini4WD Manual SDK v2.4.1**
 
-> This document contains ready-to-use prompts for starting a Mini4WD manual
-> generation session with ChatGPT, Claude, Gemini, or any AI model.
-> Copy the relevant prompt and attach or paste the listed files.
-> Updated at every release.
+> Un prompt pronto per ogni fase della pipeline. Per ogni fase trovi: **Input**
+> (cosa allegare), **Output** (cosa aspettarti), **Prompt** (da copiare), **Nuova
+> chat SÌ/NO**. Compatibile con ChatGPT, Claude, Gemini e qualsiasi modello futuro.
+>
+> La pipeline: **Bootstrap → Generazione Testi → QA → Rendering → PDF**
+> Mappa completa degli stati: `WORKFLOW.md` (root).
 
 ---
 
-## Prompt A — Full Session Bootstrap (Recommended)
+## FASE 1 — Bootstrap
 
-Use this prompt when starting a full manual generation session from scratch.
-Attach or paste the listed files in order.
+*(ex Prompt A)*
 
-**Files to attach (in order):**
+**Nuova chat: SÌ** — è l'inizio della sessione.
+
+**Input (file da allegare, in quest'ordine):**
 1. `SDK_CONTEXT.yaml`
 2. `BOOTSTRAP.md`
 3. `Core/AI_OPERATING_RULES.md`
@@ -25,211 +27,271 @@ Attach or paste the listed files in order.
 7. `Core/STYLE_GUIDE.md`
 8. `Core/COMPONENT_SYSTEM.md`
 9. `Core/PAGE_SYSTEM.md`
-10. `Projects/{ModelName}/PROJECT.yaml`
-11. Reference images of the model (photos of the physical Mini4WD)
+10. `Projects/{Modello}/PROJECT.yaml` ← il TUO
+11. Le foto da `Projects/{Modello}/Images/`
+
+**Output atteso:** Bootstrap Report (formato in `AI_ENTRYPOINT.md`) e STOP in attesa
+della tua approvazione. Nessun contenuto generato prima dell'approvazione.
 
 **Prompt:**
 
 ```
-Stai operando come motore editoriale del Mini4WD Manual SDK v2.4.0.
+Stai operando come motore editoriale del Mini4WD Manual SDK v2.4.1.
 
-Ho allegato i documenti del framework nell'ordine corretto di caricamento.
+Ho allegato i documenti del framework nell'ordine corretto di caricamento,
+il PROJECT.yaml del mio progetto e le immagini di riferimento del modello.
 Leggi tutti i documenti allegati prima di procedere.
 
 Regole fondamentali:
 - Tutto il testo editoriale deve essere in italiano.
 - content.yaml è la source of truth per ogni pagina.
 - Non inventare dati. Se un valore non è in PROJECT.yaml, usa TODO: come placeholder.
+- Nomi commerciali delle vernici, codici prodotto (TS-xx, X-xx, PS-xx) e chiavi YAML
+  sono language-neutral: non vanno tradotti né segnalati come violazioni.
 - Non modificare la forma fisica del modello nei render.
-- Segui le istruzioni di Core/AI_OPERATING_RULES.md per ogni operazione.
+- Segui Core/AI_OPERATING_RULES.md per ogni operazione.
 
-Conferma di aver letto tutti i documenti allegati, poi attendi le istruzioni
-per la prima pagina da generare.
+Produci ora il Bootstrap Report nel formato definito da AI_ENTRYPOINT.md,
+poi fermati e attendi la mia approvazione esplicita.
 ```
+
+**Dopo l'output:** verifica il report (tuo modello, tuoi colori, pagine in `draft`) e
+rispondi «Bootstrap approvato. Inizia dalla pagina P001.»
 
 ---
 
-## Prompt B — Single Page Generation
+## FASE 2 — Generazione Testi (una pagina alla volta)
 
-Use this prompt when generating a specific page. Assumes the AI has already
-loaded the full framework context (Prompt A or equivalent).
+*(ex Prompt B)*
 
-**Additional files to attach:**
-- `PromptEngine/{page}.md` (e.g., `PromptEngine/Cover.md` for P001)
-- `ApprovedAssets/Text/P00x/` directory (if the page has existing sealed content)
+**Nuova chat: NO** — stessa chat del Bootstrap.
+
+**Input (aggiungi agli allegati):**
+- `PromptEngine/{pagina}.md` (es. `PromptEngine/Cover.md` per P001)
+- `ApprovedAssets/Text/P00x/` solo se la pagina ha già contenuto sigillato
+
+**Output atteso:** `content.yaml` completo per la pagina, in italiano, con `TODO:` per
+i dati mancanti. Nessuna immagine, nessuna decisione di layout.
 
 **Prompt:**
 
 ```
+Fase 2 — Text Engine.
 Genera la pagina {PAGINA} ({NOME_PAGINA}) del manuale per il modello {NOME_MODELLO}.
 
-Fase 2a — Text Engine:
 1. Leggi il file PromptEngine/{page}.md allegato.
 2. Estrai tutti i valori dal PROJECT.yaml caricato in precedenza.
 3. Genera il file content.yaml completo per questa pagina.
-4. Usa TODO: per qualsiasi valore non disponibile in PROJECT.yaml.
-5. Tutto il testo deve essere in italiano.
+4. Usa TODO: per qualsiasi valore non disponibile in PROJECT.yaml — non inventare nulla.
+5. Tutto il testo editoriale in italiano; codici e nomi commerciali restano invariati.
 
-Non procedere alla fase di rendering fino a che non hai ricevuto
-la conferma che il content.yaml è approvato.
-
-Output atteso: content.yaml completo e pronto per la validazione QA.
+Non procedere al rendering: siamo in Text Mode. Output atteso: solo il content.yaml,
+pronto per la validazione QA.
 ```
 
 ---
 
-## Prompt C — QA Validation
+## FASE 3 — QA (valida la pagina appena generata)
 
-Use this prompt to run QA on a generated content.yaml.
+*(ex Prompt C)*
 
-**Files to attach:**
+**Nuova chat: NO** — stessa chat, subito dopo la Fase 2.
+
+**Input (aggiungi agli allegati):**
 - `Tests/ContentValidation.md`
 - `Tests/TextValidation.md`
-- The `content.yaml` to validate
+- il `content.yaml` da validare (se non già in chat)
+
+**Output atteso:** esito per suite (PASS/FAIL), lista dei FAIL con correzione,
+verdetto finale APPROVED / REJECTED.
 
 **Prompt:**
 
 ```
-Esegui la validazione QA completa sul content.yaml allegato.
+Fase 3 — QA. Esegui la validazione completa sul content.yaml appena generato.
 
-Fase 2b — Content Validation:
-Applica tutte e 7 le suite di validazione definite in Tests/ContentValidation.md.
-Riporta ogni test: PASS / FAIL / WARNING.
-Elenca tutti i FAIL con la riga specifica del content.yaml e la correzione necessaria.
+Ambito: questo è CONTENUTO GENERATO (status: review), non un template. Applica
+Tests/ContentValidation.md §Validation Scope.
 
-Fase 2c — Text Validation:
-Applica tutti e 9 i test di conformità italiana definiti in Tests/TextValidation.md.
-Riporta ogni test: PASS / FAIL.
-Zero tolleranza per testo in giapponese, inglese nel corpo, o Lorem ipsum.
+Content Validation: applica tutte e 7 le suite di Tests/ContentValidation.md.
+Text Validation: applica tutti e 9 i test di Tests/TextValidation.md.
 
-Output atteso:
-- Riepilogo per suite (PASS/FAIL)
-- Lista dettagliata di tutti i FAIL con correzioni
+Ricorda le eccezioni language-neutral (LANGUAGE_POLICY §exceptions): codici vernice
+(TS-37, X-10, PS-1…), nomi commerciali (Chrome Silver, Gun Metal, Semi Gloss Black,
+Flat Black, Primer, Topcoat, Masking Tape…), chiavi YAML e valori di schema
+(finish: gloss, status: draft, Header, Footer) NON sono violazioni linguistiche.
+
+Riporta:
+- Esito per suite: PASS / FAIL / WARNING
+- Ogni FAIL con riga e correzione necessaria
 - Verdetto finale: APPROVED / REJECTED
-- Se REJECTED: lista completa delle correzioni richieste prima del rendering.
+- Se REJECTED: lista completa delle correzioni richieste.
 ```
+
+**Dopo l'output:**
+- REJECTED → fai applicare le correzioni e rilancia questa fase.
+- APPROVED → conferma il seal: «Approvato. Sigilla la pagina: metadata.yaml →
+  status: locked, con riga di changelog.» Poi torna alla Fase 2 per la pagina
+  successiva. Quando TUTTE le pagine sono locked → Fase 4.
 
 ---
 
-## Prompt D — Render Engine
+## FASE 4 — Rendering
 
-Use this prompt to generate the illustrated page from a locked content.yaml.
-Only use after QA approval.
+*(ex Prompt D)*
 
-**Files to attach:**
-- `Core/RENDER_GUIDE.md`
-- `Core/DESIGN_LANGUAGE.md`
-- `Core/STYLE_GUIDE.md`
-- `Core/COMPONENT_SYSTEM.md`
-- `Assets/DesignSystem/Tokens/tokens.example.yaml`
-- The locked `content.yaml` for this page
-- Reference images of the model
+**Nuova chat: SÌ** — il rendering usa un contesto diverso (design, non testi).
+
+**Input (file da allegare):**
+1. `Core/RENDER_GUIDE.md`
+2. `Core/DESIGN_LANGUAGE.md`
+3. `Core/STYLE_GUIDE.md`
+4. `Core/COMPONENT_SYSTEM.md`
+5. `Assets/DesignSystem/Tokens/tokens.example.yaml`
+6. il `content.yaml` **locked** della pagina
+7. le foto da `Projects/{Modello}/Images/`
+
+**Output atteso:** pagina illustrata completa, pronta per la validazione visiva
+(`Core/QA_SYSTEM.md`). Da salvare in `ApprovedAssets/Images/P00x/`.
 
 **Prompt:**
 
 ```
+Fase 4 — Render Engine.
 Genera l'illustrazione per la pagina {PAGINA} ({NOME_PAGINA}).
 
 Il content.yaml allegato è approvato e bloccato (status: locked).
 
-Regole operative del Render Engine:
-- Leggi esclusivamente da content.yaml. Non generare testo non presente in content.yaml.
-- Usa solo i valori dei Design Token di tokens.example.yaml. Nessun valore hardcoded.
+Regole operative:
+- Leggi ESCLUSIVAMENTE da content.yaml. Non generare, modificare o riformulare testo.
+- Usa solo i Design Token di tokens.example.yaml. Nessun valore hardcoded.
 - La forma fisica del modello deve corrispondere esattamente alle immagini di riferimento.
-- Applica tutte le regole di Core/DESIGN_LANGUAGE.md e Core/STYLE_GUIDE.md.
-- Posiziona i componenti secondo le specifiche di Core/COMPONENT_SYSTEM.md.
-- Lo sfondo è bianco puro. Il pannello header è viola (token.PrimaryViolet).
+- Applica Core/DESIGN_LANGUAGE.md e Core/STYLE_GUIDE.md.
+- Componenti secondo Core/COMPONENT_SYSTEM.md.
+- Sfondo bianco puro. Pannello header viola (token.PrimaryViolet).
 
-Output atteso: pagina illustrata completa, pronta per la validazione visiva.
+Output atteso: pagina illustrata completa. Poi esegui la checklist visiva di
+Core/QA_SYSTEM.md sulle voci applicabili e riporta PASS/FAIL per ciascuna.
 ```
+
+**Guida passo-passo:** `FIRST_RENDER.md`
 
 ---
 
-## Prompt E — Minimal Bootstrap (ZIP or Limited Context)
+## FASE 5 — PDF
 
-Use this prompt when the AI receives only the SDK ZIP and must self-orient.
+**Nuova chat: SÌ.**
 
-**Files to attach:**
-- SDK ZIP (or the full repository)
+**Input (file da allegare):**
+1. `Core/PDF_MASTER.md`
+2. `Projects/{Modello}/PDF_CONFIG.yaml` (copia compilata di `Templates/PDF_CONFIG.yaml`)
+3. le pagine renderizzate (o i percorsi in `ApprovedAssets/Images/`)
+
+**Output atteso:** guida all'export delle 3 varianti (screen / print / archive) con
+verifica di metadati, segnalibri, font e bleed.
 
 **Prompt:**
 
 ```
-Hai ricevuto il Mini4WD Manual SDK v2.4.0.
+Fase 5 — PDF Builder.
+Tutte le pagine del manuale {NOME_MODELLO} sono in status: rendered.
 
-Leggi i file nell'ordine seguente prima di fare qualsiasi altra cosa:
-1. SDK_CONTEXT.yaml
-2. BOOTSTRAP.md
-3. Core/AI_OPERATING_RULES.md
-4. Config/LANGUAGE_POLICY.yaml
-5. Core/TEXT_ENGINE.md
-6. Core/DESIGN_LANGUAGE.md
-7. Core/STYLE_GUIDE.md
-8. Core/COMPONENT_SYSTEM.md
-9. Core/PAGE_SYSTEM.md
-
-Dopo aver letto tutti questi documenti, conferma:
-- La versione dell'SDK che stai utilizzando
-- Le 10 regole non negoziabili del BOOTSTRAP.md
-- La struttura del content.yaml richiesta dal TEXT_ENGINE.md
-- Il nome della lingua obbligatoria per tutto il testo editoriale
-
-Poi attendi il PROJECT.yaml e le immagini di riferimento del modello.
+1. Verifica l'ordine pagine P001–P010 (P009 solo se premium abilitato).
+2. Guidami nell'export delle tre varianti secondo Core/PDF_MASTER.md e la
+   PDF_CONFIG.yaml allegata:
+   - screen  (sRGB, 150dpi, no bleed, PDF/A-2b)
+   - print   (CMYK FOGRA39, 300dpi, bleed 3mm, PDF/X-4)
+   - archive (specifiche in Config/pdf.yaml)
+3. Al termine, esegui la checklist QA-096–QA-100: metadati, segnalibri,
+   font incorporati, bleed corretto per variante.
 ```
+
+**Guida passo-passo:** `FIRST_PDF.md`
 
 ---
 
-## Prompt F — Session Continuity
+## Prompt di servizio
 
-Use this prompt when resuming a session that already loaded the framework.
+### Prompt E — Bootstrap Minimo (ZIP o contesto limitato)
 
-**Prompt:**
+**Nuova chat: SÌ.** Usalo se puoi allegare solo l'archivio SDK completo.
 
 ```
-Stiamo continuando la sessione di generazione del manuale Mini4WD SDK v2.4.0
+Hai ricevuto il Mini4WD Manual SDK v2.4.1.
+
+Leggi i file in questo ordine prima di qualsiasi altra cosa:
+1. AI_ENTRYPOINT.md
+2. SDK_CONTEXT.yaml
+3. BOOTSTRAP.md
+4. Core/AI_OPERATING_RULES.md
+5. Config/LANGUAGE_POLICY.yaml
+6. Core/TEXT_ENGINE.md
+7. Core/DESIGN_LANGUAGE.md
+8. Core/STYLE_GUIDE.md
+9. Core/COMPONENT_SYSTEM.md
+10. Core/PAGE_SYSTEM.md
+
+Poi conferma: versione SDK, le 10 regole non negoziabili di BOOTSTRAP.md,
+la struttura del content.yaml, la lingua obbligatoria del testo editoriale.
+Infine attendi il PROJECT.yaml e le immagini di riferimento.
+```
+
+### Prompt F — Continuità di Sessione
+
+**Nuova chat: SÌ** (è il suo scopo: riprendere dopo una chat degenerata o chiusa).
+Riallegare i file della fase in corso.
+
+```
+Stiamo continuando la sessione Mini4WD Manual SDK v2.4.1
 per il modello {NOME_MODELLO}.
 
 Stato attuale:
-- Pagine completate: {LISTA_PAGINE_COMPLETATE}
-- Pagina corrente: {PAGINA_CORRENTE}
-- Pagine rimanenti: {LISTA_PAGINE_RIMANENTI}
+- Fase corrente: {FASE}            (es. Fase 2 — Generazione Testi)
+- Pagine completate: {LISTA}
+- Pagina corrente: {PAGINA}
 
-Tutte le regole del framework rimangono attive:
-- Tutto il testo in italiano
-- content.yaml come source of truth
-- Pipeline: Text Engine → QA → Render → PDF
+Tutte le regole del framework restano attive: testo editoriale in italiano,
+content.yaml come source of truth, pipeline Bootstrap → Testi → QA → Render → PDF,
+QA bloccante, TODO: per i dati mancanti.
 
-Continua dalla pagina {PAGINA_CORRENTE}.
+Continua dalla pagina {PAGINA} nella fase {FASE}.
 ```
 
 ---
 
-## Notes for All Prompts
+## Note per tutti i prompt
 
-- Replace `{NOME_MODELLO}` with the actual model name (e.g., "Proto Emperor")
-- Replace `{PAGINA}` with the page ID (e.g., "P001")
-- Replace `{NOME_PAGINA}` with the Italian page name (e.g., "Copertina")
-- All prompts assume Italian output — do not translate to other languages
-- If the AI model has a token limit, use Prompt E (minimal) and load documents incrementally
-- For the most reliable results, attach documents as files rather than pasting content
+- Sostituisci `{NOME_MODELLO}`, `{PAGINA}`, `{NOME_PAGINA}` con i valori reali
+  (es. "Dash 01 Shadow Emperor", "P001", "Copertina").
+- Allega i documenti come file quando possibile (più affidabile dell'incolla).
+- Tutto l'output editoriale è in italiano; non chiedere traduzioni.
+- Contesto limitato? Prompt E + caricamento incrementale.
 
----
+## Tabella riassuntiva
 
-## Compatibility
+| Fase | Prompt | Nuova chat | Input chiave | Output |
+|---|---|---|---|---|
+| 1 Bootstrap | Fase 1 (A) | SÌ | Framework + PROJECT.yaml + foto | Bootstrap Report |
+| 2 Testi | Fase 2 (B) | NO | PromptEngine/{pagina}.md | content.yaml |
+| 3 QA | Fase 3 (C) | NO | Tests/ + content.yaml | APPROVED/REJECTED |
+| 4 Rendering | Fase 4 (D) | SÌ | Design + content.yaml locked + foto | Pagina illustrata |
+| 5 PDF | Fase 5 | SÌ | PDF_MASTER + config + pagine | 3 PDF |
+| — Minimo | E | SÌ | Archivio SDK | Conferma bootstrap |
+| — Continuità | F | SÌ | Stato sessione | Ripresa |
 
-| Model | Tested | Notes |
-|-------|--------|-------|
-| ChatGPT (GPT-4o, GPT-4) | ✓ | Attach files via file upload |
-| Claude (Sonnet, Opus) | ✓ | Paste content or attach files |
-| Gemini (1.5 Pro, Ultra) | ✓ | Attach files via Google Drive or paste |
-| Future models | Expected ✓ | Prompts use no model-specific syntax |
+## Compatibilità
 
----
+| Modello | Testato | Note |
+|---|---|---|
+| ChatGPT (GPT-4o, GPT-4) | ✓ | Allegati via file upload |
+| Claude (Sonnet, Opus) | ✓ | Allegati o incolla |
+| Gemini (1.5 Pro, Ultra) | ✓ | Allegati via Drive o incolla |
+| Modelli futuri | Atteso ✓ | Nessuna sintassi model-specific |
 
-## Cross References
+## Riferimenti
 
-- `BOOTSTRAP.md` → full framework rules and pipeline
-- `SDK_CONTEXT.yaml` → machine-readable SDK state
-- `Docs/LOAD_ORDER.md` → detailed loading order with rationale
-- `Core/AI_OPERATING_RULES.md` → 100 behavioral rules
-- `Build/Pipeline.md` → full 8-phase pipeline
+- `WORKFLOW.md` (root) — state machine completa
+- `START_HERE.md` — onboarding operatore
+- `OperatorGuide/02_Workflow.md` — fasi e chat in versione compatta
+- `Docs/LOAD_ORDER.md` — ordine di caricamento con motivazioni
+- `Core/AI_OPERATING_RULES.md` — 100 regole comportamentali
