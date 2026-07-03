@@ -214,6 +214,10 @@ Se il report è corretto, scrivi in chat:
 Bootstrap approvato. Inizia dalla pagina P001.
 ```
 
+> Questo messaggio approva il bootstrap e indica da quale pagina partire.
+> L'AI **non genera automaticamente** — aspetta il prompt esplicito del PASSO 11a.
+> Subito dopo la conferma dell'AI, passa al PASSO 11a con CODICE_PAGINA=P001.
+
 Se il report cita dati sbagliati o inventati: correggi il PROJECT.yaml e ricomincia dal Passo 7.
 
 ---
@@ -222,7 +226,8 @@ Se il report cita dati sbagliati o inventati: correggi il PROJECT.yaml e ricomin
 
 Rimani nella stessa chat del bootstrap. Non riaprire una nuova chat e non ricaricare file.
 
-Il flusso per **ogni pagina** è: **invia Prompt Genera → invia Prompt QA → correggi se REJECTED → sigilla**.
+Il ciclo **11a → 11b → 11c si ripete 10 volte** — una per ogni pagina da P001 a P010.
+Completa P001 prima di passare a P002, e così via.
 
 ---
 

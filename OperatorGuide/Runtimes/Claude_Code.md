@@ -179,6 +179,10 @@ Se corretto, scrivi:
 Bootstrap approvato. Inizia dalla pagina P001.
 ```
 
+> Questo messaggio approva il bootstrap e indica da quale pagina partire.
+> L'AI **non genera automaticamente** — aspetta il prompt esplicito del PASSO 9a.
+> Subito dopo la conferma dell'AI, passa al PASSO 9a con CODICE_PAGINA=P001.
+
 Se il report cita dati sbagliati: correggi `Projects/{Modello}/PROJECT.yaml` e rilancia il prompt.
 
 ---
@@ -188,7 +192,8 @@ Se il report cita dati sbagliati: correggi `Projects/{Modello}/PROJECT.yaml` e r
 Rimani nella stessa sessione Claude Code. L'AI scrive `content.yaml` direttamente nel repo —
 non serve copiare nulla dalla chat.
 
-Il flusso per **ogni pagina** è: **invia Prompt Genera → invia Prompt QA → correggi se REJECTED → sigilla**.
+Il ciclo **9a → 9b → 9c si ripete 10 volte** — una per ogni pagina da P001 a P010.
+Completa P001 prima di passare a P002, e così via.
 
 ---
 
