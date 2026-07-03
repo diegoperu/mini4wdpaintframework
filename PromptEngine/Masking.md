@@ -112,7 +112,8 @@ Body: "Press tape edges firmly with a toothpick or burnishing tool. Lift tape at
 | Zoom C012 present for complex zone | `Core/COMPONENT_SYSTEM.md §C012` |
 | Page level DoD | `Core/DEFINITION_OF_DONE.md` |
 
-Save output to: `ApprovedAssets/Text/P006/content.yaml`
+Save output to: `Projects/{Model}/{Variant}/ApprovedText/P006/content.yaml`
+(where {Model} = PascalCase_Underscore model folder, {Variant} = PascalCase_Underscore variant folder derived from paintScheme.slug)
 
 ---
 

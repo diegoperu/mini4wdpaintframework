@@ -302,6 +302,7 @@ Lorem ipsum dolor sit amet.    ← LOREM — RIFIUTATO
 |---------|---------------|-----------------|
 | v2.3.0 | `ApprovedText/P{NNN}.md` (Markdown) | — |
 | v2.4.0 | `ApprovedAssets/Text/P{NNN}/content.yaml` (YAML) | `text.md` (derived) |
+| v2.5.0 | `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/content.yaml` (YAML) | `text.md` (derived) |
 
 ### Why content.yaml?
 
@@ -340,7 +341,7 @@ If text.md and content.yaml disagree: **content.yaml wins. Always.**
 ### Render Engine Contract (v2.4.0)
 
 The Render Engine:
-1. Opens `ApprovedAssets/Text/P{NNN}/content.yaml`
+1. Opens `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/content.yaml`
 2. Checks `metadata.yaml §approved == true` and `§locked == true` (preferred)
 3. Maps each content field to its component per `manifest.yaml §components[].content_fields`
 4. Places content verbatim — no paraphrase, no translation

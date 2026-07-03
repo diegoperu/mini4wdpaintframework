@@ -123,7 +123,8 @@ Content: any premium-specific notes not covered above.
 | Additional materials listed if defined | Prompt spec |
 | Page level DoD | `Core/DEFINITION_OF_DONE.md` |
 
-Save output to: `ApprovedAssets/Text/P009/content.yaml`
+Save output to: `Projects/{Model}/{Variant}/ApprovedText/P009/content.yaml`
+(where {Model} = PascalCase_Underscore model folder, {Variant} = PascalCase_Underscore variant folder derived from paintScheme.slug)
 
 ---
 

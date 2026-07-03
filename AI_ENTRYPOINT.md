@@ -22,7 +22,7 @@ bootstrap:
     - "Core/PAGE_SYSTEM.md"
     - "PromptEngine/{page}.md"
     - "Projects/{ModelName}/PROJECT.yaml"
-    - "ApprovedAssets/Text/{page}/"
+    - "Projects/{ModelFolder}/{VariantFolder}/ApprovedText/{page}/"
     - "Projects/{ModelName}/Images/ or provided images"
 
 output_mode:

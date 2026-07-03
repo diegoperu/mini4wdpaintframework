@@ -120,7 +120,8 @@ Body: aggregated notes from decals[], or: "No model-specific decal notes."
 | C015 notes present | `Core/COMPONENT_SYSTEM.md §C015` |
 | Page level DoD | `Core/DEFINITION_OF_DONE.md` |
 
-Save output to: `ApprovedAssets/Text/P008/content.yaml`
+Save output to: `Projects/{Model}/{Variant}/ApprovedText/P008/content.yaml`
+(where {Model} = PascalCase_Underscore model folder, {Variant} = PascalCase_Underscore variant folder derived from paintScheme.slug)
 
 ---
 

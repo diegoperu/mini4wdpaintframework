@@ -390,7 +390,7 @@ New pages can be added to the system without modifying existing pages. Follow th
 
 ### Module Architecture
 
-Each page (P001–P010) is no longer just a generated image. It is a module stored in `ApprovedAssets/Text/P{NNN}/` containing:
+Each page (P001–P010) is no longer just a generated image. It is a module stored in `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/` containing:
 
 ```
 P{NNN}/
@@ -429,7 +429,7 @@ Page modules are designed to be reusable:
 When adding pages beyond P010:
 1. Assign next available ID: `P011`, `P012`, etc.
 2. Add to `Config/sdk.yaml §pages`
-3. Create `ApprovedAssets/Text/P{NNN}/` with all required files
+3. Create `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/` with all required files
 4. Create `PromptEngine/{PageName}.md`
 5. Add ADR in `STYLE_DECISIONS.md`
 6. Update `MANIFEST.yaml §pages`

@@ -64,7 +64,7 @@ Phase 2: Knowledge Load
 
 Phase 2a: Text Engine
           └─ Generate content.yaml for each page P001–P010
-          └─ Output: ApprovedAssets/Text/P00x/content.yaml
+          └─ Output: Projects/{Model}/{Variant}/ApprovedText/P00x/content.yaml
 
 Phase 2b: Content QA
           └─ Validate content.yaml with Tests/ContentValidation.md (7 suites)
@@ -81,7 +81,7 @@ Phase 2d: Approved Assets Sealing
 Phase 3: Render Engine
          └─ Generate illustrated page from locked content.yaml
          └─ Input: content.yaml ONLY
-         └─ Output: ApprovedAssets/Images/P00x/
+         └─ Output: Projects/{Model}/{Variant}/ApprovedImages/P00x/
 
 Phase 4: Image and Page QA
          └─ Validate with Core/QA_SYSTEM.md (110-item checklist)
@@ -93,7 +93,7 @@ Phase 6: Approved Manual
          └─ Output: Assets/ApprovedManual/{ModelName}/
 
 Phase 7: Release
-         └─ Tag release, update ApprovedAssets/index.yaml
+         └─ Tag release, update Projects/{Model}/{Variant}/index.yaml
 ```
 
 Full details: `Build/Pipeline.md`

@@ -45,6 +45,10 @@ project:
 paintScheme:
   name: ""                       # REQUIRED — descriptive name for this color scheme
                                  #   Example: "Midnight Violet"
+  slug: ""                       # REQUIRED — kebab-case identifier for this variant (used as folder name)
+                                 #   Derived from name: lowercase, spaces → hyphens, no special chars
+                                 #   Example: "midnight-violet"
+                                 #   Folder name = Title_Case_Underscore version: "Midnight_Violet"
   description: ""                # OPTIONAL — 1-2 sentence description of the scheme's aesthetic
                                  #   Example: "Deep violet body with metallic silver accents and black details"
   colors:                        # REQUIRED — at least one color entry

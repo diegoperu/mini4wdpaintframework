@@ -140,7 +140,8 @@ After the AI produces output, verify against:
 | Render QA-016 to QA-030 | `Core/QA_SYSTEM.md §Rendering` |
 | Page level Definition of Done | `Core/DEFINITION_OF_DONE.md §Page Level DoD` |
 
-Save output to: `ApprovedAssets/Text/P001/content.yaml`
+Save output to: `Projects/{Model}/{Variant}/ApprovedText/P001/content.yaml`
+(where {Model} = PascalCase_Underscore model folder, {Variant} = PascalCase_Underscore variant folder derived from paintScheme.slug)
 Save approved output to: `Assets/ApprovedManual/{{project.modelSlug}}/P001.png`
 
 ---

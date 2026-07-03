@@ -93,7 +93,8 @@ Source Sans Pro Regular 9pt DarkGray.
 | Pro tips C009 at bottom | `Core/COMPONENT_SYSTEM.md §C009` |
 | Page level DoD | `Core/DEFINITION_OF_DONE.md` |
 
-Save output to: `ApprovedAssets/Text/P004/content.yaml`
+Save output to: `Projects/{Model}/{Variant}/ApprovedText/P004/content.yaml`
+(where {Model} = PascalCase_Underscore model folder, {Variant} = PascalCase_Underscore variant folder derived from paintScheme.slug)
 
 ---
 

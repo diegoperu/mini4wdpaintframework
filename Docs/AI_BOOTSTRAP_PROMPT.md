@@ -107,7 +107,7 @@ rispondi «Bootstrap approvato. Inizia dalla pagina P001.»
 
 **Input (aggiungi agli allegati):**
 - `PromptEngine/{pagina}.md` (es. `PromptEngine/Cover.md` per P001)
-- `ApprovedAssets/Text/P00x/` solo se la pagina ha già contenuto sigillato
+- `Projects/{Model}/{Variant}/ApprovedText/P00x/` solo se la pagina ha già contenuto sigillato
 
 **Output atteso:** `content.yaml` completo per la pagina, in italiano, con `TODO:` per
 i dati mancanti. Nessuna immagine, nessuna decisione di layout.
@@ -124,7 +124,10 @@ Genera la pagina {PAGINA} ({NOME_PAGINA}) del manuale per il modello {NOME_MODEL
    corrispondente in paintScheme.colors (dove id == colorId) ed estrai paintCode,
    paintName, finish, hex. Non lasciare TODO: per valori raggiungibili tramite
    riferimento — usa TODO: solo per dati genuinamente assenti nel PROJECT.yaml.
-4. Genera il file content.yaml completo per questa pagina.
+4. Genera il file content.yaml e scrivilo in
+   Projects/{Model}/{Variant}/ApprovedText/{PAGINA}/content.yaml
+   dove {Model} = cartella PascalCase_Underscore del modello,
+   {Variant} = cartella PascalCase_Underscore della variante (da paintScheme.slug).
 5. Usa TODO: per qualsiasi valore non disponibile in PROJECT.yaml — non inventare nulla.
 6. Tutto il testo editoriale in italiano; codici e nomi commerciali restano invariati.
 
@@ -195,7 +198,7 @@ Riporta:
 7. le foto da `Projects/{Modello}/Images/`
 
 **Output atteso:** pagina illustrata completa, pronta per la validazione visiva
-(`Core/QA_SYSTEM.md`). Da salvare in `ApprovedAssets/Images/P00x/`.
+(`Core/QA_SYSTEM.md`). Da salvare in `Projects/{Model}/{Variant}/ApprovedImages/P00x/`.
 
 **Prompt:**
 

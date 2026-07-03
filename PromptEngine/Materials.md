@@ -107,7 +107,8 @@ Body: "Always use paints in a well-ventilated area. Wear nitrile gloves when han
 | Safety warning C008 present | `Core/COMPONENT_SYSTEM.md §C008` |
 | Page level DoD | `Core/DEFINITION_OF_DONE.md` |
 
-Save output to: `ApprovedAssets/Text/P003/content.yaml`
+Save output to: `Projects/{Model}/{Variant}/ApprovedText/P003/content.yaml`
+(where {Model} = PascalCase_Underscore model folder, {Variant} = PascalCase_Underscore variant folder derived from paintScheme.slug)
 
 ---
 

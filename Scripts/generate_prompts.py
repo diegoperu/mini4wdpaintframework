@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Mini4WD Manual SDK v2.4.1 — Generatore Prompt Precompilati
+Mini4WD Manual SDK v2.5.0 — Generatore Prompt Precompilati
 ===========================================================
 Legge PROJECT.yaml e genera tutti i prompt Fase 2 / QA / Sigillatura
 pronti per il copia-incolla, per le sole pagine attive del progetto.
@@ -68,16 +68,25 @@ def ask_yes_no(question, default=None):
 # GENERATORI PROMPT
 # ============================================================
 
-def prompt_fase2(page, model_name, runtime):
+def slug_to_folder(slug):
+    """Convert kebab-case slug to PascalCase_Underscore folder name."""
+    return "_".join(word.capitalize() for word in slug.split("-"))
+
+
+def prompt_fase2(page, model_name, runtime, project_dir=None, variant_folder=None):
     pid  = page["id"]
     name = page["name"]
     pf   = page["file"]
 
     if runtime == "claude":
         read_step  = f"Leggi il file PromptEngine/{pf} nel repository."
+        if project_dir and variant_folder:
+            approved_text = f"{project_dir}/ApprovedText/{pid}/content.yaml"
+        else:
+            approved_text = f"Projects/{{Model}}/{variant_folder or '{Variant}'}/ApprovedText/{pid}/content.yaml"
         write_step = (
             f"Genera il file content.yaml completo per questa pagina e scrivilo in\n"
-            f"   ApprovedAssets/Text/{pid}/content.yaml."
+            f"   {approved_text}"
         )
     else:
         read_step  = f"Leggi il file PromptEngine/{pf} dallo ZIP che hai già caricato."
@@ -104,12 +113,13 @@ pronto per la validazione QA.
 """
 
 
-def prompt_qa(page, runtime):
+def prompt_qa(page, runtime, project_dir=None):
     pid  = page["id"]
     name = page["name"]
 
     if runtime == "claude":
-        target = f"in ApprovedAssets/Text/{pid}/content.yaml"
+        path = f"{project_dir}/ApprovedText/{pid}/content.yaml" if project_dir else f"Projects/{{Model}}/{{Variant}}/ApprovedText/{pid}/content.yaml"
+        target = f"in {path}"
     else:
         target = "appena generato"
 
@@ -135,15 +145,16 @@ Riporta:
 """
 
 
-def prompt_sigillatura(page):
+def prompt_sigillatura(page, project_dir=None):
     pid  = page["id"]
     name = page["name"]
+    base = f"{project_dir}/ApprovedText/{pid}" if project_dir else f"Projects/{{Model}}/{{Variant}}/ApprovedText/{pid}"
     return f"""\
 [SIGILLATURA — {pid} {name}]
 
 Approvato. Sigilla la pagina {pid}:
-ApprovedAssets/Text/{pid}/metadata.yaml → status: locked
-Aggiungi riga di changelog in ApprovedAssets/Text/{pid}/changelog.md.
+{base}/metadata.yaml → status: locked
+Aggiungi riga di changelog in {base}/changelog.md.
 """
 
 # ============================================================
@@ -184,14 +195,28 @@ def main():
     decals          = project.get("decals", [])
     premium_enabled = project.get("premiumVariant", {}).get("enabled", False)
 
+    # --- Deriva project_dir e variant_folder dal path del PROJECT.yaml ---
+    project_dir    = os.path.dirname(os.path.abspath(args.project_yaml)).replace("\\", "/")
+    variant_folder = os.path.basename(project_dir)
+
+    # Cross-check con paintScheme.slug
+    scheme_slug = project.get("paintScheme", {}).get("slug", "")
+    if scheme_slug:
+        expected_folder = slug_to_folder(scheme_slug)
+        if expected_folder != variant_folder:
+            print(f"  ⚠️  ATTENZIONE: cartella variante ({variant_folder}) ≠ slug → cartella attesa ({expected_folder})")
+            print(f"     Verifica che paintScheme.slug sia corretto in PROJECT.yaml.")
+            print()
+
     # --- Banner ---
     print()
     print(SEP)
     print("  Mini4WD Manual SDK — Generatore Prompt")
     print(SEP)
-    print(f"  Modello : {model_name}")
-    print(f"  Runtime : {args.runtime}")
-    print(f"  Progetto: {args.project_yaml}")
+    print(f"  Modello  : {model_name}")
+    print(f"  Variante : {variant_folder}")
+    print(f"  Runtime  : {args.runtime}")
+    print(f"  Path     : {project_dir}")
     print(SEP)
     print()
 
@@ -246,28 +271,29 @@ def main():
         lines.append(SEP_THIN)
         lines.append(f"  STEP 1 di 3 — Genera content.yaml")
         lines.append(SEP_THIN)
-        lines.append(prompt_fase2(page, model_name, args.runtime))
+        lines.append(prompt_fase2(page, model_name, args.runtime, project_dir, variant_folder))
 
         lines.append(SEP_THIN)
         lines.append(f"  STEP 2 di 3 — QA (invia dopo aver ricevuto content.yaml)")
         lines.append(SEP_THIN)
-        lines.append(prompt_qa(page, args.runtime))
+        lines.append(prompt_qa(page, args.runtime, project_dir))
 
         lines.append(SEP_THIN)
         lines.append(f"  STEP 3 di 3 — Sigilla (solo se QA: APPROVED)")
         lines.append(SEP_THIN)
-        lines.append(prompt_sigillatura(page))
+        lines.append(prompt_sigillatura(page, project_dir))
         lines.append("")
 
     output_text = "\n".join(lines)
 
-    if args.output:
-        with open(args.output, "w", encoding="utf-8") as f:
-            f.write(output_text)
-        print(f"  Prompt salvati in: {args.output}")
-        print()
-    else:
-        print(output_text)
+    output_path = args.output or os.path.join(
+        os.path.dirname(os.path.abspath(args.project_yaml)),
+        "prompts_generated.txt"
+    )
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(output_text)
+    print(f"  Prompt salvati in: {output_path}")
+    print()
 
 
 if __name__ == "__main__":

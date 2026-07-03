@@ -94,7 +94,8 @@ Body: "Never apply the next coat before the previous one is fully dry to touch. 
 | Code boxes formatted correctly | `Core/COMPONENT_SYSTEM.md §C011` |
 | Page level DoD | `Core/DEFINITION_OF_DONE.md` |
 
-Save output to: `ApprovedAssets/Text/P005/content.yaml`
+Save output to: `Projects/{Model}/{Variant}/ApprovedText/P005/content.yaml`
+(where {Model} = PascalCase_Underscore model folder, {Variant} = PascalCase_Underscore variant folder derived from paintScheme.slug)
 
 ---
 

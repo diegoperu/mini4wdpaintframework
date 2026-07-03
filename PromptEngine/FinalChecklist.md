@@ -146,7 +146,8 @@ Right: SDK Version: 2.4.0 | Page Count: 10 | Scheme: {{paintScheme.name}}
 | SDK version correct in footer | VERSION file |
 | Page level DoD | `Core/DEFINITION_OF_DONE.md` |
 
-Save output to: `ApprovedAssets/Text/P010/content.yaml`
+Save output to: `Projects/{Model}/{Variant}/ApprovedText/P010/content.yaml`
+(where {Model} = PascalCase_Underscore model folder, {Variant} = PascalCase_Underscore variant folder derived from paintScheme.slug)
 
 ---
 

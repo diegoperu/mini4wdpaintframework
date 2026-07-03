@@ -117,7 +117,8 @@ Body: "{{paintScheme.colorNotes}}" Source Sans Pro Regular 9pt DarkGray.
 | All colors reference `Core/COLOR_SYSTEM.md` design tokens | QA-046 to QA-060 |
 | Page level DoD | `Core/DEFINITION_OF_DONE.md §Page Level DoD` |
 
-Save output to: `ApprovedAssets/Text/P002/content.yaml`
+Save output to: `Projects/{Model}/{Variant}/ApprovedText/P002/content.yaml`
+(where {Model} = PascalCase_Underscore model folder, {Variant} = PascalCase_Underscore variant folder derived from paintScheme.slug)
 
 ---
 

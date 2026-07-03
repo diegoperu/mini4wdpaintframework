@@ -145,7 +145,7 @@ Project configuration for the current model. Contains model name, series, paint 
 ---
 
 ### Step 12 — ApprovedAssets/Text/{page}/
-**Type:** Directory | **Path:** `ApprovedAssets/Text/P00x/`
+**Type:** Directory | **Path:** `Projects/{ModelFolder}/{VariantFolder}/ApprovedText/P00x/`
 
 Existing sealed content for the current page, if any. Contains `content.yaml` (primary source of truth), `metadata.yaml` (lifecycle state), `manifest.yaml` (dependencies), and `changelog.md` (revision history).
 
