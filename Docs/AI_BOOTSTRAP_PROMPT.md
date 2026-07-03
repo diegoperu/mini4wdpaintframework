@@ -4,7 +4,8 @@
 
 > Un prompt pronto per ogni fase della pipeline. Per ogni fase trovi: **Input**
 > (cosa allegare), **Output** (cosa aspettarti), **Prompt** (da copiare), **Nuova
-> chat SÌ/NO**. Compatibile con ChatGPT, Claude, Gemini e qualsiasi modello futuro.
+> chat SÌ/NO**. Verificato con ChatGPT (GPT-4o) e Claude (Sonnet/Opus).
+> Gemini: non supportato — fallito UAT-002 (vedi §Compatibilità).
 >
 > La pipeline: **Bootstrap → Generazione Testi → QA → Rendering → PDF**
 > Mappa completa degli stati: `WORKFLOW.md` (root).
@@ -334,7 +335,7 @@ Continua dalla pagina {PAGINA} nella fase {FASE}.
 |---|---|---|
 | ChatGPT (GPT-4o, GPT-4) | ✓ | Allegati via file upload |
 | Claude (Sonnet, Opus) | ✓ | Allegati o incolla |
-| Gemini (1.5 Pro, Ultra) | ✓ | Allegati via Drive o incolla |
+| Gemini | ❌ Non supportato | Fallito UAT-002: allucinazioni Fase 3/4, metadati leaked nel render, risposta scollegata. Vedi `UAT/UAT-002.md`. |
 | Modelli futuri | Atteso ✓ | Nessuna sintassi model-specific |
 
 ## Riferimenti

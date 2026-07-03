@@ -66,7 +66,7 @@ L'architettura del framework è progettata per supportare altri runtime senza mo
 | ChatGPT Web | ✅ Supportato | Procedura via ZIP + allegati |
 | Claude Code | ✅ Supportato | Accesso diretto al repository |
 | Claude Web | 🔜 Pianificato | Analogo a ChatGPT Web |
-| Gemini | 🔜 Pianificato | Via Google Drive o allegati |
+| Gemini | ❌ Non supportato | Fallito UAT-002: allucinazioni in Fase 3/4, metadati leaked nel render, risposta scollegata con prompt rinforzato. Vedi `UAT/UAT-002.md`. |
 | Ollama | 🔜 Pianificato | Locale, richiede context window ≥ 100K token |
 | Open WebUI | 🔜 Pianificato | Dipende dal modello backend |
 | vLLM | 🔜 Pianificato | Deployment locale/cloud |

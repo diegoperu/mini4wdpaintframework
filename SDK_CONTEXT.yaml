@@ -29,11 +29,17 @@ repository:
 compatibility:
   chatgpt: true
   claude: true
-  gemini: true
+  gemini: false
+  gemini_note: >
+    Testato in UAT-002 (v2.4.1) — allucinazioni severe in Fase 3/4 (Render Engine):
+    contenuto inventato da priors di training invece di content.yaml, metadati SDK
+    leaked nell'immagine finale, risposta scollegata dall'input con prompt rinforzato.
+    Non raccomandato fino a nuova verifica con modello aggiornato.
   future_models: true
   notes: >
-    All PromptEngine/ prompts are model-agnostic. No model-specific syntax is used.
-    Any instruction-following language model can execute this framework.
+    PromptEngine/ prompts are model-agnostic in syntax but not all models can reliably
+    follow structured content constraints. Verified: ChatGPT (GPT-4o), Claude (Sonnet/Opus).
+    Gemini: failed UAT-002 (see gemini_note). Other models: untested.
 
 pipeline:
   sequence: ["text_engine", "qa_engine", "render_engine", "pdf_builder"]

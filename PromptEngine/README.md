@@ -135,12 +135,12 @@ All tokens used across all prompts in this directory:
 
 Prompts are written in plain instructional English. They must work without modification on:
 
-- OpenAI GPT-4 / GPT-4o
-- Anthropic Claude (any version)
-- Google Gemini
-- Meta Llama (via API)
-- Mistral / Mixtral
-- Any future model
+- OpenAI GPT-4 / GPT-4o ✓ (verified)
+- Anthropic Claude (any version) ✓ (verified)
+- Google Gemini ❌ (failed UAT-002 — Phase 3/4 render unreliable; see `UAT/UAT-002.md`)
+- Meta Llama (via API) — untested
+- Mistral / Mixtral — untested
+- Any future model — untested
 
 **Never** include model-specific syntax inside prompt templates:
 - No `[INST]...[/INST]` (Llama format)

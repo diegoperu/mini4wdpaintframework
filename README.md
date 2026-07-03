@@ -137,7 +137,8 @@ For the full pipeline with all phases, see `Build/Pipeline.md`.
 
 ## Quick Start — For an AI Model
 
-> If you are an AI model (ChatGPT, Claude, Gemini, or any other), read these files in order before generating anything. Do not skip steps.
+> If you are an AI model (ChatGPT, Claude, or any other verified model), read these files in order before generating anything. Do not skip steps.
+> Note: Gemini is not supported — failed UAT-002 (unreliable Phase 3/4 render). See `UAT/UAT-002.md`.
 
 **Step 1 — Read `AI_ENTRYPOINT.md`**
 
@@ -166,7 +167,7 @@ Photography of the physical Mini4WD model. Required by the Render Engine to ensu
 After loading all documents: produce a **Bootstrap Report** (format defined in `AI_ENTRYPOINT.md`) and wait for user approval before generating any content.
 
 For the full AI context loading order with rationale, see `Docs/LOAD_ORDER.md`.
-For ready-to-use prompts (ChatGPT, Claude, Gemini), see `Docs/AI_BOOTSTRAP_PROMPT.md`.
+For ready-to-use prompts (ChatGPT, Claude), see `Docs/AI_BOOTSTRAP_PROMPT.md`.
 For step-by-step project creation, see `Projects/PROJECT_BOOTSTRAP.md`.
 
 ---
@@ -294,7 +295,7 @@ mini4wdpaintframework/
 │
 └── Docs/                        ← Extended documentation and guides
     ├── LOAD_ORDER.md            ← Explicit AI context loading order with rationale
-    ├── AI_BOOTSTRAP_PROMPT.md   ← Ready-to-use prompts for ChatGPT, Claude, Gemini
+    ├── AI_BOOTSTRAP_PROMPT.md   ← Ready-to-use prompts for ChatGPT, Claude (Gemini: not supported — UAT-002)
     └── migration/
         └── v1-to-v2.md          ← Migration guide: SDK v1.x → v2.x
 ```
@@ -310,7 +311,7 @@ mini4wdpaintframework/
 | [BOOTSTRAP.md](BOOTSTRAP.md) | **AI entry point** — rules, pipeline, page index, errors to avoid |
 | [SDK_CONTEXT.yaml](SDK_CONTEXT.yaml) | SDK identity card — version, pipeline, source of truth |
 | [Docs/LOAD_ORDER.md](Docs/LOAD_ORDER.md) | Explicit context loading order with rationale |
-| [Docs/AI_BOOTSTRAP_PROMPT.md](Docs/AI_BOOTSTRAP_PROMPT.md) | Ready-to-use prompts for ChatGPT, Claude, Gemini |
+| [Docs/AI_BOOTSTRAP_PROMPT.md](Docs/AI_BOOTSTRAP_PROMPT.md) | Ready-to-use prompts for ChatGPT, Claude (Gemini: not supported — UAT-002) |
 | [Projects/PROJECT_BOOTSTRAP.md](Projects/PROJECT_BOOTSTRAP.md) | Step-by-step new project guide |
 | [STATUS.md](STATUS.md) | Implementation status, roadmap, known issues |
 | [ReleaseInfo.yaml](ReleaseInfo.yaml) | Machine-readable release metadata |
