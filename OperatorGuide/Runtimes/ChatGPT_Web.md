@@ -226,8 +226,16 @@ Se il report cita dati sbagliati o inventati: correggi il PROJECT.yaml e ricomin
 
 Rimani nella stessa chat del bootstrap. Non riaprire una nuova chat e non ricaricare file.
 
-Il ciclo **11a → 11b → 11c si ripete 10 volte** — una per ogni pagina da P001 a P010.
-Completa P001 prima di passare a P002, e così via.
+Il ciclo **11a → 11b → 11c si ripete N volte** — una per ogni pagina attiva.
+
+> **Il numero di pagine dipende dal tuo progetto:**
+> - **P008 Decalcomanie** — includi solo se il tuo modello ha decalcomanie (`decals:` non vuoto in PROJECT.yaml). Se `decals: []`, salta P008.
+> - **P009 Variante Premium** — includi solo se `premiumVariant.enabled: true` in PROJECT.yaml.
+> - Tutte le altre pagine (P001–P007, P010) sono **sempre richieste**.
+>
+> Minimo: **8 pagine** (P001–P007 + P010). Massimo: **10 pagine**.
+>
+> 💡 **Power user:** usa `Scripts/generate_prompts.py` per generare automaticamente tutti i prompt precompilati per le pagine del tuo progetto. Lo script legge PROJECT.yaml e chiede interattivamente per P008/P009.
 
 ---
 
@@ -264,18 +272,18 @@ Sostituisci prima di inviare:
 
 Tabella pagine → file PromptEngine:
 
-| Pagina | Nome | FILE_PROMPT.md |
-|---|---|---|
-| P001 | Copertina | `Cover.md` |
-| P002 | Schema Colori | `ColorScheme.md` |
-| P003 | Materiali | `Materials.md` |
-| P004 | Preparazione | `Preparation.md` |
-| P005 | Verniciatura | `Painting.md` |
-| P006 | Mascheratura | `Masking.md` |
-| P007 | Dettagli | `Details.md` |
-| P008 | Decalcomanie | `Decals.md` |
-| P009 | Variante Premium *(solo se abilitata)* | `Premium.md` |
-| P010 | Checklist Finale | `FinalChecklist.md` |
+| Pagina | Nome | FILE_PROMPT.md | Condizione |
+|---|---|---|---|
+| P001 | Copertina | `Cover.md` | Sempre |
+| P002 | Schema Colori | `ColorScheme.md` | Sempre |
+| P003 | Materiali | `Materials.md` | Sempre |
+| P004 | Preparazione | `Preparation.md` | Sempre |
+| P005 | Verniciatura | `Painting.md` | Sempre |
+| P006 | Mascheratura | `Masking.md` | Sempre |
+| P007 | Dettagli | `Details.md` | Sempre |
+| P008 | Decalcomanie | `Decals.md` | Solo se `decals:` non vuoto in PROJECT.yaml |
+| P009 | Variante Premium | `Premium.md` | Solo se `premiumVariant.enabled: true` |
+| P010 | Checklist Finale | `FinalChecklist.md` | Sempre |
 
 > ⚠️ **`TODO:` nell'output non è un errore.** Significa che quel dato non è presente in PROJECT.yaml.
 > Se vedi molti `TODO:` nei campi vernice o sequenze operative, torna a compilare PROJECT.yaml
