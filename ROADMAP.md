@@ -84,6 +84,22 @@ default skin. Two new components are candidates to ship alongside this system, n
 
 Each new theme must still pass Rule 1 (function over decoration) for whatever tone it targets.
 
+**Manual frame chrome must become config-driven, not prompt-hardcoded.** Today the page
+frame itself (background, header/footer color) is literal text in the Fase 4 prompt —
+e.g. `Docs/AI_BOOTSTRAP_PROMPT.md`: *"Sfondo bianco puro. Pannello header viola
+(token.PrimaryViolet)"*, duplicated in `OperatorGuide/Runtimes/Claude_Code.md` 10c. There
+is no config layer resolving which token applies; the prompt names `PrimaryViolet`
+directly. This must move to a per-project (or per-series) config value that the prompt
+*resolves* instead of hardcodes.
+
+**New hierarchy level: series/collection ("collana").** A theme should be settable once
+for a whole series of models and inherited by every project under it, not just per single
+project. This requires a config layer above `PROJECT.yaml` that does not exist today —
+the SDK only has `Projects/{Model}/{Variant}/`, no collection/series grouping. Candidate
+shape: a `Collections/{CollanaName}/COLLECTION.yaml` (or similar) declaring the default
+theme, with `PROJECT.yaml` gaining an optional `collana` reference and an optional
+override if a single project needs to deviate from its series' theme.
+
 ### P002 Layout — Compact Orthogonal View Row
 Independent of the theme system. Current P002 shows front/side/top renders as three large
 vertical panels. Alternate layout: same `renders.front/side/top` data from `content.yaml`,
