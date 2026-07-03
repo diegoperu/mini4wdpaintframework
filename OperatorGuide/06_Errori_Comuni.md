@@ -1,6 +1,6 @@
 # 06 — Errori Comuni
 
-**OperatorGuide · Mini4WD Manual SDK v2.4.1**
+**OperatorGuide · Mini4WD Manual SDK v2.5.0**
 
 > Errori realmente osservati durante il primo test con un operatore esterno
 > (report completo: `../UAT/UAT-001.md`), più gli errori classici delle sessioni AI.
@@ -12,7 +12,7 @@
 
 **Sintomo:** bootstrap OK, lanci la validazione su P001 e piove di FAIL (campi vuoti,
 placeholder, "contenuto mancante").
-**Causa:** hai validato il **template** di `ApprovedAssets/Text/P001/` — che nasce con
+**Causa:** hai validato il **template** di `Projects/{Model}/{Variant}/ApprovedText/P001/` — che nasce con
 campi vuoti e `status: draft` — invece del contenuto generato. Un template non è
 contenuto finale.
 **Soluzione:** prima **Fase 2** (genera content.yaml), poi **Fase 3** (valida). Il QA

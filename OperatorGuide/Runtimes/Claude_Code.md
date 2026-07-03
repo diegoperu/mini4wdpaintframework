@@ -1,6 +1,6 @@
 # Guida Claude Code — Il Tuo Primo Manuale
 
-**OperatorGuide · Mini4WD Manual SDK v2.4.1 · Runtime: Claude Code**
+**OperatorGuide · Mini4WD Manual SDK v2.5.0 · Runtime: Claude Code**
 
 > Questa guida è autonoma: contiene tutto ciò che ti serve per produrre il tuo primo manuale
 > usando Claude Code. Non è necessario leggere altri documenti prima di questa guida.
@@ -131,7 +131,7 @@ Claude Code si avvia nel contesto del repository. L'AI può leggere tutti i file
 Incolla il **Prompt Fase 1 — Bootstrap** da `Docs/AI_BOOTSTRAP_PROMPT.md §FASE 1 · Claude Code`.
 
 ```
-Stai operando come motore editoriale del Mini4WD Manual SDK v2.4.1.
+Stai operando come motore editoriale del Mini4WD Manual SDK v2.5.0.
 
 Leggi i seguenti file del repository nell'ordine indicato:
 1. AI_ENTRYPOINT.md

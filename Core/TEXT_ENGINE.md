@@ -301,7 +301,7 @@ Lorem ipsum dolor sit amet.    ← LOREM — RIFIUTATO
 | Version | Primary Output | Secondary Output |
 |---------|---------------|-----------------|
 | v2.3.0 | `ApprovedText/P{NNN}.md` (Markdown) | — |
-| v2.4.0 | `ApprovedAssets/Text/P{NNN}/content.yaml` (YAML) | `text.md` (derived) |
+| v2.4.0 | `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/content.yaml` (YAML) | `text.md` (derived) |
 | v2.5.0 | `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/content.yaml` (YAML) | `text.md` (derived) |
 
 ### Why content.yaml?

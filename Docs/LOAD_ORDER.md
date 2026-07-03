@@ -1,7 +1,7 @@
 # LOAD_ORDER.md
 # Mini4WD Manual SDK — Context Loading Order
 
-**Version:** 2.4.1
+**Version:** 2.5.0
 
 > This document defines the exact order in which an AI model must load SDK documents
 > before generating any page. Skipping steps or loading out of order produces incomplete
@@ -20,7 +20,7 @@ Each document in the LOAD sequence builds on the previous ones:
 - `DESIGN_LANGUAGE.md` and `STYLE_GUIDE.md` define the visual grammar — must be loaded before rendering
 - `COMPONENT_SYSTEM.md` must be loaded before `PAGE_SYSTEM.md` (pages reference components)
 - `PROJECT.yaml` is loaded last among specifications because it overrides defaults set by all previous documents
-- `ApprovedAssets/` are loaded after `PROJECT.yaml` to provide existing sealed content for the current project
+- `ApprovedText/` files are loaded after `PROJECT.yaml` to provide existing sealed content for the current project
 
 ---
 
@@ -133,8 +133,8 @@ Page-specific prompt for the current page. Contains the generation instructions,
 
 ---
 
-### Step 11 — Projects/{ModelName}/PROJECT.yaml
-**Type:** YAML | **Path:** `Projects/{ModelName}/PROJECT.yaml`
+### Step 11 — Projects/{ModelFolder}/{VariantFolder}/PROJECT.yaml
+**Type:** YAML | **Path:** `Projects/{ModelFolder}/{VariantFolder}/PROJECT.yaml`
 
 Project configuration for the current model. Contains model name, series, paint scheme, render paths, and all project-specific data. Overrides prompt defaults for any field it specifies.
 
@@ -144,7 +144,7 @@ Project configuration for the current model. Contains model name, series, paint 
 
 ---
 
-### Step 12 — ApprovedAssets/Text/{page}/
+### Step 12 — Projects/{Model}/{Variant}/ApprovedText/{page}/
 **Type:** Directory | **Path:** `Projects/{ModelFolder}/{VariantFolder}/ApprovedText/P00x/`
 
 Existing sealed content for the current page, if any. Contains `content.yaml` (primary source of truth), `metadata.yaml` (lifecycle state), `manifest.yaml` (dependencies), and `changelog.md` (revision history).
@@ -156,7 +156,7 @@ Existing sealed content for the current page, if any. Contains `content.yaml` (p
 ---
 
 ### Step 13 — Reference Images
-**Type:** Image files | **Path:** `Projects/{ModelName}/Images/` or provided by user
+**Type:** Image files | **Path:** `Projects/{ModelFolder}/{VariantFolder}/Images/` or provided by user
 
 Photography of the physical Mini4WD model. Used by the Render Engine to ensure renders match the real product exactly.
 

@@ -1,6 +1,6 @@
 # AI_BOOTSTRAP_PROMPT.md — Prompt Ufficiali per Fase
 
-**Mini4WD Manual SDK v2.4.1**
+**Mini4WD Manual SDK v2.5.0**
 
 > Un prompt pronto per ogni fase della pipeline. Per ogni fase trovi: **Input**
 > (cosa allegare), **Output** (cosa aspettarti), **Prompt** (da copiare), **Nuova
@@ -58,7 +58,7 @@ Guida completa passo-passo: `OperatorGuide/Runtimes/ChatGPT_Web.md`
 **Prompt:**
 
 ```
-Stai operando come motore editoriale del Mini4WD Manual SDK v2.4.1.
+Stai operando come motore editoriale del Mini4WD Manual SDK v2.5.0.
 
 Leggi i seguenti file del repository nell'ordine indicato:
 1. AI_ENTRYPOINT.md
@@ -264,7 +264,7 @@ Tutte le pagine del manuale {NOME_MODELLO} sono in status: rendered.
 allega PROJECT.yaml e immagini separatamente, poi incolla questo prompt.
 
 ```
-Hai ricevuto il Mini4WD Manual SDK v2.4.1.
+Hai ricevuto il Mini4WD Manual SDK v2.5.0.
 
 Leggi i file in questo ordine prima di qualsiasi altra cosa:
 1. AI_ENTRYPOINT.md
@@ -291,7 +291,7 @@ e fermati: attendi la mia approvazione prima di generare qualsiasi contenuto.
 Riallegare i file della fase in corso.
 
 ```
-Stiamo continuando la sessione Mini4WD Manual SDK v2.4.1
+Stiamo continuando la sessione Mini4WD Manual SDK v2.5.0
 per il modello {NOME_MODELLO}.
 
 Stato attuale:

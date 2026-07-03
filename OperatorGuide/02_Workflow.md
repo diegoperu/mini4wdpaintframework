@@ -1,6 +1,6 @@
 # 02 — Workflow Operativo
 
-**OperatorGuide · Mini4WD Manual SDK v2.4.1**
+**OperatorGuide · Mini4WD Manual SDK v2.5.0**
 
 > Versione compatta del workflow. State machine completa: `../WORKFLOW.md`.
 
@@ -55,7 +55,7 @@ quando cambi solo pagina.
 |---|---|---|
 | Setup | Template + dati modello | `PROJECT.yaml` + foto in `Images/` |
 | Bootstrap | Framework + PROJECT.yaml + foto | Bootstrap Report approvato |
-| Testi | PromptEngine/{pagina}.md | `ApprovedAssets/Text/P00x/content.yaml` |
+| Testi | PromptEngine/{pagina}.md | `Projects/{Modello}/{Variante}/ApprovedText/P00x/content.yaml` |
 | QA testi | content.yaml + Tests/ | Verdetto APPROVED/REJECTED |
 | Seal | content.yaml approvato | `metadata.yaml → locked` |
 | Rendering | content.yaml locked + foto + design | Immagine pagina |

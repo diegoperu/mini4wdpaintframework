@@ -1,6 +1,6 @@
 # OPERATOR_PROFILE.md — Ruoli e Responsabilità
 
-**Mini4WD Manual SDK v2.4.1**
+**Mini4WD Manual SDK v2.5.0**
 
 > L'SDK distingue quattro ruoli umani (più l'AI come esecutore). Una stessa persona può
 > coprire più ruoli, ma le responsabilità restano separate: sapere "con quale cappello"
@@ -28,8 +28,8 @@ il contenuto (regola no-self-approval).
 
 | Aspetto | Dettaglio |
 |---|---|
-| **Responsabilità** | Verificare gli esiti QA, approvare i content.yaml (status `approved`/`locked`), firmare `approved_by`/`approved_date`, validare i render contro QA_SYSTEM.md, aggiornare `ApprovedAssets/index.yaml` |
-| **File modificabili** | `ApprovedAssets/Text/P00x/metadata.yaml` (campi approvazione), `ApprovedAssets/index.yaml`, qa_log.md |
+| **Responsabilità** | Verificare gli esiti QA, approvare i content.yaml (status `approved`/`locked`), firmare `approved_by`/`approved_date`, validare i render contro QA_SYSTEM.md, aggiornare `Projects/{Modello}/{Variante}/index.yaml` |
+| **File modificabili** | `Projects/{Modello}/{Variante}/ApprovedText/P00x/metadata.yaml` (campi approvazione), `Projects/{Modello}/{Variante}/index.yaml`, qa_log.md |
 | **Competenze richieste** | Italiano editoriale, conoscenza di `Tests/ContentValidation.md`, `Tests/TextValidation.md`, `Core/QA_SYSTEM.md` |
 
 ## Maintainer

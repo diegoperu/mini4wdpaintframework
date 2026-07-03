@@ -1,6 +1,6 @@
 # Guida ChatGPT Web — Il Tuo Primo Manuale
 
-**OperatorGuide · Mini4WD Manual SDK v2.4.1 · Runtime: ChatGPT Web**
+**OperatorGuide · Mini4WD Manual SDK v2.5.0 · Runtime: ChatGPT Web**
 
 > Questa guida è autonoma: contiene tutto ciò che ti serve per produrre il tuo primo manuale
 > usando ChatGPT Web. Non è necessario leggere altri documenti prima di questa guida.
@@ -171,7 +171,7 @@ Caricare file singoli dal ZIP **oltre** allo ZIP stesso genera contesto duplicat
 Copia il **Prompt E — Bootstrap Minimo** da `Docs/AI_BOOTSTRAP_PROMPT.md §Prompt di servizio` e incollalo nella chat.
 
 ```
-Hai ricevuto il Mini4WD Manual SDK v2.4.1.
+Hai ricevuto il Mini4WD Manual SDK v2.5.0.
 
 Leggi i file in questo ordine prima di qualsiasi altra cosa:
 1. AI_ENTRYPOINT.md

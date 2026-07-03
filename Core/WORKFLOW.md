@@ -166,7 +166,7 @@ The SDK is AI-model-agnostic. Text Mode produces structured content only — no 
 
 **2.4** Save the generated content:
 ```
-ApprovedAssets/Text/P{NNN}/content.yaml   ← PRIMARY output
+Projects/{Model}/{Variant}/ApprovedText/P{NNN}/content.yaml   ← PRIMARY output
 ```
 `content.yaml` is the sole source of truth for page content (Golden Rule G02). A `text.md` human-review copy is derived automatically from it — never edit `text.md` directly.
 
@@ -178,9 +178,9 @@ Both suites must return zero failures before proceeding.
 
 **2.6** Seal the page and render.
 
-Once QA passes, set `ApprovedAssets/Text/P{NNN}/metadata.yaml → status: locked`. The Render Engine (`Core/RENDER_GUIDE.md`) then reads `content.yaml` exclusively and produces the illustrated page — it never invents or modifies text (Golden Rule G03). Save the rendered page to:
+Once QA passes, set `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/metadata.yaml → status: locked`. The Render Engine (`Core/RENDER_GUIDE.md`) then reads `content.yaml` exclusively and produces the illustrated page — it never invents or modifies text (Golden Rule G03). Save the rendered page to:
 ```
-ApprovedAssets/Images/P{NNN}/
+Projects/{Model}/{Variant}/ApprovedImages/P{NNN}/
 ```
 
 **Decision point per page:**

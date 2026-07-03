@@ -3,57 +3,92 @@
 # Mini4WD Manual SDK — Release Metadata
 # Updated at every release. See CHANGELOG.md for full history.
 
-version: "2.4.1"
-release_date: "2026-07-02"
-release_type: "patch"
-codename: "Operator"
-release_name: "UX & Operator Workflow Update"
+version: "2.5.0"
+release_date: "2026-07-03"
+release_type: "minor"
+codename: "MultiProject"
+release_name: "Multi-Project Content Isolation"
 
-breaking_changes: []
+breaking_changes:
+  - field: content_path
+    old: "ApprovedAssets/Text/P{NNN}/content.yaml"
+    new: "Projects/{ModelFolder}/{VariantFolder}/ApprovedText/P{NNN}/content.yaml"
+  - field: images_path
+    old: "ApprovedAssets/Images/P{NNN}/"
+    new: "Projects/{ModelFolder}/{VariantFolder}/ApprovedImages/P{NNN}/"
+  - field: index_path
+    old: "ApprovedAssets/index.yaml"
+    new: "Projects/{ModelFolder}/{VariantFolder}/index.yaml"
+  - field: project_structure
+    old: "Projects/{Model}/"
+    new: "Projects/{Model}/{Variant}/"
+  - field: paintScheme_slug
+    status: "NEW REQUIRED FIELD"
+    description: "paintScheme.slug (kebab-case) required in PROJECT.yaml from v2.5.0"
 
 migration_notes:
-  from: "2.4.0"
-  to: "2.4.1"
-  guide: "MigrationReport_v2.4.1.md"
+  from: "2.4.1"
+  to: "2.5.0"
+  guide: "CHANGELOG.md §[2.5.0] Migration from v2.4.x"
   summary: >
-    UX-only release driven by UAT-001. No framework behavior changes: architecture,
-    Prompt Engine, Text Engine, Component System, Page System and ApprovedAssets
-    structure are untouched. Adds the operator documentation layer (START_HERE.md,
-    OperatorGuide/, tutorials, WORKFLOW state machine), unifies the reference-image
-    convention (Projects/{Model}/Images/), and scopes validation (templates are never
-    validated as final content; language-neutral categories whitelisted).
-  required_actions: []
+    Per-project content isolation. ApprovedAssets/ (global shared directory) is
+    deprecated and replaced by per-variant directories inside each project.
+    Each project now lives at Projects/{Model}/{Variant}/ with its own
+    ApprovedText/ and ApprovedImages/ subdirectories. No functional change to
+    Prompt Engine, Text Engine, QA logic, or page/component specifications.
+  required_actions:
+    - "Add paintScheme.slug field to existing PROJECT.yaml files"
+    - "Create Projects/{Model}/{Variant}/ subfolder for each project"
+    - "Move PROJECT.yaml, Images/, Output/, Notes/ into the variant subfolder"
+    - "Move ApprovedAssets/Text/ content to Projects/{Model}/{Variant}/ApprovedText/"
 
 new_in_this_version:
-  - "START_HERE.md — human operator entry point"
-  - "OperatorGuide/ — 7-document operator guide"
-  - "WORKFLOW.md (root) — operational state machine"
-  - "FILE_MATRIX.md, PROJECT_STRUCTURE.md, WHO_MODIFIES_WHAT.md, LIFECYCLE.md, OPERATOR_PROFILE.md"
-  - "FIRST_PROJECT.md, FIRST_RENDER.md, FIRST_PDF.md — end-to-end tutorials"
-  - "UAT/UAT-001.md — first external-operator test report (8 errors documented and fixed)"
-  - "Docs/AI_BOOTSTRAP_PROMPT.md — restructured by phase with Input/Output/Prompt/Nuova chat"
-  - "Projects/PROJECT_BOOTSTRAP.md — rewritten as operational PASSO-based guide"
-  - "Config/LANGUAGE_POLICY.yaml — 5 language-neutral exception categories + validation_scope"
-  - "Tests/ContentValidation.md, Tests/TextValidation.md — §Validation Scope (Template vs Draft vs Approved)"
+  - "Projects/{Model}/{Variant}/ two-level project structure"
+  - "paintScheme.slug field (REQUIRED) in Templates/PROJECT.yaml and Projects/PROJECT.yaml"
+  - "ApprovedText/ and ApprovedImages/ per-variant directories"
+  - "Core/NAMING_CONVENTION.md §3.1 — variant folder naming rule"
+  - "Scripts/generate_prompts.py — pre-filled prompt generator (reads PROJECT.yaml, dynamic paths)"
+  - "Docs/RUNTIMES.md — runtime concept, ChatGPT Web vs Claude Code comparison"
+  - "OperatorGuide/Runtimes/ChatGPT_Web.md — standalone ChatGPT Web guide"
+  - "OperatorGuide/Runtimes/Claude_Code.md — standalone Claude Code guide with handoff procedure"
+  - "Documentation/QualityManagement/Reports/UR-0001.md — first user report"
+
+changed_in_this_version:
+  - "PromptEngine/*.md (all 10) — Save output to: path updated to per-project variant structure"
+  - "Core/TEXT_ENGINE.md — v2.5.0 output format row; Render Engine contract path"
+  - "Core/PAGE_SYSTEM.md — module storage path"
+  - "AI_ENTRYPOINT.md — Bootstrap Contract paths; CMS layer description"
+  - "BOOTSTRAP.md — Phase 2a/3/7 paths; PROJECT.yaml path"
+  - "Docs/LOAD_ORDER.md — Step 12 path"
+  - "Docs/AI_BOOTSTRAP_PROMPT.md — Fase 1 split ChatGPT/Claude; Fase 2 colorId JOIN fix; Fase 4 path"
+  - "FILE_MATRIX.md — new Projects/{M}/{V}/ section; ApprovedAssets/ marked deprecated"
+  - "PROJECT_STRUCTURE.md — two-level structure; new mkdir commands"
+  - "FIRST_PROJECT.md, FIRST_RENDER.md, FIRST_PDF.md — paths updated"
+  - "OperatorGuide/01-07 — v2.5.0 header; path references updated"
+  - "WHO_MODIFIES_WHAT.md, LIFECYCLE.md, WORKFLOW.md, OPERATOR_PROFILE.md — paths updated"
+  - "START_HERE.md — PASSO 0 runtime selection; checklist updated to variant structure"
+  - "Templates/ (all) — sdk_version bumped to 2.5.0"
+  - "Projects/Proto_Emperor/Violet_Phantom/ — reference project migrated to v2.5.0"
 
 compatibility:
-  backward_compatible_with:
-    - "2.1.0"
-    - "2.2.0"
-    - "2.3.0"
-    - "2.4.0"
-  project_yaml_schema: "unchanged — all existing PROJECT.yaml files work without modification"
+  backward_compatible_with: []
+  breaking_from: "2.4.x"
+  project_yaml_schema: "EXTENDED — paintScheme.slug field added (required)"
   page_ids: "P001–P010 unchanged"
   component_ids: "C001–C015 unchanged"
   token_names: "unchanged"
-  prompt_files: "unchanged — all PromptEngine/ files work as before"
-  approved_text: "Projects/{model}/ApprovedText/ retained — still functional"
+  prompt_files: "PromptEngine/*.md output paths updated — functional change"
+  approved_text: "Moved from ApprovedAssets/Text/ to Projects/{Model}/{Variant}/ApprovedText/"
 
 previous_releases:
+  - version: "2.4.1"
+    date: "2026-07-02"
+    codename: "Operator"
+    key: "UX & Operator Workflow — START_HERE, OperatorGuide/, runtime-aware docs, UAT-001 fixes"
   - version: "2.4.0"
     date: "2026-07-01"
     codename: "CMS"
-    key: "CMS layer (ApprovedAssets/), content.yaml as source of truth, page lifecycle, Bootstrap System"
+    key: "CMS layer (ApprovedAssets/), content.yaml as source of truth, page lifecycle"
   - version: "2.3.0"
     date: "2026-07-01"
     codename: "Editorial"
@@ -68,11 +103,11 @@ previous_releases:
     key: "Initial release — Core framework, PromptEngine, Design Tokens, Component System"
 
 next_release:
-  version: "2.5.0"
+  version: "2.6.0"
   planned_features:
     - "Compiler/ — automated pipeline executor"
     - "Prompt Orchestrator"
+    - "Documentation/OperationalManual/ update to v2.5.0 paths"
     - "Icon Library (15 SVG icons)"
-    - "Docs/tutorial/ — end-to-end tutorials"
-    - "Release System automation"
+    - "Multi-language support (Italian, Japanese, English)"
   see: "ROADMAP.md"

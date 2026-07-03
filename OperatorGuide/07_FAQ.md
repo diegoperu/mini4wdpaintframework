@@ -1,6 +1,6 @@
 # 07 — FAQ Operatore
 
-**OperatorGuide · Mini4WD Manual SDK v2.4.1**
+**OperatorGuide · Mini4WD Manual SDK v2.5.0**
 
 > Domande frequenti sull'USO dell'SDK. Per le FAQ tecniche di verniciatura:
 > `Knowledge/FAQ.md`.

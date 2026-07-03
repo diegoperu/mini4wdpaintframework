@@ -1,6 +1,6 @@
 # PROJECT_BOOTSTRAP.md — Creazione Nuovo Progetto
 
-**Mini4WD Manual SDK v2.4.1** · Guida operativa
+**Mini4WD Manual SDK v2.5.0** · Guida operativa
 **Prerequisito:** `START_HERE.md` (root del repository)
 
 > Guida operativa, non descrittiva: esegui i PASSI in ordine, uno alla volta.

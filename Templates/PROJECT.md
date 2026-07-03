@@ -143,4 +143,4 @@
 
 ---
 
-*Generated with Mini4WD Manual SDK v2.4.1 — see `Core/WORKFLOW.md` for the complete pipeline.*
+*Generated with Mini4WD Manual SDK v2.5.0 — see `Core/WORKFLOW.md` for the complete pipeline.*

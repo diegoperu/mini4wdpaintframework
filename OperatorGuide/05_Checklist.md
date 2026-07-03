@@ -1,6 +1,6 @@
 # 05 — Checklist Operative
 
-**OperatorGuide · Mini4WD Manual SDK v2.4.1**
+**OperatorGuide · Mini4WD Manual SDK v2.5.0**
 
 > Una checklist per ogni fase. Stampale o tienile aperte di fianco alla chat.
 
@@ -44,7 +44,7 @@
 [ ] Prompt Fase 3 (QA) inviato con i 2 file di test allegati
 [ ] Verdetto APPROVED (se REJECTED: correzioni applicate e rivalidato)
 [ ] Seal confermato: metadata.yaml → locked
-[ ] content.yaml salvato in ApprovedAssets/Text/P00x/
+[ ] content.yaml salvato in Projects/{Modello}/{Variante}/ApprovedText/P00x/
 ```
 
 ## Per OGNI pagina — rendering (chat #2)
@@ -57,7 +57,7 @@
 [ ] Testo sulla pagina IDENTICO a content.yaml
 [ ] Sfondo bianco, header viola, footer presente
 [ ] QA visivo eseguito (QA_SYSTEM.md)
-[ ] Immagine salvata col naming corretto in ApprovedAssets/Images/P00x/
+[ ] Immagine salvata col naming corretto in Projects/{Modello}/{Variante}/ApprovedImages/P00x/
 [ ] metadata.yaml → rendered
 [ ] Esito annotato in Notes/qa_log.md
 ```

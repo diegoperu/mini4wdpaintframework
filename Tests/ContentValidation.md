@@ -3,10 +3,10 @@
 **Test Suite ID:** TEST-CV
 **SDK Version:** 2.4.1
 **Layer:** Content / CMS
-**Reference:** `ApprovedAssets/Text/README.md`, `Core/TEXT_ENGINE.md`, `Config/LANGUAGE_POLICY.yaml`
+**Reference:** `Projects/{Model}/{Variant}/ApprovedText/README.md`, `Core/TEXT_ENGINE.md`, `Config/LANGUAGE_POLICY.yaml`
 
 ## Purpose
-Verify that `content.yaml` files in `ApprovedAssets/Text/P{NNN}/` are complete, correctly structured, language-compliant, and ready for rendering.
+Verify that `content.yaml` files in `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/` are complete, correctly structured, language-compliant, and ready for rendering.
 
 ## Validation Scope (v2.4.1) — Template vs Draft vs Approved
 
@@ -44,7 +44,7 @@ structural/metadata terms (Header, Footer, draft, locked) used as metadata.
 
 ## TEST-CV-001: Schema Validity
 
-For each `ApprovedAssets/Text/P{NNN}/content.yaml`:
+For each `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/content.yaml`:
 
 - [ ] CV-001-A: File is valid YAML (no parse errors) — ❌
 - [ ] CV-001-B: `page.id` field present and matches directory name — ❌
@@ -101,7 +101,7 @@ For each `ApprovedAssets/Text/P{NNN}/content.yaml`:
 
 ## TEST-CV-004: Metadata Compliance
 
-For each `ApprovedAssets/Text/P{NNN}/metadata.yaml`:
+For each `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/metadata.yaml`:
 
 - [ ] CV-004-A: File is valid YAML — ❌
 - [ ] CV-004-B: `page_id` matches parent directory — ❌
@@ -116,7 +116,7 @@ For each `ApprovedAssets/Text/P{NNN}/metadata.yaml`:
 
 ## TEST-CV-005: Manifest Completeness
 
-For each `ApprovedAssets/Text/P{NNN}/manifest.yaml`:
+For each `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/manifest.yaml`:
 
 - [ ] CV-005-A: File is valid YAML — ❌
 - [ ] CV-005-B: `components` list includes C001 and C002 — ❌

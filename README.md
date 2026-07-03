@@ -1,6 +1,6 @@
 # Mini4WD Manual SDK
 
-**Version 2.4.1** | Apache 2.0 | Open Source | Language: Italian (it)
+**Version 2.5.0** | Apache 2.0 | Open Source | Language: Italian (it)
 
 ---
 
@@ -10,7 +10,7 @@
 > `START_HERE.md` → `OperatorGuide/01_Primo_Manuale.md` → `FIRST_PROJECT.md`.
 > This README describes the architecture, for contributors and developers.
 >
-> Operator documents (v2.4.1): [START_HERE.md](START_HERE.md) ·
+> Operator documents (v2.5.0): [START_HERE.md](START_HERE.md) ·
 > [OperatorGuide/](OperatorGuide/) · [WORKFLOW.md](WORKFLOW.md) ·
 > [LIFECYCLE.md](LIFECYCLE.md) · [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) ·
 > [FILE_MATRIX.md](FILE_MATRIX.md) · [WHO_MODIFIES_WHAT.md](WHO_MODIFIES_WHAT.md) ·
@@ -40,7 +40,7 @@ All editorial text is produced in **Italian only**. No Japanese scripts (kanji, 
 
 ---
 
-## Architecture (v2.4.0)
+## Architecture (v2.5.0)
 
 The SDK separates content generation into three independent engines that execute in strict sequence:
 
@@ -57,11 +57,11 @@ Validates `content.yaml` against the Content Validation suite (7 checks: schema,
 ### Render Engine
 Reads `content.yaml` exclusively. Never reads `text.md` directly. Generates the illustrated page using Design Tokens, Component System, and Render Guide specifications.
 
-### CMS Layer (ApprovedAssets/)
-Each page is stored as a self-contained content module with 7 files:
+### CMS Layer (per-project, v2.5.0)
+Each page is stored as a self-contained content module with 7 files, **inside the project variant folder**:
 
 ```
-ApprovedAssets/Text/P001/
+Projects/{Model}/{Variant}/ApprovedText/P001/
 ├── content.yaml    ← PRIMARY source of truth
 ├── text.md         ← derived, read-only after approval
 ├── metadata.yaml   ← page lifecycle state
@@ -70,6 +70,8 @@ ApprovedAssets/Text/P001/
 ├── notes.md        ← editorial annotations (not rendered)
 └── README.md       ← module documentation
 ```
+
+Multiple variants of the same model are siblings: `Projects/Proto_Emperor/Violet_Phantom/` and `Projects/Proto_Emperor/Midnight_Blue/` coexist without conflict.
 
 ### Page Lifecycle
 
@@ -100,13 +102,14 @@ cd mini4wdpaintframework
 
 **Step 2 — Create a project**
 ```bash
-cp Templates/PROJECT.yaml Projects/MyModel/PROJECT.yaml
+mkdir -p Projects/MyModel/MyVariant/{Images,Output/raw,Output/pdf,Notes,ApprovedText,ApprovedImages}
+cp Templates/PROJECT.yaml Projects/MyModel/MyVariant/PROJECT.yaml
 ```
-Edit `Projects/MyModel/PROJECT.yaml` with your model name, series, paint scheme, and render paths.
+Edit `Projects/MyModel/MyVariant/PROJECT.yaml` — fill in model name, paint scheme, and set `paintScheme.slug` (kebab-case, required from v2.5.0).
 
 **Step 3 — Run the Text Engine (Phase 2a)**
 
-For each page P001–P010, load the prompt from `PromptEngine/` following the LOAD sequence above. The Text Engine generates `ApprovedAssets/Text/P00x/content.yaml`.
+For each page P001–P010, load the prompt from `PromptEngine/` following the LOAD sequence above. The Text Engine generates `Projects/{Model}/{Variant}/ApprovedText/P00x/content.yaml`.
 
 **Step 4 — Run Content and Text QA (Phase 2b–2c)**
 
@@ -148,11 +151,11 @@ Machine-readable SDK identity card. Confirms the version, pipeline sequence, sou
 
 Operational guide — expands on the rules and workflow from AI_ENTRYPOINT.md. Contains the detailed pipeline, page/component index, common errors to avoid, and document map.
 
-**Step 4 — Read `Projects/{ModelName}/PROJECT.yaml`**
+**Step 4 — Read `Projects/{ModelFolder}/{VariantFolder}/PROJECT.yaml`**
 
-Project configuration for the current model. Contains the model name, paint colors (Tamiya codes + Italian names), and render paths. All content.yaml fields are populated from this file.
+Project configuration for the current variant. Contains the model name, paint colors (Tamiya codes + Italian names), `paintScheme.slug`, and render paths. All content.yaml fields are populated from this file.
 
-**Step 5 — Read `ApprovedAssets/Text/{page}/`**
+**Step 5 — Read `Projects/{ModelFolder}/{VariantFolder}/ApprovedText/{page}/`**
 
 Existing sealed content for each page. If `metadata.yaml → status: locked`, the page is already approved — proceed directly to rendering. Never regenerate locked content.
 
@@ -180,7 +183,7 @@ mini4wdpaintframework/
 ├── ReleaseInfo.yaml             ← Machine-readable release metadata
 ├── RepositoryManifest.yaml      ← Complete file and dependency map
 ├── CHANGELOG.md                 ← Version history
-├── VERSION                      ← Current version (2.4.0)
+├── VERSION                      ← Current version (2.5.0)
 ├── MANIFEST.yaml                ← Full SDK descriptor (components, tokens, pages)
 ├── LICENSE                      ← Apache 2.0
 ├── STYLE_DECISIONS.md           ← Architecture Decision Records (ADR-001–ADR-021)
@@ -224,17 +227,10 @@ mini4wdpaintframework/
 │   ├── Premium.md               ← P009
 │   └── FinalChecklist.md        ← P010
 │
-├── ApprovedAssets/              ← CMS layer — sealed content modules per page (NEW v2.4.0)
-│   ├── index.yaml               ← Registry of all page modules and their lifecycle state
-│   ├── Text/
-│   │   ├── P001/                ← Page module (7 files each: content.yaml, text.md,
-│   │   ├── P002/                    metadata.yaml, manifest.yaml, changelog.md,
-│   │   ├── ...                      notes.md, README.md)
-│   │   └── P010/
-│   ├── Images/                  ← Approved render images
-│   ├── Components/              ← Approved component exports
-│   ├── Templates/               ← Page layout templates
-│   └── References/              ← Reference photography
+├── ApprovedAssets/              ← DEPRECATED v2.5.0 — per-project content moved to Projects/
+│
+├── Scripts/                     ← Utility scripts for operators
+│   └── generate_prompts.py      ← Generates pre-filled prompts from PROJECT.yaml (v2.5.0)
 │
 ├── Templates/                   ← Starter files for new projects
 │   ├── PROJECT.yaml             ← Project configuration template
@@ -243,14 +239,16 @@ mini4wdpaintframework/
 │   ├── COLOR_SCHEME.yaml        ← Paint scheme definition template
 │   └── PDF_CONFIG.yaml          ← PDF export configuration
 │
-├── Projects/                    ← One subfolder per Mini4WD model
+├── Projects/                    ← {Model}/{Variant}/ two-level structure (v2.5.0)
 │   ├── PROJECT_BOOTSTRAP.md     ← Step-by-step guide for starting a new project
-│   └── Proto_Emperor/           ← Reference project (read-only)
-│       ├── PROJECT.yaml
-│       ├── Images/
-│       ├── Output/
-│       ├── Notes/
-│       └── ApprovedText/        ← Legacy path (v2.3.0); superseded by ApprovedAssets/
+│   └── Proto_Emperor/           ← Reference model folder
+│       └── Violet_Phantom/      ← Reference variant (read-only)
+│           ├── PROJECT.yaml     ← Contains paintScheme.slug: "violet-phantom"
+│           ├── Images/
+│           ├── Output/
+│           ├── Notes/
+│           ├── ApprovedText/    ← content.yaml per page (written by AI)
+│           └── ApprovedImages/  ← renders per page (written by AI)
 │
 ├── Assets/                      ← Design system, references, approved output
 │   ├── DesignSystem/

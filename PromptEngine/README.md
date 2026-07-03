@@ -64,7 +64,7 @@ All prompts use `{{token.path}}` syntax, mirroring the structure of `PROJECT.yam
 3. Copy the **Prompt Template** section.
 4. Replace every `{{token}}` with the corresponding value from `PROJECT.yaml`.
 5. Paste the substituted prompt into your AI model of choice.
-6. Save the AI output to `ApprovedAssets/Text/P001/content.yaml` (or appropriate page ID).
+6. Save the AI output to `Projects/{Modello}/{Variante}/ApprovedText/P001/content.yaml` (or appropriate page ID).
 7. Run `Tests/ContentValidation.md` and `Tests/TextValidation.md` — both must pass before sealing (`metadata.yaml → status: locked`), then run `Core/QA_SYSTEM.md` at render stage.
 
 ### Automation
@@ -333,19 +333,19 @@ Paint Scheme: {{project.paintScheme.name}}
 ╚══════════════════════════════════════════════════════╝
 ```
 
-**Step 8 is new in v2.4.0.** Load the existing `ApprovedAssets/Text/P{NNN}/content.yaml` when updating (not generating fresh). Preserves prior approved content; only modifies declared fields.
+**Step 8 is new in v2.4.0.** Load the existing `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/content.yaml` when updating (not generating fresh). Preserves prior approved content; only modifies declared fields.
 
 ### Text-Mode vs Render-Mode (v2.4.0 update)
 
 **Text-mode prompts (Phase 2a — content.yaml output):**
 - Generate structured YAML conforming to page content.yaml schema
-- Output saved to `ApprovedAssets/Text/P{NNN}/content.yaml` ← PRIMARY
+- Output saved to `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/content.yaml` ← PRIMARY
 - text.md auto-derived from content.yaml — do not generate separately
 - Field names: English. Field values: Italian
 - No visual layout. No hex values. No component dimensions.
 
 **Render-mode prompts (Phase 3 — Render Engine):**
-- Load `ApprovedAssets/Text/P{NNN}/content.yaml` as source (not text.md)
+- Load `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/content.yaml` as source (not text.md)
 - Read approved field values verbatim — no rewrite, no paraphrase
 - Generate visual layout description using those values
 - Render Engine never reads PROJECT.yaml directly (v2.4.0 change)
@@ -375,7 +375,7 @@ After text generation and QA:
 1. Set `metadata.yaml §status: "approved"`
 2. Set `metadata.yaml §approved_by` and `§approved_date`
 3. Optional: set `metadata.yaml §locked: true` for production freeze
-4. Update `ApprovedAssets/index.yaml`
+4. Update `Projects/{Modello}/{Variante}/index.yaml`
 5. Log in `changelog.md`
 
 Render Engine may only begin after sealing.

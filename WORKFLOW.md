@@ -1,6 +1,6 @@
 # WORKFLOW.md — State Machine Operativa
 
-**Mini4WD Manual SDK v2.4.1** · Documento operatore
+**Mini4WD Manual SDK v2.5.0** · Documento operatore
 **Prerequisito:** `START_HERE.md`
 
 > Questo documento descrive il ciclo di vita di un manuale come macchina a stati.
@@ -110,7 +110,7 @@
 - **Obiettivo:** produrre `content.yaml` per una pagina alla volta (P001 → P010).
 - **Chi:** AI (Prompt Fase 2).
 - **Input:** PROJECT.yaml (già in sessione) + `PromptEngine/{pagina}.md`.
-- **Output:** `ApprovedAssets/Text/P00x/content.yaml` — tutto in italiano, `TODO:` per i dati mancanti.
+- **Output:** `Projects/{Modello}/{Variante}/ApprovedText/P00x/content.yaml` — tutto in italiano, `TODO:` per i dati mancanti.
 - **Prossimo stato:** QA TESTI.
 - **Nuova chat:** NO — stessa chat del bootstrap.
 
@@ -135,7 +135,7 @@
 - **Obiettivo:** generare la pagina illustrata.
 - **Chi:** AI (Prompt Fase 4).
 - **Input:** content.yaml locked + immagini di riferimento + specifiche di design.
-- **Output:** immagine pagina in `ApprovedAssets/Images/P00x/`.
+- **Output:** immagine pagina in `Projects/{Modello}/{Variante}/ApprovedImages/P00x/`.
 - **Prossimo stato:** QA RENDERING.
 - **Nuova chat:** **SÌ** — il rendering usa un contesto diverso (design, non testi).
 - **Guida:** `FIRST_RENDER.md`
@@ -166,7 +166,7 @@
 - **Obiettivo:** pubblicare.
 - **Chi:** Maintainer (approvazione finale — non self-service).
 - **Output:** manuale in `Assets/ApprovedManual/{Modello}/`, pagine `released`,
-  `ApprovedAssets/index.yaml` aggiornato.
+  `Projects/{Modello}/{Variante}/index.yaml` aggiornato.
 - **Stato finale.** Il progetto diventa riferimento per i futuri manuali.
 
 ---

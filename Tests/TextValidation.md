@@ -9,7 +9,7 @@
 
 Verify that all generated editorial text is linguistically correct, editorially consistent, and compliant with the language policy before it enters the Render Engine.
 
-In v2.4.x the primary target is `ApprovedAssets/Text/P{NNN}/content.yaml` (and its
+In v2.4.x the primary target is `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/content.yaml` (and its
 derived `text.md`). References to `ApprovedText/` files apply to legacy v2.3.0
 projects only.
 

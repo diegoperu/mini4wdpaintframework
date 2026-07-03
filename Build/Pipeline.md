@@ -491,7 +491,7 @@ As of SDK v2.3.0, the pipeline includes dedicated Text Engine phases between Pro
 │ Phase 2a │ Text Engine          AI generates content.yaml           │
 │ Phase 2b │ Content QA           Tests/ContentValidation.md          │
 │ Phase 2c │ Text QA              Tests/TextValidation.md             │
-│ Phase 2d │ Approved Assets      ApprovedAssets/Text/ P{NNN}/ sealed │
+│ Phase 2d │ Approved Assets      Projects/{Model}/{Variant}/ApprovedText/ P{NNN}/ sealed │
 │ Phase 3  │ Render Engine        Reads content.yaml → renders        │
 │ Phase 4  │ Image QA             Tests/AssetsValidation.md           │
 │ Phase 4a │ Page QA              Tests/LayoutValidation.md           │
@@ -508,12 +508,12 @@ As of SDK v2.3.0, the pipeline includes dedicated Text Engine phases between Pro
 **Process:**
 1. Run PromptEngine/{PageName}.md with full LOAD sequence
 2. AI generates structured content.yaml per page template
-3. Save to `ApprovedAssets/Text/P{NNN}/content.yaml`
+3. Save to `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/content.yaml`
 4. Text Engine auto-generates `text.md` from content.yaml (human review copy)
 
 **Output:**
-- `ApprovedAssets/Text/P{NNN}/content.yaml` ← PRIMARY
-- `ApprovedAssets/Text/P{NNN}/text.md` ← DERIVED
+- `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/content.yaml` ← PRIMARY
+- `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/text.md` ← DERIVED
 
 ### Phase 2b — Content QA (NEW in v2.4.0)
 
@@ -531,7 +531,7 @@ As of SDK v2.3.0, the pipeline includes dedicated Text Engine phases between Pro
 **Process:**
 1. Set `metadata.yaml §approved: true`, `§approved_by`, `§approved_date`
 2. Optionally set `metadata.yaml §locked: true` for production
-3. Update `ApprovedAssets/index.yaml` with page entry
+3. Update `Projects/{Model}/{Variant}/index.yaml` with page entry
 4. Increment `metadata.yaml §revision`
 5. Log change in `changelog.md`
 
@@ -542,14 +542,14 @@ As of SDK v2.3.0, the pipeline includes dedicated Text Engine phases between Pro
 **Change from v2.3.0:** Render Engine reads `content.yaml` — not PROJECT.yaml directly.
 
 **Source priority:**
-1. `ApprovedAssets/Text/P{NNN}/content.yaml` ← PRIMARY
-2. `ApprovedAssets/Text/P{NNN}/text.md` ← FALLBACK (with error log)
+1. `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/content.yaml` ← PRIMARY
+2. `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/text.md` ← FALLBACK (with error log)
 3. PROJECT.yaml ← NEVER (Render Engine does not read PROJECT.yaml in v2.4.0)
 
 ### Phase 7 — Release (v2.4.0 additions)
 
 After PDF generation:
-1. Update `ApprovedAssets/index.yaml §manuals` with release entry
+1. Update `Projects/{Model}/{Variant}/index.yaml §manuals` with release entry
 2. Update all page `metadata.yaml §status: "released"`
 3. Tag in git: `v{manualVersion}-{modelSlug}`
 4. Update CHANGELOG.md

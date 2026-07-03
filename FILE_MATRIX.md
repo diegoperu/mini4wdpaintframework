@@ -1,6 +1,6 @@
 # FILE_MATRIX.md — Matrice dei File
 
-**Mini4WD Manual SDK v2.4.1** · Documento operatore
+**Mini4WD Manual SDK v2.5.0** · Documento operatore
 
 > Per ogni file/cartella del repository: si può modificare? Quando? Chi? In quale fase?
 > Ruoli: **Operatore** (usa l'SDK), **Reviewer** (approva), **Maintainer** (governa il repo),

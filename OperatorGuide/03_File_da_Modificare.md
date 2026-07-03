@@ -1,6 +1,6 @@
 # 03 — File da Modificare
 
-**OperatorGuide · Mini4WD Manual SDK v2.4.1**
+**OperatorGuide · Mini4WD Manual SDK v2.5.0**
 
 > Gli UNICI file che l'Operatore modifica. Tutto ciò che non è in questa pagina è in
 > `04_File_da_NON_Modificare.md`. Matrice completa: `../FILE_MATRIX.md`.
@@ -46,11 +46,11 @@ Questi file cambiano durante il lavoro, ma **li scrive l'AI attraverso i prompt*
 
 | File | Fase | Tu cosa fai |
 |---|---|---|
-| `ApprovedAssets/Text/P00x/content.yaml` | Testi | Approvi/rifiuti in chat |
-| `ApprovedAssets/Text/P00x/metadata.yaml` | QA/Seal | Confermi il passaggio di stato |
-| `ApprovedAssets/Text/P00x/changelog.md` | Ogni revisione | Verifichi che la riga ci sia |
-| `ApprovedAssets/Images/P00x/` | Render | Salvi il file col nome giusto |
-| `ApprovedAssets/index.yaml` | Seal/Release | Con ruolo Reviewer/Maintainer |
+| `Projects/{Modello}/{Variante}/ApprovedText/P00x/content.yaml` | Testi | Approvi/rifiuti in chat |
+| `Projects/{Modello}/{Variante}/ApprovedText/P00x/metadata.yaml` | QA/Seal | Confermi il passaggio di stato |
+| `Projects/{Modello}/{Variante}/ApprovedText/P00x/changelog.md` | Ogni revisione | Verifichi che la riga ci sia |
+| `Projects/{Modello}/{Variante}/ApprovedImages/P00x/` | Render | Salvi il file col nome giusto |
+| `Projects/{Modello}/{Variante}/index.yaml` | Seal/Release | Con ruolo Reviewer/Maintainer |
 
 Se ti accorgi di un errore in questi file: **non correggerlo a mano** — rientra in
 chat, fai correggere all'AI e fai registrare la revisione nel changelog di pagina.

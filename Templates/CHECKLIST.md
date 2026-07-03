@@ -186,4 +186,4 @@ For each page: run the PromptEngine prompt, review the output, iterate until app
 
 ---
 
-*Mini4WD Manual SDK v2.4.1 — `Core/WORKFLOW.md` for pipeline details.*
+*Mini4WD Manual SDK v2.5.0 — `Core/WORKFLOW.md` for pipeline details.*

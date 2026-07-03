@@ -1,6 +1,6 @@
 # 04 — File da NON Modificare
 
-**OperatorGuide · Mini4WD Manual SDK v2.4.1**
+**OperatorGuide · Mini4WD Manual SDK v2.5.0**
 
 > Tutto ciò che NON devi toccare, e perché. In caso di dubbio: se non è dentro
 > `Projects/{TuoModello}/`, non si tocca.
@@ -27,9 +27,9 @@
 
 | Cartella/File | Perché |
 |---|---|
-| `ApprovedAssets/Text/P00x/*` | Ogni modifica deve passare dal Text Engine ed essere tracciata nel changelog di pagina. Un edit a mano rompe la tracciabilità e invalida il QA. |
-| `ApprovedAssets/Text/P00x/text.md` | È DERIVATO da content.yaml: qualsiasi modifica va fatta su content.yaml (via prompt), mai qui. |
-| `ApprovedAssets/index.yaml` | Registro globale: lo aggiornano Reviewer/Maintainer nelle fasi di seal e release. |
+| `Projects/{Modello}/{Variante}/ApprovedText/P00x/*` | Ogni modifica deve passare dal Text Engine ed essere tracciata nel changelog di pagina. Un edit a mano rompe la tracciabilità e invalida il QA. |
+| `Projects/{Modello}/{Variante}/ApprovedText/P00x/text.md` | È DERIVATO da content.yaml: qualsiasi modifica va fatta su content.yaml (via prompt), mai qui. |
+| `Projects/{Modello}/{Variante}/index.yaml` | Registro globale: lo aggiornano Reviewer/Maintainer nelle fasi di seal e release. |
 | Pagine con `status: locked` | Sigillate. Riaprire = riga di changelog + ritorno a `review` (vedi `../LIFECYCLE.md`). |
 
 ## I 3 errori di modifica più gravi

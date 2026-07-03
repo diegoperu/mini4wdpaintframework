@@ -456,7 +456,7 @@ The Render Engine must NOT:
 
 *Added in SDK v2.4.0. Each component declares which content.yaml fields it consumes.*
 
-As of v2.4.0, the Render Engine reads component content from `ApprovedAssets/Text/P{NNN}/content.yaml` using the field paths declared in each page's `manifest.yaml §components[].content_fields`.
+As of v2.4.0, the Render Engine reads component content from `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/content.yaml` using the field paths declared in each page's `manifest.yaml §components[].content_fields`.
 
 ### Component → content.yaml Field Map
 
@@ -482,8 +482,8 @@ As of v2.4.0, the Render Engine reads component content from `ApprovedAssets/Tex
 
 ```python
 # Pseudocode — Render Engine field access
-content = load_yaml("ApprovedAssets/Text/P002/content.yaml")
-manifest = load_yaml("ApprovedAssets/Text/P002/manifest.yaml")
+content = load_yaml("Projects/{Model}/{Variant}/ApprovedText/P002/content.yaml")
+manifest = load_yaml("Projects/{Model}/{Variant}/ApprovedText/P002/manifest.yaml")
 
 for component in manifest.components:
     for field_path in component.content_fields:

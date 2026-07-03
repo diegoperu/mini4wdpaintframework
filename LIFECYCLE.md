@@ -1,6 +1,6 @@
 # LIFECYCLE.md — Ciclo di Vita di un Manuale
 
-**Mini4WD Manual SDK v2.4.1** · Documento operatore
+**Mini4WD Manual SDK v2.5.0** · Documento operatore
 
 > Due cicli di vita convivono nell'SDK: quello del **manuale** (macro) e quello di
 > **ogni singola pagina** (micro, tracciato in `metadata.yaml`). Questo documento li
@@ -52,7 +52,7 @@ GOLDEN PROJECT
 
 ## Ciclo di vita della singola pagina (micro)
 
-Tracciato in `ApprovedAssets/Text/P00x/metadata.yaml → status`:
+Tracciato in `Projects/{Modello}/{Variante}/ApprovedText/P00x/metadata.yaml → status`:
 
 ```
 draft → review → approved → locked → rendered → released → archived
@@ -84,7 +84,7 @@ Regole:
 
 | Cosa | Dove |
 |---|---|
-| Stato di ogni pagina | `ApprovedAssets/Text/P00x/metadata.yaml → status` |
-| Registro globale | `ApprovedAssets/index.yaml` |
+| Stato di ogni pagina | `Projects/{Modello}/{Variante}/ApprovedText/P00x/metadata.yaml → status` |
+| Registro globale | `Projects/{Modello}/{Variante}/index.yaml` |
 | Stato QA del progetto | `Projects/{Modello}/PROJECT.yaml → qa.status` + `Notes/qa_log.md` |
-| Storia delle revisioni | `ApprovedAssets/Text/P00x/changelog.md` |
+| Storia delle revisioni | `Projects/{Modello}/{Variante}/ApprovedText/P00x/changelog.md` |

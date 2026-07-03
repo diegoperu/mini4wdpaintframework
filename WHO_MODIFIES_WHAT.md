@@ -1,6 +1,6 @@
 # WHO_MODIFIES_WHAT.md — Chi Modifica Cosa
 
-**Mini4WD Manual SDK v2.4.1** · Documento operatore
+**Mini4WD Manual SDK v2.5.0** · Documento operatore
 **Ruoli:** definiti in `OPERATOR_PROFILE.md` · **Dettaglio per file:** `FILE_MATRIX.md`
 
 ---
@@ -12,10 +12,10 @@
 | `PROJECT.yaml` (nel tuo progetto) | **Operatore** | Editor di testo | Setup progetto; correzioni dopo QA FAIL |
 | `Projects/{Modello}/Images/` | **Operatore** | Copia file | Setup progetto |
 | `Projects/{Modello}/Notes/qa_log.md` | **Operatore** | Editor di testo | Durante QA |
-| `ApprovedAssets/Text/P00x/content.yaml` | **AI** | Prompt Fase 2 (Text Engine) | Generazione testi |
-| `ApprovedAssets/Text/P00x/metadata.yaml` | **AI / Reviewer** | Prompt QA + conferma | Approvazione e seal |
+| `Projects/{Modello}/{Variante}/ApprovedText/P00x/content.yaml` | **AI** | Prompt Fase 2 (Text Engine) | Generazione testi |
+| `Projects/{Modello}/{Variante}/ApprovedText/P00x/metadata.yaml` | **AI / Reviewer** | Prompt QA + conferma | Approvazione e seal |
 | `ApprovedAssets/Images/` | **AI** | Prompt Fase 4 (Render) | Rendering |
-| `ApprovedAssets/index.yaml` | **Reviewer / Maintainer** | Editor / prompt | Seal e release |
+| `Projects/{Modello}/{Variante}/index.yaml` | **Reviewer / Maintainer** | Editor / prompt | Seal e release |
 | `Assets/ApprovedManual/{Modello}/` | **Maintainer** | Copia file + firma | Pubblicazione |
 | `Templates/` (master) | **Developer** | Pull request | Release SDK |
 | `PromptEngine/` | **Developer** | Pull request + ADR | Release SDK |
@@ -41,7 +41,7 @@ Scrive `content.yaml`, `text.md` (derivato), `metadata.yaml`, `manifest.yaml`,
 
 ### Reviewer
 Approva: imposta `approved/locked` nei `metadata.yaml`, firma i QA log, aggiorna
-`ApprovedAssets/index.yaml`. Non genera contenuti.
+`Projects/{Modello}/{Variante}/index.yaml`. Non genera contenuti.
 
 ### Maintainer
 Pubblica: `Assets/ApprovedManual/`, tag di release, CHANGELOG, VERSION, UAT.

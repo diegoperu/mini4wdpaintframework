@@ -14,7 +14,7 @@ The **Mini4WD Manual SDK** is an open-source editorial framework that enables an
 
 It is a **specification-first system**: the SDK defines every design rule, editorial rule, component, and workflow in authoritative documents. The AI's role is to execute these specifications, not to invent them.
 
-The current version is **2.4.1** (codename: Operator — UX & Operator Workflow Update; 2.4.x family: CMS).
+The current version is **2.5.0** (codename: MultiProject — Multi-Project Content Isolation; 2.5.x family: per-variant CMS)..
 
 ---
 
@@ -136,7 +136,7 @@ Required minimum:
 - Core/COMPONENT_SYSTEM.md
 - Core/PAGE_SYSTEM.md
 - PromptEngine/{page}.md
-- Projects/{ModelName}/PROJECT.yaml
+- Projects/{ModelFolder}/{VariantFolder}/PROJECT.yaml
 ```
 
 See `Docs/AI_BOOTSTRAP_PROMPT.md` for the ready-to-use prompt to request these files.
@@ -158,8 +158,8 @@ Load documents in this exact sequence. See `Docs/LOAD_ORDER.md` for full details
 8.  Core/COMPONENT_SYSTEM.md  ← C001–C015 specifications
 9.  Core/PAGE_SYSTEM.md       ← P001–P010 specifications
 10. PromptEngine/{page}.md    ← Page-specific prompt
-11. Projects/{Model}/PROJECT.yaml ← Project data
-12. ApprovedAssets/Text/{page}/ ← Existing approved content (if any)
+11. Projects/{ModelFolder}/{VariantFolder}/PROJECT.yaml ← Project data
+12. Projects/{Model}/{Variant}/ApprovedText/{page}/ ← Existing approved content (if any)
 13. Reference images           ← Photography of the physical model
 ```
 
@@ -247,7 +247,7 @@ draft → review → approved → locked → rendered → released → archived
 - **rendered**: visual page generated from locked content.yaml
 - **released**: page is in the final published manual
 
-Lifecycle state is stored in `ApprovedAssets/Text/P00x/metadata.yaml`.
+Lifecycle state is stored in `Projects/{Model}/{Variant}/ApprovedText/P00x/metadata.yaml`.
 
 ---
 

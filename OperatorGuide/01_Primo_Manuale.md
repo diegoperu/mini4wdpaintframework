@@ -1,6 +1,6 @@
 # 01 — Il Tuo Primo Manuale
 
-**OperatorGuide · Mini4WD Manual SDK v2.4.1**
+**OperatorGuide · Mini4WD Manual SDK v2.5.0**
 
 > Il percorso completo, dall'inizio alla fine, in un'unica pagina. Ogni tappa rimanda
 > al tutorial dettagliato. Se è la prima volta che usi l'SDK, segui questo documento
@@ -53,7 +53,7 @@ Per **ogni pagina** P001 → P010, in quest'ordine:
 Ordine pagine e prompt: `../BOOTSTRAP.md §Pages`. P009 solo se hai il premium abilitato.
 
 ⚠️ **Non validare mai una pagina che non hai ancora generato**: i moduli in
-`ApprovedAssets/Text/` nascono come template vuoti in stato `draft` — il QA sui
+`Projects/{Model}/{Variant}/ApprovedText/` nascono come template vuoti in stato `draft` — il QA sui
 template dà FAIL per costruzione. Prima si genera, poi si valida.
 
 Esito atteso: tutte le pagine con `status: locked`.

@@ -1,6 +1,6 @@
 # START HERE — Parti da qui
 
-**Mini4WD Manual SDK v2.4.1** · Tempo di lettura: 3 minuti
+**Mini4WD Manual SDK v2.5.0** · Tempo di lettura: 3 minuti
 
 > Questo è il PRIMO documento da leggere. Non spiega come funziona il framework:
 > spiega solo **cosa fare per ottenere il tuo primo manuale**.
@@ -64,9 +64,9 @@ Prima di aprire qualsiasi chat con l'AI:
 
 Poi, in ordine:
 
-- [ ] **1.** Crea `Projects/{Nome_Modello}/` con dentro `Images/`, `Output/`, `Notes/`
-- [ ] **2.** Copia `Templates/PROJECT.yaml` → `Projects/{Nome_Modello}/PROJECT.yaml` e compilalo
-- [ ] **3.** Metti le foto in `Projects/{Nome_Modello}/Images/` ← **UNICA posizione corretta**
+- [ ] **1.** Crea `Projects/{Modello}/{Variante}/` con dentro `Images/`, `Output/`, `Notes/`, `ApprovedText/`, `ApprovedImages/`
+- [ ] **2.** Copia `Templates/PROJECT.yaml` → `Projects/{Modello}/{Variante}/PROJECT.yaml`, compilalo e aggiungi `paintScheme.slug`
+- [ ] **3.** Metti le foto in `Projects/{Modello}/{Variante}/Images/` ← **UNICA posizione corretta**
 - [ ] **4.** Apri una chat AI e usa il **Prompt Fase 1 — Bootstrap** da `Docs/AI_BOOTSTRAP_PROMPT.md`
 - [ ] **5.** Aspetta il Bootstrap Report e approvalo
 - [ ] **6.** Prosegui una fase alla volta seguendo `WORKFLOW.md`
@@ -77,11 +77,11 @@ Poi, in ordine:
 
 | Puoi modificare | NON toccare mai |
 |---|---|
-| `Projects/{TuoModello}/` (tutta la cartella) | `Core/` |
-| `Projects/{TuoModello}/PROJECT.yaml` | `PromptEngine/` |
-| `Projects/{TuoModello}/Images/` (le tue foto) | `Config/` |
+| `Projects/{Modello}/{Variante}/` (tutta la cartella) | `Core/` |
+| `Projects/{Modello}/{Variante}/PROJECT.yaml` | `PromptEngine/` |
+| `Projects/{Modello}/{Variante}/Images/` (le tue foto) | `Config/` |
 | — | `Templates/` (si copia, non si edita) |
-| — | `ApprovedAssets/` (li scrive l'AI, non tu) |
+| — | `ApprovedText/` e `ApprovedImages/` (li scrive l'AI) |
 | — | `Assets/`, `Knowledge/`, `Tests/`, `Docs/` |
 
 Tabella completa: `FILE_MATRIX.md`

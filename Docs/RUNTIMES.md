@@ -1,6 +1,6 @@
 # RUNTIMES.md — Runtime Supportati
 
-**Mini4WD Manual SDK v2.4.1** · Documento operatore
+**Mini4WD Manual SDK v2.5.0** · Documento operatore
 
 > Un **Runtime** è l'ambiente in cui l'Operatore interagisce con l'AI.
 > Ambienti diversi = procedure di caricamento diverse.

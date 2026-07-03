@@ -1,6 +1,6 @@
 # FIRST_PDF.md — Tutorial: dal Rendering al PDF
 
-**Mini4WD Manual SDK v2.4.1** · Tutorial operatore · Tempo: ~45 minuti
+**Mini4WD Manual SDK v2.5.0** · Tutorial operatore · Tempo: ~45 minuti
 
 > Da dove parti: tutte le pagine in `status: rendered` (vedi `FIRST_RENDER.md`).
 > Dove arrivi: il manuale PDF nelle 3 varianti (screen / print / archive).
@@ -9,7 +9,7 @@
 
 ## PASSO 1 — Verifica che tutte le pagine siano pronte
 
-Per ogni pagina in `ApprovedAssets/Text/P00x/metadata.yaml`:
+Per ogni pagina in `Projects/{Modello}/{Variante}/ApprovedText/P00x/metadata.yaml`:
 
 ```yaml
 status: "rendered"
