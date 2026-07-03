@@ -39,21 +39,58 @@ Governance note (2026-07-03): Gemini was degraded from "planned runtime" to "not
 
 ---
 
+## Build Order (2026-07-03)
+
+`v2.6.0` in `ReleaseInfo.yaml`/`SDK_CONTEXT.yaml` bundles items with a real dependency
+order between them — building them in the listed order (rather than as one flat bucket)
+avoids rework. This section is the authoritative sequencing; version numbers below are
+provisional and may be re-cut once scope per release is decided (v2.6.0 may end up
+covering only steps 1–4, with the rest sliding to v2.7.0+).
+
+1. **Validate the Fase 4 prompt fix** (in progress) — reference-image scope + C010/C011
+   split, see commit `3096aef`. Confirms colors and text-box overflow are actually fixed
+   before building anything on top of the render pipeline.
+2. **Theme/collana mechanism** (schema only, not the full style catalog) — `PROJECT.yaml`/
+   `COLLECTION.yaml` shape and token resolution order (project → collana → SDK default).
+   Must land before Compiler/ and before Token Inheritance, see **Multi-Style / Theme
+   System** below — both of those would otherwise encode or duplicate this mechanism.
+3. **P002 compact orthogonal-view layout** — cheap, bundle with step 1's render testing
+   since it touches the same page/components already under test.
+4. **`Documentation/OperationalManual/` path cleanup** — independent debt paydown, no
+   dependency either way, do it whenever convenient.
+5. **`Compiler/` + Prompt Orchestrator** — now reads theme/collana config from step 2
+   instead of hardcoding it. Absorbs the automated QA runner, index updater, and PDF
+   pipeline from **Automation & Tooling** below rather than duplicating that scope in a
+   second system.
+6. **Icon Library** (15 SVG icons) — build against token references, not fixed hex, so
+   new themes from step 2 apply automatically. Can run in parallel with step 5.
+7. **`Docs/tutorial/` + release system automation** — written once the operator workflow
+   (manual prompting vs. Compiler-assisted) is settled by step 5, to avoid rewriting them.
+8. **Multi-language support** — blocked, not just unscheduled: needs the RULE-058
+   locale-scoping decision below before any implementation starts.
+9. **Extended Page Set (P011–P015) / Component Extensions (C016–C020)** — built on the
+   settled theme + Compiler architecture rather than against a foundation still moving.
+10. **Platform Features** (Web Prompt Runner, Plugin system) — last, major/breaking.
+    Token Inheritance specifically is folded into step 2's design, not built separately.
+
+---
+
 ## Next Release — v2.6.0 (Planned)
 
-**Target:** Q3 2026
+**Target:** Q3 2026. Scope = Build Order steps 1–4 above, pending re-cut once step 2 is scoped in detail.
 
-- `Compiler/` — automated pipeline executor (Project Loader, Context Builder, Page Generator, QA Engine, PDF Assembler)
-- Prompt Orchestrator — manages the LOAD sequence automatically instead of manual per-phase prompting
-- `Documentation/OperationalManual/` — update all path references to v2.5.0 two-level project structure
-- Icon Library — 15 SVG icons, replacing current Unicode fallbacks (see `Assets/DesignSystem/Icons/README.md`)
-- Multi-language support: Italian, Japanese, English as selectable whole-document locales
-- `Docs/tutorial/` — end-to-end tutorial documents
-- Release system automation
+- `Compiler/` — automated pipeline executor (Project Loader, Context Builder, Page Generator, QA Engine, PDF Assembler) — see Build Order step 5, likely slides to v2.7.0
+- Prompt Orchestrator — manages the LOAD sequence automatically instead of manual per-phase prompting — step 5
+- `Documentation/OperationalManual/` — update all path references to v2.5.0 two-level project structure — step 4
+- Icon Library — 15 SVG icons, replacing current Unicode fallbacks (see `Assets/DesignSystem/Icons/README.md`) — step 6
+- Multi-language support: Italian, Japanese, English as selectable whole-document locales — step 8, blocked
+- `Docs/tutorial/` — end-to-end tutorial documents — step 7
+- Release system automation — step 7
 
 > ⚠️ **Known drift:** `ReleaseInfo.yaml → next_release` and `SDK_CONTEXT.yaml → roadmap.next_planned`
 > list slightly different feature sets for v2.6.0 (the list above is their union). Reconcile
-> both files to a single authoritative list before v2.6.0 planning locks.
+> both files to a single authoritative list before v2.6.0 planning locks — and reconsider
+> whether all of this still belongs in one release given the Build Order above.
 >
 > ⚠️ **Open question — multi-language vs. RULE-058:** `Core/DESIGN_LANGUAGE.md` RULE-058
 > mandates zero Japanese characters in any text element of an Italian manual. Multi-language
@@ -66,9 +103,10 @@ Governance note (2026-07-03): Gemini was degraded from "planned runtime" to "not
 
 ## Planned — Unscheduled
 
-Features with committed scope but no assigned version yet.
+Features with committed scope but no assigned version yet. Build Order step numbers
+reference the sequencing section above where applicable.
 
-### Multi-Style / Theme System
+### Multi-Style / Theme System — Build Order step 2
 Currently `Core/DESIGN_LANGUAGE.md` defines one fixed visual identity applied to every
 project regardless of paint scheme mood (Rule 1/11/12: Tamiya-catalog aesthetic, white
 background, function over fashion). Add a `paintScheme.style` or `project.theme` field in
@@ -100,37 +138,44 @@ shape: a `Collections/{CollanaName}/COLLECTION.yaml` (or similar) declaring the 
 theme, with `PROJECT.yaml` gaining an optional `collana` reference and an optional
 override if a single project needs to deviate from its series' theme.
 
-### P002 Layout — Compact Orthogonal View Row
+### P002 Layout — Compact Orthogonal View Row — Build Order step 3
 Independent of the theme system. Current P002 shows front/side/top renders as three large
 vertical panels. Alternate layout: same `renders.front/side/top` data from `content.yaml`,
 displayed as a compact thumbnail row alongside the color legend. Pure layout variant, no new
 content.yaml fields, no theme dependency — can ship whenever.
 
-### Extended Page Set (P011–P015)
+### Extended Page Set (P011–P015) — Build Order step 9
 - P011: Tools & Equipment reference page
 - P012: Common Mistakes & Troubleshooting
 - P013: Advanced Techniques (airbrushing, candy coat, metallics)
 - P014: Custom Part Painting (chassis, rollers, motor cover)
 - P015: Photography & Display guide
 
-### Component Extensions (C016–C020)
+### Component Extensions (C016–C020) — Build Order step 9
 - C016: Comparison Table (before/after paint stages)
 - C017: Difficulty Rating badge
 - C018: Compatibility Matrix (paint brands)
 - C019: QR Code block (links to video companion)
 - C020: Author/Contributor credit block
 
-### Automation & Tooling
-- Automated PDF pipeline (pandoc + LaTeX, or headless Chromium/Puppeteer)
+### Automation & Tooling — absorbed into Build Order step 5
+Not a separate system from `Compiler/` — building these independently would produce two
+automation stacks that don't compose. Scope folds into the Compiler/'s QA Engine and PDF
+Assembler:
+- Automated PDF pipeline (pandoc + LaTeX, or headless Chromium/Puppeteer) → Compiler PDF Assembler
+- Automated `Tests/ContentValidation.md` and `Tests/TextValidation.md` runners (script-based, not manual AI checklist) → Compiler QA Engine
+- Automated `ApprovedAssets/index.yaml` / project index updater → Compiler Context Builder
+
+Still independent of Compiler, no folding needed:
 - `Build/CI.md` — CI/CD integration guide
 - `Config/environments/` — local dev/staging/production overrides
-- Automated `Tests/ContentValidation.md` and `Tests/TextValidation.md` runners (script-based, not manual AI checklist)
-- Automated `ApprovedAssets/index.yaml` / project index updater
 
-### Platform Features (Breaking — would require a MAJOR version bump)
+### Platform Features (Breaking — would require a MAJOR version bump) — Build Order step 10
 - Web-based Prompt Runner — browser tool that fills `PromptEngine/` templates from `PROJECT.yaml`, no server required
 - Plugin system for custom component/page types via `plugins/` directory (`plugin.yaml` manifest; `COMPONENT_SYSTEM.md` schema gains a `source` field)
-- Token Inheritance — `PROJECT.yaml` gains optional `tokenOverrides`, changing token resolution order (project overrides → SDK defaults)
+- ~~Token Inheritance~~ — folded into Build Order step 2 (Multi-Style/Theme System). It was
+  the same token-resolution-order mechanism proposed twice under two different names; do
+  not design separately.
 
 ---
 
