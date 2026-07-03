@@ -220,17 +220,105 @@ Se il report cita dati sbagliati o inventati: correggi il PROJECT.yaml e ricomin
 
 ## PASSO 11 — Generazione testi (stessa chat)
 
-Nella stessa chat del bootstrap, usa il **Prompt Fase 2** da `Docs/AI_BOOTSTRAP_PROMPT.md`.
+Rimani nella stessa chat del bootstrap. Non riaprire una nuova chat e non ricaricare file.
 
-Non serve ricaricare i file: l'AI li ricorda nella stessa conversazione.
+Il flusso per **ogni pagina** è: **invia Prompt Genera → invia Prompt QA → correggi se REJECTED → sigilla**.
 
-Ripeti per ogni pagina P001 → P010:
-1. **Genera** — Prompt Fase 2 con nome pagina
-2. **Valida** — Prompt Fase 3 (QA)
-3. **Correggi** se REJECTED, poi rivalida
-4. **Sigilla** — conferma `status: locked` per la pagina
+---
 
-Salva il `content.yaml` prodotto dall'AI in ogni step (copia il testo dalla chat nel file locale).
+### 11a — Genera il content.yaml (una pagina alla volta)
+
+Copia il prompt qui sotto, sostituisci i tre valori in maiuscolo e invialo in chat:
+
+```
+Fase 2 — Text Engine.
+Genera la pagina CODICE_PAGINA (NOME_PAGINA) del manuale per il modello NOME_MODELLO.
+
+1. Leggi il file PromptEngine/FILE_PROMPT.md dallo ZIP che hai già caricato.
+2. Estrai tutti i valori dal PROJECT.yaml che hai già analizzato.
+3. Genera il file content.yaml completo per questa pagina.
+4. Usa TODO: per qualsiasi valore non disponibile in PROJECT.yaml — non inventare nulla.
+5. Tutto il testo editoriale in italiano; codici e nomi commerciali restano invariati.
+
+Non procedere al rendering: siamo in Text Mode. Output atteso: solo il content.yaml,
+pronto per la validazione QA.
+```
+
+Sostituisci prima di inviare:
+
+| Placeholder | Cosa scrivere | Esempio |
+|---|---|---|
+| `CODICE_PAGINA` | ID pagina | `P001` |
+| `NOME_PAGINA` | Nome della pagina | `Copertina` |
+| `NOME_MODELLO` | Nome del tuo modello | `Magnum Saber Premium` |
+| `FILE_PROMPT.md` | File PromptEngine corrispondente (vedi tabella sotto) | `Cover.md` |
+
+Tabella pagine → file PromptEngine:
+
+| Pagina | Nome | FILE_PROMPT.md |
+|---|---|---|
+| P001 | Copertina | `Cover.md` |
+| P002 | Schema Colori | `ColorScheme.md` |
+| P003 | Materiali | `Materials.md` |
+| P004 | Preparazione | `Preparation.md` |
+| P005 | Verniciatura | `Painting.md` |
+| P006 | Mascheratura | `Masking.md` |
+| P007 | Dettagli | `Details.md` |
+| P008 | Decalcomanie | `Decals.md` |
+| P009 | Variante Premium *(solo se abilitata)* | `Premium.md` |
+| P010 | Checklist Finale | `FinalChecklist.md` |
+
+> ⚠️ **`TODO:` nell'output non è un errore.** Significa che quel dato non è presente in PROJECT.yaml.
+> Se vedi molti `TODO:` nei campi vernice o sequenze operative, torna a compilare PROJECT.yaml
+> con quei dati (colori, codici, sequenza di applicazione), poi rigenera la pagina.
+> `TODO:` su un campo che HAI compilato in PROJECT.yaml = AI non ha letto il file → ricomincia dal Passo 7.
+
+---
+
+### 11b — Valida con QA (stessa chat, subito dopo)
+
+Dopo aver ricevuto il content.yaml, invia questo prompt nella stessa chat:
+
+```
+Fase 3 — QA. Esegui la validazione completa sul content.yaml appena generato.
+
+Ambito: questo è CONTENUTO GENERATO (status: review), non un template. Applica
+Tests/ContentValidation.md §Validation Scope dallo ZIP che hai già caricato.
+
+Content Validation: applica tutte e 7 le suite di Tests/ContentValidation.md.
+Text Validation: applica tutti e 9 i test di Tests/TextValidation.md.
+
+Ricorda le eccezioni language-neutral: codici vernice (TS-37, X-10, PS-1…),
+nomi commerciali (Chrome Silver, Gun Metal, Flat Black, Primer…), chiavi YAML
+e valori di schema NON sono violazioni linguistiche.
+
+Riporta:
+- Esito per suite: PASS / FAIL / WARNING
+- Ogni FAIL con riga e correzione necessaria
+- Verdetto finale: APPROVED / REJECTED
+```
+
+---
+
+### 11c — Correggi e risigilla
+
+- **REJECTED** → chiedi all'AI di applicare le correzioni, poi invia di nuovo il Prompt QA (11b).
+- **APPROVED** → invia in chat:
+
+```
+Approvato. Sigilla la pagina CODICE_PAGINA: metadata.yaml → status: locked, con riga di changelog.
+```
+
+Sostituisci `CODICE_PAGINA` con il codice reale (es. `P001`).
+
+Poi **salva il content.yaml** dalla chat nel file locale corrispondente.
+
+---
+
+### 11d — Pagina successiva
+
+Ripeti 11a → 11b → 11c per ogni pagina fino a P010.
+Non aprire una nuova chat tra una pagina e l'altra.
 
 ---
 
