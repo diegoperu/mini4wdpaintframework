@@ -17,6 +17,11 @@ Con Claude Code l'AI ha accesso diretto al repository clonato localmente:
 - L'AI **scrive** i file generati (content.yaml, metadata.yaml, ecc.) direttamente nel repository
 - Non serve riaprire una nuova sessione per ogni fase: Claude Code mantiene il contesto del repository
 
+> ⚠️ **Claude Code gestisce solo la fase TESTI (Bootstrap → Generazione → QA → Sigillatura).**
+> Claude Code **non può generare immagini**. Il rendering (Fase 4) richiede un'AI generativa
+> visuale separata: ChatGPT Web (DALL-E), Gemini, o equivalente.
+> Quando tutti i content.yaml sono locked, passerai a un runtime immagini — vedi **PASSO 10**.
+
 ---
 
 ## Cosa ti serve
@@ -180,46 +185,205 @@ Se il report cita dati sbagliati: correggi `Projects/{Modello}/PROJECT.yaml` e r
 
 ## PASSO 9 — Generazione testi (stessa sessione)
 
-Nella stessa sessione Claude Code, usa il **Prompt Fase 2** da `Docs/AI_BOOTSTRAP_PROMPT.md`.
+Rimani nella stessa sessione Claude Code. L'AI scrive `content.yaml` direttamente nel repo —
+non serve copiare nulla dalla chat.
 
-Con Claude Code, l'AI scrive `content.yaml` direttamente in `ApprovedAssets/Text/P00x/`.
-Non serve copiare output dalla chat: i file sono già nel repository.
-
-Per ogni pagina P001 → P010:
-1. **Genera** — Prompt Fase 2
-2. **Valida** — Prompt Fase 3 (QA)
-3. **Correggi** se REJECTED, poi rivalida
-4. **Sigilla** — l'AI aggiorna `metadata.yaml → status: locked`
+Il flusso per **ogni pagina** è: **invia Prompt Genera → invia Prompt QA → correggi se REJECTED → sigilla**.
 
 ---
 
-## PASSO 10 — Rendering (nuova sessione con contesto diverso)
+### 9a — Genera il content.yaml (una pagina alla volta)
 
-Il rendering usa un contesto AI diverso dai testi. Avvia una nuova sessione Claude Code
-(oppure usa il **Prompt Fase 4** nella sessione corrente se il contesto è ancora pulito).
+Copia il prompt qui sotto, sostituisci i tre valori in maiuscolo e invialo:
 
-Usa il **Prompt Fase 4** da `Docs/AI_BOOTSTRAP_PROMPT.md`.
+```
+Fase 2 — Text Engine.
+Genera la pagina CODICE_PAGINA (NOME_PAGINA) del manuale per il modello NOME_MODELLO.
 
-L'AI legge direttamente `ApprovedAssets/Text/P00x/content.yaml` (già locked) e
-`Projects/{Modello}/Images/` — nessun allegato necessario.
+1. Leggi il file PromptEngine/FILE_PROMPT.md nel repository.
+2. Estrai tutti i valori dal PROJECT.yaml del progetto.
+3. Risolvi i riferimenti per ID: se paintSequence usa colorId, cerca il colore
+   corrispondente in paintScheme.colors (dove id == colorId) ed estrai paintCode,
+   paintName, finish, hex. Non lasciare TODO: per valori raggiungibili tramite
+   riferimento — usa TODO: solo per dati genuinamente assenti nel PROJECT.yaml.
+4. Genera il file content.yaml completo per questa pagina e scrivilo in
+   ApprovedAssets/Text/CODICE_PAGINA/content.yaml.
+5. Usa TODO: per qualsiasi valore non disponibile in PROJECT.yaml — non inventare nulla.
+6. Tutto il testo editoriale in italiano; codici e nomi commerciali restano invariati.
+
+Non procedere al rendering: siamo in Text Mode. Output atteso: content.yaml scritto nel
+repository, pronto per la validazione QA.
+```
+
+Sostituisci prima di inviare:
+
+| Placeholder | Cosa scrivere | Esempio |
+|---|---|---|
+| `CODICE_PAGINA` | ID pagina | `P001` |
+| `NOME_PAGINA` | Nome della pagina | `Copertina` |
+| `NOME_MODELLO` | Nome del tuo modello | `Magnum Saber Premium` |
+| `FILE_PROMPT.md` | File PromptEngine corrispondente (vedi tabella sotto) | `Cover.md` |
+
+Tabella pagine → file PromptEngine:
+
+| Pagina | Nome | FILE_PROMPT.md |
+|---|---|---|
+| P001 | Copertina | `Cover.md` |
+| P002 | Schema Colori | `ColorScheme.md` |
+| P003 | Materiali | `Materials.md` |
+| P004 | Preparazione | `Preparation.md` |
+| P005 | Verniciatura | `Painting.md` |
+| P006 | Mascheratura | `Masking.md` |
+| P007 | Dettagli | `Details.md` |
+| P008 | Decalcomanie | `Decals.md` |
+| P009 | Variante Premium *(solo se abilitata)* | `Premium.md` |
+| P010 | Checklist Finale | `FinalChecklist.md` |
+
+> ⚠️ **`TODO:` nell'output non è un errore.** Significa che quel dato non è presente
+> in PROJECT.yaml. Se vedi molti `TODO:` nei campi vernice o sequenze operative, integra
+> PROJECT.yaml con quei dati e rigenera la pagina.
+> `TODO:` su un campo che HAI compilato = AI non ha letto il file o ha mancato il JOIN colorId → rilanciare il prompt.
+
+---
+
+### 9b — Valida con QA (stessa sessione, subito dopo)
+
+Dopo che l'AI ha scritto il content.yaml, invia questo prompt:
+
+```
+Fase 3 — QA. Esegui la validazione completa sul content.yaml appena generato
+in ApprovedAssets/Text/CODICE_PAGINA/content.yaml.
+
+Ambito: questo è CONTENUTO GENERATO (status: review), non un template. Applica
+Tests/ContentValidation.md §Validation Scope.
+
+Content Validation: applica tutte e 7 le suite di Tests/ContentValidation.md.
+Text Validation: applica tutti e 9 i test di Tests/TextValidation.md.
+
+Ricorda le eccezioni language-neutral: codici vernice (TS-37, X-10, PS-1…),
+nomi commerciali (Chrome Silver, Gun Metal, Flat Black, Primer…), chiavi YAML
+e valori di schema NON sono violazioni linguistiche.
+
+Riporta:
+- Esito per suite: PASS / FAIL / WARNING
+- Ogni FAIL con riga e correzione necessaria
+- Verdetto finale: APPROVED / REJECTED
+```
+
+Sostituisci `CODICE_PAGINA` con il codice reale (es. `P001`).
+
+---
+
+### 9c — Correggi e sigilla
+
+- **REJECTED** → chiedi all'AI di applicare le correzioni direttamente nel file, poi invia di nuovo il Prompt QA (9b).
+- **APPROVED** → invia in chat:
+
+```
+Approvato. Sigilla la pagina CODICE_PAGINA:
+ApprovedAssets/Text/CODICE_PAGINA/metadata.yaml → status: locked
+Aggiungi riga di changelog in ApprovedAssets/Text/CODICE_PAGINA/changelog.md.
+```
+
+---
+
+### 9d — Pagina successiva
+
+Ripeti 9a → 9b → 9c per ogni pagina fino a P010.
+Non aprire una nuova sessione tra una pagina e l'altra.
+
+---
+
+## PASSO 10 — Handoff al Runtime Immagini
+
+> ⚠️ **Claude Code non può generare immagini.**
+> Il rendering (Fase 4) richiede un'AI generativa visuale: ChatGPT Web (DALL-E), Gemini, o equivalente.
+> Questo passo descrive come trasferire tutto il lavoro fatto con Claude Code al runtime immagini.
+
+---
+
+### 10a — Verifica che tutte le pagine siano locked
+
+Prima di passare al rendering, controlla che ogni pagina da P001 a P010 abbia `status: locked`:
+
+```bash
+grep -r "status:" ApprovedAssets/Text/*/metadata.yaml
+```
+
+Ogni riga deve mostrare `status: locked`. Se qualche pagina è ancora `draft` o `review`,
+torna al PASSO 9 per completarla.
+
+---
+
+### 10b — Prepara il pacchetto di handoff
+
+I content.yaml locked sono già nel repository locale. Hai due opzioni:
+
+**Opzione A — Handoff via GitHub (consigliata):**
+1. Esegui `git add . && git commit -m "lock: all pages P001-P010"` e `git push`
+2. Scarica il repository aggiornato come ZIP da GitHub (Code → Download ZIP)
+3. Il ZIP conterrà già tutti i content.yaml locked in `ApprovedAssets/Text/`
+
+**Opzione B — Handoff diretto (senza push):**
+Per ogni pagina che vuoi renderizzare, copia il file localmente:
+- `ApprovedAssets/Text/P001/content.yaml` → tieni pronto da allegare
+- `ApprovedAssets/Text/P002/content.yaml` → ecc.
+
+---
+
+### 10c — Rendering in ChatGPT Web (una pagina alla volta)
+
+Apri **ChatGPT Web**, nuova chat. Carica:
+
+| File | Come ottenerlo |
+|---|---|
+| `Mini4WDFramework.zip` | Il ZIP scaricato al punto 10b (Opzione A) oppure il ZIP originale del repo |
+| `content.yaml` della pagina da renderizzare | Da `ApprovedAssets/Text/P00x/content.yaml` (allegato separato) |
+| Immagini di riferimento | Da `Projects/{Modello}/Images/` |
+
+Poi incolla il **Prompt Fase 4** da `Docs/AI_BOOTSTRAP_PROMPT.md` con i valori corretti.
+
+> Se usi il ZIP aggiornato (Opzione A), il content.yaml è già dentro — non serve allegarlo
+> separatamente. Se usi il ZIP originale, allegalo come file separato in modo che ChatGPT
+> usi la versione locked, non il template vuoto.
+
+---
+
+### 10d — Rendering in Gemini
+
+Procedura identica a ChatGPT Web (10c). Carica lo stesso set di file tramite allegati
+o Google Drive. Usa lo stesso Prompt Fase 4.
+
+---
+
+### 10e — Salva le immagini generate
+
+Per ogni pagina renderizzata:
+1. Scarica l'immagine prodotta dall'AI generativa
+2. Salvala in `ApprovedAssets/Images/P00x/` nel repository locale
+3. Aggiorna `ApprovedAssets/Text/P00x/metadata.yaml → status: rendered`
 
 ---
 
 ## PASSO 11 — PDF
 
-Usa il **Prompt Fase 5** da `Docs/AI_BOOTSTRAP_PROMPT.md`.
+Con tutte le pagine in `status: rendered`, usa il **Prompt Fase 5** da `Docs/AI_BOOTSTRAP_PROMPT.md`.
 
+Il PDF può essere assemblato con ChatGPT Web o Gemini (stessa procedura handoff del PASSO 10).
 Prerequisito: copia compilata di `Templates/PDF_CONFIG.yaml` in `Projects/{Modello}/PDF_CONFIG.yaml`.
 
 ---
 
 ## Riepilogo fasi
 
-| Fase | Nuova sessione | Cosa fa l'AI |
+| Fase | Runtime | Cosa fa l'AI |
 |---|---|---|
-| Bootstrap + Testi + QA | SÌ (inizio) | Legge dal repo, scrive content.yaml |
-| Rendering | Consigliata (contesto diverso) | Legge content.yaml, scrive immagini in ApprovedAssets/ |
-| PDF | Consigliata | Guida assemblaggio PDF |
+| Bootstrap | **Claude Code** | Legge dal repo, produce Bootstrap Report |
+| Testi P001–P010 | **Claude Code** | Scrive content.yaml nel repo |
+| QA Testi | **Claude Code** | Valida content.yaml, APPROVED/REJECTED |
+| Sigillatura | **Claude Code** | Imposta metadata.yaml → locked |
+| **Rendering** | **AI immagini** (ChatGPT/Gemini) | Genera pagine illustrate da content.yaml |
+| PDF | **AI immagini** (ChatGPT/Gemini) | Assembla 3 varianti PDF |
 
 ---
 
@@ -235,9 +399,11 @@ Con Claude Code non serve ricaricare i file — l'AI accede di nuovo direttament
 | Errore | Causa | Soluzione |
 |---|---|---|
 | L'AI valida template vuoti e dà FAIL | Hai saltato la generazione (Fase 2) | Genera prima, poi valida |
+| content.yaml con tutti TODO: in paint_sequence | AI non ha risolto il JOIN colorId → paintScheme.colors | Rilancia il Prompt 9a — il punto 3 istruisce il JOIN |
 | content.yaml contiene dati inventati | PROJECT.yaml aveva campi vuoti | Correggi PROJECT.yaml, rigenera |
 | L'AI modifica file fuori da Projects/ | Istruzioni errate nel prompt | Usa i prompt ufficiali, controlla le modifiche |
-| Contesto saturo | Chat troppo lunga | Prompt F — Continuità |
+| Contesto saturo | Sessione troppo lunga | Prompt F — Continuità (il repo rimane invariato) |
+| ChatGPT usa content.yaml sbagliato al rendering | ZIP originale senza locked files, content.yaml non allegato separato | Usa Opzione A (ZIP aggiornato) oppure allega content.yaml separatamente |
 
 Guida errori completa: `OperatorGuide/06_Errori_Comuni.md`
 
