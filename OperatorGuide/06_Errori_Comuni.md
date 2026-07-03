@@ -53,7 +53,7 @@ trattini (`dash-01-shadow-emperor`). Rinomina la cartella e aggiorna PROJECT.yam
 **Causa:** ambiguità documentale pre-2.4.1.
 **Soluzione:** set **minimo** per il bootstrap: `PROJECT.yaml` + `Images/` + `Output/`
 + `Notes/`. Gli altri template sono opzionali (utili, non bloccanti). Vedi
-`PROJECT_STRUCTURE.md`.
+`../PROJECT_STRUCTURE.md`.
 
 ## E06 — Placeholder sbagliato
 
@@ -80,7 +80,7 @@ content.yaml. Non generare testo nuovo». Se persiste, nuova chat, ri-bootstrap 
 
 **Sintomo:** l'AI dimentica le regole, mescola le fasi, cita dati di altri modelli.
 **Causa:** contesto saturo o contaminato.
-**Soluzione:** nuova chat con **Prompt F — Continuità** (`Docs/AI_BOOTSTRAP_PROMPT.md`),
+**Soluzione:** nuova chat con **Prompt F — Continuità** (`../Docs/AI_BOOTSTRAP_PROMPT.md`),
 indicando pagine completate e pagina corrente.
 
 ## E10 — Dati inventati dall'AI

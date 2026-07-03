@@ -22,8 +22,8 @@ Prepara     →    Bootstrap  →    Testi + QA  →    Rendering  →   PDF    
 
 Cosa fai: cartella progetto, PROJECT.yaml compilato, foto in `Images/`.
 
-- Guida completa: **`FIRST_PROJECT.md`** (PASSO 1–5)
-- Struttura e posizioni: `PROJECT_STRUCTURE.md`
+- Guida completa: **`../FIRST_PROJECT.md`** (PASSO 1–5)
+- Struttura e posizioni: `../PROJECT_STRUCTURE.md`
 - Checklist: `05_Checklist.md §Setup`
 
 Esito atteso: `Projects/{TuoModello}/` completo, nessun altro file toccato.
@@ -33,8 +33,8 @@ Esito atteso: `Projects/{TuoModello}/` completo, nessun altro file toccato.
 Cosa fai: apri una chat, alleghi i file della Fase 1, incolli il prompt, leggi il
 Bootstrap Report e lo approvi.
 
-- Prompt e file da allegare: `Docs/AI_BOOTSTRAP_PROMPT.md → Fase 1`
-- Guida: `FIRST_PROJECT.md` (PASSO 6–7)
+- Prompt e file da allegare: `../Docs/AI_BOOTSTRAP_PROMPT.md → Fase 1`
+- Guida: `../FIRST_PROJECT.md` (PASSO 6–7)
 
 Esito atteso: Bootstrap Report con i TUOI dati, tua approvazione esplicita in chat.
 
@@ -50,7 +50,7 @@ Per **ogni pagina** P001 → P010, in quest'ordine:
    Se il problema è un dato sbagliato in PROJECT.yaml, correggi il file e riallegalo.
 4. **Sigilla** — a verdetto APPROVED, conferma il seal: `metadata.yaml → locked`.
 
-Ordine pagine e prompt: `BOOTSTRAP.md §Pages`. P009 solo se hai il premium abilitato.
+Ordine pagine e prompt: `../BOOTSTRAP.md §Pages`. P009 solo se hai il premium abilitato.
 
 ⚠️ **Non validare mai una pagina che non hai ancora generato**: i moduli in
 `ApprovedAssets/Text/` nascono come template vuoti in stato `draft` — il QA sui
@@ -63,7 +63,7 @@ Esito atteso: tutte le pagine con `status: locked`.
 Per ogni pagina locked: allega specifiche di design + content.yaml + foto, prompt
 Fase 4, poi QA visivo.
 
-- Guida completa: **`FIRST_RENDER.md`**
+- Guida completa: **`../FIRST_RENDER.md`**
 
 Esito atteso: tutte le pagine `status: rendered`, immagini in `ApprovedAssets/Images/`.
 
@@ -71,7 +71,7 @@ Esito atteso: tutte le pagine `status: rendered`, immagini in `ApprovedAssets/Im
 
 Assembla le pagine nelle 3 varianti PDF.
 
-- Guida completa: **`FIRST_PDF.md`**
+- Guida completa: **`../FIRST_PDF.md`**
 
 Esito atteso: 3 PDF + checksum in `Projects/{Modello}/Output/pdf/`.
 
