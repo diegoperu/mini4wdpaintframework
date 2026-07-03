@@ -78,7 +78,10 @@ All components:
 ## 3. Folder Naming by Category
 
 ### 3.1 Project Folders (in Projects/)
-**Format:** `PascalCase` matching the official Tamiya model name, spaces replaced with underscores.
+
+**Structure (v2.5.0):** `Projects/{Model}/{Variant}/`
+
+**{Model} folder — format:** `PascalCase` matching the official Tamiya model name, spaces replaced with underscores.
 
 The model slug (used in file names) is derived from the folder name: lowercase all characters, replace underscores with hyphens.
 
@@ -90,6 +93,23 @@ The model slug (used in file names) is derived from the folder name: lowercase a
 | Hurricane Sonic | `Hurricane_Sonic` | `hurricane-sonic` |
 
 > ⚠️ **Warning:** The folder name and the model slug are different. The folder name is `Proto_Emperor` (underscores, PascalCase). The model slug is `proto-emperor` (hyphens, lowercase). Use each in its correct context.
+
+**{Variant} folder — format:** `PascalCase` matching `paintScheme.name`, spaces replaced with underscores. The variant slug (`paintScheme.slug` in PROJECT.yaml) is the kebab-case source: capitalize each segment and join with underscores to get the folder name.
+
+| paintScheme.name | paintScheme.slug | Variant Folder |
+|---|---|---|
+| Violet Phantom | `violet-phantom` | `Violet_Phantom` |
+| Cotton Candy Drift | `cotton-candy-drift` | `Cotton_Candy_Drift` |
+| Midnight Blue v2 | `midnight-blue-v2` | `Midnight_Blue_V2` |
+
+**Full path example:**
+```
+Projects/Proto_Emperor/Violet_Phantom/PROJECT.yaml
+Projects/Proto_Emperor/Violet_Phantom/ApprovedText/P001/content.yaml
+Projects/Proto_Emperor/Cotton_Candy_Drift/PROJECT.yaml   ← same model, different variant
+```
+
+Multiple variants of the same model are siblings under the model folder.
 
 ### 3.2 SDK Directory Structure Folders
 **Format:** `PascalCase` for semantic SDK directories.
