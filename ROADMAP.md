@@ -73,6 +73,10 @@ covering only steps 1–4, with the rest sliding to v2.7.0+).
 10. **Platform Features** (Web Prompt Runner, Plugin system) — last, major/breaking.
     Token Inheritance specifically is folded into step 2's design, not built separately.
 
+**Parallel track (no dependency on steps above):** Claude Code Text-Phase Autopilot —
+touches only Fase 2/3 (text generation + QA), never Fase 4 (render/theme/chrome), so it
+does not need to wait for step 2. See **Planned — Unscheduled** below.
+
 ---
 
 ## Next Release — v2.6.0 (Planned)
@@ -105,6 +109,57 @@ covering only steps 1–4, with the rest sliding to v2.7.0+).
 
 Features with committed scope but no assigned version yet. Build Order step numbers
 reference the sequencing section above where applicable.
+
+### Claude Code Text-Phase Autopilot — Parallel track, independent of Build Order
+Originated 2026-07-03. Today the Claude Code text workflow (`OperatorGuide/Runtimes/
+Claude_Code.md` steps 9a→9b→9c→9d) requires a human to manually trigger each phase per
+page — generate, QA, seal — across up to 10 pages. Goal: a Claude Code Skill that runs
+this loop autonomously across all applicable pages (P001–P010, conditional pages per
+`PROJECT.yaml`), to speed up human review — the human reviews finished/locked text, not
+each round-trip.
+
+**Scope:** Fase 2/3 (text generation + QA + seal) only. Never touches Fase 4 (render) —
+no dependency on the Theme/collana mechanism (step 2) or on `Compiler/` (step 5). Can be
+built now, in parallel with the numbered Build Order.
+
+**Failure handling (the actual design problem):**
+- REJECTED on first QA pass → auto-correct and re-run QA (already the manual 9c pattern),
+  capped at 2–3 attempts per page. Not blocking.
+- REJECTED past the retry cap, or a structural failure (a REQUIRED `PROJECT.yaml` field
+  is genuinely absent, a `colorId` reference resolves to nothing) → blocking. Log page,
+  reason, and attempt count; continue to the next page rather than halting the run.
+- If the first 2–3 pages all hit blocking failures for the same underlying reason, stop
+  early and report "likely malformed PROJECT.yaml" instead of grinding through all pages
+  identically.
+- Final output: a per-page report (page, status LOCKED/BLOCKED, attempts, reason if
+  blocked) — same idea as the `qa_log.md` already described under the Long-Term CLI Tool,
+  just realized now instead of waiting for that tool.
+- Recommended safety gate: run only P001 first, pause for human confirmation, then run
+  the rest unattended. Removing the per-page human checkpoint means a systemic
+  misunderstanding (e.g. a misread paint scheme) could repeat identically across many
+  pages before anyone looks, unlike today's manual loop where an operator tends to notice
+  by page 1–2. This does not make the self-QA problem worse than it already is (Fase 3 QA
+  is already the same model grading its own Fase 2 output, today, manually) — it just
+  removes the human's early chance to catch a systemic issue before it repeats.
+
+**Downsides of the Skill approach, for the record:**
+- Claude Code only — ChatGPT Web and future local-model runtimes get no benefit from this
+  specific implementation; state that limitation in the Skill's own docs.
+- Batch autonomy trades real-time human observability for a post-hoc report.
+- Still a functional change under STABLE governance — needs the same documented
+  justification as any other roadmap item, not a casual addition.
+
+**Does this prejudice the eventual Compiler/Prompt Orchestrator (step 5), given the
+long-term goal of supporting local AI models?** No — different mechanism, not a
+prototype of the same code. The Skill is agentic instructions executed by Claude Code's
+own harness (no API keys, no provider SDK — still "prompt text", just executed in a loop
+instead of by hand). The eventual Compiler, to be genuinely model-agnostic including
+local models, will need to be real software calling whichever provider's API directly.
+
+Note: an earlier draft of this section flagged a conflict with a "no direct AI calls, SDK
+is prompt text not software" constraint that used to live under `What Will Not Be Added`.
+That constraint has been removed (2026-07-03) — direct provider API calls are the intended
+long-term direction for `Compiler/`, not something to avoid. No conflict remains.
 
 ### Multi-Style / Theme System — Build Order step 2
 Currently `Core/DESIGN_LANGUAGE.md` defines one fixed visual identity applied to every
@@ -205,7 +260,6 @@ Command-line interface (`mini4wd-sdk init`, `mini4wd-sdk qa`, `mini4wd-sdk expor
 ## What Will Not Be Added
 
 - **Model-specific content** — The SDK contains no Mini4WD model data. Models live in `Projects/`.
-- **AI provider integrations** — No API keys, no provider SDKs, no direct AI calls. The SDK is prompt text, not software.
 - **Paint brand recommendations** — The SDK describes how to represent colors; it does not endorse brands.
 - **Racing or performance content** — This SDK covers painting manuals only. Motor tuning, gear ratios, and track setups are out of scope.
 
