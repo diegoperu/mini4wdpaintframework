@@ -1,0 +1,50 @@
+# Mini4WD Manual SDK — Page Content
+# Page: P008 — Decalcomanie (Decals)
+# SDK Version: 2.4.0
+# SOURCE OF TRUTH
+
+page:
+  id: "P008"
+  name: "Decalcomanie"
+  version: "1.0.0"
+  language: "it"
+
+title: "Applicazione Decalcomanie"  # REQUIRED
+intro: "Questo schema di verniciatura (Cotton Candy Drift) non utilizza decalcomanie."  # PROJECT.yaml decals: [] — dichiarazione esplicita richiesta da Core/PAGE_SYSTEM.md §P008
+
+# ============================================================
+# DECALS — from PROJECT.yaml decals[]
+# PROJECT.yaml decals: [] → nessuna decalcomania per questo schema.
+# Array lasciato vuoto: RULE-004 vieta di inventare decal non presenti in PROJECT.yaml.
+# ============================================================
+decals: []
+
+# ============================================================
+# APPLICATION STEPS — nessuna decalcomania da applicare
+# ============================================================
+application_steps: []
+
+warnings: []                 # Nessun rischio decal-specifico applicabile (nessuna decal presente)
+
+tips: []                     # Nessun consiglio decal-specifico applicabile (nessuna decal presente)
+
+footer:
+  page_id: "P008"
+  model_name: "Magnum Saber Premium (Super-II Chassis)"
+  series: "Fully Cowled Mini 4WD Series No.31 — Item No. 19431"
+
+component_mapping:
+  C001:
+    uses: ["title"]
+  C002:
+    uses: ["footer.page_id", "footer.model_name"]
+  C008:
+    uses: ["warnings"]
+  C009:
+    uses: ["tips"]
+  C012:
+    uses: []                 # Placement zoom panels
+  C013:
+    uses: ["application_steps[].step"]
+  C015:
+    uses: ["decals[].notes"]

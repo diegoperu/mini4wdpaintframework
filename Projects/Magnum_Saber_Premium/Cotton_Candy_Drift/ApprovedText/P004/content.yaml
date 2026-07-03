@@ -1,0 +1,88 @@
+# Mini4WD Manual SDK — Page Content
+# Page: P004 — Preparazione (Preparation)
+# SDK Version: 2.4.0
+# SOURCE OF TRUTH
+
+page:
+  id: "P004"
+  name: "Preparazione"
+  version: "1.0.0"
+  language: "it"
+
+title: "Preparazione della Superficie"  # REQUIRED
+intro: ""                               # OPTIONAL — non richiesto da PromptEngine/Preparation.md
+
+# ============================================================
+# STEPS — from PROJECT.yaml preparationSteps[]
+# All descriptions in Italian, imperative form
+# (PROJECT.yaml usa forma infinita — convertita a imperativo per RULE-067)
+# ============================================================
+steps:
+  - id: 1
+    title: "Lavaggio della carrozzeria"
+    description: "Lava la carrozzeria in ABS con acqua tiepida e detergente neutro. Usa uno spazzolino morbido per rimuovere i residui di stampo. Risciacqua con acqua distillata."
+    duration: "15 minuti"
+    tools: ["spazzolino morbido"]
+    warning: "Attenzione: non usare detergenti aggressivi o solventi — danneggiano la plastica ABS."
+    tip: "Suggerimento: l'acqua distillata nel risciacquo finale evita depositi calcarei che comprometterebbero l'adesione del primer."
+
+  - id: 2
+    title: "Asciugatura completa"
+    description: "Lascia asciugare la carrozzeria all'aria per almeno 2 ore in ambiente pulito e privo di polvere."
+    duration: "2 ore"
+    tools: []
+    warning: "Attenzione: non usare asciugacapelli — il calore deforma la plastica ABS sottile."
+    tip: ""
+
+  - id: 3
+    title: "Carteggiatura leggera"
+    description: "Carteggia delicatamente tutta la superficie con carta abrasiva 400 grit a umido, poi rifinisci con 600 grit. Procedi in direzione unica, mai circolare."
+    duration: "20 minuti"
+    tools: ["Carta abrasiva 400 grit"]
+    warning: "Attenzione: non carteggiare eventuali scritte in rilievo o texture decorative."
+    tip: "Suggerimento: una superficie ben opacizzata migliora sensibilmente l'adesione del primer bianco."
+
+  - id: 4
+    title: "Rimozione della polvere"
+    description: "Elimina tutta la polvere di carteggiatura con un panno *tack cloth*, passando su tutta la superficie con movimenti lenti."
+    duration: "10 minuti"
+    tools: ["Panno tack cloth"]
+    warning: "Attenzione: non soffiare sulla carrozzeria con la bocca — la saliva causa crateri nella vernice (fish-eye)."
+    tip: "Suggerimento: lavorare in un ambiente con poca circolazione d'aria per evitare che la polvere si ridepositi."
+
+  - id: 5
+    title: "Applicazione del primer bianco"
+    description: "Applica il primer bianco Tamiya in 2 mani sottili, attendendo 10 minuti tra una mano e l'altra, a 25-30cm di distanza. Lascia asciugare 2 ore prima di procedere."
+    duration: "15 minuti (applicazione) + 2 ore (asciugatura)"
+    tools: ["Primer bianco Tamiya (Fine Surface Primer)"]
+    warning: "Attenzione: non applicare una sola mano spessa — causerebbe colature."
+    tip: "Suggerimento: il primer bianco (anziché grigio) è fondamentale per la resa vivace dei pastelli azzurro, rosa e giallo di questo schema."
+
+warnings: []                 # Nessuna avvertenza generale distinta da PROJECT.yaml — solo avvertenze per-step (vedi steps[].warning)
+
+tips:
+  - "Suggerimento: lava la carrozzeria con sapone neutro per piatti e acqua tiepida prima di qualsiasi carteggiatura. Le impronte digitali contengono oli che impediscono l'adesione della vernice."
+  - "Suggerimento: lascia asciugare completamente la carrozzeria (minimo 2 ore) prima di applicare il primer."
+  - "Suggerimento: carteggia in un'unica direzione — mai con movimenti circolari sulle superfici visibili."
+  - "Suggerimento: passa un panno tack cloth subito prima di applicare il primer. Qualsiasi residuo di polvere resterà sigillato nella vernice."
+
+footer:
+  page_id: "P004"
+  model_name: "Magnum Saber Premium (Super-II Chassis)"
+  series: "Fully Cowled Mini 4WD Series No.31 — Item No. 19431"
+
+component_mapping:
+  C001:
+    uses: ["title"]
+  C002:
+    uses: ["footer.page_id", "footer.model_name"]
+  C007:
+    uses: []                 # Exploded view — visual only
+  C008:
+    uses: ["warnings", "steps[].warning"]
+  C009:
+    uses: ["tips", "steps[].tip"]
+  C013:
+    uses: ["steps[].id"]
+  C014:
+    uses: ["steps[].duration"]

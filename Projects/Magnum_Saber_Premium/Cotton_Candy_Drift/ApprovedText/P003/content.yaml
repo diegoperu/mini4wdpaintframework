@@ -1,0 +1,134 @@
+# Mini4WD Manual SDK — Page Content
+# Page: P003 — Materiali (Materials)
+# SDK Version: 2.4.0
+# SOURCE OF TRUTH
+
+page:
+  id: "P003"
+  name: "Materiali"
+  version: "1.0.0"
+  language: "it"
+
+title: "Materiali e Strumenti"  # REQUIRED
+intro: ""                        # OPTIONAL — non richiesto da PromptEngine/Materials.md
+
+# ============================================================
+# PAINTS — from PROJECT.yaml paintScheme.colors[]
+# ============================================================
+paints:
+  - name: "Light Blue"            # paintName — nome commerciale, invariato
+    brand: "Tamiya"
+    code: "TS-23"
+    finish: "Lucido"
+    quantity: ""                  # OPTIONAL — quantità di acquisto non specificata in PROJECT.yaml
+
+  - name: "Pink"
+    brand: "Tamiya"
+    code: "TS-25"
+    finish: "Lucido"
+    quantity: ""
+
+  - name: "Black"
+    brand: "Tamiya"
+    code: "TS-14"
+    finish: "Lucido"
+    quantity: ""
+
+  - name: "Yellow"
+    brand: "Tamiya"
+    code: "TS-16"
+    finish: "Lucido"
+    quantity: ""
+
+  - name: "Silver Leaf"
+    brand: "Tamiya"
+    code: "TS-30"
+    finish: "Metallizzato"
+    quantity: ""
+
+  - name: "Gun Metal"
+    brand: "Tamiya"
+    code: "TS-38"
+    finish: "Metallizzato"
+    quantity: ""
+
+# ============================================================
+# TOOLS — from PROJECT.yaml materials.tools[]
+# ============================================================
+tools:
+  - name: "Aerografo Tamiya 0.3mm"
+    type: "aerografo"
+    optional: true
+    notes: "Alternativa al pennello per superfici grandi, in particolare per PC001/PC002."
+
+  - name: "Pennello sintetico piatto n.8"
+    type: "pennello"
+    optional: false
+    notes: "Per aree medie e mascherature irregolari (PC003, PC004)."
+
+  - name: "Pennello sintetico tondo n.000"
+    type: "pennello"
+    optional: false
+    notes: "Per dettagli fini: abitacolo, meccanica del motore, dry-brush metallizzati."
+
+  - name: "Coltellino da modellismo"
+    type: "strumento"
+    optional: false
+    notes: "Per rifilare il nastro di mascheratura sulle curve della cowling."
+
+  - name: "Bacchette in legno (stecchi)"
+    type: "strumento"
+    optional: false
+    notes: "Per tenere la carrozzeria durante la verniciatura senza toccarla."
+
+# ============================================================
+# CONSUMABLES — sandpaper, tape, thinner, etc.
+# ============================================================
+consumables:
+  - name: "Carta abrasiva"
+    specification: "400 grit (primo passaggio), 600 grit (secondo), 1000 grit (finale)"
+    optional: false
+    notes: ""
+
+  - name: "Nastro di mascheratura Tamiya"
+    specification: "6mm (curve), 10mm (linee rette), 18mm (aree ampie)"
+    optional: false
+    notes: ""
+
+  - name: "Diluente Tamiya X-20A"
+    specification: "Per aerografo e pulizia pennelli"
+    optional: true
+    notes: ""
+
+  - name: "Panno per rimozione polvere (tack cloth)"
+    specification: "Privo di pelucchi"
+    optional: false
+    notes: ""
+
+  - name: "Primer bianco Tamiya (Fine Surface Primer)"
+    specification: "Spray 180ml, base Bianca"
+    optional: false
+    notes: "Essenziale per mantenere la luminosità dei pastelli azzurro/rosa/giallo."
+
+# ============================================================
+# SAFETY NOTES — for C008 Warning boxes
+# ============================================================
+safety_notes:
+  - "Attenzione: utilizzare sempre le vernici in un ambiente ben ventilato. Indossare guanti in nitrile quando si maneggiano vernici e diluenti a base solvente. Tenere lontano da fiamme libere. Leggere le schede di sicurezza dei prodotti prima dell'uso."
+
+footer:
+  page_id: "P003"
+  model_name: "Magnum Saber Premium (Super-II Chassis)"
+  series: "Fully Cowled Mini 4WD Series No.31 — Item No. 19431"
+
+component_mapping:
+  C001:
+    uses: ["title"]
+  C002:
+    uses: ["footer.page_id", "footer.model_name"]
+  C004:
+    uses: ["paints", "tools", "consumables"]
+  C008:
+    uses: ["safety_notes"]
+  C009:
+    uses: []                 # Tips from editorial notes if any

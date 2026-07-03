@@ -1,0 +1,76 @@
+# Mini4WD Manual SDK — Page Content
+# Page: P007 — Dettagli (Details)
+# SDK Version: 2.4.0
+# SOURCE OF TRUTH
+
+page:
+  id: "P007"
+  name: "Dettagli"
+  version: "1.0.0"
+  language: "it"
+
+title: "Verniciatura dei Dettagli"  # REQUIRED
+intro: ""                           # OPTIONAL — non richiesto da PromptEngine/Details.md
+
+# ============================================================
+# DETAIL AREAS — from PROJECT.yaml detailAreas[]
+# color_id risolto contro paintScheme.colors[] (= P002 colors[].id) — nessun TODO
+# ============================================================
+areas:
+  - id: "D001"
+    name: "Abitacolo / cornice interna"
+    color_id: "PC003"        # → TS-14 Black, Lucido
+    technique: "pennello"
+    description: "Dipingi l'abitacolo e la cornice interna con pennello piatto n.8, applicando 2 mani di TS-14 (Black)."
+    notes: "Nero come contrasto netto rispetto ad azzurro e rosa della cowling."
+
+  - id: "D002"
+    name: "Ingranaggi e meccanica del motore"
+    color_id: "PC006"        # → TS-38 Gun Metal, Metallizzato
+    technique: "pennello"
+    description: "Applica TS-38 (Gun Metal) su ingranaggi e meccanica del motore con pennello tondo n.000, usando la tecnica dry-brush."
+    notes: "Gun metal metallizzato per un effetto meccanico realistico sui componenti visibili del motore."
+
+  - id: "D003"
+    name: "Cerchi ruote"
+    color_id: "PC005"        # → TS-30 Silver Leaf, Metallizzato
+    technique: "pennello"
+    description: "Applica TS-30 (Silver Leaf) sui cerchi ruote con pennello tondo n.000, oppure a spray dopo la mascheratura M003."
+    notes: "Argento metallizzato coordinato con il telaio Super-II."
+
+  - id: "D004"
+    name: "Piccoli dettagli e prese d'aria"
+    color_id: "PC004"        # → TS-16 Yellow, Lucido
+    technique: "pennello"
+    description: "Applica TS-16 (Yellow) su piccoli dettagli e prese d'aria con pennello tondo n.000 e tocco leggero."
+    notes: "Giallo usato con parsimonia — solo accenti puntuali, mai aree estese."
+
+warnings: []                 # C008 — nessun warning specifico in PROJECT.yaml/PromptEngine/Details.md per questa pagina
+
+tips:
+  - "Suggerimento: diluisci la vernice. Le vernici per dettagli devono scorrere liberamente da un pennello n.000 senza formare grumi. Mescola 1 parte di vernice con 1 parte di diluente appropriato."
+  - "Suggerimento: asciuga il pennello. Rimuovi la vernice in eccesso su un foglio di carta assorbente prima di ogni pennellata. Il pennello deve apparire quasi asciutto — questa è la tecnica dry-brush."
+  - "Suggerimento: chiaro sopra scuro. Applica sempre i colori chiari sopra quelli scuri. Se sbagli un colore chiaro sopra uno scuro, dovrai prima riverniciare la base scura."
+  - "Suggerimento: stabilizza la mano. Appoggia il polso della mano che dipinge su una superficie stabile. Non dipingere mai a mano libera in aria per lavori di dettaglio."
+  - "Suggerimento: usa un ingrandimento. Usa una lente 10x o una lente d'ingrandimento per ispezionare il lavoro. Errori invisibili a occhio nudo appariranno nelle fotografie."
+
+footer:
+  page_id: "P007"
+  model_name: "Magnum Saber Premium (Super-II Chassis)"
+  series: "Fully Cowled Mini 4WD Series No.31 — Item No. 19431"
+
+component_mapping:
+  C001:
+    uses: ["title"]
+  C002:
+    uses: ["footer.page_id", "footer.model_name"]
+  C008:
+    uses: ["warnings"]
+  C009:
+    uses: ["tips"]
+  C012:
+    uses: []                 # Close-up zoom panels
+  C013:
+    uses: ["areas[].id"]
+  C015:
+    uses: ["areas[].notes"]

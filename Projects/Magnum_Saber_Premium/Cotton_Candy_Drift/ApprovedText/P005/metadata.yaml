@@ -1,0 +1,36 @@
+# Page Metadata — P005
+# SDK Version: 2.4.0
+
+page_id: "P005"
+page_name: "Verniciatura"
+
+status: "locked"
+locked: true
+
+approved: true
+approved_by: "diego.peruselli@polimi.it"
+approved_date: "2026-07-03"
+approval_notes: "ContentValidation (7 suite) + TextValidation (9 test): 1 FAIL bloccante (CV-005-E, manifest.yaml prompt_file errato) rilevato, corretto e rivalidato — PASS. Warning aperti: sdk_version mismatch (corretto qui sotto), mood infinito borderline in alcune sequence[].notes (campo supplementare, non description)."
+
+rendered: false
+render_version: ""
+rendered_date: ""
+rendered_images: []
+
+qa_status: "passed"
+qa_log: ""
+content_validation_passed: true
+text_validation_passed: true
+layout_validation_passed: false
+
+sdk_version: "2.4.1"
+design_language: "2.4.0"
+manual_version: "1.0.0"
+revision: 1
+language: "it"
+
+released: false
+released_date: ""
+archived: false
+archived_date: ""
+archived_reason: ""

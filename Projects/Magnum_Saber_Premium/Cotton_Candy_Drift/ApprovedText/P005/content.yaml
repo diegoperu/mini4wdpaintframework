@@ -1,0 +1,95 @@
+# Mini4WD Manual SDK — Page Content
+# Page: P005 — Verniciatura (Painting)
+# SDK Version: 2.4.0
+# SOURCE OF TRUTH
+
+page:
+  id: "P005"
+  name: "Verniciatura"
+  version: "1.0.0"
+  language: "it"
+
+title: "Sequenza di Verniciatura"  # REQUIRED
+intro: ""                          # OPTIONAL — non richiesto da PromptEngine/Painting.md
+
+# ============================================================
+# SEQUENCE — from PROJECT.yaml paintSequence[]
+# color_id risolto contro paintScheme.colors[] (= P002 colors[].id) — tutti validi, nessun TODO
+# Order matters: paint light before dark
+# ============================================================
+sequence:
+  - step: 1
+    color_id: "PC005"        # → TS-30 Silver Leaf, Metallizzato (risolto da paintScheme.colors)
+    area: "Telaio Super-II e cover motore"
+    technique: "bomboletta"  # spray-can → bomboletta
+    coats: 2
+    drying_time: "30 minuti tra le mani, 2 ore prima di procedere"
+    notes: "Iniziare dal telaio per evitare sovra-spray sulla carrozzeria."
+
+  - step: 2
+    color_id: "PC001"        # → TS-23 Light Blue, Lucido
+    area: "Intera carrozzeria esterna (cowling completa)"
+    technique: "bomboletta"
+    coats: 3
+    drying_time: "20 minuti tra le mani, 3 ore prima della mascheratura"
+    notes: "Colore dominante. Prima mano di ancoraggio leggera, seconda e terza per copertura piena."
+
+  - step: 3
+    color_id: "PC002"        # → TS-25 Pink, Lucido
+    area: "Ala posteriore e pannelli laterali della cowling"
+    technique: "bomboletta"
+    coats: 2
+    drying_time: "30 minuti tra le mani, 2 ore prima di rimuovere la mascheratura"
+    notes: "Applicare dopo mascheratura (M001) delle zone già in Light Blue."
+
+  - step: 4
+    color_id: "PC003"        # → TS-14 Black, Lucido
+    area: "Linee di cintura, cornice abitacolo, bordi cowling"
+    technique: "pennello"    # brush → pennello
+    coats: 2
+    drying_time: "1 ora tra le mani, 2 ore prima del clear coat"
+    notes: "Pennello piatto n.8 dopo mascheratura M002. Diluire leggermente per evitare pennellate visibili."
+
+  - step: 5
+    color_id: "PC004"        # → TS-16 Yellow, Lucido
+    area: "Dettagli in rilievo e piccoli accenti (numero di gara, prese d'aria)"
+    technique: "pennello"
+    coats: 2
+    drying_time: "1 ora tra le mani"
+    notes: "Colore minoritario: usare con parsimonia solo su piccoli dettagli per non competere con azzurro e rosa."
+
+  - step: 6
+    color_id: "PC006"        # → TS-38 Gun Metal, Metallizzato
+    area: "Ingranaggi visibili, boccole e dettagli meccanici del motore"
+    technique: "pennello"
+    coats: 1
+    drying_time: "2 ore prima dell'assemblaggio finale"
+    notes: "Pennello tondo n.000, tecnica dry-brush per accentuare i rilievi meccanici."
+
+warnings:
+  - "Attenzione: non applicare mai la mano successiva prima che quella precedente sia completamente asciutta al tatto. Applicare vernice su una mano ancora umida causa raggrinzimento, sollevamento e difetti superficiali che non possono essere corretti se non rimuovendo tutto e ricominciando da capo. In caso di dubbio, attendi più a lungo."
+
+tips: []                     # C009 — nessun dato distinto in PROJECT.yaml/PromptEngine/Painting.md oltre alle note per-step
+
+footer:
+  page_id: "P005"
+  model_name: "Magnum Saber Premium (Super-II Chassis)"
+  series: "Fully Cowled Mini 4WD Series No.31 — Item No. 19431"
+
+component_mapping:
+  C001:
+    uses: ["title"]
+  C002:
+    uses: ["footer.page_id", "footer.model_name"]
+  C005:
+    uses: ["sequence[].step", "sequence[].area", "sequence[].color_id"]
+  C008:
+    uses: ["warnings"]
+  C009:
+    uses: ["tips"]
+  C011:
+    uses: ["sequence[].color_id"]
+  C013:
+    uses: ["sequence[].step"]
+  C014:
+    uses: ["sequence[].drying_time"]

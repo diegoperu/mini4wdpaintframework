@@ -1,0 +1,65 @@
+# Page Manifest — P004
+# SDK Version: 2.4.0
+
+page_id: "P004"
+
+components:
+  - id: "C001"
+    name: "Header"
+    required: true
+    content_fields: ["title"]
+  - id: "C002"
+    name: "Footer"
+    required: true
+    content_fields: ["footer.page_id", "footer.model_name"]
+  - id: "C007"
+    name: "Exploded View"
+    required: false
+    content_fields: []
+  - id: "C008"
+    name: "Warning Box"
+    required: false
+    content_fields: ["warnings", "steps[].warning"]
+  - id: "C009"
+    name: "Tip Box"
+    required: false
+    content_fields: ["tips", "steps[].tip"]
+  - id: "C013"
+    name: "Step Number Badge"
+    required: true
+    content_fields: ["steps[].id"]
+  - id: "C014"
+    name: "Timer Badge"
+    required: false
+    content_fields: ["steps[].duration"]
+
+images:
+  - role: "exploded_view"
+    description: "Vista esplosa della carrozzeria con parti componenti evidenziate"
+    file: ""
+    resolution_required: "2480x3508"
+    lighting: "technical-flat"
+    approved: false
+
+tokens:
+  - "VioletPrimary"
+  - "White"
+  - "DarkGray"
+  - "TitleFont"
+  - "BodyFont"
+  - "HeaderHeight"
+  - "FooterHeight"
+  - "StepBadgeColor"
+  - "WarningColor"
+
+prompt_file: "PromptEngine/Preparation.md"
+prompt_version: "2.4.0"
+palette: []
+
+fonts:
+  - "TitleFont (Bebas Neue)"
+  - "BodyFont (Source Sans Pro)"
+
+dependencies:
+  - "Assets/DesignSystem/Tokens/tokens.example.yaml"
+  - "Config/LANGUAGE_POLICY.yaml"

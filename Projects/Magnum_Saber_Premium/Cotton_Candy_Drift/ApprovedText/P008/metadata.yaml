@@ -1,0 +1,36 @@
+# Page Metadata — P008
+# SDK Version: 2.4.0
+
+page_id: "P008"
+page_name: "Decalcomanie"
+
+status: "locked"
+locked: true
+
+approved: true
+approved_by: "diego.peruselli@polimi.it"
+approved_date: "2026-07-03"
+approval_notes: "ContentValidation (7 suite) + TextValidation (9 test): 0 FAIL bloccanti. Eccezioni documentate: CV-001-F e CV-006 (C008/C013 required:true) in conflitto con schema 'zero decal' (PROJECT.yaml decals: []) — risolto per autorità di Core/PAGE_SYSTEM.md §P008 su Tests/ (Golden Rule G09). Raccomandato aggiornamento futuro di Tests/ContentValidation.md e manifest.yaml per rendere questi requisiti condizionali. Warning aperto: sdk_version mismatch (corretto qui sotto)."
+
+rendered: false
+render_version: ""
+rendered_date: ""
+rendered_images: []
+
+qa_status: "passed"
+qa_log: ""
+content_validation_passed: true
+text_validation_passed: true
+layout_validation_passed: false
+
+sdk_version: "2.4.1"
+design_language: "2.4.0"
+manual_version: "1.0.0"
+revision: 1
+language: "it"
+
+released: false
+released_date: ""
+archived: false
+archived_date: ""
+archived_reason: ""

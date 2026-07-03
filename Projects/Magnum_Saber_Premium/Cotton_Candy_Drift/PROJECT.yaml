@@ -1,0 +1,346 @@
+# ============================================================
+# Mini4WD Manual SDK — Project Configuration
+# Model: Magnum Saber Premium (Super-II Chassis) — Cotton Candy Drift
+# ============================================================
+
+sdk_version: "2.5.0"
+
+# ============================================================
+# PROJECT METADATA
+# ============================================================
+project:
+  modelName: "Magnum Saber Premium (Super-II Chassis)"
+  modelSlug: "magnum-saber-premium-super-ii-chassis"
+  seriesName: "Fully Cowled Mini 4WD Series No.31 — Item No. 19431"
+  year: "2010"
+  language: "it"
+  version: "1.0.0"
+  author: ""
+  createdAt: "2026-07-03"
+  updatedAt: "2026-07-03"
+
+# ============================================================
+# PAINT SCHEME: Cotton Candy Drift
+# ============================================================
+paintScheme:
+  name: "Cotton Candy Drift"
+  slug: "cotton-candy-drift"
+  description: "Schema pastello allegro e giocoso: azzurro cielo come colore dominante della carrozzeria, abbinato a pannelli rosa confetto per un contrasto dolce. Accenti in nero lucido definiscono le linee della carrozzeria, mentre tocchi di giallo acceso ravvivano i dettagli in minoranza. Argento e gun metal metallizzati valorizzano telaio e componenti meccanici del motore per un tocco racing."
+  colors:
+    - id: "PC001"
+      name: "Body Base"
+      paintBrand: "Tamiya"
+      paintCode: "TS-23"
+      paintName: "Light Blue"
+      hex: "#8FD3E8"
+      finish: "gloss"
+      coverage: "3 mani sottili"
+      notes: "Colore dominante dello schema. Applicare su primer bianco per mantenere la luminosità pastello. Distanza 25-30cm."
+
+    - id: "PC002"
+      name: "Cowling Accents & Side Panels"
+      paintBrand: "Tamiya"
+      paintCode: "TS-25"
+      paintName: "Pink"
+      hex: "#F4879E"
+      finish: "gloss"
+      coverage: "2-3 mani sottili"
+      notes: "Applicare dopo mascheratura del corpo principale già in Light Blue. Su primer bianco per massima brillantezza."
+
+    - id: "PC003"
+      name: "Trim & Accent Lines"
+      paintBrand: "Tamiya"
+      paintCode: "TS-14"
+      paintName: "Black"
+      hex: "#0A0A0A"
+      finish: "gloss"
+      coverage: "2 mani"
+      notes: "Colore di accento — linee di cintura, cornici, abitacolo. Non colore dominante."
+
+    - id: "PC004"
+      name: "Highlight Accents"
+      paintBrand: "Tamiya"
+      paintCode: "TS-16"
+      paintName: "Yellow"
+      hex: "#F5D300"
+      finish: "gloss"
+      coverage: "1-2 mani"
+      notes: "Colore di accento minoritario — piccoli dettagli e punti luce. Coprente già in 2 mani su base chiara."
+
+    - id: "PC005"
+      name: "Chassis & Motor Cover"
+      paintBrand: "Tamiya"
+      paintCode: "TS-30"
+      paintName: "Silver Leaf"
+      hex: "#C8C8C8"
+      finish: "metallic"
+      coverage: "2 mani"
+      notes: "Metallizzato — applicare sempre nella stessa direzione per uniformità. Usato su telaio e cover motore."
+
+    - id: "PC006"
+      name: "Motor & Mechanical Details"
+      paintBrand: "Tamiya"
+      paintCode: "TS-38"
+      paintName: "Gun Metal"
+      hex: "#4B4E52"
+      finish: "metallic"
+      coverage: "1-2 mani"
+      notes: "Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush."
+
+  colorNotes: "Usare esclusivamente vernici Tamiya TS in spray a 20-25°C. Data la natura pastello dello schema, applicare sempre Primer Bianco Tamiya prima dei colori PC001/PC002/PC004 — un primer grigio scurirebbe eccessivamente la resa. Finitura consigliata: TS-13 Clear (lucido) su tutta la carrozzeria, 24 ore dopo l'ultima mano colore. I metallizzati (PC005/PC006) non richiedono clear coat."
+
+# ============================================================
+# MATERIALS
+# ============================================================
+materials:
+  paints: []  # Derivato automaticamente da paintScheme.colors
+
+  tools:
+    - name: "Aerografo Tamiya 0.3mm"
+      type: "airbrush"
+      optional: true
+      notes: "Alternativa al pennello per superfici grandi, in particolare per PC001/PC002."
+
+    - name: "Pennello sintetico piatto n.8"
+      type: "brush"
+      optional: false
+      notes: "Per aree medie e mascherature irregolari (PC003, PC004)."
+
+    - name: "Pennello sintetico tondo n.000"
+      type: "brush"
+      optional: false
+      notes: "Per dettagli fini: abitacolo, meccanica del motore, dry-brush metallizzati."
+
+    - name: "Coltellino da modellismo"
+      type: "tool"
+      optional: false
+      notes: "Per rifilare il nastro di mascheratura sulle curve della cowling."
+
+    - name: "Bacchette in legno (stecchi)"
+      type: "tool"
+      optional: false
+      notes: "Per tenere la carrozzeria durante la verniciatura senza toccarla."
+
+  consumables:
+    - name: "Carta abrasiva"
+      type: "sandpaper"
+      specification: "400 grit (primo passaggio), 600 grit (secondo), 1000 grit (finale)"
+      optional: false
+
+    - name: "Nastro di mascheratura Tamiya"
+      type: "tape"
+      specification: "6mm (curve), 10mm (linee rette), 18mm (aree ampie)"
+      optional: false
+
+    - name: "Diluente Tamiya X-20A"
+      type: "thinner"
+      specification: "Per aerografo e pulizia pennelli"
+      optional: true
+
+    - name: "Panno per rimozione polvere (tack cloth)"
+      type: "cleaner"
+      specification: "Privo di pelucchi"
+      optional: false
+
+    - name: "Primer bianco Tamiya (Fine Surface Primer)"
+      type: "primer"
+      specification: "Spray 180ml, base Bianca"
+      optional: false
+      notes: "Essenziale per mantenere la luminosità dei pastelli azzurro/rosa/giallo."
+
+# ============================================================
+# PREPARATION STEPS
+# ============================================================
+preparationSteps:
+  - id: 1
+    title: "Lavaggio della carrozzeria"
+    description: "Lavare la carrozzeria in ABS con acqua tiepida e detergente neutro. Usare uno spazzolino morbido per rimuovere i residui di stampo. Risciacquare con acqua distillata."
+    duration: "15 min"
+    tools: ["spazzolino morbido"]
+    warning: "Non usare detergenti aggressivi o solventi — danneggiano la plastica ABS."
+    tip: "L'acqua distillata nel risciacquo finale evita depositi calcarei che comprometterebbero l'adesione del primer."
+
+  - id: 2
+    title: "Asciugatura completa"
+    description: "Lasciare asciugare la carrozzeria all'aria per almeno 2 ore in ambiente pulito e privo di polvere."
+    duration: "120 min"
+    tools: []
+    warning: "Non usare asciugacapelli — il calore deforma la plastica ABS sottile."
+    tip: null
+
+  - id: 3
+    title: "Carteggiatura leggera"
+    description: "Carteggiare delicatamente tutta la superficie con carta abrasiva 400 grit a umido, poi rifinire con 600 grit. Procedere in direzione unica, mai circolare."
+    duration: "20 min"
+    tools: ["Carta abrasiva 400 grit"]
+    warning: "Non carteggiare eventuali scritte in rilievo o texture decorative."
+    tip: "Una superficie ben opacizzata migliora sensibilmente l'adesione del primer bianco."
+
+  - id: 4
+    title: "Rimozione della polvere"
+    description: "Eliminare tutta la polvere di carteggiatura con un panno tack cloth, passando su tutta la superficie con movimenti lenti."
+    duration: "10 min"
+    tools: ["Panno tack cloth"]
+    warning: "Non soffiare sulla carrozzeria con la bocca — la saliva causa crateri nella vernice (fish-eye)."
+    tip: "Lavorare in un ambiente con poca circolazione d'aria per evitare che la polvere si ridepositi."
+
+  - id: 5
+    title: "Applicazione del primer bianco"
+    description: "Applicare il primer bianco Tamiya in 2 mani sottili, attendendo 10 minuti tra una mano e l'altra, a 25-30cm di distanza. Lasciare asciugare 2 ore prima di procedere."
+    duration: "15 min (applicazione) + 120 min (asciugatura)"
+    tools: ["Primer bianco Tamiya (Fine Surface Primer)"]
+    warning: "Non applicare una sola mano spessa — causerebbe colature."
+    tip: "Il primer bianco (anziché grigio) è fondamentale per la resa vivace dei pastelli azzurro, rosa e giallo di questo schema."
+
+# ============================================================
+# PAINT SEQUENCE
+# ============================================================
+paintSequence:
+  - step: 1
+    colorId: "PC005"
+    area: "Telaio Super-II e cover motore"
+    technique: "spray-can"
+    coats: 2
+    dryingTime: "30 min tra le mani, 2 ore prima di procedere"
+    notes: "Iniziare dal telaio per evitare sovra-spray sulla carrozzeria."
+
+  - step: 2
+    colorId: "PC001"
+    area: "Intera carrozzeria esterna (cowling completa)"
+    technique: "spray-can"
+    coats: 3
+    dryingTime: "20 min tra le mani, 3 ore prima della mascheratura"
+    notes: "Colore dominante. Prima mano di ancoraggio leggera, seconda e terza per copertura piena."
+
+  - step: 3
+    colorId: "PC002"
+    area: "Ala posteriore e pannelli laterali della cowling"
+    technique: "spray-can"
+    coats: 2
+    dryingTime: "30 min tra le mani, 2 ore prima di rimuovere la mascheratura"
+    notes: "Applicare dopo mascheratura (M001) delle zone già in Light Blue."
+
+  - step: 4
+    colorId: "PC003"
+    area: "Linee di cintura, cornice abitacolo, bordi cowling"
+    technique: "brush"
+    coats: 2
+    dryingTime: "1 ora tra le mani, 2 ore prima del clear coat"
+    notes: "Pennello piatto n.8 dopo mascheratura M002. Diluire leggermente per evitare pennellate visibili."
+
+  - step: 5
+    colorId: "PC004"
+    area: "Dettagli in rilievo e piccoli accenti (numero di gara, prese d'aria)"
+    technique: "brush"
+    coats: 2
+    dryingTime: "1 ora tra le mani"
+    notes: "Colore minoritario: usare con parsimonia solo su piccoli dettagli per non competere con azzurro e rosa."
+
+  - step: 6
+    colorId: "PC006"
+    area: "Ingranaggi visibili, boccole e dettagli meccanici del motore"
+    technique: "brush"
+    coats: 1
+    dryingTime: "2 ore prima dell'assemblaggio finale"
+    notes: "Pennello tondo n.000, tecnica dry-brush per accentuare i rilievi meccanici."
+
+# ============================================================
+# MASKING
+# ============================================================
+maskingZones:
+  - id: "M001"
+    area: "Ala posteriore e pannelli laterali della cowling"
+    maskingType: "tape"
+    maskingOrder: 1
+    notes: "Mascherare dopo completa asciugatura di PC001. Nastro 10mm per aree piane, 6mm per bordi curvi, in vista della verniciatura PC002."
+
+  - id: "M002"
+    area: "Linee di cintura e cornice abitacolo"
+    maskingType: "tape"
+    maskingOrder: 2
+    notes: "Nastro 6mm per seguire le curve della cornice prima dell'accento nero PC003."
+
+  - id: "M003"
+    area: "Cerchi ruote (per verniciatura PC005)"
+    maskingType: "tape"
+    maskingOrder: 3
+    notes: "Mascherare le gomme con nastro 6mm avvolto sul battistrada. Proteggere il mozzo con un dischetto di carta."
+
+# ============================================================
+# DETAILS
+# ============================================================
+detailAreas:
+  - id: "D001"
+    name: "Abitacolo / cornice interna"
+    colorId: "PC003"
+    technique: "Pennello piatto n.8, 2 mani"
+    notes: "Nero come contrasto netto rispetto ad azzurro e rosa della cowling."
+
+  - id: "D002"
+    name: "Ingranaggi e meccanica del motore"
+    colorId: "PC006"
+    technique: "Pennello tondo n.000, dry-brush"
+    notes: "Gun metal metallizzato per un effetto meccanico realistico sui componenti visibili del motore."
+
+  - id: "D003"
+    name: "Cerchi ruote"
+    colorId: "PC005"
+    technique: "Pennello tondo n.000 o spray dopo mascheratura M003"
+    notes: "Argento metallizzato coordinato con il telaio Super-II."
+
+  - id: "D004"
+    name: "Piccoli dettagli e prese d'aria"
+    colorId: "PC004"
+    technique: "Pennello tondo n.000, tocco leggero"
+    notes: "Giallo usato con parsimonia — solo accenti puntuali, mai aree estese."
+
+# ============================================================
+# DECALS
+# ============================================================
+decals: []
+
+# ============================================================
+# PREMIUM VARIANT
+# ============================================================
+premiumVariant:
+  enabled: false
+  name: ""
+  description: ""
+  additionalMaterials: []
+  specialTechniques: []
+
+# ============================================================
+# FILE PATHS
+# ============================================================
+paths:
+  coverRenderPath: "Images/cover_3q.png"
+  colorSchemeRenderFront: "Images/P002_front.png"
+  colorSchemeRenderSide: "Images/P002_side.png"
+  colorSchemeRenderTop: "Images/P002_top.png"
+  outputDir: "Output/"
+  notesDir: "Notes/"
+
+# ============================================================
+# TEXT ENGINE (v2.3.0)
+# ============================================================
+text:
+  language: "it"
+  strict_language: true
+  allow_english: false
+  allow_japanese: false
+  allow_fake_text: false
+  placeholders_if_uncertain: true
+  typography_profile: "technical_manual"
+
+  approved_text_dir: "ApprovedText/"
+  approved_text_raw_dir: "ApprovedText/raw/"
+
+# ============================================================
+# QA METADATA
+# ============================================================
+qa:
+  status: "draft"
+  reviewer: ""
+  reviewDate: ""
+  approvedDate: ""
+  qaLogPath: "Notes/qa_log.md"

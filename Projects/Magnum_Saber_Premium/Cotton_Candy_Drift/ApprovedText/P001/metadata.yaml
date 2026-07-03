@@ -1,0 +1,40 @@
+# Page Metadata — P001
+# SDK Version: 2.4.0
+
+page_id: "P001"
+page_name: "Copertina"
+
+status: "locked"              # draft|review|approved|locked|rendered|released|archived
+locked: true
+
+approved: true
+approved_by: "diego.peruselli@polimi.it"
+approved_date: "2026-07-03"
+approval_notes: "ContentValidation (7 suite) + TextValidation (9 test): 0 FAIL bloccanti. Warning aperti: sdk_version mismatch (corretto qui sotto), campo year assente dallo schema P001, render.file non ancora prodotto (Phase 3 pending)."
+
+rendered: false
+render_version: ""
+rendered_date: ""
+rendered_images:
+  - role: "cover_3q"
+    file: ""
+    resolution: ""
+    approved: false
+
+qa_status: "passed"          # pending|in-progress|passed|failed
+qa_log: ""
+content_validation_passed: true
+text_validation_passed: true
+layout_validation_passed: false
+
+sdk_version: "2.4.1"
+design_language: "2.4.0"
+manual_version: "1.0.0"
+revision: 1
+language: "it"
+
+released: false
+released_date: ""
+archived: false
+archived_date: ""
+archived_reason: ""

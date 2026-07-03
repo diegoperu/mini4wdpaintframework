@@ -1,0 +1,7 @@
+# Changelog — P007
+
+| Rev | Date | Author | Change |
+|-----|------|--------|--------|
+| 0 | 2026-07-01 | SDK Init | Page module created from template |
+| 1 | 2026-07-03 | Text Engine | content.yaml populated from Projects/Magnum_Saber/PROJECT.yaml. 4 aree da detailAreas[] (D001-D004). color_id (PC003,PC006,PC005,PC004) risolti contro paintScheme.colors → TS-14 Black, TS-38 Gun Metal, TS-30 Silver Leaf, TS-16 Yellow. technique semplificato a enum "pennello" (dettaglio strumento spostato in description). description sintetizzata in imperativo per area (nessun campo description in PROJECT.yaml, sintesi da technique+colorId). notes riusate verbatim da PROJECT.yaml (già italiano). tips[] (5 voci) tradotte da boilerplate PromptEngine/Details.md con lead-in "Suggerimento:". warnings[] vuoto — nessun warning specifico per questa pagina nel prompt. Nessun TODO: — tutti i dati richiesti erano raggiungibili. |
+| 2 | 2026-07-03 | diego.peruselli@polimi.it | QA passed (ContentValidation 7/7, TextValidation 9/9, 0 blocking FAIL). Page sealed: status → locked, approved: true. sdk_version corrected to 2.4.1, page_name compilato. |

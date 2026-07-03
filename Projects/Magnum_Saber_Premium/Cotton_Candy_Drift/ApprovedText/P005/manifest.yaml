@@ -1,0 +1,64 @@
+# Page Manifest — P005
+# SDK Version: 2.4.0
+
+page_id: "P005"
+
+components:
+  - id: "C001"
+    name: "Header"
+    required: true
+    content_fields: ["title"]
+  - id: "C002"
+    name: "Footer"
+    required: true
+    content_fields: ["footer.page_id", "footer.model_name"]
+  - id: "C005"
+    name: "Step Sequence"
+    required: true
+    content_fields: ["sequence[].step", "sequence[].area", "sequence[].color_id"]
+  - id: "C008"
+    name: "Warning Box"
+    required: true
+    content_fields: ["warnings"]
+  - id: "C009"
+    name: "Tip Box"
+    required: false
+    content_fields: ["tips"]
+  - id: "C011"
+    name: "Paint Code Box"
+    required: true
+    content_fields: ["sequence[].color_id"]
+  - id: "C013"
+    name: "Step Number Badge"
+    required: true
+    content_fields: ["sequence[].step"]
+  - id: "C014"
+    name: "Timer Badge"
+    required: true
+    content_fields: ["sequence[].drying_time"]
+
+images: []
+
+tokens:
+  - "VioletPrimary"
+  - "White"
+  - "DarkGray"
+  - "TitleFont"
+  - "BodyFont"
+  - "HeaderHeight"
+  - "FooterHeight"
+  - "StepBadgeColor"
+  - "WarningColor"
+
+prompt_file: "PromptEngine/Painting.md"
+prompt_version: "2.4.0"
+palette: []
+
+fonts:
+  - "TitleFont (Bebas Neue)"
+  - "BodyFont (Source Sans Pro)"
+
+dependencies:
+  - "Assets/DesignSystem/Tokens/tokens.example.yaml"
+  - "Config/LANGUAGE_POLICY.yaml"
+  - "ApprovedAssets/Text/P002/content.yaml"

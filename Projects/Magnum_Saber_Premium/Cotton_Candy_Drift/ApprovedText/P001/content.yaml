@@ -1,0 +1,35 @@
+# Mini4WD Manual SDK — Page Content
+# Page: P001 — Copertina (Cover)
+# SDK Version: 2.4.0
+# SOURCE OF TRUTH — do not edit text.md independently
+# Reference: Core/TEXT_ENGINE.md
+
+page:
+  id: "P001"
+  name: "Copertina"
+  version: "1.0.0"
+  language: "it"
+
+title: "Magnum Saber Premium (Super-II Chassis)"     # project.modelName
+subtitle: "Cotton Candy Drift"                       # paintScheme.name
+series: "Fully Cowled Mini 4WD Series No.31 — Item No. 19431"  # project.seriesName
+edition: ""                  # OPTIONAL — not specified in PROJECT.yaml
+
+footer:
+  page_id: "P001"            # FIXED
+  model_name: "Magnum Saber Premium (Super-II Chassis)"
+  series: "Fully Cowled Mini 4WD Series No.31 — Item No. 19431"
+
+render:
+  file: "Images/cover_3q.png"  # paths.coverRenderPath — file not yet rendered on disk (Phase 3 pending)
+  alt: "Vista a tre quarti anteriore-sinistra della carrozzeria Magnum Saber Premium (telaio Super-II), schema Cotton Candy Drift: azzurro chiaro dominante con pannelli rosa, accenti neri e dettagli gialli."
+  angle: "3/4 front-left"
+  lighting: "studio-neutral"
+
+component_mapping:
+  C001:
+    uses: []                 # Cover header: visual only
+  C002:
+    uses: ["footer.page_id", "footer.model_name"]
+  cover_overlay:
+    uses: ["title", "subtitle", "series"]

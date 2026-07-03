@@ -1,0 +1,104 @@
+# Mini4WD Manual SDK — Page Content
+# Page: P002 — Schema Colori (Color Scheme)
+# SDK Version: 2.4.0
+# SOURCE OF TRUTH
+
+page:
+  id: "P002"
+  name: "Schema Colori"
+  version: "1.0.0"
+  language: "it"
+
+title: "Schema Colori"       # REQUIRED
+intro: "Schema pastello allegro e giocoso: azzurro cielo come colore dominante della carrozzeria, abbinato a pannelli rosa confetto per un contrasto dolce. Accenti in nero lucido definiscono le linee della carrozzeria, mentre tocchi di giallo acceso ravvivano i dettagli in minoranza. Argento e gun metal metallizzati valorizzano telaio e componenti meccanici del motore per un tocco racing."   # paintScheme.description
+
+# ============================================================
+# COLORS — one entry per paintScheme.colors[] in PROJECT.yaml
+# ============================================================
+colors:
+  - id: "PC001"
+    name: "Light Blue"                     # paintScheme.colors[0].paintName — nome commerciale, invariato
+    paint_code: "TS-23"
+    paint_brand: "Tamiya"
+    finish: "Lucido"                       # gloss → Lucido
+    hex: "#8FD3E8"
+    area: "Carrozzeria esterna — colore dominante dello schema"
+    notes: "Colore dominante dello schema. Applicare su primer bianco per mantenere la luminosità pastello. Distanza 25-30cm."
+
+  - id: "PC002"
+    name: "Pink"
+    paint_code: "TS-25"
+    paint_brand: "Tamiya"
+    finish: "Lucido"
+    hex: "#F4879E"
+    area: "Accenti cowling e pannelli laterali"
+    notes: "Applicare dopo mascheratura del corpo principale già in Light Blue. Su primer bianco per massima brillantezza."
+
+  - id: "PC003"
+    name: "Black"
+    paint_code: "TS-14"
+    paint_brand: "Tamiya"
+    finish: "Lucido"
+    hex: "#0A0A0A"
+    area: "Rifiniture e linee di accento (cintura, cornici, abitacolo)"
+    notes: "Colore di accento — linee di cintura, cornici, abitacolo. Non colore dominante."
+
+  - id: "PC004"
+    name: "Yellow"
+    paint_code: "TS-16"
+    paint_brand: "Tamiya"
+    finish: "Lucido"
+    hex: "#F5D300"
+    area: "Accenti in evidenza — piccoli dettagli e punti luce"
+    notes: "Colore di accento minoritario — piccoli dettagli e punti luce. Coprente già in 2 mani su base chiara."
+
+  - id: "PC005"
+    name: "Silver Leaf"
+    paint_code: "TS-30"
+    paint_brand: "Tamiya"
+    finish: "Metallizzato"
+    hex: "#C8C8C8"
+    area: "Telaio Super-II e cover motore"
+    notes: "Metallizzato — applicare sempre nella stessa direzione per uniformità. Usato su telaio e cover motore."
+
+  - id: "PC006"
+    name: "Gun Metal"
+    paint_code: "TS-38"
+    paint_brand: "Tamiya"
+    finish: "Metallizzato"
+    hex: "#4B4E52"
+    area: "Ingranaggi visibili, boccole e dettagli meccanici del motore"
+    notes: "Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush."
+
+color_notes: "Usare esclusivamente vernici Tamiya TS in spray a 20-25°C. Data la natura pastello dello schema, applicare sempre Primer Bianco Tamiya prima dei colori PC001/PC002/PC004 — un primer grigio scurirebbe eccessivamente la resa. Finitura consigliata: TS-13 Clear (lucido) su tutta la carrozzeria, 24 ore dopo l'ultima mano colore. I metallizzati (PC005/PC006) non richiedono clear coat."
+palette_overview: ""         # OPTIONAL — non richiesto da PromptEngine/ColorScheme.md, nessun dato distinto disponibile
+
+footer:
+  page_id: "P002"
+  model_name: "Magnum Saber Premium (Super-II Chassis)"
+  series: "Fully Cowled Mini 4WD Series No.31 — Item No. 19431"
+
+renders:
+  front:
+    file: "Images/P002_front.png"   # paths.colorSchemeRenderFront — non ancora renderizzato (Phase 3 pending)
+    alt: "Vista ortogonale frontale della carrozzeria Magnum Saber Premium, schema Cotton Candy Drift"
+  side:
+    file: "Images/P002_side.png"    # paths.colorSchemeRenderSide — non ancora renderizzato (Phase 3 pending)
+    alt: "Vista ortogonale laterale destra della carrozzeria Magnum Saber Premium, schema Cotton Candy Drift"
+  top:
+    file: "Images/P002_top.png"     # paths.colorSchemeRenderTop — non ancora renderizzato (Phase 3 pending)
+    alt: "Vista ortogonale dall'alto della carrozzeria Magnum Saber Premium, schema Cotton Candy Drift"
+
+component_mapping:
+  C001:
+    uses: ["title"]
+  C002:
+    uses: ["footer.page_id", "footer.model_name"]
+  C003:
+    uses: ["colors[].name", "colors[].hex", "palette_overview"]
+  C006:
+    uses: ["color_notes"]
+  C010:
+    uses: ["colors[].name", "colors[].paint_code", "colors[].finish"]
+  C011:
+    uses: ["colors[].paint_code", "colors[].paint_brand", "colors[].finish", "colors[].name"]
