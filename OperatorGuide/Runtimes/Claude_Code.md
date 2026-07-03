@@ -19,7 +19,7 @@ Con Claude Code l'AI ha accesso diretto al repository clonato localmente:
 
 > ⚠️ **Claude Code gestisce solo la fase TESTI (Bootstrap → Generazione → QA → Sigillatura).**
 > Claude Code **non può generare immagini**. Il rendering (Fase 4) richiede un'AI generativa
-> visuale separata: ChatGPT Web (DALL-E), Gemini, o equivalente.
+> visuale separata: ChatGPT Web (DALL-E) o altro runtime supportato (vedi `Docs/RUNTIMES.md`).
 > Quando tutti i content.yaml sono locked, passerai a un runtime immagini — vedi **PASSO 10**.
 
 ---
@@ -314,7 +314,7 @@ Non aprire una nuova sessione tra una pagina e l'altra.
 ## PASSO 10 — Handoff al Runtime Immagini
 
 > ⚠️ **Claude Code non può generare immagini.**
-> Il rendering (Fase 4) richiede un'AI generativa visuale: ChatGPT Web (DALL-E), Gemini, o equivalente.
+> Il rendering (Fase 4) richiede un'AI generativa visuale: ChatGPT Web (DALL-E) o altro runtime supportato (vedi `Docs/RUNTIMES.md`).
 > Questo passo descrive come trasferire tutto il lavoro fatto con Claude Code al runtime immagini.
 
 ---
@@ -358,22 +358,51 @@ Apri **ChatGPT Web**, nuova chat. Carica:
 | `content.yaml` della pagina da renderizzare | Da `Projects/{Model}/{Variant}/ApprovedText/P00x/content.yaml` (allegato separato) |
 | Immagini di riferimento | Da `Projects/{Modello}/Images/` |
 
-Poi incolla il **Prompt Fase 4** da `Docs/AI_BOOTSTRAP_PROMPT.md` con i valori corretti.
+> Se usi il ZIP aggiornato (Opzione A), `content.yaml` e `Images/` sono già dentro —
+> non serve allegarli separatamente. Se usi il ZIP originale, allega entrambi come file
+> separati: il ZIP originale non ha ancora il progetto, e ChatGPT userebbe il template
+> vuoto invece della versione locked.
+>
+> Il ZIP contiene già anche i 5 file richiesti dalla Fase 4 (`Core/RENDER_GUIDE.md`,
+> `Core/DESIGN_LANGUAGE.md`, `Core/STYLE_GUIDE.md`, `Core/COMPONENT_SYSTEM.md`,
+> `Assets/DesignSystem/Tokens/tokens.example.yaml`) — non allegarli a parte.
 
-> Se usi il ZIP aggiornato (Opzione A), il content.yaml è già dentro — non serve allegarlo
-> separatamente. Se usi il ZIP originale, allegalo come file separato in modo che ChatGPT
-> usi la versione locked, non il template vuoto.
+Copia il prompt qui sotto, sostituisci i due valori in maiuscolo e invialo:
+
+```
+Fase 4 — Render Engine.
+Genera l'illustrazione per la pagina CODICE_PAGINA (NOME_PAGINA).
+
+Il content.yaml allegato è approvato e bloccato (status: locked).
+
+Regole operative:
+- Leggi ESCLUSIVAMENTE da content.yaml. Non generare, modificare o riformulare testo.
+- Usa solo i Design Token di tokens.example.yaml. Nessun valore hardcoded.
+- La forma fisica del modello deve corrispondere esattamente alle immagini di riferimento.
+- Applica Core/DESIGN_LANGUAGE.md e Core/STYLE_GUIDE.md.
+- Componenti secondo Core/COMPONENT_SYSTEM.md.
+- Sfondo bianco puro. Pannello header viola (token.PrimaryViolet).
+
+Output atteso: pagina illustrata completa. Poi esegui la checklist visiva di
+Core/QA_SYSTEM.md sulle voci applicabili e riporta PASS/FAIL per ciascuna.
+```
+
+Sostituisci prima di inviare:
+
+| Placeholder | Cosa scrivere | Esempio |
+|---|---|---|
+| `CODICE_PAGINA` | ID pagina | `P001` |
+| `NOME_PAGINA` | Nome della pagina | `Copertina` |
 
 ---
 
-### 10d — Rendering in Gemini
-
-Procedura identica a ChatGPT Web (10c). Carica lo stesso set di file tramite allegati
-o Google Drive. Usa lo stesso Prompt Fase 4.
+> ⚠️ **Gemini non è supportato per il rendering** (Fase 3/4). Fallito in 3 tentativi
+> su UAT-002 (allucinazioni, metadati leaked, risposte scollegate dal prompt).
+> Vedi `UAT/UAT-002.md` e `Docs/RUNTIMES.md`.
 
 ---
 
-### 10e — Salva le immagini generate
+### 10d — Salva le immagini generate
 
 Per ogni pagina renderizzata:
 1. Scarica l'immagine prodotta dall'AI generativa
@@ -386,7 +415,7 @@ Per ogni pagina renderizzata:
 
 Con tutte le pagine in `status: rendered`, usa il **Prompt Fase 5** da `Docs/AI_BOOTSTRAP_PROMPT.md`.
 
-Il PDF può essere assemblato con ChatGPT Web o Gemini (stessa procedura handoff del PASSO 10).
+Il PDF può essere assemblato con ChatGPT Web (stessa procedura handoff del PASSO 10).
 Prerequisito: copia compilata di `Templates/PDF_CONFIG.yaml` in `Projects/{Modello}/PDF_CONFIG.yaml`.
 
 ---
@@ -399,8 +428,8 @@ Prerequisito: copia compilata di `Templates/PDF_CONFIG.yaml` in `Projects/{Model
 | Testi P001–P010 | **Claude Code** | Scrive content.yaml nel repo |
 | QA Testi | **Claude Code** | Valida content.yaml, APPROVED/REJECTED |
 | Sigillatura | **Claude Code** | Imposta metadata.yaml → locked |
-| **Rendering** | **AI immagini** (ChatGPT/Gemini) | Genera pagine illustrate da content.yaml |
-| PDF | **AI immagini** (ChatGPT/Gemini) | Assembla 3 varianti PDF |
+| **Rendering** | **AI immagini** (ChatGPT Web) | Genera pagine illustrate da content.yaml |
+| PDF | **AI immagini** (ChatGPT Web) | Assembla 3 varianti PDF |
 
 ---
 

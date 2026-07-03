@@ -12,8 +12,9 @@ R: No. Devi sapere: cosa fare, quando, quali file toccare, quale prompt usare, q
 aprire una nuova chat. È tutto in `START_HERE.md` + `OperatorGuide/`.
 
 **D: Quale modello AI serve?**
-R: Uno qualsiasi tra ChatGPT, Claude, Gemini (o futuri) con allegati file e contesto
-ampio (consigliato 100K+ token). I prompt sono model-agnostic.
+R: ChatGPT o Claude, con allegati file e contesto ampio (consigliato 100K+ token).
+I prompt sono model-agnostic. Gemini **non è supportato** per il rendering (Fase 3/4)
+— fallito su UAT-002, vedi `UAT/UAT-002.md` e `Docs/RUNTIMES.md`.
 
 **D: Dove metto le foto del modello?**
 R: `Projects/{TuoModello}/Images/`. Sempre e solo lì. (v2.4.1 — convenzione unica.)

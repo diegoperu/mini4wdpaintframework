@@ -24,7 +24,7 @@ R: Le vernici TS sono per plastica ABS (standard). Le vernici PS sono formulate 
 ## Uso dello SDK
 
 **D: Posso usare questo SDK con qualunque modello AI?**
-R: Sì. I prompt di `PromptEngine/` sono progettati per essere model-agnostic e funzionano con ChatGPT, Claude, Gemini, e qualunque LLM in grado di seguire istruzioni. Vedi `PromptEngine/README.md` (Capitolo 07).
+R: I prompt di `PromptEngine/` sono progettati per essere model-agnostic e funzionano con ChatGPT e Claude. Gemini **non è supportato** per il rendering (Fase 3/4) — fallito su UAT-002 (allucinazioni, metadati leaked, output scollegato dal prompt). Vedi `PromptEngine/README.md` (Capitolo 07), `UAT/UAT-002.md` e `Docs/RUNTIMES.md`.
 
 **D: Come aggiungo un nuovo modello Mini4WD?**
 R: Copiare `Templates/PROJECT.yaml` in `Projects/{NuovoModello}/PROJECT.yaml`, compilare tutti i campi, poi seguire `Build/Pipeline.md` a partire dalla Fase 0 (Capitolo 05).

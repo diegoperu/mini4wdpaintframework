@@ -22,7 +22,7 @@ A: TS paints are for ABS plastic (standard). PS paints are formulated for polyca
 ## SDK Usage
 
 **Q: Can I use this SDK with any AI model?**
-A: Yes. The PromptEngine prompts are designed to be model-agnostic and work with ChatGPT, Claude, Gemini, and any instruction-following LLM. See `PromptEngine/README.md`.
+A: The PromptEngine prompts are designed to be model-agnostic and work with ChatGPT and Claude. Gemini is **not supported** for rendering (Phase 3/4) — failed on UAT-002 (hallucinations, leaked metadata, off-prompt output). See `PromptEngine/README.md`, `UAT/UAT-002.md`, and `Docs/RUNTIMES.md`.
 
 **Q: How do I add a new Mini4WD model?**
 A: Copy `Templates/PROJECT.yaml` to `Projects/{NewModelName}/PROJECT.yaml`, fill in all fields, then follow `Build/Pipeline.md` Phase 0 onward.
