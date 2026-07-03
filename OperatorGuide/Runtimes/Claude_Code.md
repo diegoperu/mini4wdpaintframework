@@ -220,7 +220,7 @@ Genera la pagina CODICE_PAGINA (NOME_PAGINA) del manuale per il modello NOME_MOD
    paintName, finish, hex. Non lasciare TODO: per valori raggiungibili tramite
    riferimento — usa TODO: solo per dati genuinamente assenti nel PROJECT.yaml.
 4. Genera il file content.yaml completo per questa pagina e scrivilo in
-   ApprovedAssets/Text/CODICE_PAGINA/content.yaml.
+   Projects/CARTELLA_MODELLO/CARTELLA_VARIANTE/ApprovedText/CODICE_PAGINA/content.yaml.
 5. Usa TODO: per qualsiasi valore non disponibile in PROJECT.yaml — non inventare nulla.
 6. Tutto il testo editoriale in italiano; codici e nomi commerciali restano invariati.
 
@@ -236,6 +236,10 @@ Sostituisci prima di inviare:
 | `NOME_PAGINA` | Nome della pagina | `Copertina` |
 | `NOME_MODELLO` | Nome del tuo modello | `Magnum Saber Premium` |
 | `FILE_PROMPT.md` | File PromptEngine corrispondente (vedi tabella sotto) | `Cover.md` |
+| `CARTELLA_MODELLO` | Nome cartella modello (PascalCase_Underscore) | `Magnum_Saber_Premium` |
+| `CARTELLA_VARIANTE` | Nome cartella variante (da paintScheme.slug) | `Cotton_Candy_Drift` |
+
+💡 **Power user:** usa `Scripts/generate_prompts.py` — compila automaticamente tutti i placeholder inclusi modello e variante.
 
 Tabella pagine → file PromptEngine:
 
@@ -265,7 +269,7 @@ Dopo che l'AI ha scritto il content.yaml, invia questo prompt:
 
 ```
 Fase 3 — QA. Esegui la validazione completa sul content.yaml appena generato
-in ApprovedAssets/Text/CODICE_PAGINA/content.yaml.
+in Projects/CARTELLA_MODELLO/CARTELLA_VARIANTE/ApprovedText/CODICE_PAGINA/content.yaml.
 
 Ambito: questo è CONTENUTO GENERATO (status: review), non un template. Applica
 Tests/ContentValidation.md §Validation Scope.
@@ -294,8 +298,8 @@ Sostituisci `CODICE_PAGINA` con il codice reale (es. `P001`).
 
 ```
 Approvato. Sigilla la pagina CODICE_PAGINA:
-ApprovedAssets/Text/CODICE_PAGINA/metadata.yaml → status: locked
-Aggiungi riga di changelog in ApprovedAssets/Text/CODICE_PAGINA/changelog.md.
+Projects/CARTELLA_MODELLO/CARTELLA_VARIANTE/ApprovedText/CODICE_PAGINA/metadata.yaml → status: locked
+Aggiungi riga di changelog in Projects/CARTELLA_MODELLO/CARTELLA_VARIANTE/ApprovedText/CODICE_PAGINA/changelog.md.
 ```
 
 ---
@@ -320,7 +324,7 @@ Non aprire una nuova sessione tra una pagina e l'altra.
 Prima di passare al rendering, controlla che ogni pagina da P001 a P010 abbia `status: locked`:
 
 ```bash
-grep -r "status:" ApprovedAssets/Text/*/metadata.yaml
+grep -r "status:" Projects/CARTELLA_MODELLO/CARTELLA_VARIANTE/ApprovedText/*/metadata.yaml
 ```
 
 Ogni riga deve mostrare `status: locked`. Se qualche pagina è ancora `draft` o `review`,
@@ -335,12 +339,12 @@ I content.yaml locked sono già nel repository locale. Hai due opzioni:
 **Opzione A — Handoff via GitHub (consigliata):**
 1. Esegui `git add . && git commit -m "lock: all pages P001-P010"` e `git push`
 2. Scarica il repository aggiornato come ZIP da GitHub (Code → Download ZIP)
-3. Il ZIP conterrà già tutti i content.yaml locked in `ApprovedAssets/Text/`
+3. Il ZIP conterrà già tutti i content.yaml locked in `Projects/{Model}/{Variant}/ApprovedText/`
 
 **Opzione B — Handoff diretto (senza push):**
 Per ogni pagina che vuoi renderizzare, copia il file localmente:
-- `ApprovedAssets/Text/P001/content.yaml` → tieni pronto da allegare
-- `ApprovedAssets/Text/P002/content.yaml` → ecc.
+- `Projects/{Model}/{Variant}/ApprovedText/P001/content.yaml` → tieni pronto da allegare
+- `Projects/{Model}/{Variant}/ApprovedText/P002/content.yaml` → ecc.
 
 ---
 
@@ -351,7 +355,7 @@ Apri **ChatGPT Web**, nuova chat. Carica:
 | File | Come ottenerlo |
 |---|---|
 | `Mini4WDFramework.zip` | Il ZIP scaricato al punto 10b (Opzione A) oppure il ZIP originale del repo |
-| `content.yaml` della pagina da renderizzare | Da `ApprovedAssets/Text/P00x/content.yaml` (allegato separato) |
+| `content.yaml` della pagina da renderizzare | Da `Projects/{Model}/{Variant}/ApprovedText/P00x/content.yaml` (allegato separato) |
 | Immagini di riferimento | Da `Projects/{Modello}/Images/` |
 
 Poi incolla il **Prompt Fase 4** da `Docs/AI_BOOTSTRAP_PROMPT.md` con i valori corretti.
@@ -373,8 +377,8 @@ o Google Drive. Usa lo stesso Prompt Fase 4.
 
 Per ogni pagina renderizzata:
 1. Scarica l'immagine prodotta dall'AI generativa
-2. Salvala in `ApprovedAssets/Images/P00x/` nel repository locale
-3. Aggiorna `ApprovedAssets/Text/P00x/metadata.yaml → status: rendered`
+2. Salvala in `Projects/{Model}/{Variant}/ApprovedImages/P00x/` nel repository locale
+3. Aggiorna `Projects/{Model}/{Variant}/ApprovedText/P00x/metadata.yaml → status: rendered`
 
 ---
 

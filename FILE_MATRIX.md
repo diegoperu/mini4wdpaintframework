@@ -68,22 +68,30 @@ L'Operatore li **usa** (li allega in chat o l'AI li legge dal repo), non li modi
 | `Projects/{TuoModello}/Output/*` | SÌ | Generazione | Operatore + AI | TESTI / PDF | ChatGPT: In chat · Claude: Nel repo |
 | `Projects/{TuoModello}/Notes/*` | SÌ | Sempre | Operatore | Tutte | ChatGPT: Locale (non caricato) · Claude: Diretto |
 | `Projects/PROJECT_BOOTSTRAP.md` | NO | Release | Developer | — | ChatGPT: ZIP · Claude: Diretto |
-| `Projects/Proto_Emperor/*` | **NO — riferimento sola lettura** | — | Maintainer | — | ChatGPT: ZIP · Claude: Diretto |
+| `Projects/Proto_Emperor/Violet_Phantom/*` | **NO — riferimento sola lettura** | — | Maintainer | — | ChatGPT: ZIP · Claude: Diretto |
 
-## ApprovedAssets/ — CMS, scrive l'AI
+## Projects/{Model}/{Variant}/ — contenuto per-progetto (CMS, scrive l'AI)
+
+*Nuovo in v2.5.0. Ogni variante ha il proprio spazio isolato. Sostituisce la vecchia cartella globale `ApprovedAssets/`.*
 
 | File | Modificabile? | Quando | Da chi | Fase | Runtime |
 |---|---|---|---|---|---|
-| `ApprovedAssets/Text/P00x/content.yaml` | SÌ (via AI) | Generazione testi | **AI** (mai a mano dopo `locked`) | GENERAZIONE TESTI | ChatGPT: **In chat** (copia manuale) · Claude: Nel repo |
-| `ApprovedAssets/Text/P00x/metadata.yaml` | SÌ (via AI) | Avanzamento lifecycle | AI / Reviewer | QA / SEAL | ChatGPT: In chat · Claude: Nel repo |
-| `ApprovedAssets/Text/P00x/changelog.md` | SÌ (via AI) | Ogni revisione | AI | Tutte | ChatGPT: In chat · Claude: Nel repo |
-| `ApprovedAssets/Text/P00x/text.md` | **NO — derivato** | — | AI (auto) | — | ChatGPT: In chat · Claude: Nel repo |
-| `ApprovedAssets/Text/P00x/manifest.yaml`, `notes.md`, `README.md` | SÌ (via AI) | Generazione | AI | TESTI | ChatGPT: In chat · Claude: Nel repo |
-| `ApprovedAssets/Images/*` | SÌ (via AI) | Rendering | AI | RENDERING | ChatGPT: In chat · Claude: Nel repo |
-| `ApprovedAssets/index.yaml` | SÌ | Approvazioni e release | Reviewer/Maintainer | SEAL / RELEASE | ChatGPT: ZIP · Claude: Diretto |
+| `Projects/{M}/{V}/ApprovedText/P00x/content.yaml` | SÌ (via AI) | Generazione testi | **AI** (mai a mano dopo `locked`) | GENERAZIONE TESTI | ChatGPT: **In chat** (copia manuale) · Claude: Nel repo |
+| `Projects/{M}/{V}/ApprovedText/P00x/metadata.yaml` | SÌ (via AI) | Avanzamento lifecycle | AI / Reviewer | QA / SEAL | ChatGPT: In chat · Claude: Nel repo |
+| `Projects/{M}/{V}/ApprovedText/P00x/changelog.md` | SÌ (via AI) | Ogni revisione | AI | Tutte | ChatGPT: In chat · Claude: Nel repo |
+| `Projects/{M}/{V}/ApprovedText/P00x/text.md` | **NO — derivato** | — | AI (auto) | — | ChatGPT: In chat · Claude: Nel repo |
+| `Projects/{M}/{V}/ApprovedText/P00x/manifest.yaml`, `notes.md` | SÌ (via AI) | Generazione | AI | TESTI | ChatGPT: In chat · Claude: Nel repo |
+| `Projects/{M}/{V}/ApprovedImages/P00x/` | SÌ (via AI) | Rendering | AI | RENDERING | ChatGPT: In chat (salva tu) · Claude: Nel repo |
+| `Projects/{M}/{V}/index.yaml` | SÌ | Approvazioni e release | Reviewer/Maintainer | SEAL / RELEASE | Claude: Diretto |
 
-**Regola:** l'Operatore non edita mai a mano i file di `ApprovedAssets/` — le modifiche
+**Regola:** l'Operatore non edita mai a mano i file di `ApprovedText/` — le modifiche
 passano per i prompt e restano tracciate nei changelog di pagina.
+
+## ApprovedAssets/ — DEPRECATA in v2.5.0
+
+| File | Stato |
+|---|---|
+| `ApprovedAssets/` (intera cartella) | **Deprecata** — non usare per nuovi progetti. Mantenuta solo per compatibilità con v2.4.x. |
 
 ## Assets/
 
@@ -110,9 +118,9 @@ passano per i prompt e restano tracciate nei changelog di pagina.
 
 ## Riassunto per l'Operatore
 
-**Modifichi solo:** `Projects/{TuoModello}/` (PROJECT.yaml, Images/, Output/, Notes/ e
-le copie dei template). **Tutto il resto è sola lettura.** L'AI scrive in
-`ApprovedAssets/` tramite i prompt; tu non ci metti mano direttamente.
+**Modifichi solo:** `Projects/{TuoModello}/{TuaVariante}/` (PROJECT.yaml, Images/, Output/, Notes/).
+**Tutto il resto è sola lettura.** L'AI scrive in `ApprovedText/` e `ApprovedImages/`
+dentro la cartella variante tramite i prompt; tu non ci metti mano direttamente.
 
 **Con ChatGPT Web:** carica il repository come ZIP + allega separatamente PROJECT.yaml e immagini.
 L'AI produce i file in chat — sei tu a salvarli localmente se vuoi conservarli.

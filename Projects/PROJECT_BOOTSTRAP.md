@@ -31,27 +31,33 @@
 
 ---
 
-## PASSO 1 — Crea la cartella progetto
+## PASSO 1 — Crea la struttura progetto
+
+Struttura v2.5.0: due livelli — `{Modello}/{Variante}`.
 
 ```bash
 MODEL="Nome_Modello"        # spazi → underscore. MAI trattini nel nome cartella.
-mkdir -p "Projects/${MODEL}/Images"
-mkdir -p "Projects/${MODEL}/Output/raw" "Projects/${MODEL}/Output/pdf"
-mkdir -p "Projects/${MODEL}/Notes"
+VARIANT="Nome_Variante"     # da paintScheme.slug: midnight-blue → Midnight_Blue
+mkdir -p "Projects/${MODEL}/${VARIANT}/Images"
+mkdir -p "Projects/${MODEL}/${VARIANT}/Output/raw" "Projects/${MODEL}/${VARIANT}/Output/pdf"
+mkdir -p "Projects/${MODEL}/${VARIANT}/Notes"
+mkdir -p "Projects/${MODEL}/${VARIANT}/ApprovedText"
+mkdir -p "Projects/${MODEL}/${VARIANT}/ApprovedImages"
 ```
 
-Regole nome (da `Core/NAMING_CONVENTION.md`):
+Regole nome (da `../Core/NAMING_CONVENTION.md`):
 
 - `Proto Emperor` → `Proto_Emperor` ✓
 - `Dash 01 Shadow Emperor` → `Dash_01_Shadow_Emperor` ✓ (non `Dash-01_...` ✗)
+- Variante: `shadow-black` (slug) → `Shadow_Black` (cartella) ✓
 - Maiuscole conservate, niente abbreviazioni, niente caratteri speciali
 
-**Non creare altre cartelle**, in particolare niente sotto `Assets/` o `ApprovedAssets/`.
+**Non creare altre cartelle**, in particolare niente sotto `Assets/`.
 
 ## PASSO 2 — Copia e compila PROJECT.yaml
 
 ```bash
-cp Templates/PROJECT.yaml "Projects/${MODEL}/PROJECT.yaml"
+cp Templates/PROJECT.yaml "Projects/${MODEL}/${VARIANT}/PROJECT.yaml"
 ```
 
 Apri la copia (MAI il master in `Templates/`) e compila ogni campo REQUIRED seguendo i
@@ -60,8 +66,9 @@ commenti nel file. Regole:
 1. Codici vernice reali del produttore — mai inventati
 2. Dato mancante → `TODO:` — mai un valore inventato
 3. `modelSlug` in kebab-case: `dash-01-shadow-emperor`
-4. Percorsi in `paths:` relativi alla cartella progetto (`Images/...`)
-5. I valori-chiave dello schema (`finish: gloss`, `technique: spray-can`) restano in
+4. `paintScheme.slug` in kebab-case: `shadow-black` ← **NUOVO v2.5.0, REQUIRED**
+5. Percorsi in `paths:` relativi alla cartella variante (`Images/...`)
+6. I valori-chiave dello schema (`finish: gloss`, `technique: spray-can`) restano in
    inglese: sono chiavi tecniche, non testo editoriale. L'italiano è per i contenuti
    che finiranno sulle pagine.
 

@@ -1,6 +1,6 @@
 # FIRST_RENDER.md — Tutorial: da Approved Text alla Prima Pagina Illustrata
 
-**Mini4WD Manual SDK v2.4.1** · Tutorial operatore · Tempo: ~30 minuti per pagina
+**Mini4WD Manual SDK v2.5.0** · Tutorial operatore · Tempo: ~30 minuti per pagina
 
 > Da dove parti: almeno una pagina con `metadata.yaml → status: locked`
 > (testo generato e validato — vedi `FIRST_PROJECT.md` e `OperatorGuide/01_Primo_Manuale.md`).
@@ -10,7 +10,7 @@
 
 ## PASSO 1 — Verifica il punto di partenza
 
-Controlla `ApprovedAssets/Text/P001/metadata.yaml`:
+Controlla `Projects/{Modello}/{Variante}/ApprovedText/P001/metadata.yaml`:
 
 ```yaml
 status: "locked"
@@ -35,7 +35,7 @@ Nell'ordine (lista anche in `Docs/AI_BOOTSTRAP_PROMPT.md → Fase 4`):
 3. `Core/STYLE_GUIDE.md`
 4. `Core/COMPONENT_SYSTEM.md`
 5. `Assets/DesignSystem/Tokens/tokens.example.yaml`
-6. `ApprovedAssets/Text/P001/content.yaml` (quello locked)
+6. `Projects/{Modello}/{Variante}/ApprovedText/P001/content.yaml` (quello locked)
 7. Le foto di riferimento da `Projects/{Modello}/Images/`
 
 ## PASSO 4 — Lancia il prompt di rendering
@@ -79,9 +79,9 @@ Verifiche manuali rapide da fare TU:
 
 ## PASSO 7 — Salva e registra
 
-1. Salva l'immagine in `ApprovedAssets/Images/P001/` seguendo il naming
+1. Salva l'immagine in `Projects/{Modello}/{Variante}/ApprovedImages/P001/` seguendo il naming
    (`Core/NAMING_CONVENTION.md`): es. `dash-01-shadow-emperor_P001_cover_v1.png`
-2. Aggiorna (o fai aggiornare all'AI) `ApprovedAssets/Text/P001/metadata.yaml`:
+2. Aggiorna (o fai aggiornare all'AI) `Projects/{Modello}/{Variante}/ApprovedText/P001/metadata.yaml`:
 
 ```yaml
 status: "rendered"

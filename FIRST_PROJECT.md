@@ -17,39 +17,46 @@ cd mini4wdpaintframework
 
 ## PASSO 2 — Crea la cartella progetto
 
-Il nome cartella usa gli **underscore** (mai trattini — vedi `PROJECT_STRUCTURE.md`):
+Il nome cartella usa gli **underscore** (mai trattini — vedi `PROJECT_STRUCTURE.md`).
+Struttura v2.5.0: due livelli `{Modello}/{Variante}`.
 
 ```bash
 MODEL="Dash_01_Shadow_Emperor"
-mkdir -p "Projects/${MODEL}/Images"
-mkdir -p "Projects/${MODEL}/Output/raw" "Projects/${MODEL}/Output/pdf"
-mkdir -p "Projects/${MODEL}/Notes"
+VARIANT="Shadow_Black"           # da paintScheme.slug: shadow-black → Shadow_Black
+mkdir -p "Projects/${MODEL}/${VARIANT}/Images"
+mkdir -p "Projects/${MODEL}/${VARIANT}/Output/raw" "Projects/${MODEL}/${VARIANT}/Output/pdf"
+mkdir -p "Projects/${MODEL}/${VARIANT}/Notes"
+mkdir -p "Projects/${MODEL}/${VARIANT}/ApprovedText"
+mkdir -p "Projects/${MODEL}/${VARIANT}/ApprovedImages"
 ```
 
 Risultato:
 
 ```
-Projects/Dash_01_Shadow_Emperor/
+Projects/Dash_01_Shadow_Emperor/Shadow_Black/
+├── PROJECT.yaml
 ├── Images/
 ├── Output/
 │   ├── raw/
 │   └── pdf/
-└── Notes/
+├── Notes/
+├── ApprovedText/    ← l'AI ci scriverà i content.yaml
+└── ApprovedImages/  ← l'AI ci salverà i render
 ```
 
-Non creare nulla sotto `Assets/` o `ApprovedAssets/` — non serve.
+Non creare nulla sotto `Assets/` — non serve.
 
 ## PASSO 3 — Copia e compila PROJECT.yaml
 
 ```bash
-cp Templates/PROJECT.yaml "Projects/${MODEL}/PROJECT.yaml"
+cp Templates/PROJECT.yaml "Projects/${MODEL}/${VARIANT}/PROJECT.yaml"
 ```
 
-Apri `Projects/Dash_01_Shadow_Emperor/PROJECT.yaml` e compila **tutti i campi REQUIRED**
+Apri `Projects/Dash_01_Shadow_Emperor/Shadow_Black/PROJECT.yaml` e compila **tutti i campi REQUIRED**
 (ogni campo ha un commento che lo spiega). Esempio reale:
 
 ```yaml
-sdk_version: "2.4.1"
+sdk_version: "2.5.0"
 
 project:
   modelName: "Dash 01 Shadow Emperor"     # nome ufficiale Tamiya, con gli spazi
@@ -64,6 +71,7 @@ project:
 
 paintScheme:
   name: "Shadow Black"
+  slug: "shadow-black"         # REQUIRED v2.5.0 — kebab-case, usato come nome cartella variante
   colors:
     - id: "PC001"                          # sempre PC001, PC002… (mai C001)
       name: "Base carrozzeria"
