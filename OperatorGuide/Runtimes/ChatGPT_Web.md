@@ -236,9 +236,13 @@ Genera la pagina CODICE_PAGINA (NOME_PAGINA) del manuale per il modello NOME_MOD
 
 1. Leggi il file PromptEngine/FILE_PROMPT.md dallo ZIP che hai già caricato.
 2. Estrai tutti i valori dal PROJECT.yaml che hai già analizzato.
-3. Genera il file content.yaml completo per questa pagina.
-4. Usa TODO: per qualsiasi valore non disponibile in PROJECT.yaml — non inventare nulla.
-5. Tutto il testo editoriale in italiano; codici e nomi commerciali restano invariati.
+3. Risolvi i riferimenti per ID: se paintSequence usa colorId, cerca il colore
+   corrispondente in paintScheme.colors (dove id == colorId) ed estrai paintCode,
+   paintName, finish, hex. Non lasciare TODO: per valori raggiungibili tramite
+   riferimento — usa TODO: solo per dati genuinamente assenti nel PROJECT.yaml.
+4. Genera il file content.yaml completo per questa pagina.
+5. Usa TODO: per qualsiasi valore non disponibile in PROJECT.yaml — non inventare nulla.
+6. Tutto il testo editoriale in italiano; codici e nomi commerciali restano invariati.
 
 Non procedere al rendering: siamo in Text Mode. Output atteso: solo il content.yaml,
 pronto per la validazione QA.

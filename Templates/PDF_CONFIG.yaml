@@ -1,6 +1,6 @@
 # ============================================================
 # Mini4WD Manual SDK — PDF Export Configuration
-# Version: 2.4.0
+# Version: 2.4.1
 # ============================================================
 # INSTRUCTIONS:
 #   Copy to Projects/{ModelName}/PDF_CONFIG.yaml
@@ -45,7 +45,7 @@ pdf:
       - "manual"
       - ""                       # Add model name here
       - ""                       # Add scheme name here
-    creator: "Mini4WD Manual SDK v2.4.0"
+    creator: "Mini4WD Manual SDK v2.4.1"
     producer: ""                 # OPTIONAL — tool used to generate PDF (e.g., "Affinity Publisher 2")
     language: "it"               # BCP 47 language tag: it | en | ja | fr | de | es
 

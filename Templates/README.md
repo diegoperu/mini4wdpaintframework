@@ -117,4 +117,4 @@ If you upgrade the SDK:
 
 ---
 
-*Templates are part of Mini4WD Manual SDK v2.4.0. See `Core/WORKFLOW.md` for the complete generation pipeline.*
+*Templates are part of Mini4WD Manual SDK v2.4.1. See `Core/WORKFLOW.md` for the complete generation pipeline.*
