@@ -7,8 +7,8 @@
 
 sdk:
   name: "Mini4WD Manual SDK"
-  version: "2.4.1"
-  codename: "Operator"       # 2.4.x family codename: CMS; 2.4.1 = UX & Operator Workflow Update
+  version: "2.5.0"
+  codename: "MultiProject"   # 2.5.0: per-project content isolation, variant folder structure
   maturity: "beta"
   status: "active"
   language: "it"
@@ -22,7 +22,7 @@ sdk:
 repository:
   url: "https://github.com/diegoperu/mini4wdpaintframework"
   default_branch: "main"
-  current_release: "v2.4.1"
+  current_release: "v2.5.0"
   github_repository: "diegoperu/mini4wdpaintframework"
   releases_url: "https://github.com/diegoperu/mini4wdpaintframework/releases"
 
@@ -111,8 +111,8 @@ load_order:
     13: "reference_images"
 
 roadmap:
-  current_version: "2.4.1"
-  next_version: "2.5.0"
+  current_version: "2.5.0"
+  next_version: "2.6.0"
   next_planned:
     - "Compiler/ — Project Loader, Context Builder, Page Generator, QA Engine, PDF Assembler"
     - "Prompt Orchestrator — manages LOAD sequence automatically"

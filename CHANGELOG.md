@@ -7,6 +7,44 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [2.5.0] - 2026-07-03 — Multi-Project Content Isolation
+
+Breaking change: per-project content isolation. `ApprovedAssets/Text/` and
+`ApprovedAssets/Images/` (global) replaced by per-variant directories inside
+each project. No functional change to Prompt Engine, Text Engine, or QA logic.
+
+### Breaking Changes
+- Content path: `ApprovedAssets/Text/P{NNN}/` → `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/`
+- Images path: `ApprovedAssets/Images/P{NNN}/` → `Projects/{Model}/{Variant}/ApprovedImages/P{NNN}/`
+- Index path: `ApprovedAssets/index.yaml` → `Projects/{Model}/{Variant}/index.yaml`
+- `paintScheme.slug` field now REQUIRED in PROJECT.yaml
+
+### Added
+- `Projects/{Model}/{Variant}/` two-level project structure: model folder + variant folder
+- `paintScheme.slug` field in `Templates/PROJECT.yaml` (kebab-case, source for variant folder name)
+- `Core/NAMING_CONVENTION.md §3.1` — variant folder naming rule and examples
+- `Projects/Proto_Emperor/Violet_Phantom/` — reference project migrated to v2.5.0 structure
+
+### Changed
+- `PromptEngine/*.md` (all 10) — `Save output to:` path updated to `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/content.yaml`
+- `Core/TEXT_ENGINE.md` — v2.5.0 row added to output format table; Render Engine contract path updated
+- `Core/PAGE_SYSTEM.md` — module storage path updated
+- `AI_ENTRYPOINT.md` — Bootstrap Contract `required_read_order` path updated
+- `BOOTSTRAP.md` — Phase 2a output, Phase 3 output, Phase 7 index paths updated
+- `Docs/LOAD_ORDER.md` — Step 12 path updated
+- `Docs/AI_BOOTSTRAP_PROMPT.md` — Fase 2 write path and Fase 4 output path updated
+- `Scripts/generate_prompts.py` — path construction dynamic from PROJECT.yaml location; variant folder derived from parent dir; paintScheme.slug cross-check; output saved to project dir by default
+- `VERSION` → 2.5.0; `SDK_CONTEXT.yaml` version updated
+
+### Migration from v2.4.x
+For each existing project `Projects/{Model}/`:
+1. Create subfolder `Projects/{Model}/{Variant}/` (variant = paintScheme.name in Title_Case_Underscore)
+2. Move `PROJECT.yaml`, `Images/`, `Output/`, `Notes/` into the variant folder
+3. Add `paintScheme.slug: "variant-slug"` to PROJECT.yaml
+4. Move any existing `ApprovedAssets/Text/` content to `Projects/{Model}/{Variant}/ApprovedText/`
+
+---
+
 ## [Unreleased]
 
 ### Fixed — ChatGPT Web UX (2026-07-03, da UR-0001 UAT session)
