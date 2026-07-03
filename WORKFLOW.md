@@ -16,6 +16,10 @@
 
 ```
 ┌─────────────────┐
+│  SCELTA RUNTIME │  Operatore: ChatGPT Web o Claude Code?
+└────────┬────────┘
+         ▼
+┌─────────────────┐
 │ NUOVO PROGETTO  │  Operatore: cartella + PROJECT.yaml + immagini
 └────────┬────────┘
          ▼
@@ -68,6 +72,14 @@
 
 ## Dettaglio degli stati
 
+### 0. SCELTA RUNTIME
+- **Obiettivo:** scegliere l'ambiente di esecuzione prima di iniziare.
+- **Chi:** Operatore.
+- **Input:** nessuno — è una scelta dell'Operatore.
+- **Output:** runtime scelto (ChatGPT Web o Claude Code).
+- **Prossimo stato:** NUOVO PROGETTO.
+- **Guida:** `Docs/RUNTIMES.md`, `OperatorGuide/Runtimes/`
+
 ### 1. NUOVO PROGETTO
 - **Obiettivo:** preparare tutti i dati prima di coinvolgere l'AI.
 - **Chi:** Operatore (nessuna chat AI).
@@ -79,7 +91,9 @@
 ### 2. BOOTSTRAP
 - **Obiettivo:** l'AI carica il framework e verifica il progetto.
 - **Chi:** Operatore + AI (chat nuova).
-- **Input:** file elencati nel Prompt Fase 1 (`Docs/AI_BOOTSTRAP_PROMPT.md`).
+- **Input:** dipende dal runtime — vedi `Docs/AI_BOOTSTRAP_PROMPT.md §FASE 1`.
+  - *ChatGPT Web:* `Mini4WDFramework.zip` + PROJECT.yaml + immagini (allegati)
+  - *Claude Code:* file del repository (accesso diretto) + PROJECT.yaml + immagini
 - **Output:** Bootstrap Report (formato in `AI_ENTRYPOINT.md`).
 - **Prossimo stato:** BOOTSTRAP OK (dopo la tua approvazione esplicita).
 - **Nuova chat:** SÌ — è l'inizio della sessione.

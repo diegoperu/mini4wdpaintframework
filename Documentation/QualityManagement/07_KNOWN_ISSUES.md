@@ -25,6 +25,7 @@
 |----|-------------|----------------------|------------|-------|-------------|
 | KI-001 | `Templates/PROJECT.yaml` mantiene il campo LEGACY `text.approved_text_dir` (compatibilità v2.3.0); può confondere nuovi operatori sul percorso di output corretto | 2.4.0 – 2.4.1 | Ignorare il campo LEGACY; usare il percorso v2.4.x documentato nel template stesso | Aperto | Rimozione in v3.0.0 (breaking) |
 | KI-002 | Pipeline PDF manuale: nessuna automazione pandoc/LaTeX; l'assemblaggio del PDF dipende dall'operatore | 2.x | Seguire `FIRST_PDF.md` passo-passo | Aperto | Pianificato post-v2.5.0 (roadmap) |
+| KI-003 | Documentazione ≤ v2.4.1 non distingueva ChatGPT Web da Claude Code: le istruzioni di bootstrap e caricamento file erano ambigue per operatori ChatGPT Web (UR-0001, score 1/5) | ≤ 2.4.1 | Usare `OperatorGuide/Runtimes/ChatGPT_Web.md` o `Claude_Code.md` — guide autonome per runtime | In correzione | Documentazione runtime-aware in rilascio |
 
 ---
 

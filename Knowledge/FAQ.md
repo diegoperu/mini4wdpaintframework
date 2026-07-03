@@ -58,7 +58,28 @@ A: Yes. See `Docs/migration/` for version-specific migration guides.
 
 ---
 
+---
+
+## Runtime
+
+**Q: Perché nella guida si parla di SDK_CONTEXT.yaml, BOOTSTRAP.md, Core/ ecc., ma io sto caricando solo uno ZIP?**
+A: Dipende dal runtime. Con **ChatGPT Web** carichi il repository come archivio ZIP e quei file sono già contenuti dentro il ZIP — non devi caricarli singolarmente. Con **Claude Code** l'AI accede direttamente ai file nel repository locale e non serve nessun ZIP. Vedi `Docs/RUNTIMES.md` e la guida del tuo runtime in `OperatorGuide/Runtimes/`.
+
+**Q: Perché con Claude Code non devo allegare il framework?**
+A: Claude Code ha accesso diretto al filesystem del repository clonato localmente. L'AI legge i file del framework (Core/, Config/, PromptEngine/, ecc.) senza bisogno di allegati. Il ZIP serve solo per ChatGPT Web, dove l'AI non ha accesso al disco.
+
+**Q: Perché con ChatGPT Web devo aprire una nuova chat per ogni fase (rendering, PDF)?**
+A: ChatGPT Web non mantiene i file tra conversazioni diverse. Ogni nuova chat riparte da zero — devi ricaricare i file necessari per la fase corrente. Con Claude Code invece il repository è sempre disponibile, quindi non è obbligatorio aprire nuove sessioni (anche se è consigliato al cambio di motore per mantenere il contesto pulito).
+
+**Q: Posso usare gli stessi prompt con Claude Code che uso con ChatGPT Web?**
+A: I prompt delle Fasi 2–5 (testi, QA, rendering, PDF) sono identici per entrambi i runtime. Il Prompt Bootstrap è diverso: ChatGPT Web usa il **Prompt E** (via ZIP), Claude Code usa il **Prompt Fase 1 · Claude Code** (file diretti). Vedi `Docs/AI_BOOTSTRAP_PROMPT.md §FASE 1`.
+
+---
+
 ## Related Documents
+- `Docs/RUNTIMES.md`
+- `OperatorGuide/Runtimes/ChatGPT_Web.md`
+- `OperatorGuide/Runtimes/Claude_Code.md`
 - `Knowledge/Glossary.md`
 - `Knowledge/BestPractices.md`
 - `PromptEngine/README.md`

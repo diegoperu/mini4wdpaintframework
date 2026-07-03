@@ -9,6 +9,25 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added — Runtime-Aware Documentation
+- `Docs/RUNTIMES.md` — Runtime concept: definition, comparison table (ChatGPT Web vs Claude Code), selection guide, future runtime roadmap (Claude Web, Gemini, Ollama, Open WebUI, vLLM)
+- `OperatorGuide/Runtimes/ChatGPT_Web.md` — standalone step-by-step guide for ChatGPT Web: download ZIP, extract only PROJECT.yaml template, upload ZIP + PROJECT.yaml + images, bootstrap via Prompt E, per-phase file requirements
+- `OperatorGuide/Runtimes/Claude_Code.md` — standalone step-by-step guide for Claude Code: clone repo, create project, direct file access, AI writes to repo
+- `Documentation/QualityManagement/Reports/UR-0001.md` — first user report; score 1/5; documents path ambiguity in OperatorGuide/ and missing runtime distinction as root cause
+
+### Changed — Runtime-Aware Documentation
+- `START_HERE.md` — added PASSO 0 (runtime selection) before all other steps; directs to runtime-specific guides
+- `Projects/PROJECT_BOOTSTRAP.md` — added runtime warning box at top: procedure dipende dal runtime; links to ChatGPT_Web.md and Claude_Code.md
+- `Docs/AI_BOOTSTRAP_PROMPT.md` — FASE 1 split into §ChatGPT Web and §Claude Code sections; Prompt E renamed to "Bootstrap Minimo (ChatGPT Web / ZIP)" with updated description; tabella riassuntiva adds Runtime column
+- `FILE_MATRIX.md` — added Runtime column per file: ChatGPT Web access pattern (ZIP / Allegato / In chat) vs Claude Code access pattern (Diretto / Nel repo)
+- `WORKFLOW.md` — added state 0 SCELTA RUNTIME before NUOVO PROGETTO; BOOTSTRAP state documents runtime-specific input
+- `Knowledge/FAQ.md` — added §Runtime section with 4 new questions: ZIP vs file singoli, Claude Code no allegati, ChatGPT nuova chat obbligatoria, prompt cross-runtime
+- `Documentation/QualityManagement/07_KNOWN_ISSUES.md` — added KI-003: documentazione pre-runtime-aware ambigua per ChatGPT Web (da UR-0001)
+- `OperatorGuide/01_Primo_Manuale.md` — path fixes: FIRST_PROJECT.md → ../FIRST_PROJECT.md, PROJECT_STRUCTURE.md → ../PROJECT_STRUCTURE.md, Docs/ → ../Docs/, BOOTSTRAP.md → ../BOOTSTRAP.md, FIRST_RENDER.md → ../FIRST_RENDER.md, FIRST_PDF.md → ../FIRST_PDF.md
+- `OperatorGuide/06_Errori_Comuni.md` — path fixes: PROJECT_STRUCTURE.md → ../PROJECT_STRUCTURE.md, Docs/AI_BOOTSTRAP_PROMPT.md → ../Docs/AI_BOOTSTRAP_PROMPT.md
+
+No functional change to the framework: Prompt Engine, Text Engine, Rendering Engine, and pipeline are untouched.
+
 ### Added — Quality Management System
 - `Documentation/QualityManagement/` — 20-document Quality Management System:
   release policy and criteria (01–02), feedback templates (03–06, 13–15),

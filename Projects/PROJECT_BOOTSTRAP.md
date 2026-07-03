@@ -5,7 +5,20 @@
 
 > Guida operativa, non descrittiva: esegui i PASSI in ordine, uno alla volta.
 > Al termine avrai un progetto pronto e il Bootstrap approvato.
-> Versione estesa con esempi reali: `FIRST_PROJECT.md`.
+> Versione estesa con esempi reali: `../FIRST_PROJECT.md`.
+
+---
+
+> ⚠️ **ATTENZIONE — Le istruzioni dipendono dal runtime scelto.**
+>
+> Le procedure di caricamento del framework (PASSO 5) sono diverse per ogni runtime.
+>
+> | Runtime | Guida dedicata |
+> |---|---|
+> | **ChatGPT Web** | `../OperatorGuide/Runtimes/ChatGPT_Web.md` |
+> | **Claude Code** | `../OperatorGuide/Runtimes/Claude_Code.md` |
+>
+> Se non hai ancora scelto il runtime, leggi `../Docs/RUNTIMES.md`.
 
 ---
 

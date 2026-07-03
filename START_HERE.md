@@ -8,6 +8,28 @@
 
 ---
 
+## PASSO 0 — Scegli il Runtime
+
+Prima di tutto: da dove interagisci con l'AI?
+
+| | Runtime | Descrizione |
+|---|---|---|
+| □ | **ChatGPT Web** | Usi chat.openai.com — carichi il framework come ZIP |
+| □ | **Claude Code** | Hai il repository clonato localmente — l'AI accede direttamente ai file |
+
+Vai subito alla guida del tuo runtime:
+
+- **ChatGPT Web** → `OperatorGuide/Runtimes/ChatGPT_Web.md` *(guida autonoma, passo-passo)*
+- **Claude Code** → `OperatorGuide/Runtimes/Claude_Code.md` *(guida autonoma, passo-passo)*
+
+Non sei sicuro? Leggi `Docs/RUNTIMES.md` per il confronto.
+
+> Le guide per runtime sono autonome: contengono tutto il necessario.
+> Puoi continuare a leggere questo documento per una panoramica generale,
+> oppure andare direttamente alla guida del tuo runtime.
+
+---
+
 ## Cosa farai
 
 ```

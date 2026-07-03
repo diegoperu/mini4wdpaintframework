@@ -17,30 +17,62 @@
 
 **Nuova chat: SÌ** — è l'inizio della sessione.
 
-**Input (file da allegare, in quest'ordine):**
-1. `SDK_CONTEXT.yaml`
-2. `BOOTSTRAP.md`
-3. `Core/AI_OPERATING_RULES.md`
-4. `Config/LANGUAGE_POLICY.yaml`
-5. `Core/TEXT_ENGINE.md`
-6. `Core/DESIGN_LANGUAGE.md`
-7. `Core/STYLE_GUIDE.md`
-8. `Core/COMPONENT_SYSTEM.md`
-9. `Core/PAGE_SYSTEM.md`
-10. `Projects/{Modello}/PROJECT.yaml` ← il TUO
-11. Le foto da `Projects/{Modello}/Images/`
+> ⚙️ **La procedura di caricamento dipende dal runtime.**
+> Segui la sezione corretta per il tuo ambiente.
+> Runtime non ancora scelto? → `Docs/RUNTIMES.md`
 
-**Output atteso:** Bootstrap Report (formato in `AI_ENTRYPOINT.md`) e STOP in attesa
-della tua approvazione. Nessun contenuto generato prima dell'approvazione.
+---
+
+### FASE 1 · ChatGPT Web
+
+**Input (carica come allegati nella nuova chat):**
+1. `Mini4WDFramework.zip` — il repository scaricato da GitHub, **allegato così com'è, non estratto**
+2. Il tuo `PROJECT.yaml` compilato — file separato, non dentro il ZIP
+3. Le tue foto di riferimento — file separati (ChatGPT deve vederle come immagini)
+
+⚠️ Non allegare singolarmente `SDK_CONTEXT.yaml`, `BOOTSTRAP.md`, `Core/`, ecc.:
+sono già contenuti nel ZIP. Allegare duplicati genera conflitti di contesto.
+
+**Prompt:** usa il **Prompt E — Bootstrap Minimo** nella sezione §Prompt di servizio qui sotto.
+
+Guida completa passo-passo: `OperatorGuide/Runtimes/ChatGPT_Web.md`
+
+---
+
+### FASE 1 · Claude Code
+
+**Input (file accessibili direttamente nel repository locale):**
+1. `AI_ENTRYPOINT.md`
+2. `SDK_CONTEXT.yaml`
+3. `BOOTSTRAP.md`
+4. `Core/AI_OPERATING_RULES.md`
+5. `Config/LANGUAGE_POLICY.yaml`
+6. `Core/TEXT_ENGINE.md`
+7. `Core/DESIGN_LANGUAGE.md`
+8. `Core/STYLE_GUIDE.md`
+9. `Core/COMPONENT_SYSTEM.md`
+10. `Core/PAGE_SYSTEM.md`
+11. `Projects/{Modello}/PROJECT.yaml` ← il TUO
+12. `Projects/{Modello}/Images/` ← le TUE foto
 
 **Prompt:**
 
 ```
 Stai operando come motore editoriale del Mini4WD Manual SDK v2.4.1.
 
-Ho allegato i documenti del framework nell'ordine corretto di caricamento,
-il PROJECT.yaml del mio progetto e le immagini di riferimento del modello.
-Leggi tutti i documenti allegati prima di procedere.
+Leggi i seguenti file del repository nell'ordine indicato:
+1. AI_ENTRYPOINT.md
+2. SDK_CONTEXT.yaml
+3. BOOTSTRAP.md
+4. Core/AI_OPERATING_RULES.md
+5. Config/LANGUAGE_POLICY.yaml
+6. Core/TEXT_ENGINE.md
+7. Core/DESIGN_LANGUAGE.md
+8. Core/STYLE_GUIDE.md
+9. Core/COMPONENT_SYSTEM.md
+10. Core/PAGE_SYSTEM.md
+11. Projects/{Modello}/PROJECT.yaml
+12. Projects/{Modello}/Images/ (immagini di riferimento)
 
 Regole fondamentali:
 - Tutto il testo editoriale deve essere in italiano.
@@ -54,6 +86,13 @@ Regole fondamentali:
 Produci ora il Bootstrap Report nel formato definito da AI_ENTRYPOINT.md,
 poi fermati e attendi la mia approvazione esplicita.
 ```
+
+Guida completa passo-passo: `OperatorGuide/Runtimes/Claude_Code.md`
+
+---
+
+**Output atteso (entrambi i runtime):** Bootstrap Report (formato in `AI_ENTRYPOINT.md`)
+e STOP in attesa della tua approvazione. Nessun contenuto generato prima dell'approvazione.
 
 **Dopo l'output:** verifica il report (tuo modello, tuoi colori, pagine in `draft`) e
 rispondi «Bootstrap approvato. Inizia dalla pagina P001.»
@@ -212,9 +251,10 @@ Tutte le pagine del manuale {NOME_MODELLO} sono in status: rendered.
 
 ## Prompt di servizio
 
-### Prompt E — Bootstrap Minimo (ZIP o contesto limitato)
+### Prompt E — Bootstrap Minimo (ChatGPT Web / ZIP)
 
-**Nuova chat: SÌ.** Usalo se puoi allegare solo l'archivio SDK completo.
+**Nuova chat: SÌ.** Prompt ufficiale per **ChatGPT Web**: carica il framework come ZIP,
+allega PROJECT.yaml e immagini separatamente, poi incolla questo prompt.
 
 ```
 Hai ricevuto il Mini4WD Manual SDK v2.4.1.
@@ -231,9 +271,11 @@ Leggi i file in questo ordine prima di qualsiasi altra cosa:
 9. Core/COMPONENT_SYSTEM.md
 10. Core/PAGE_SYSTEM.md
 
-Poi conferma: versione SDK, le 10 regole non negoziabili di BOOTSTRAP.md,
-la struttura del content.yaml, la lingua obbligatoria del testo editoriale.
-Infine attendi il PROJECT.yaml e le immagini di riferimento.
+Ho allegato anche il mio PROJECT.yaml e le immagini di riferimento del modello.
+Leggi PRIMA tutti i file del framework, POI analizza PROJECT.yaml e le immagini.
+
+Poi produci il Bootstrap Report nel formato definito da AI_ENTRYPOINT.md
+e fermati: attendi la mia approvazione prima di generare qualsiasi contenuto.
 ```
 
 ### Prompt F — Continuità di Sessione
@@ -269,15 +311,15 @@ Continua dalla pagina {PAGINA} nella fase {FASE}.
 
 ## Tabella riassuntiva
 
-| Fase | Prompt | Nuova chat | Input chiave | Output |
-|---|---|---|---|---|
-| 1 Bootstrap | Fase 1 (A) | SÌ | Framework + PROJECT.yaml + foto | Bootstrap Report |
-| 2 Testi | Fase 2 (B) | NO | PromptEngine/{pagina}.md | content.yaml |
-| 3 QA | Fase 3 (C) | NO | Tests/ + content.yaml | APPROVED/REJECTED |
-| 4 Rendering | Fase 4 (D) | SÌ | Design + content.yaml locked + foto | Pagina illustrata |
-| 5 PDF | Fase 5 | SÌ | PDF_MASTER + config + pagine | 3 PDF |
-| — Minimo | E | SÌ | Archivio SDK | Conferma bootstrap |
-| — Continuità | F | SÌ | Stato sessione | Ripresa |
+| Fase | Prompt | Nuova chat | Runtime | Input chiave | Output |
+|---|---|---|---|---|---|
+| 1 Bootstrap | Fase 1 · Claude Code | SÌ | Claude Code | File repo (diretti) + foto | Bootstrap Report |
+| 1 Bootstrap | Prompt E | SÌ | ChatGPT Web | ZIP + PROJECT.yaml + foto | Bootstrap Report |
+| 2 Testi | Fase 2 (B) | NO | Entrambi | PromptEngine/{pagina}.md | content.yaml |
+| 3 QA | Fase 3 (C) | NO | Entrambi | Tests/ + content.yaml | APPROVED/REJECTED |
+| 4 Rendering | Fase 4 (D) | SÌ | Entrambi | Design + content.yaml locked + foto | Pagina illustrata |
+| 5 PDF | Fase 5 | SÌ | Entrambi | PDF_MASTER + config + pagine | 3 PDF |
+| — Continuità | F | SÌ | Entrambi | Stato sessione | Ripresa |
 
 ## Compatibilità
 
