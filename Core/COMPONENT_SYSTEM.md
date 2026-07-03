@@ -282,8 +282,11 @@ Metallic   Chrome    Flat    Pearl
 - Rows: White background, 1pt LightGray bottom border per row
 - Color names: Caption (9pt), Black
 - Area descriptions: Caption (9pt), DarkGray
+- No finish badge in this component — finish badges belong to C011 only (see below)
+- Row height is variable: it must expand to fit the full Area Description text. Never
+  truncate or clip text to force a fixed row height — wrap onto additional lines instead
 
-**Common Errors:** Describing areas too vaguely ("body," "details"); missing colors that appear in the render; swatch colors not matching the paint.
+**Common Errors:** Describing areas too vaguely ("body," "details"); missing colors that appear in the render; swatch colors not matching the paint; adding a finish badge (that's C011's job, not C010's — do not merge the two components into one card); truncating or clipping the Area Description instead of growing the row.
 
 ---
 
@@ -305,7 +308,7 @@ Metallic   Chrome    Flat    Pearl
 
 **Token References:** `{{token.OffWhite}}`, `{{token.VioletDark}}`, `{{token.MonoFont}}`, `{{token.LightGray}}`
 
-**Common Errors:** Omitting the finish badge; using a generic color name instead of the official paint name; paint code not in monospace.
+**Common Errors:** Omitting the finish badge; using a generic color name instead of the official paint name; paint code not in monospace; placing this component inside C010 Paint Legend (they are separate components — C010 is the table on P002, C011 is a standalone inline box next to step instructions on P002/P005–P007).
 
 **Wireframe:**
 ```

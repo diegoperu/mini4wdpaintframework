@@ -12,6 +12,28 @@ Renders must be treated with the same discipline as studio photography. A lazy r
 
 Renders are generated outside the SDK's text pipeline. The SDK does not generate images — it specifies what images must look like and provides AI prompt templates to produce them. The actual generation uses a separate AI image model or 3D rendering software.
 
+### Reference Image Scope
+
+Reference photos in `Projects/{Model}/{Variant}/Images/` are almost always stock box-art
+or stock product photography — they carry the **original manufacturer livery**, not the
+paint scheme being documented. Their authority is strictly limited:
+
+**Reference images ARE authoritative for:** body shape, panel lines, proportions,
+silhouette, mechanical components (chassis, wing geometry, cockpit shape, wheel/tire
+placement), and component presence (spoilers, air intakes, cowling shape).
+
+**Reference images are NEVER authoritative for:** body color, livery, flames, stripes,
+or any painted graphic; decal placement, decal artwork, or printed logos/numbers;
+wheel/rim color (unless `paintScheme` explicitly specifies it).
+
+Paint colors, hex values, and area-of-application come **exclusively** from
+`content.yaml → colors[]`. When the reference photo's livery conflicts with the paint
+scheme — the normal case, since the reference is stock and the paint scheme is a repaint
+— the paint scheme always wins. Do not blend, tint, or "recolor" the reference livery:
+discard it entirely and repaint per `colors[]`. Do not invent graphics (flames, stripes,
+patterns) that are not described in the paint scheme, even if present in the reference
+photo.
+
 ---
 
 ## 2. Required Render Angles
@@ -242,7 +264,10 @@ Before accepting a render for use in a manual page, verify all of the following:
 - [ ] No motion blur, noise, or AI generation artifacts visible
 - [ ] Model body shape is recognizable as the correct Mini4WD model
 - [ ] Paint finish accurately represents the specified `paintScheme.style`
-- [ ] All paint colors present in the render match the scheme definition
+- [ ] All paint colors present in the render match the scheme definition — verify each
+      `colors[].hex` against the rendered pixels individually, not by overall impression
+- [ ] No colors, graphics, or decals were carried over from the reference photo's livery
+      (see §1 Reference Image Scope) unless also specified in `colors[]`
 - [ ] Decals (if present) are legible at the render's intended display size
 - [ ] No elements from outside the model are visible (no hands, no background props)
 - [ ] White balance is neutral (no warm or cool color cast on white background)
