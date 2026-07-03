@@ -28,4 +28,4 @@ Lists all paints, tools, and consumables required to complete the paint job. Saf
 ## Related
 - `PromptEngine/Materials.md`
 - `Core/PAGE_SYSTEM.md §P003`
-- `ApprovedAssets/Text/P002/content.yaml` — colors referenced here must match P002
+- `Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/ApprovedText/P002/content.yaml` — colors referenced here must match P002

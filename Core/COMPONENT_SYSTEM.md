@@ -507,7 +507,7 @@ for component in manifest.components:
 
 ### Template System Integration
 
-Layout templates (`ApprovedAssets/Templates/`) define component slots as named zones. The Render Engine maps content.yaml fields to template zones using manifest.yaml as the bridge:
+Layout templates (`Templates/`) define component slots as named zones. The Render Engine maps content.yaml fields to template zones using manifest.yaml as the bridge:
 
 ```
 Template zone "color-list" ← manifest component C003 ← content.yaml colors[]

@@ -136,7 +136,7 @@ Are all required renders in Images/ and referenced in PROJECT.yaml?
 
 ## Phase 2: Manual Generation
 
-**Goal:** Generate the Italian editorial content for all 10 pages as `content.yaml`, validate it, seal it in `ApprovedAssets/`, then render the final illustrated pages from that sealed content. This follows the `editorial_pipeline.sequence` in `AI_ENTRYPOINT.md`: `text_engine → qa_engine → render_engine → pdf_builder` — text is always generated and validated before rendering (`editor_first: true`).
+**Goal:** Generate the Italian editorial content for all 10 pages as `content.yaml`, validate it, seal it in `Projects/{Model}/{Variant}/ApprovedText/`, then render the final illustrated pages from that sealed content. This follows the `editorial_pipeline.sequence` in `AI_ENTRYPOINT.md`: `text_engine → qa_engine → render_engine → pdf_builder` — text is always generated and validated before rendering (`editor_first: true`).
 
 ### Steps
 

@@ -68,5 +68,5 @@ quando cambi solo pagina.
   («Siamo in Fase 2: solo content.yaml, nessuna immagine»).
 - L'AI riscrive il testo durante il rendering → violazione: il testo locked non si
   tocca. Rilancia il prompt Fase 4.
-- Stai per editare un file in `ApprovedAssets/` a mano → fermati: si fa via prompt.
+- Stai per editare un file in `ApprovedText/` o `ApprovedImages/` a mano → fermati: si fa via prompt.
 - Stai per validare P001 senza averla generata → prima Fase 2, poi Fase 3.

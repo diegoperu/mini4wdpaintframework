@@ -245,8 +245,8 @@ per impressione generale.
 
 **Input (file da allegare):**
 1. `Core/PDF_MASTER.md`
-2. `Projects/{Modello}/PDF_CONFIG.yaml` (copia compilata di `Templates/PDF_CONFIG.yaml`)
-3. le pagine renderizzate (o i percorsi in `ApprovedAssets/Images/`)
+2. `Projects/{Modello}/{Variante}/PDF_CONFIG.yaml` (copia compilata di `Templates/PDF_CONFIG.yaml`)
+3. le pagine renderizzate (o i percorsi in `Projects/{Modello}/{Variante}/ApprovedImages/`)
 
 **Output atteso:** guida all'export delle 3 varianti (screen / print / archive) con
 verifica di metadati, segnalibri, font e bleed.

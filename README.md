@@ -228,8 +228,6 @@ mini4wdpaintframework/
 │   ├── Premium.md               ← P009
 │   └── FinalChecklist.md        ← P010
 │
-├── ApprovedAssets/              ← DEPRECATED v2.5.0 — per-project content moved to Projects/
-│
 ├── Scripts/                     ← Utility scripts for operators
 │   └── generate_prompts.py      ← Generates pre-filled prompts from PROJECT.yaml (v2.5.0)
 │

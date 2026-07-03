@@ -100,8 +100,9 @@ Qualità: min 2048px lato lungo, sfondo bianco/neutro, fuoco nitido (`Config/ren
 [ ] Nessun file toccato fuori da Projects/{Modello}/
 ```
 
-Non serve inizializzare `ApprovedAssets/`: i moduli pagina P001–P010 esistono già in
-stato `draft` (sono template — verranno riempiti dall'AI in Fase 2).
+Non serve creare a mano le cartelle `ApprovedText/P00x/`: l'AI le crea durante la Fase 2
+(Text Engine), scrivendo `content.yaml` direttamente in
+`Projects/{Modello}/{Variante}/ApprovedText/P00x/`.
 
 ## PASSO 5 — Bootstrap della sessione AI
 

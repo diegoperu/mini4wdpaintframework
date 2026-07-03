@@ -28,4 +28,4 @@ Fine detail painting guide for interior panels, edges, and decorative elements. 
 ## Related
 - `PromptEngine/Details.md`
 - `Core/PAGE_SYSTEM.md §P007`
-- `ApprovedAssets/Text/P002/content.yaml` — color_id must resolve here
+- `Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/ApprovedText/P002/content.yaml` — color_id must resolve here

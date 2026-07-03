@@ -65,7 +65,7 @@ Fase 4, poi QA visivo.
 
 - Guida completa: **`../FIRST_RENDER.md`**
 
-Esito atteso: tutte le pagine `status: rendered`, immagini in `ApprovedAssets/Images/`.
+Esito atteso: tutte le pagine `status: rendered`, immagini in `Projects/{Modello}/{Variante}/ApprovedImages/`.
 
 ## TAPPA 5 — PDF (chat #3, NUOVA)
 

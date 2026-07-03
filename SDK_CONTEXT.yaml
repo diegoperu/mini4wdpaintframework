@@ -46,9 +46,9 @@ pipeline:
   text_engine:
     description: "Generates all editorial text from PROJECT.yaml + Knowledge/ inputs"
     input:
-      - "Projects/{ModelName}/PROJECT.yaml"
+      - "Projects/{ModelName}/{Variant}/PROJECT.yaml"
       - "Knowledge/"
-    output: "ApprovedAssets/Text/P00x/content.yaml"
+    output: "Projects/{ModelName}/{Variant}/ApprovedText/P00x/content.yaml"
     primary_output: "content.yaml"
     spec: "Core/TEXT_ENGINE.md"
   qa_engine:
@@ -60,13 +60,13 @@ pipeline:
     gate: "All 16 validation checks must pass before proceeding to render"
   render_engine:
     description: "Generates illustrated page from locked content.yaml"
-    input: "ApprovedAssets/Text/P00x/content.yaml"
-    output: "ApprovedAssets/Images/P00x/"
+    input: "Projects/{ModelName}/{Variant}/ApprovedText/P00x/content.yaml"
+    output: "Projects/{ModelName}/{Variant}/ApprovedImages/P00x/"
     constraint: "Reads content.yaml ONLY — never reads text.md directly"
     spec: "Core/RENDER_GUIDE.md"
   pdf_builder:
     description: "Assembles all 10 approved pages into the final manual PDF"
-    input: "ApprovedAssets/"
+    input: "Projects/{ModelName}/{Variant}/"
     output: "Assets/ApprovedManual/{ModelName}/"
     spec: "Core/PDF_MASTER.md"
     config: "Templates/PDF_CONFIG.yaml"
@@ -91,8 +91,8 @@ architecture:
 
 source_of_truth:
   sdk: "Core/"
-  project_yaml: "Projects/{ModelName}/PROJECT.yaml"
-  approved_assets: "ApprovedAssets/Text/P00x/content.yaml"
+  project_yaml: "Projects/{ModelName}/{Variant}/PROJECT.yaml"
+  approved_text: "Projects/{ModelName}/{Variant}/ApprovedText/P00x/content.yaml"
   design_tokens: "Assets/DesignSystem/Tokens/tokens.example.yaml"
   hierarchy:
     - "Core/ overrides everything else"
@@ -112,8 +112,8 @@ load_order:
     8: "Core/COMPONENT_SYSTEM.md"
     9: "Core/PAGE_SYSTEM.md"
     10: "PromptEngine/{page}.md"
-    11: "Projects/{ModelName}/PROJECT.yaml"
-    12: "ApprovedAssets/Text/{page}/"
+    11: "Projects/{ModelName}/{Variant}/PROJECT.yaml"
+    12: "Projects/{ModelName}/{Variant}/ApprovedText/{page}/"
     13: "reference_images"
 
 roadmap:

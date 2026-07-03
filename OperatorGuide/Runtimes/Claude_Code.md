@@ -64,7 +64,7 @@ Regole nome cartella (da `Core/NAMING_CONVENTION.md`):
 
 Maiuscole conservate, underscore tra le parole, niente trattini nel nome cartella.
 
-**Non creare altre cartelle**, in particolare niente sotto `Assets/` o `ApprovedAssets/`.
+**Non creare altre cartelle**, in particolare niente sotto `Assets/`.
 
 ---
 

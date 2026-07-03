@@ -10,11 +10,11 @@
 | Artefatto | Chi lo modifica | Come | Quando |
 |---|---|---|---|
 | `PROJECT.yaml` (nel tuo progetto) | **Operatore** | Editor di testo | Setup progetto; correzioni dopo QA FAIL |
-| `Projects/{Modello}/Images/` | **Operatore** | Copia file | Setup progetto |
-| `Projects/{Modello}/Notes/qa_log.md` | **Operatore** | Editor di testo | Durante QA |
+| `Projects/{Modello}/{Variante}/Images/` | **Operatore** | Copia file | Setup progetto |
+| `Projects/{Modello}/{Variante}/Notes/qa_log.md` | **Operatore** | Editor di testo | Durante QA |
 | `Projects/{Modello}/{Variante}/ApprovedText/P00x/content.yaml` | **AI** | Prompt Fase 2 (Text Engine) | Generazione testi |
 | `Projects/{Modello}/{Variante}/ApprovedText/P00x/metadata.yaml` | **AI / Reviewer** | Prompt QA + conferma | Approvazione e seal |
-| `ApprovedAssets/Images/` | **AI** | Prompt Fase 4 (Render) | Rendering |
+| `Projects/{Modello}/{Variante}/ApprovedImages/` | **AI** | Prompt Fase 4 (Render) | Rendering |
 | `Projects/{Modello}/{Variante}/index.yaml` | **Reviewer / Maintainer** | Editor / prompt | Seal e release |
 | `Assets/ApprovedManual/{Modello}/` | **Maintainer** | Copia file + firma | Pubblicazione |
 | `Templates/` (master) | **Developer** | Pull request | Release SDK |
@@ -31,7 +31,7 @@
 
 ### Operatore
 Modifica **solo** `Projects/{SuoModello}/`. Non tocca mai framework, template master,
-ApprovedAssets (ci pensa l'AI via prompt), Assets.
+ApprovedText/ApprovedImages (ci pensa l'AI via prompt), Assets.
 
 ### AI (in chat)
 Scrive `content.yaml`, `text.md` (derivato), `metadata.yaml`, `manifest.yaml`,

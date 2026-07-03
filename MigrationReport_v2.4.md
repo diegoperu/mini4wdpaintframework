@@ -208,20 +208,24 @@ v2.4.0 introduces no breaking changes. v2.3.0 projects continue to work without 
 
 ---
 
-## Known Limitations (v2.4.0)
+## Known Limitations (v2.4.0, at time of writing)
 
-- `ApprovedAssets/index.yaml` requires manual update after each page approval (automated updater planned for v2.5.0)
-- content.yaml schema validation is currently human-executed (automated runner planned for v2.5.0)
-- No tooling yet for Markdown → content.yaml migration (manual conversion required)
+- `ApprovedAssets/index.yaml` required manual update after each page approval
+- content.yaml schema validation was human-executed, no automated runner
+- No tooling for Markdown → content.yaml migration (manual conversion required)
+
+> Note (2026-07-03): this is a historical snapshot of v2.4.0 limitations, kept as-is.
+> `ApprovedAssets/` itself was removed in v2.5.0 (see `MigrationReport_v2.4.1.md` and
+> `CHANGELOG.md`); these specific limitations no longer apply, but the report is not
+> rewritten to reflect that — it describes v2.4.0 as it was.
 
 ---
 
-## Next: v2.5.0
+## What Came Next
 
-Planned automation features:
-- Python scripts for content.yaml generation and validation
-- SVG icon library for components C006, C008
-- Automated Tests/ContentValidation.md runner
-- `Config/environments/` for dev/staging/production config switching
-
-See `ROADMAP.md §v2.5.0 — Planned` for full scope.
+This report previously predicted specific v2.5.0 features (automation scripts, icon
+library, config environments) that did not match what v2.5.0 actually shipped
+(Multi-Project Content Isolation — see `CHANGELOG.md`). Migration reports are historical
+records of what changed *up to* a release; they are not the place to plan what's next.
+For current and future plans, see `ROADMAP.md` — the single source of truth for
+direction, kept live and reconciled at every release.

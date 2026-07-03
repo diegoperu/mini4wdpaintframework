@@ -326,7 +326,7 @@ Do not generate any manual page, any illustration, or any editorial content unti
 - [x] Core/PAGE_SYSTEM.md
 - [ ] PromptEngine/{page}.md (loaded per page)
 - [x] Projects/{ModelFolder}/{VariantFolder}/PROJECT.yaml
-- [x] ApprovedAssets/ (index read)
+- [x] Projects/{ModelFolder}/{VariantFolder}/ApprovedText/ (existing pages, if any)
 - [x] Reference images
 
 ## Project

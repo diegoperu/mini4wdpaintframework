@@ -34,7 +34,7 @@ Fase diversa, contesto diverso. Allega:
 
 1. `Core/PDF_MASTER.md`
 2. `Projects/{Modello}/PDF_CONFIG.yaml` (la tua copia compilata)
-3. Le pagine renderizzate (o i loro percorsi in `ApprovedAssets/Images/`)
+3. Le pagine renderizzate (o i loro percorsi in `Projects/{Modello}/{Variante}/ApprovedImages/`)
 
 Usa il **Prompt Fase 5 — PDF** da `Docs/AI_BOOTSTRAP_PROMPT.md`.
 

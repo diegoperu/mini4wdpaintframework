@@ -74,14 +74,11 @@ directory_map:
     role: "Supplementary documentation and migration guides"
 
   ApprovedAssets/:
-    role: "CMS layer — approved content modules per page"
+    role: "CMS layer — approved content modules per page (was a single global directory shared by all projects)"
     added_version: "2.4.0"
-    subdirectories:
-      - "Text/"
-      - "Images/"
-      - "Components/"
-      - "Templates/"
-      - "References/"
+    removed_version: "2.5.0"
+    status: "removed"
+    superseded_by: "Projects/{Model}/{Variant}/ApprovedText/ and Projects/{Model}/{Variant}/ApprovedImages/"
     key_documents: ["README.md", "index.yaml"]
     page_modules:
       count: 10
@@ -184,25 +181,25 @@ components:
 next_available_component_id: "C016"
 
 # ============================================================
-# CONTENT FORMATS (v2.4.0)
+# CONTENT FORMATS (v2.4.0, paths updated v2.5.0)
 # ============================================================
 content_formats:
   primary:
     format: "YAML"
-    path_pattern: "ApprovedAssets/Text/P{NNN}/content.yaml"
+    path_pattern: "Projects/{model}/{variant}/ApprovedText/P{NNN}/content.yaml"
     added_version: "2.4.0"
     schema_enforced: true  # Via Tests/ContentValidation.md
   derived:
     format: "Markdown"
-    path_pattern: "ApprovedAssets/Text/P{NNN}/text.md"
+    path_pattern: "Projects/{model}/{variant}/ApprovedText/P{NNN}/text.md"
     generated_from: "content.yaml"
     render_engine_reads: false
   legacy:
     format: "Markdown"
     path_pattern: "Projects/{model}/ApprovedText/P{NNN}.md"
     added_version: "2.4.0"
-    deprecated: false  # Maintained for backward compatibility
-    render_engine_reads: false  # Render Engine reads content.yaml exclusively in v2.4.0
+    deprecated: true  # Superseded by content.yaml (v2.4.0) and the two-level Projects/{model}/{variant}/ path (v2.5.0)
+    render_engine_reads: false
 
 # ============================================================
 # MINIMUM AI REQUIREMENTS

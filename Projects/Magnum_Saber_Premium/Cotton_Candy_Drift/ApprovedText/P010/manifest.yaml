@@ -43,8 +43,8 @@ fonts:
 dependencies:
   - "Assets/DesignSystem/Tokens/tokens.example.yaml"
   - "Config/LANGUAGE_POLICY.yaml"
-  - "ApprovedAssets/Text/P002/content.yaml"
-  - "ApprovedAssets/Text/P005/content.yaml"
-  - "ApprovedAssets/Text/P006/content.yaml"
-  - "ApprovedAssets/Text/P007/content.yaml"
-  - "ApprovedAssets/Text/P008/content.yaml"
+  - "Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/ApprovedText/P002/content.yaml"
+  - "Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/ApprovedText/P005/content.yaml"
+  - "Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/ApprovedText/P006/content.yaml"
+  - "Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/ApprovedText/P007/content.yaml"
+  - "Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/ApprovedText/P008/content.yaml"

@@ -18,7 +18,7 @@ First page of every Mini4WD manual. Full-bleed visual with model name, paint sch
 | `footer.model_name` | C002 Footer | Yes |
 
 ## Render Dependencies
-- Cover render: `ApprovedAssets/Images/{model_slug}/P001/cover_3q_v{n}.png`
+- Cover render: `Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/ApprovedImages/P001/cover_3q_v{n}.png`
 - Lighting: Studio Neutral
 - Layout: Full-bleed
 

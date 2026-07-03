@@ -29,4 +29,4 @@ Ordered step-by-step painting sequence. Light colors before dark. Each step refe
 ## Related
 - `PromptEngine/PaintSequence.md`
 - `Core/PAGE_SYSTEM.md §P005`
-- `ApprovedAssets/Text/P002/content.yaml` — color_id must resolve here
+- `Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/ApprovedText/P002/content.yaml` — color_id must resolve here

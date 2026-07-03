@@ -406,28 +406,17 @@ prompt_engine:
       depends_on: ["Core/PAGE_SYSTEM.md"]
 
 # ─────────────────────────────────────────────
-# APPROVEDASSETS/ — CMS layer (NEW v2.4.0)
+# APPROVEDASSETS/ — CMS layer (NEW v2.4.0, REMOVED v2.5.0)
 # ─────────────────────────────────────────────
 
 approved_assets:
-  description: "CMS layer — sealed content modules per page"
+  description: "CMS layer — sealed content modules per page. Was a single global directory shared by all projects; removed in v2.5.0, superseded by a per-project-variant directory (see page_modules below)."
   added_in: "2.4.0"
-  files:
-
-    - path: "ApprovedAssets/index.yaml"
-      type: "registry"
-      role: "global registry of all page module lifecycle states"
-      status: "current"
-      depends_on: []
-
-    - path: "ApprovedAssets/README.md"
-      type: "documentation"
-      role: "CMS layer documentation"
-      status: "current"
-      depends_on: []
+  removed_in: "2.5.0"
+  status: "removed"
 
   page_modules:
-    structure: "ApprovedAssets/Text/P00x/"
+    structure: "Projects/{Model}/{Variant}/ApprovedText/P00x/"
     files_per_module:
       - "content.yaml    ← PRIMARY source of truth"
       - "text.md         ← derived from content.yaml, read-only after approval"
@@ -776,7 +765,7 @@ dependency_graph:
     - "Core/PAGE_SYSTEM.md"
   level_6:
     - "PromptEngine/{page}.md"
-    - "Projects/{ModelName}/PROJECT.yaml"
+    - "Projects/{ModelName}/{Variant}/PROJECT.yaml"
   level_7:
-    - "ApprovedAssets/Text/{page}/"
+    - "Projects/{ModelName}/{Variant}/ApprovedText/{page}/"
     - "reference_images"

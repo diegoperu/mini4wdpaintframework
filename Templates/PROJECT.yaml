@@ -221,11 +221,12 @@ text:
   placeholders_if_uncertain: true   # REQUIRED — use approved placeholders when data missing
   typography_profile: "technical_manual"  # REQUIRED — see Core/STYLE_GUIDE.md §Typography Rules
 
-  # Approved text output paths — LEGACY (v2.3.0 compatibility only).
-  # In v2.4.x the Text Engine writes to ApprovedAssets/Text/P{NNN}/content.yaml.
-  # Leave these values as-is; do NOT create an ApprovedText/ folder in new projects.
-  approved_text_dir: "ApprovedText/"        # REQUIRED (legacy, keep default)
-  approved_text_raw_dir: "ApprovedText/raw/" # REQUIRED (legacy, keep default)
+  # Approved text output paths — field names are LEGACY (v2.3.0 compatibility, see
+  # KI-001, removal planned for v3.0.0). The values below ARE current: in v2.5.0 the
+  # Text Engine writes to Projects/{Model}/{Variant}/ApprovedText/P{NNN}/content.yaml —
+  # create that ApprovedText/ folder inside your project's variant folder.
+  approved_text_dir: "ApprovedText/"        # REQUIRED (legacy field name, keep default)
+  approved_text_raw_dir: "ApprovedText/raw/" # REQUIRED (legacy field name, keep default)
 
 # ============================================================
 # QA METADATA

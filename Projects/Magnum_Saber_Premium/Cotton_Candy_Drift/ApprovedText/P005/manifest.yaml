@@ -61,4 +61,4 @@ fonts:
 dependencies:
   - "Assets/DesignSystem/Tokens/tokens.example.yaml"
   - "Config/LANGUAGE_POLICY.yaml"
-  - "ApprovedAssets/Text/P002/content.yaml"
+  - "Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/ApprovedText/P002/content.yaml"

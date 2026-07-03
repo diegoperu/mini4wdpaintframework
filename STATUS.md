@@ -111,8 +111,8 @@ None currently documented.
 | TODO-004 | Write Docs/tutorial/render-generation.md | Medium | v2.5.0 |
 | TODO-005 | Write Docs/tutorial/pdf-export.md | Medium | v2.5.0 |
 | TODO-006 | Create Release System automation | Low | v2.5.0 |
-| TODO-007 | Populate ApprovedAssets/Text/ for Proto_Emperor project | High | Active |
-| TODO-008 | Populate ApprovedAssets/Images/ for Proto_Emperor project | High | Active |
+| TODO-007 | Populate Projects/Proto_Emperor/Violet_Phantom/ApprovedText/ (v2.5.0 path; ApprovedAssets/ is deprecated and removed) | High | Active |
+| TODO-008 | Populate Projects/Proto_Emperor/Violet_Phantom/ApprovedImages/ (v2.5.0 path; ApprovedAssets/ is deprecated and removed) | High | Active |
 
 ---
 

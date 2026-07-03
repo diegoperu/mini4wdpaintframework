@@ -39,6 +39,6 @@ fonts:
   - "BodyFont (Source Sans Pro)"
 
 dependencies:
-  - "ApprovedAssets/Text/P002/content.yaml"
+  - "Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/ApprovedText/P002/content.yaml"
   - "Assets/DesignSystem/Tokens/tokens.example.yaml"
   - "Config/LANGUAGE_POLICY.yaml"

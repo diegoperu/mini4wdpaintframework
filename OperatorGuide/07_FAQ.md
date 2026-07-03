@@ -58,8 +58,10 @@ sola lettura: è il riferimento per tutti.
 
 **D: Il Bootstrap Report mostra pagine "locked" che non ho mai generato.**
 R: Anomalia: in un progetto nuovo tutte le pagine sono `draft`. Verifica di aver
-allegato il TUO PROJECT.yaml e che `ApprovedAssets/` non contenga residui di un altro
-progetto. In dubbio: chiedi al Maintainer.
+allegato il TUO PROJECT.yaml e che l'AI stia leggendo
+`Projects/{Modello}/{Variante}/ApprovedText/` del TUO progetto, non di un altro (dalla
+v2.5.0 ogni progetto ha la propria cartella isolata, quindi questo non dovrebbe più
+capitare per contaminazione tra progetti). In dubbio: chiedi al Maintainer.
 
 **D: Chi approva il manuale finale?**
 R: Solo il Maintainer (no self-approval). Tu consegni PDF + qa_log; la pubblicazione

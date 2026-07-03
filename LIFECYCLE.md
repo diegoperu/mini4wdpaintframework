@@ -43,7 +43,7 @@ GOLDEN PROJECT
 | BOOTSTRAP | Bootstrap Report approvato | Operatore + AI |
 | TEXT | content.yaml validati per tutte le pagine | AI |
 | APPROVED | metadata.yaml → `locked` per tutte le pagine | Reviewer/Operatore |
-| RENDER | Immagini pagina in ApprovedAssets/Images/ | AI |
+| RENDER | Immagini pagina in Projects/{Modello}/{Variante}/ApprovedImages/ | AI |
 | QA | qa_log.md senza FAIL | Operatore/Reviewer |
 | PDF | 3 PDF validati e checksummati | Operatore |
 | GOLDEN PROJECT | Manuale in Assets/ApprovedManual/, pagine `released` | Maintainer |
