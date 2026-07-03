@@ -9,6 +9,12 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed — ChatGPT Web UX (2026-07-03, da UR-0001 UAT session)
+- `OperatorGuide/Runtimes/ChatGPT_Web.md` PASSO 11 — riscritto completamente: prompt Fase 2 e Fase 3 ora embedded copia-incolla; PASSO 11 diviso in 11a (Genera) / 11b (QA) / 11c (Sigilla) / 11d (pagina successiva); tabella pagina→PromptEngine file; warning esplicito su `TODO:` (dato mancante in PROJECT.yaml, non errore); riferimento "allegato" corretto in "dallo ZIP che hai già caricato"
+- `Docs/AI_BOOTSTRAP_PROMPT.md` + `OperatorGuide/Runtimes/ChatGPT_Web.md` Prompt Fase 2 — aggiunto step 3 esplicito: l'AI deve risolvere riferimenti `colorId` → `paintScheme.colors[id]` per estrarre `paintCode`/`paintName`/`finish`/`hex` prima di scrivere il content.yaml; causa root del TODO: massiccio in UR-0001 nonostante PROJECT.yaml completo
+- `Templates/PROJECT.yaml`, `PDF_CONFIG.yaml`, `APPROVED_TEXT.md`, `COLOR_SCHEME.yaml`, `CHECKLIST.md`, `PROJECT.md`, `README.md` — bumped `sdk_version` da 2.4.0 a 2.4.1; nuovi progetti copiati dai template partono con versione corretta
+- `Projects/Proto_Emperor/PROJECT.yaml` — bumped `sdk_version` da 2.4.0 a 2.4.1
+
 ### Added — Runtime-Aware Documentation
 - `Docs/RUNTIMES.md` — Runtime concept: definition, comparison table (ChatGPT Web vs Claude Code), selection guide, future runtime roadmap (Claude Web, Gemini, Ollama, Open WebUI, vLLM)
 - `OperatorGuide/Runtimes/ChatGPT_Web.md` — standalone step-by-step guide for ChatGPT Web: download ZIP, extract only PROJECT.yaml template, upload ZIP + PROJECT.yaml + images, bootstrap via Prompt E, per-phase file requirements
