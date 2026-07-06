@@ -127,6 +127,38 @@ Schema colori ({scheme_name}):
 Dettaglio specifico per questo slot: {descrizione_slot}
 """
 
+# P004 (Preparazione) precede la verniciatura (Fase 5/P005): il modello a questo
+# stadio NON e' ancora colorato con lo schema finale. Usare PROMPT_TEMPLATE
+# (con lo schema colori) qui produrrebbe foto con la carrozzeria gia' verniciata,
+# sbagliato per uno step di lavaggio/carteggiatura/primer. Corretto 2026-07-06 dopo
+# user testing su GPT Web: errore trovato nelle immagini generate per questa pagina.
+PROMPT_TEMPLATE_UNPAINTED = """Genera SOLO un'illustrazione fotorealistica del modellino Mini4WD — {tipo_slot}.
+Nessun testo, nessuna tabella, nessun logo, nessun pannello colorato: solo il
+soggetto isolato su sfondo bianco puro. Questa immagine viene inserita in un
+template gia' pronto che aggiunge testo/tabelle/header per conto suo — se aggiungi
+tu del testo o una cornice, il risultato finale avra' doppioni o elementi in
+conflitto col template.
+
+Regole:
+- Forma fisica (sagoma, proporzioni, componenti meccanici) il piu' fedele possibile
+  alle foto di riferimento allegate.
+- IMPORTANTE — questa e' una fase di PREPARAZIONE, precedente alla verniciatura:
+  {stato_colore} Non mostrare NESSUNO dei colori dello schema di verniciatura
+  finale del progetto (niente azzurro, rosa, o altri colori — quelli vengono
+  applicati solo a partire dalla Fase 5, non in questa pagina). Se le foto di
+  riferimento mostrano una livrea box-art colorata, ignorala: qui il soggetto deve
+  apparire neutro/non verniciato, non nella sua colorazione finale.
+- Applica Core/DESIGN_LANGUAGE.md e Core/STYLE_GUIDE.md per stile fotografico/
+  illuminazione, non per layout di pagina (quello lo fa il template).
+
+Dettaglio specifico per questo slot: {descrizione_slot}
+"""
+
+
+def is_primer_step(step: dict) -> bool:
+    text = f"{step.get('title', '')} {step.get('description', '')}".lower()
+    return "primer" in text
+
 
 def colors_block(colors_by_id: dict) -> str:
     lines = []
@@ -188,12 +220,28 @@ def build_prompt_entries(variant_dir: Path, model: str, variant: str, project: d
     entries = []
     for slot, rel_path in missing:
         tipo_slot, descrizione_slot = slot_description(page_id, slot, content)
-        prompt = PROMPT_TEMPLATE.format(
-            tipo_slot=tipo_slot,
-            scheme_name=scheme_name,
-            colors_block=colors_txt,
-            descrizione_slot=descrizione_slot,
-        )
+
+        if page_id == "P004" and slot.startswith("step"):
+            step_id = int(slot.removeprefix("step"))
+            step = next(s for s in content["steps"] if s["id"] == step_id)
+            stato_colore = (
+                "Il corpo e' ricoperto da un primer bianco opaco uniforme — nessun colore dello schema di verniciatura ancora applicato."
+                if is_primer_step(step)
+                else "Il corpo e' plastica ABS grezza non verniciata, nel colore naturale di stampo (bianco/neutro/traslucido) — nessuna vernice applicata."
+            )
+            prompt = PROMPT_TEMPLATE_UNPAINTED.format(
+                tipo_slot=tipo_slot,
+                stato_colore=stato_colore,
+                descrizione_slot=descrizione_slot,
+            )
+        else:
+            prompt = PROMPT_TEMPLATE.format(
+                tipo_slot=tipo_slot,
+                scheme_name=scheme_name,
+                colors_block=colors_txt,
+                descrizione_slot=descrizione_slot,
+            )
+
         entries.append({
             "page_id": page_id,
             "slot": slot,
