@@ -402,16 +402,16 @@ Genera l'illustrazione per la pagina CODICE_PAGINA (NOME_PAGINA).
 Il content.yaml allegato è approvato e bloccato (status: locked).
 
 Regole operative:
-- Leggi ESCLUSIVAMENTE da content.yaml. Non generare, modificare o riformulare testo.
-- Usa solo i Design Token di tokens.example.yaml. Nessun valore hardcoded.
-- La forma fisica del modello (sagoma, proporzioni, componenti meccanici) deve
-  corrispondere esattamente alle immagini di riferimento. Colori, livrea, fiamme,
-  decal e grafica NON derivano dalle immagini di riferimento — sono quasi sempre
-  box-art stock con schema colori diverso da quello da documentare. Palette e aree
-  di applicazione provengono ESCLUSIVAMENTE da content.yaml → colors[]. Se la livrea
-  della foto reference è in conflitto con lo schema colori, scarta completamente la
-  livrea della foto e ridipingi secondo colors[] — non mescolare o "tingere" i colori
-  esistenti. Non inventare grafiche (fiamme, strisce) assenti dallo schema colori.
+- Il testo viene solo da content.yaml. Non generare, modificare o riformulare testo.
+- Usa i Design Token di tokens.example.yaml per i valori visivi (colori, spaziature).
+- La forma fisica del modello (sagoma, proporzioni, componenti meccanici) segue le
+  immagini di riferimento allegate, il più fedelmente possibile. Colori, livrea,
+  fiamme, decal e grafica NON vanno presi dalle immagini di riferimento — sono quasi
+  sempre box-art stock con schema colori diverso da quello da documentare. Palette e
+  aree di applicazione vengono da content.yaml → colors[]. Se la livrea della foto
+  reference è in conflitto con lo schema colori, ignora la livrea della foto e
+  ridipingi secondo colors[] — non mescolare o "tingere" i colori esistenti. Non
+  aggiungere grafiche (fiamme, strisce) assenti dallo schema colori.
 - Applica Core/DESIGN_LANGUAGE.md e Core/STYLE_GUIDE.md.
 - Componenti secondo Core/COMPONENT_SYSTEM.md. Non fondere componenti diversi in un
   unico elemento: es. C010 Paint Legend (tabella, senza badge) e C011 Paint Code Box
@@ -421,10 +421,11 @@ Regole operative:
   il testo. Non troncare mai il testo per farlo entrare in uno spazio fisso.
 - Sfondo bianco puro. Pannello header viola (token.PrimaryViolet).
 
-Output atteso: pagina illustrata completa. Poi esegui la checklist visiva di
-Core/QA_SYSTEM.md sulle voci applicabili e riporta PASS/FAIL per ciascuna — per la
-voce colori, verifica ogni colors[].hex contro i pixel del render singolarmente, non
-per impressione generale.
+Output atteso: pagina illustrata completa. Poi fai una tua auto-review visiva
+best-effort con la checklist di Core/QA_SYSTEM.md sulle voci applicabili, indicando
+per ciascuna il tuo giudizio (non una certificazione formale, la tua valutazione
+visiva più accurata) — per i colori, confronta a occhio il render con colors[].hex
+e segnala eventuali scostamenti percepiti.
 ```
 
 Sostituisci prima di inviare:
