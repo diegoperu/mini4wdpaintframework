@@ -203,20 +203,20 @@ solo le illustrazioni mancanti)*
 
 **Nuova chat: SÌ** — il rendering usa un contesto diverso (design, non testi).
 
-### 4a — Genera la pagina con il template (nessuna AI coinvolta)
+### 4a — Genera tutte le pagine con il template (nessuna AI coinvolta)
 
 ```bash
 pip install -r Scripts/requirements.txt   # una tantum
 playwright install chromium                # una tantum
-Scripts/render_page.py Projects/{Model}/{Variant}/ApprovedText/P00x/content.yaml Build/Preview
+Scripts/render_page.py {Model} {Variant}
 ```
 
-Lo script stampa quali slot immagine mancano ancora, col path esatto atteso, es.:
-```
-Immagini mancanti (3): front -> Images/P002_front.png, side -> Images/P002_side.png, top -> Images/P002_top.png
-```
-Se non manca nulla, la pagina è già completa — vai a Fase 5. Se manca qualcosa,
-continua con 4b per ciascuno slot mancante.
+Un solo comando per l'intero progetto — gira in automatico su tutte le
+`ApprovedText/P0xx` esistenti. Genera `Build/Preview/{Model}_{Variant}_{PageID}.png`
+per ciascuna pagina e scrive `Projects/{Model}/{Variant}/MISSING_IMAGES.md` con
+l'elenco di tutte le immagini ancora mancanti, col path esatto atteso. Se il report
+è vuoto, tutte le pagine sono già complete — vai a Fase 5. Altrimenti continua con
+4b per ciascuno slot elencato.
 
 ### 4b — Genera SOLO l'illustrazione mancante (una alla volta)
 

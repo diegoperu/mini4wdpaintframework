@@ -344,29 +344,31 @@ torna al PASSO 9 per completarla.
 
 ---
 
-### 10b — Genera la pagina con il template
+### 10b — Genera tutte le pagine con il template
 
 ```bash
 pip install -r Scripts/requirements.txt   # una tantum
 playwright install chromium                # una tantum
 
-Scripts/render_page.py \
-  Projects/CARTELLA_MODELLO/CARTELLA_VARIANTE/ApprovedText/P00x/content.yaml \
-  Build/Preview
+Scripts/render_page.py CARTELLA_MODELLO CARTELLA_VARIANTE
+# es: Scripts/render_page.py Magnum_Saber_Premium Cotton_Candy_Drift
 ```
 
-Genera `Build/Preview/{Model}_{Variant}_{PageID}.png` (o `.pdf` come terzo argomento)
-e stampa l'elenco di eventuali immagini ancora mancanti, col path esatto atteso:
+Un solo comando per l'intero progetto — nessun path da costruire a mano, nessuna
+invocazione per pagina. Lo script gira su tutte le `ApprovedText/P0xx` esistenti in
+automatico e:
+- genera `Build/Preview/{Model}_{Variant}_{PageID}.png` (o `.pdf` con un terzo
+  argomento `png`/`pdf`) per ciascuna pagina
+- scrive `Projects/{Model}/{Variant}/MISSING_IMAGES.md` — elenco di **tutte** le
+  immagini mancanti in tutto il progetto, col path esatto atteso, riscritto ad ogni
+  run (tracciato in git, così chi guarda il repo vede subito cosa manca)
 
-```
-Immagini mancanti (3): front -> Images/P002_front.png, side -> Images/P002_side.png, top -> Images/P002_top.png
-```
-
-Se non manca nulla, la pagina è già completa — salvala (PASSO 10d) e passa alla
-pagina successiva. Se manca qualcosa, continua con 10c per ciascuno slot mancante.
+Se `MISSING_IMAGES.md` è vuoto ("nessuna immagine mancante"), tutte le pagine sono
+già complete — salvale (PASSO 10d). Altrimenti continua con 10c per ciascuno slot
+elencato nel report.
 
 Le pagine P003, P005, P010 non richiedono mai illustrazioni (solo testo/tabelle) —
-per queste, 10b è l'unico passo necessario.
+non compaiono mai nel report.
 
 ---
 

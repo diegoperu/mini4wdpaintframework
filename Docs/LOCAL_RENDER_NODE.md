@@ -177,9 +177,10 @@ segnala come mancante. Convenzione path per pagina: vedi `Scripts/render_page.py
 - P007: `Images/P007_{area_id}.png` per area di dettaglio
 - P008: `Images/P008_decal{N}.png` per decal (solo se `decals[]` non vuoto)
 
-Verifica: `Scripts/render_page.py content.yaml Build/Preview` stampa sempre l'elenco
-esatto degli slot ancora mancanti col path atteso — è il modo per sapere cosa manca
-e confermare che un'immagine appena generata sia stata agganciata correttamente.
+Verifica: `Scripts/render_page.py {Model} {Variant}` rigenera tutte le pagine e
+riscrive `Projects/{Model}/{Variant}/MISSING_IMAGES.md` con l'elenco esatto degli
+slot ancora mancanti col path atteso — è il modo per sapere cosa manca e confermare
+che un'immagine appena generata sia stata agganciata correttamente.
 
 ## Cosa NON è ancora deciso
 
