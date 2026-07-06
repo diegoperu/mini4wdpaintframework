@@ -29,17 +29,22 @@ repository:
 compatibility:
   chatgpt: true
   claude: true
-  gemini: false
+  gemini: false   # full pipeline (Fase 1-3, testi/bootstrap) - non verificato
+  gemini_phase4: true   # Fase 4 (generazione illustrazione singola) - vedi UAT-004
   gemini_note: >
-    Testato in UAT-002 (v2.4.1) — allucinazioni severe in Fase 3/4 (Render Engine):
-    contenuto inventato da priors di training invece di content.yaml, metadati SDK
-    leaked nell'immagine finale, risposta scollegata dall'input con prompt rinforzato.
-    Non raccomandato fino a nuova verifica con modello aggiornato.
+    Testato in UAT-002 (v2.4.1) — allucinazioni severe in Fase 3/4 (Render Engine,
+    vecchio scope whole-page): contenuto inventato da priors di training invece di
+    content.yaml, metadati SDK leaked nell'immagine finale, risposta scollegata
+    dall'input con prompt rinforzato. Dal 2026-07-06 la Fase 4 chiede solo una
+    illustrazione isolata (testo/layout prodotti da Scripts/render_page.py) - in
+    questo scope ristretto, ri-testato con successo in UAT-004. Fase 1-3 restano
+    non verificate.
   future_models: true
   notes: >
     PromptEngine/ prompts are model-agnostic in syntax but not all models can reliably
     follow structured content constraints. Verified: ChatGPT (GPT-4o), Claude (Sonnet/Opus).
-    Gemini: failed UAT-002 (see gemini_note). Other models: untested.
+    Gemini: failed UAT-002 for full-page generation; passed UAT-004 for Fase 4
+    single-illustration generation only (see gemini_note). Other models: untested.
 
 pipeline:
   sequence: ["text_engine", "qa_engine", "render_engine", "pdf_builder"]

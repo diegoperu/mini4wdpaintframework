@@ -18,7 +18,7 @@ To propose a feature, open a GitHub Issue and apply the `roadmap` label. See **H
 
 Mini4WD Manual SDK aims to become the canonical open framework for producing professional, archival-quality painting manuals for scale model hobby projects. The goal is a library of approved manuals, a community of contributors across multiple countries, and tooling that makes manual production as fast and consistent as a software build pipeline.
 
-The SDK must remain model-agnostic at the AI layer. No feature will be added that requires a specific AI provider. See `Docs/RUNTIMES.md` for supported runtimes and `UAT/UAT-002.md` for why Gemini was degraded to unsupported.
+The SDK must remain model-agnostic at the AI layer. No feature will be added that requires a specific AI provider. See `Docs/RUNTIMES.md` for supported runtimes; `UAT/UAT-002.md` and `UAT/UAT-004.md` for the Gemini compatibility history (degraded, then restored for Fase 4 only after the rendering architecture split text/layout out of the AI's job).
 
 ---
 
@@ -36,6 +36,12 @@ The SDK must remain model-agnostic at the AI layer. No feature will be added tha
 Full detail for each release: `CHANGELOG.md`. Machine-readable metadata for the current and prior releases: `ReleaseInfo.yaml`. Pre-2.1.0 history (1.0.0–2.0.0) exists only in `CHANGELOG.md` as early scaffolding and predates the current release process.
 
 Governance note (2026-07-03): Gemini was degraded from "planned runtime" to "not supported" following 3 failed render attempts on UAT-002 (hallucinated output, leaked metadata, off-prompt responses). See `Docs/RUNTIMES.md` and `UAT/UAT-002.md`. This roadmap does not list unsupported runtimes as a target.
+
+Governance note (2026-07-06): Gemini restored to "supported", limited to Fase 4
+(single-illustration generation) after UAT-004 retest under the new render
+architecture (`Scripts/render_page.py` produces page text/layout; the AI's job
+shrank to generating one isolated illustration, no longer the failure mode
+UAT-002 found). Fase 1-3 (text/bootstrap) remain unverified on Gemini.
 
 ---
 

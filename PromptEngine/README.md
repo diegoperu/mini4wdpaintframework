@@ -137,7 +137,7 @@ Prompts are written in plain instructional English. They must work without modif
 
 - OpenAI GPT-4 / GPT-4o ✓ (verified)
 - Anthropic Claude (any version) ✓ (verified)
-- Google Gemini ❌ (failed UAT-002 — Phase 3/4 render unreliable; see `UAT/UAT-002.md`)
+- Google Gemini ⚠️ (Phase 4 only, single-illustration generation ✓ — see `UAT/UAT-004.md`; failed UAT-002 for old whole-page Phase 3/4 scope, and Phase 1-3 text/bootstrap remain unverified)
 - Meta Llama (via API) — untested
 - Mistral / Mixtral — untested
 - Any future model — untested

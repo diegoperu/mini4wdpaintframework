@@ -138,7 +138,7 @@ For the full pipeline with all phases, see `Build/Pipeline.md`.
 ## Quick Start — For an AI Model
 
 > If you are an AI model (ChatGPT, Claude, or any other verified model), read these files in order before generating anything. Do not skip steps.
-> Note: Gemini is not supported — failed UAT-002 (unreliable Phase 3/4 render). See `UAT/UAT-002.md`.
+> Note: Gemini is supported for Phase 4 only (single-illustration generation) — failed UAT-002 for the old whole-page Phase 3/4 scope, passed UAT-004 under the current split architecture. Phase 1-3 (text/bootstrap) remain unverified. See `UAT/UAT-002.md` and `UAT/UAT-004.md`.
 
 **Step 1 — Read `AI_ENTRYPOINT.md`**
 
@@ -293,7 +293,7 @@ mini4wdpaintframework/
 │
 └── Docs/                        ← Extended documentation and guides
     ├── LOAD_ORDER.md            ← Explicit AI context loading order with rationale
-    ├── AI_BOOTSTRAP_PROMPT.md   ← Ready-to-use prompts for ChatGPT, Claude (Gemini: not supported — UAT-002)
+    ├── AI_BOOTSTRAP_PROMPT.md   ← Ready-to-use prompts for ChatGPT, Claude (Gemini: Fase 4 only — UAT-004)
     └── migration/
         └── v1-to-v2.md          ← Migration guide: SDK v1.x → v2.x
 ```
@@ -309,7 +309,7 @@ mini4wdpaintframework/
 | [BOOTSTRAP.md](BOOTSTRAP.md) | **AI entry point** — rules, pipeline, page index, errors to avoid |
 | [SDK_CONTEXT.yaml](SDK_CONTEXT.yaml) | SDK identity card — version, pipeline, source of truth |
 | [Docs/LOAD_ORDER.md](Docs/LOAD_ORDER.md) | Explicit context loading order with rationale |
-| [Docs/AI_BOOTSTRAP_PROMPT.md](Docs/AI_BOOTSTRAP_PROMPT.md) | Ready-to-use prompts for ChatGPT, Claude (Gemini: not supported — UAT-002) |
+| [Docs/AI_BOOTSTRAP_PROMPT.md](Docs/AI_BOOTSTRAP_PROMPT.md) | Ready-to-use prompts for ChatGPT, Claude (Gemini: Fase 4 only — UAT-004) |
 | [Projects/PROJECT_BOOTSTRAP.md](Projects/PROJECT_BOOTSTRAP.md) | Step-by-step new project guide |
 | [STATUS.md](STATUS.md) | Implementation status, roadmap, known issues |
 | [ReleaseInfo.yaml](ReleaseInfo.yaml) | Machine-readable release metadata |

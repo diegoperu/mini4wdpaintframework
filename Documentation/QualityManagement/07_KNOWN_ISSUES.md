@@ -27,7 +27,6 @@
 | KI-002 | Pipeline PDF manuale: nessuna automazione pandoc/LaTeX; l'assemblaggio del PDF dipende dall'operatore | 2.x | Seguire `FIRST_PDF.md` passo-passo | Aperto | Pianificato post-v2.5.0 (roadmap) |
 | KI-003 | Documentazione ≤ v2.4.1 non distingueva ChatGPT Web da Claude Code: le istruzioni di bootstrap e caricamento file erano ambigue per operatori ChatGPT Web (UR-0001, score 1/5) | ≤ 2.4.1 | Usare `OperatorGuide/Runtimes/ChatGPT_Web.md` o `Claude_Code.md` — guide autonome per runtime | Risolto in 2.5.0 | — |
 | KI-004 | `Documentation/OperationalManual/` (20 capitoli) e `Documentation/QualityManagement/` contengono ancora riferimenti ai path v2.4.x (`ApprovedAssets/Text/`, `ApprovedAssets/Images/`) — non fanno parte del load order AI ma sono fonti di potenziale confusione per i Maintainer | 2.5.0 | Ignorare i path in quei documenti; usare i path v2.5.0 in tutti gli altri file | Aperto | Aggiornamento pianificato in v2.6.0 |
-| KI-005 | Runtime Gemini inaffidabile per Fase 3/4 (Render Engine): allucinazioni da priors, metadati SDK leaked nell'immagine, risposta scollegata dall'input con prompt rinforzato — 3/3 tentativi falliti, non correggibile via prompt engineering (`UAT/UAT-002.md`) | 2.4.1 | Usare ChatGPT Web (GPT-4o + DALL-E) per il Render Engine | Aperto | Riesame con modello Gemini aggiornato — nessuna data pianificata |
 
 ---
 
@@ -39,3 +38,4 @@
 | KI-A02 | Falsi positivi linguistici su codici colore e nomi commerciali (TS-37, Chrome Silver…) | ≤ 2.4.0 | 2.4.1 | UAT-001 Errore 2; `Config/LANGUAGE_POLICY.yaml §exceptions` |
 | KI-A03 | Posizione immagini di riferimento ambigua (due convenzioni concorrenti) | ≤ 2.4.0 | 2.4.1 | UAT-001 Errore 3; convenzione unica `Projects/{Model}/Images/` |
 | KI-A04 | Nessun entry point per l'operatore umano | ≤ 2.4.0 | 2.4.1 | UAT-001 Errore 8; `START_HERE.md`, `OperatorGuide/` |
+| KI-005 | Runtime Gemini inaffidabile per Fase 3/4 (Render Engine, vecchio scope whole-page): allucinazioni da priors, metadati SDK leaked nell'immagine, risposta scollegata dall'input con prompt rinforzato — 3/3 tentativi falliti (`UAT/UAT-002.md`). Risolto non correggendo Gemini, ma restringendo cosa si chiede a qualunque AI in Fase 4: solo un'illustrazione isolata (testo/layout ora prodotti da `Scripts/render_page.py`). In questo scope ristretto, Gemini ri-testato con successo (`UAT/UAT-004.md`) — supportato solo per Fase 4, Fase 1-3 restano non verificate | 2.4.1 – 2.5.0 | 2.5.0 | UAT-002 (fallimento originale); UAT-004 (retest, scope ristretto) |

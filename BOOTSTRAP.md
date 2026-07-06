@@ -10,7 +10,7 @@
 
 ## What is the Mini4WD Manual SDK?
 
-The **Mini4WD Manual SDK** is an open-source editorial framework that enables any AI model — ChatGPT, Claude, or any future model — to generate professional illustrated painting manuals for Tamiya Mini4WD scale models. (Gemini: non supportato — vedi `UAT/UAT-002.md`.)
+The **Mini4WD Manual SDK** is an open-source editorial framework that enables any AI model — ChatGPT, Claude, or any future model — to generate professional illustrated painting manuals for Tamiya Mini4WD scale models. (Gemini: supportato solo per Fase 4, generazione illustrazione singola — vedi `UAT/UAT-002.md` e `UAT/UAT-004.md`.)
 
 It is a **specification-first system**: the SDK defines every design rule, editorial rule, component, and workflow in authoritative documents. The AI's role is to execute these specifications, not to invent them.
 

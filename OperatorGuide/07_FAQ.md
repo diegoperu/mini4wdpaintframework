@@ -13,8 +13,10 @@ aprire una nuova chat. È tutto in `START_HERE.md` + `OperatorGuide/`.
 
 **D: Quale modello AI serve?**
 R: ChatGPT o Claude, con allegati file e contesto ampio (consigliato 100K+ token).
-I prompt sono model-agnostic. Gemini **non è supportato** per il rendering (Fase 3/4)
-— fallito su UAT-002, vedi `UAT/UAT-002.md` e `Docs/RUNTIMES.md`.
+I prompt sono model-agnostic. Gemini è supportato **solo per la Fase 4** (generazione
+di una singola illustrazione) — fallito su UAT-002 per il vecchio scope whole-page,
+superato su UAT-004 nel nuovo scope ristretto. Fase 1-3 (testi) non verificate su
+Gemini. Vedi `UAT/UAT-002.md`, `UAT/UAT-004.md` e `Docs/RUNTIMES.md`.
 
 **D: Dove metto le foto del modello?**
 R: `Projects/{TuoModello}/Images/`. Sempre e solo lì. (v2.4.1 — convenzione unica.)

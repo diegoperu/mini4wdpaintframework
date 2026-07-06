@@ -5,7 +5,8 @@
 > Un prompt pronto per ogni fase della pipeline. Per ogni fase trovi: **Input**
 > (cosa allegare), **Output** (cosa aspettarti), **Prompt** (da copiare), **Nuova
 > chat SÌ/NO**. Verificato con ChatGPT (GPT-4o) e Claude (Sonnet/Opus).
-> Gemini: non supportato — fallito UAT-002 (vedi §Compatibilità).
+> Gemini: supportato solo per Fase 4 (generazione illustrazione singola, non
+> testi/bootstrap) — vedi §Compatibilità e `UAT/UAT-004.md`.
 >
 > La pipeline: **Bootstrap → Generazione Testi → QA → Rendering → PDF**
 > Mappa completa degli stati: `WORKFLOW.md` (root).
@@ -363,7 +364,7 @@ Continua dalla pagina {PAGINA} nella fase {FASE}.
 |---|---|---|
 | ChatGPT (GPT-4o, GPT-4) | ✓ | Allegati via file upload |
 | Claude (Sonnet, Opus) | ✓ | Allegati o incolla |
-| Gemini | ❌ Non supportato | Fallito UAT-002: allucinazioni Fase 3/4, metadati leaked nel render, risposta scollegata. Vedi `UAT/UAT-002.md`. |
+| Gemini | ⚠️ Solo Fase 4 | Fallito UAT-002 sulla generazione whole-page (Fase 3/4 vecchio scope). Ri-testato con successo per la Fase 4 a scope ristretto (solo illustrazione singola, § 4b) in UAT-004. Fase 1-3 non verificate. Vedi `UAT/UAT-002.md` e `UAT/UAT-004.md`. |
 | Modelli futuri | Atteso ✓ | Nessuna sintassi model-specific |
 
 ## Riferimenti

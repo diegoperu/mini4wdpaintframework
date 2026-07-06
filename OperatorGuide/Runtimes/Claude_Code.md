@@ -378,7 +378,11 @@ non compaiono mai nel report.
 
 ---
 
-### 10c — Genera le illustrazioni mancanti (ChatGPT Web, una alla volta)
+### 10c — Genera le illustrazioni mancanti (ChatGPT Web o Gemini, una alla volta)
+
+> Gemini segue le stesse istruzioni di questa sezione (stesso prompt, stessi file da
+> allegare) — supportato solo per questo compito ristretto (Fase 4, singola
+> illustrazione), vedi avviso in fondo alla sezione.
 
 > 🛑 **Una chat = una immagine.** Verificato empiricamente (2026-07-06): riusare la
 > stessa chat ChatGPT tra una generazione e l'altra contamina il risultato successivo
@@ -426,9 +430,12 @@ Salva l'immagine ricevuta **esattamente** al path indicato nel blocco, poi ripet
 
 ---
 
-> ⚠️ **Gemini non è supportato per il rendering** (Fase 3/4). Fallito in 3 tentativi
-> su UAT-002 (allucinazioni, metadati leaked, risposte scollegate dal prompt).
-> Vedi `UAT/UAT-002.md` e `Docs/RUNTIMES.md`.
+> ⚠️ **Gemini è supportato solo per la Fase 4** (generazione di una singola
+> illustrazione, stesse istruzioni di 10c). Fallito in 3 tentativi su UAT-002 per il
+> vecchio scope whole-page (allucinazioni, metadati leaked, risposte scollegate);
+> superato in UAT-004 nel nuovo scope ristretto (10b genera testo/layout, l'AI
+> genera solo l'illustrazione). Fase 1-3 (testi) non verificate su Gemini.
+> Vedi `UAT/UAT-002.md`, `UAT/UAT-004.md` e `Docs/RUNTIMES.md`.
 
 ---
 

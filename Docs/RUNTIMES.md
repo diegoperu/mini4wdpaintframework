@@ -66,7 +66,7 @@ L'architettura del framework è progettata per supportare altri runtime senza mo
 | ChatGPT Web | ✅ Supportato | Procedura via ZIP + allegati |
 | Claude Code | ✅ Supportato | Accesso diretto al repository |
 | Claude Web | 🔜 Pianificato | Analogo a ChatGPT Web |
-| Gemini | ❌ Non supportato | Fallito UAT-002: allucinazioni in Fase 3/4, metadati leaked nel render, risposta scollegata con prompt rinforzato. Vedi `UAT/UAT-002.md`. |
+| Gemini | ⚠️ Supportato solo per Fase 4 | Fallito UAT-002 per la generazione whole-page (testo+layout+immagine in un turno). Dal 2026-07-06 la Fase 4 chiede solo un'illustrazione isolata (testo/layout prodotti da `Scripts/render_page.py`) — in questo scope ristretto, ri-testato con successo in UAT-004. Fase 1-3 (testi/bootstrap) non verificate su Gemini. Vedi `UAT/UAT-002.md` e `UAT/UAT-004.md`. |
 | Ollama | 🔜 Pianificato | Locale, richiede context window ≥ 100K token |
 | Open WebUI | 🔜 Pianificato | Dipende dal modello backend |
 | vLLM | 🔜 Pianificato | Deployment locale/cloud |
