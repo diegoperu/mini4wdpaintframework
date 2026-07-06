@@ -220,50 +220,22 @@ l'elenco di tutte le immagini ancora mancanti, col path esatto atteso. Se il rep
 
 ### 4b — Genera SOLO l'illustrazione mancante (una alla volta)
 
-**Input (file da allegare):**
-1. `Core/RENDER_GUIDE.md`
-2. `Core/DESIGN_LANGUAGE.md`
-3. `Core/STYLE_GUIDE.md`
-4. le foto da `Projects/{Model}/{Variant}/Images/`
-5. `Assets/DesignSystem/Tokens/tokens.example.yaml` (solo se lo slot richiede colori — vedi content.yaml → colors[])
+> ⚠️ **Il prompt non è più scritto qui a mano.** Duplicarlo in più documenti ha
+> già causato una divergenza reale in passato (due copie del prompt Fase 4 che si
+> sono scollegate durante un ciclo di test). Il prompt, i file da allegare e il
+> path di destinazione sono generati **automaticamente** da `Scripts/render_page.py`
+> (4a) dentro `Projects/{Model}/{Variant}/MISSING_IMAGES_PROMPT.md` — uno già
+> pronto da copiare per ciascuno slot mancante, compilato dai dati reali del
+> progetto (non placeholder da riempire a mano). Apri quel file, copia il blocco
+> del prompt e l'elenco file da allegare per lo slot che ti serve.
 
 **Output atteso:** un singolo file immagine (nessun testo, nessuna tabella, nessun
-logo, nessun pannello header/footer) da salvare esattamente al path indicato dallo
-script in 4a (es. `Images/P002_front.png`).
-
-**Prompt (adatta TIPO_SLOT: copertina / vista ortogonale / dettaglio):**
-
-```
-Genera SOLO un'illustrazione fotorealistica del modellino Mini4WD — {TIPO_SLOT}.
-Nessun testo, nessuna tabella, nessun logo, nessun pannello colorato: solo il
-soggetto isolato su sfondo bianco puro. Questa immagine viene inserita in un
-template già pronto che aggiunge testo/tabelle/header per conto suo — se aggiungi
-tu del testo o una cornice, il risultato finale avrà doppioni o elementi in
-conflitto col template.
-
-Regole:
-- Forma fisica (sagoma, proporzioni, componenti meccanici) il più fedele possibile
-  alle foto di riferimento allegate.
-- Colori, livrea, fiamme, decal e grafica NON derivano dalle foto di riferimento —
-  sono quasi sempre box-art stock con schema colori diverso da quello da
-  documentare. Palette e aree di applicazione vengono SOLO da content.yaml →
-  colors[] (allegato separatamente o riportato qui sotto). Se la livrea della foto
-  reference è in conflitto con lo schema colori, ignora la livrea della foto e
-  ridipingi secondo colors[] — non mescolare o "tingere" i colori esistenti. Non
-  aggiungere grafiche (fiamme, strisce, numeri di gara) assenti dallo schema colori.
-- Applica Core/DESIGN_LANGUAGE.md e Core/STYLE_GUIDE.md per stile fotografico/
-  illuminazione, non per layout di pagina (quello lo fa il template).
-
-Dettaglio specifico per questo slot: {DESCRIZIONE_SLOT}
-(es. "vista 3/4 anteriore-sinistra, elevazione 15°, illuminazione studio-neutral,
-per la copertina" oppure "vista ortogonale frontale, nessuna prospettiva" oppure
-"primo piano dell'area ala posteriore e pannelli laterali durante la mascheratura
-zona M001").
-```
+logo, nessun pannello header/footer) da salvare esattamente al path indicato in
+`MISSING_IMAGES_PROMPT.md` per quello slot (es. `Images/P002_front.png`).
 
 Dopo aver ricevuto l'immagine: salvala al path esatto, poi ripeti 4a per
-confermare che il template la incorpori (lo script non mostra più quello slot
-tra le immagini mancanti).
+confermare che il template la incorpori (lo slot non comparirà più in
+`MISSING_IMAGES.md`/`MISSING_IMAGES_PROMPT.md`).
 
 ### 4c — Nodo locale (quando disponibile)
 
@@ -271,6 +243,11 @@ Stesso identico contratto input/output di 4b (foto reference + colors[] in,
 un'immagine al path esatto out) — vedi `Docs/LOCAL_RENDER_NODE.md` § Contratto.
 Nessuna differenza di procedura per l'operatore: cambia solo dove gira la
 generazione.
+
+`Projects/{Model}/{Variant}/MISSING_IMAGES.json` (generato da 4a insieme al `.md`)
+è già nel formato pensato per questo: un array di entry `{page_id, slot,
+output_path, prompt, reference_files}` — un batch runner futuro può iterarci sopra
+direttamente senza fare parsing di markdown.
 
 **Guida passo-passo:** `FIRST_RENDER.md`
 

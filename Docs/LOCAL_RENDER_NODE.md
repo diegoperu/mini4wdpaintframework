@@ -157,15 +157,24 @@ nessuna differenza di procedura per l'operatore, cambia solo dove gira il modell
 
 **Input:**
 - foto di riferimento reali del modello fisico: `Projects/{Model}/{Variant}/Images/ref_*.jpg`
-- schema colori: `content.yaml → colors[]` (mai il box-art delle foto reference, che
-  ha quasi sempre uno schema colori diverso da quello da documentare)
-- descrizione dello slot specifico (angolo, area, tecnica) — vedi
-  `Docs/AI_BOOTSTRAP_PROMPT.md` § Fase 4 per il prompt esatto usato con ChatGPT oggi
+- schema colori: `PROJECT.yaml → paintScheme.colors[]` (mai il box-art delle foto
+  reference, che ha quasi sempre uno schema colori diverso da quello da documentare)
+- descrizione dello slot specifico (angolo, area, tecnica)
 
 **Output:** un singolo file immagine, **senza testo/tabelle/loghi/UI** (quelli li
 aggiunge il template), salvato esattamente al path che `Scripts/render_page.py`
 segnala come mancante. Convenzione path per pagina: vedi `Scripts/render_page.py`
 → `image_slots()`.
+
+**Implementazione concreta del contratto (2026-07-06):** `Scripts/render_page.py`
+genera automaticamente, per ogni progetto, `Projects/{Model}/{Variant}/
+MISSING_IMAGES_PROMPT.md` (prompt già compilato, per uso umano/ChatGPT) e
+`Projects/{Model}/{Variant}/MISSING_IMAGES.json` (stessi dati in forma
+strutturata: array di `{page_id, slot, output_path, prompt, reference_files}`) —
+il secondo è pensato apposta per un batch runner locale: itera sull'array, per
+ogni entry genera l'immagine da `prompt`+`reference_files` e salva a
+`output_path`, senza fare parsing di markdown. Nessuna differenza di schema tra
+uso oggi (copia-incolla in ChatGPT) e uso futuro (batch automatico).
 
 **Path già dichiarati in content.yaml:**
 - P001: `render.file` (es. `Images/cover_3q.png`)

@@ -27,6 +27,7 @@ Esempio:
 """
 
 import base64
+import json
 import re
 import sys
 from datetime import datetime
@@ -77,6 +78,168 @@ def image_slots(page_id: str, content: dict) -> dict:
         decals = content.get("decals") or []
         return {f"decal{i}": f"Images/P008_decal{i}.png" for i in range(1, len(decals) + 1)}
     return {}
+
+
+# File di stile sempre allegati alla generazione di un'illustrazione (path relativi
+# alla root del repo). Non piu' Core/COMPONENT_SYSTEM.md/QA_SYSTEM.md: l'AI non
+# tocca layout di pagina, solo stile fotografico/illuminazione.
+STYLE_REFERENCE_FILES = [
+    "Core/RENDER_GUIDE.md",
+    "Core/DESIGN_LANGUAGE.md",
+    "Core/STYLE_GUIDE.md",
+]
+
+# Fonte unica del prompt Fase 4 (vedi Docs/AI_BOOTSTRAP_PROMPT.md § FASE 4 -> 4b,
+# che ora rimanda qui invece di duplicarlo): genera SOLO l'illustrazione, mai testo
+# o layout di pagina (quello lo fa il template). Lo schema colori e' inline nel
+# prompt (non richiede che chi genera l'immagine legga PROJECT.yaml a parte) - utile
+# soprattutto per un futuro nodo locale, dove non esiste un concetto di "allegato in
+# chat" da cui l'AI possa leggere un file a parte.
+PROMPT_TEMPLATE = """Genera SOLO un'illustrazione fotorealistica del modellino Mini4WD — {tipo_slot}.
+Nessun testo, nessuna tabella, nessun logo, nessun pannello colorato: solo il
+soggetto isolato su sfondo bianco puro. Questa immagine viene inserita in un
+template gia' pronto che aggiunge testo/tabelle/header per conto suo — se aggiungi
+tu del testo o una cornice, il risultato finale avra' doppioni o elementi in
+conflitto col template.
+
+Regole:
+- Forma fisica (sagoma, proporzioni, componenti meccanici) il piu' fedele possibile
+  alle foto di riferimento allegate.
+- Colori, livrea, fiamme, decal e grafica NON derivano dalle foto di riferimento —
+  sono quasi sempre box-art stock con schema colori diverso da quello da
+  documentare. Palette e aree di applicazione vengono SOLO dallo schema colori
+  sotto. Se la livrea della foto reference e' in conflitto, ignora la livrea della
+  foto e ridipingi secondo lo schema sotto — non mescolare o "tingere" i colori
+  esistenti. Non aggiungere grafiche (fiamme, strisce, numeri di gara) assenti
+  dallo schema colori.
+- Applica Core/DESIGN_LANGUAGE.md e Core/STYLE_GUIDE.md per stile fotografico/
+  illuminazione, non per layout di pagina (quello lo fa il template).
+
+Schema colori ({scheme_name}):
+{colors_block}
+
+Dettaglio specifico per questo slot: {descrizione_slot}
+
+Salva il risultato come singolo file immagine, senza alcun elemento grafico
+aggiuntivo, al path: {output_path}
+"""
+
+
+def colors_block(colors_by_id: dict) -> str:
+    lines = []
+    for c in colors_by_id.values():
+        lines.append(
+            f"- {c.get('paintName', c.get('name', '?'))} ({c.get('paintCode', '?')}, "
+            f"{finish_it(c.get('finish', ''))}) — hex {c.get('hex', '?')}"
+            + (f" — {c['notes']}" if c.get("notes") else "")
+        )
+    return "\n".join(lines) if lines else "(nessuno schema colori trovato in PROJECT.yaml)"
+
+
+def slot_description(page_id: str, slot: str, content: dict) -> tuple[str, str]:
+    """Ritorna (tipo_slot, descrizione_slot) per un singolo slot immagine mancante,
+    compilati dai dati reali del content.yaml — non lasciati come placeholder."""
+    if page_id == "P001":
+        r = content["render"]
+        return "copertina", f"vista {r.get('angle', '3/4 front-left')}, illuminazione {r.get('lighting', 'studio-neutral')}. {r.get('alt', '')}"
+
+    if page_id == "P002":
+        names = {"front": "frontale", "side": "laterale", "top": "dall'alto"}
+        r = content["renders"][slot]
+        return f"vista ortogonale {names.get(slot, slot)}", f"nessuna prospettiva, sfondo bianco. {r.get('alt', '')}"
+
+    if page_id == "P004" and slot.startswith("step"):
+        step_id = int(slot.removeprefix("step"))
+        step = next(s for s in content["steps"] if s["id"] == step_id)
+        return "foto di dettaglio/preparazione", f"Step {step_id} — {step['title']}: {step['description']}"
+
+    if page_id == "P006" and slot.startswith("zone_"):
+        zone_id = slot.removeprefix("zone_")
+        zone = next(z for z in content["zones"] if z["id"] == zone_id)
+        return "foto di dettaglio/mascheratura", f"Zona {zone_id} — {zone['area']} ({zone['masking_type']}). {zone.get('notes', '')}"
+
+    if page_id == "P007" and slot.startswith("area_"):
+        area_id = slot.removeprefix("area_")
+        area = next(a for a in content["areas"] if a["id"] == area_id)
+        return "foto di dettaglio", f"{area['name']}: {area['description']} {area.get('notes', '')}"
+
+    if page_id == "P008" and slot.startswith("decal"):
+        idx = int(slot.removeprefix("decal"))
+        decal = content["decals"][idx - 1]
+        return "foto di dettaglio/decal", str(decal)
+
+    return "illustrazione", "(descrizione non disponibile — verifica manualmente content.yaml)"
+
+
+def build_prompt_entries(variant_dir: Path, model: str, variant: str, project: dict, colors_by_id: dict,
+                          page_id: str, content: dict, missing: list) -> list:
+    scheme_name = project.get("paintScheme", {}).get("name", "") if project else ""
+    colors_txt = colors_block(colors_by_id)
+
+    images_dir = variant_dir / "Images"
+    ref_photos = sorted(p.name for p in images_dir.glob("ref_*.jp*g")) if images_dir.is_dir() else []
+    project_prefix = f"Projects/{model}/{variant}"
+    reference_files = STYLE_REFERENCE_FILES + [f"{project_prefix}/PROJECT.yaml"]
+    reference_files += [f"{project_prefix}/Images/{name}" for name in ref_photos]
+
+    entries = []
+    for slot, rel_path in missing:
+        tipo_slot, descrizione_slot = slot_description(page_id, slot, content)
+        prompt = PROMPT_TEMPLATE.format(
+            tipo_slot=tipo_slot,
+            scheme_name=scheme_name,
+            colors_block=colors_txt,
+            descrizione_slot=descrizione_slot,
+            output_path=f"{project_prefix}/{rel_path}",
+        )
+        entries.append({
+            "page_id": page_id,
+            "slot": slot,
+            "output_path": f"{project_prefix}/{rel_path}",
+            "tipo_slot": tipo_slot,
+            "descrizione_slot": descrizione_slot,
+            "reference_files": reference_files,
+            "prompt": prompt,
+        })
+    return entries
+
+
+def write_prompt_files(md_path: Path, json_path: Path, model: str, variant: str, entries: list) -> None:
+    json_path.write_text(
+        json.dumps({"model": model, "variant": variant, "generated_at": datetime.now().isoformat(timespec="minutes"),
+                    "entries": entries}, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+    lines = [
+        "# Prompt per le immagini mancanti",
+        "",
+        "> File generato automaticamente da `Scripts/render_page.py` — non modificare a mano,",
+        f"> viene riscritto ad ogni run. Ultimo aggiornamento: {datetime.now():%Y-%m-%d %H:%M}.",
+        "> Versione machine-readable (stessi dati, per un futuro nodo di generazione locale in batch): "
+        f"`{json_path.name}`.",
+        "",
+        f"Progetto: `{model}/{variant}`",
+        "",
+    ]
+    if not entries:
+        lines.append("Nessuna immagine mancante — niente da generare.")
+    else:
+        for e in entries:
+            lines.append(f"## {e['page_id']} — {e['slot']}")
+            lines.append("")
+            lines.append(f"**Salva come:** `{e['output_path']}`")
+            lines.append("")
+            lines.append("**File da allegare:**")
+            for f in e["reference_files"]:
+                lines.append(f"- `{f}`")
+            lines.append("")
+            lines.append("**Prompt:**")
+            lines.append("```")
+            lines.append(e["prompt"].rstrip())
+            lines.append("```")
+            lines.append("")
+    md_path.write_text("\n".join(lines), encoding="utf-8")
 
 
 def mm(value: float) -> str:
@@ -161,6 +324,7 @@ def main() -> None:
     tokens = load_yaml(TOKENS_PATH)["tokens"]
 
     project_yaml_path = variant_dir / "PROJECT.yaml"
+    project = {}
     colors_by_id = {}
     if project_yaml_path.exists():
         project = load_yaml(project_yaml_path)
@@ -182,6 +346,7 @@ def main() -> None:
     missing_by_page = {}
     skipped_pages = []
     rendered_count = 0
+    prompt_entries = []
 
     with sync_playwright() as p:
         browser = p.chromium.launch()
@@ -219,6 +384,9 @@ def main() -> None:
             missing = [(slot, v["path"]) for slot, v in images.items() if v["data_uri"] is None]
             if missing:
                 missing_by_page[page_id] = missing
+                prompt_entries += build_prompt_entries(
+                    variant_dir, model_name, variant_name, project, colors_by_id, page_id, content, missing
+                )
 
         browser.close()
 
@@ -227,8 +395,15 @@ def main() -> None:
 
     report_path = variant_dir / "MISSING_IMAGES.md"
     write_missing_report(report_path, model_name, variant_name, missing_by_page, skipped_pages)
+
+    prompt_md_path = variant_dir / "MISSING_IMAGES_PROMPT.md"
+    prompt_json_path = variant_dir / "MISSING_IMAGES.json"
+    write_prompt_files(prompt_md_path, prompt_json_path, model_name, variant_name, prompt_entries)
+
     total_missing = sum(len(v) for v in missing_by_page.values())
-    print(f"\n{rendered_count} pagine renderizzate. {total_missing} immagini mancanti — report in {report_path}")
+    print(f"\n{rendered_count} pagine renderizzate. {total_missing} immagini mancanti.")
+    print(f"Report: {report_path}")
+    print(f"Prompt pronti: {prompt_md_path} ({prompt_json_path} per uso batch)")
 
 
 if __name__ == "__main__":

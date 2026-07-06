@@ -362,6 +362,12 @@ automatico e:
 - scrive `Projects/{Model}/{Variant}/MISSING_IMAGES.md` — elenco di **tutte** le
   immagini mancanti in tutto il progetto, col path esatto atteso, riscritto ad ogni
   run (tracciato in git, così chi guarda il repo vede subito cosa manca)
+- scrive `Projects/{Model}/{Variant}/MISSING_IMAGES_PROMPT.md` — per ciascuno slot
+  mancante, il prompt già compilato pronto da copiare + l'elenco esatto dei file da
+  allegare (10c usa questo, non serve costruire il prompt a mano)
+- scrive `Projects/{Model}/{Variant}/MISSING_IMAGES.json` — stessi dati del
+  `.md` in forma strutturata, per un futuro nodo di generazione locale in batch
+  (vedi `Docs/LOCAL_RENDER_NODE.md` § Contratto)
 
 Se `MISSING_IMAGES.md` è vuoto ("nessuna immagine mancante"), tutte le pagine sono
 già complete — salvale (PASSO 10d). Altrimenti continua con 10c per ciascuno slot
@@ -401,19 +407,14 @@ chat. Carica lo ZIP **e in aggiunta separatamente le foto di riferimento**
 (`Images/*.jpg`) come allegati immagine diretti — lo strumento di generazione le usa
 meglio come input visivo diretto che come file dentro un archivio.
 
-Copia il prompt da **`Docs/AI_BOOTSTRAP_PROMPT.md` § FASE 4 → 4b** (fonte unica,
-non duplicato qui per evitare che le due copie divergano nel tempo), sostituisci
-`{TIPO_SLOT}` e `{DESCRIZIONE_SLOT}` con lo slot che ti serve — es.:
+Apri `Projects/{Model}/{Variant}/MISSING_IMAGES_PROMPT.md` (generato al punto 10b
+insieme a `MISSING_IMAGES.md`): per ogni slot mancante trovi già pronti il prompt
+compilato, l'elenco esatto dei file da allegare e il path dove salvare il risultato
+— niente più placeholder da riempire a mano. Copia il blocco dello slot che ti
+serve e incollalo in chat.
 
-| Slot | TIPO_SLOT | DESCRIZIONE_SLOT |
-|---|---|---|
-| P001 copertina | copertina | vista 3/4 anteriore-sinistra, elevazione 15°, illuminazione studio-neutral |
-| P002 vista ortogonale | vista ortogonale frontale/laterale/dall'alto | nessuna prospettiva, sfondo bianco |
-| P004/P006/P007 dettaglio | foto di dettaglio/mascheratura | area e tecnica specifica dello step/zona/area (vedi content.yaml) |
-
-Salva l'immagine ricevuta **esattamente** al path indicato da 10b (es.
-`Projects/{Model}/{Variant}/Images/P002_front.png`), poi ripeti 10b: lo slot non
-comparirà più tra le immagini mancanti se il path è corretto.
+Salva l'immagine ricevuta **esattamente** al path indicato nel blocco, poi ripeti
+10b: lo slot non comparirà più tra le immagini mancanti se il path è corretto.
 
 > ⚠️ **Variante ChatGPT: usa "Thinking", non "Pro".** Test 2026-07-06: "Pro" sovra-pensa
 > il task e produce un output scarso in tempi lunghi; "Thinking" risponde in meno di un
