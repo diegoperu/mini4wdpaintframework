@@ -453,6 +453,18 @@ Regole operative:
   unico elemento: es. C010 Paint Legend (tabella, senza badge) e C011 Paint Code Box
   (box indipendente con badge finitura) sono componenti separati con collocazioni
   diverse — non unirli in un'unica card.
+- **Includi SOLO i componenti/campi presenti nel content.yaml di QUESTA pagina.** Se
+  un campo (es. colors[], checklist_sections[]) non esiste in questo content.yaml,
+  quel componente non esiste su questa pagina — non aggiungerlo per "completare" la
+  pagina, anche se ti sembra una pagina di manuale incompleta senza. Esempio concreto:
+  la Copertina (P001) non ha mai Paint Legend né Paint Code Box — quelli sono
+  componenti esclusivi di Schema Colori (P002), pagina diversa. Non mescolare layout
+  di pagine diverse.
+- **Non aggiungere NESSUN elemento non presente in content.yaml**, in particolare:
+  loghi di brand reali (es. Tamiya), timbri versione/data (es. "VERSION 1.0", date),
+  badge di finitura (GLOSS/FLAT/METALLIC) non elencati nel content.yaml, numeri di
+  gara o scritte/decal sulla carrozzeria o sull'alettone non presenti in colors[]. Se
+  non è scritto in content.yaml, non esiste in questa pagina, punto.
 - Se un componente ha altezza variabile, il box deve espandersi per contenere tutto
   il testo. Non troncare mai il testo per farlo entrare in uno spazio fisso.
 - Sfondo bianco puro. Pannello header viola (token.PrimaryViolet).
@@ -471,6 +483,15 @@ Sostituisci prima di inviare:
 | `MODELLO/VARIANTE` | Cartella progetto/variante | `Magnum_Saber_Premium/Cotton_Candy_Drift` |
 | `CODICE_PAGINA` | ID pagina | `P001` |
 | `NOME_PAGINA` | Nome della pagina | `Copertina` |
+
+> ⚠️ **Variante ChatGPT: usa "Thinking", non "Pro".** Test 2026-07-06: "Pro" sovra-pensa
+> il task e produce un output scarso in tempi lunghi; "Thinking" risponde in meno di un
+> minuto con risultato nettamente migliore (per la prima volta ha letto correttamente
+> i codici PC001-PC006/TS-xx reali da PROJECT.yaml invece di inventarli). Difetti residui
+> osservati con "Thinking" su P001: layout mescolato con P002 (Paint Legend/Paint Code Box
+> aggiunti a una Copertina che non li prevede) ed elementi inventati (logo Tamiya, timbro
+> versione/data, badge finitura, numero gara/decal su carrozzeria) — da qui le due regole
+> aggiunte sopra ("Includi SOLO i componenti..." e "Non aggiungere NESSUN elemento...").
 
 ---
 
