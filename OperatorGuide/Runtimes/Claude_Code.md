@@ -394,8 +394,11 @@ Scripts/package_handoff.sh {Model} {Variant}
 # es: Scripts/package_handoff.sh Magnum_Saber_Premium Cotton_Candy_Drift
 ```
 
-Produce uno ZIP in `Build/Handoff/{Model}_{Variant}_{timestamp}.zip` contenente
-**solo**: `Core/RENDER_GUIDE.md`, `Core/DESIGN_LANGUAGE.md`, `Core/STYLE_GUIDE.md`
+Produce uno ZIP in `Projects/{Model}/{Variant}/{Model}_{Variant}_{timestamp}.zip`
+— accanto a `MISSING_IMAGES.md`/`MISSING_IMAGES_PROMPT.md`/`MISSING_IMAGES.json`,
+non in `Build/`, così tutto quello che serve per generare le immagini mancanti
+sta in un unico posto (lo zip non è tracciato in git, vedi `.gitignore`).
+Contiene **solo**: `Core/RENDER_GUIDE.md`, `Core/DESIGN_LANGUAGE.md`, `Core/STYLE_GUIDE.md`
 (stile fotografico), `PROJECT.yaml` (schema colori), `Images/` (foto reference,
 compresse JPEG q70), `HANDOFF_CONTEXT.md` (dichiara il ruolo: genera SOLO
 un'illustrazione isolata, non una pagina). Niente più `ApprovedText/`,

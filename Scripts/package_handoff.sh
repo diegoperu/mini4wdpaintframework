@@ -95,10 +95,11 @@ if [[ -d "$IMAGES_DIR" ]]; then
 fi
 
 # --- Zip ---
-OUT_DIR="Build/Handoff"
-mkdir -p "$OUT_DIR"
+# Salvato dentro la cartella del progetto stesso (non Build/Handoff/), accanto a
+# MISSING_IMAGES.md/.json/_PROMPT.md: tutto quello che serve per generare le
+# immagini mancanti sta in un unico posto, niente da cercare altrove nel repo.
 STAMP="$(date +%Y%m%d-%H%M%S)"
-OUT_ZIP="${OUT_DIR}/${MODEL}_${VARIANT}_${STAMP}.zip"
+OUT_ZIP="${PROJECT_DIR}/${MODEL}_${VARIANT}_${STAMP}.zip"
 
 (cd "$STAGE_DIR" && zip -rq - .) > "$OUT_ZIP"
 
