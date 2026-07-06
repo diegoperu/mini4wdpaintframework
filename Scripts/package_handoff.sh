@@ -80,6 +80,16 @@ for f in "${CORE_FILES[@]}"; do
   cp "$f" "$STAGE_DIR/$f"
 done
 
+# File di framing/ruolo alla radice dello zip: senza AI_ENTRYPOINT.md (che forza un
+# bootstrap report completo, sbagliato per un handoff di singola pagina) il pacchetto
+# mirato è solo un mucchio di yaml/md tecnici e ChatGPT può leggerlo come corpus da
+# analizzare invece che come istruzione a generare un'immagine.
+if [[ ! -f "Docs/RENDER_HANDOFF_CONTEXT.md" ]]; then
+  echo "Errore: file core mancante: Docs/RENDER_HANDOFF_CONTEXT.md" >&2
+  exit 1
+fi
+cp "Docs/RENDER_HANDOFF_CONTEXT.md" "$STAGE_DIR/HANDOFF_CONTEXT.md"
+
 mkdir -p "$STAGE_DIR/$(dirname "$PROJECT_DIR")"
 cp -R "$PROJECT_DIR" "$STAGE_DIR/$PROJECT_DIR"
 

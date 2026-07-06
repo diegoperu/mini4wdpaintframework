@@ -362,6 +362,14 @@ contenente **solo**:
   `Core/STYLE_GUIDE.md`, `Core/COMPONENT_SYSTEM.md`, `Assets/DesignSystem/Tokens/tokens.example.yaml`)
 - `Core/QA_SYSTEM.md` (per la checklist finale)
 - `Projects/{Model}/{Variant}/` completo (PROJECT.yaml, ApprovedText/, Images/)
+- `HANDOFF_CONTEXT.md` alla radice (da `Docs/RENDER_HANDOFF_CONTEXT.md`) — senza
+  `AI_ENTRYPOINT.md` (che forzerebbe un bootstrap report completo, sbagliato per un
+  handoff di singola pagina) il pacchetto mirato rischiava di essere letto da ChatGPT
+  come corpus documentale da analizzare invece che come istruzione a generare
+  un'immagine: riprodotto 2/2 volte un rifiuto ("non posso produrre l'illustrazione
+  né verificare i pixel del render") con il pacchetto mirato privo di framing. Questo
+  file dichiara esplicitamente il ruolo di Render Engine e ammorbidisce la richiesta
+  di verifica colore da "lettura pixel esatta" a "confronto visivo best-effort".
 
 Nessun altro progetto del repo entra nello ZIP — dimensione minima, nessuna ambiguità
 su quale progetto stai renderizzando.
