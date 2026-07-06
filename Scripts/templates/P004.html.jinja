@@ -59,6 +59,13 @@
     font-weight: 700; font-size: 10pt;
   }
   .step-body { flex: 1; }
+  .step-thumb {
+    flex: none; width: {{ mm(24) }}; height: {{ mm(17) }};
+    border: 1pt dashed var(--light-gray); background: var(--off-white);
+    color: var(--mid-gray); font-size: 6.5pt; text-align: center;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .step-thumb img { width: 100%; height: 100%; object-fit: cover; }
   .step-title-row { display: flex; align-items: baseline; gap: {{ mm(3) }}; }
   .step-title { font-size: 12pt; font-weight: 700; color: var(--black); }
   .time-box {
@@ -107,6 +114,14 @@
         {% endif %}
         {% if step.tip %}
         <div class="tip-inline">💡 {{ step.tip }}</div>
+        {% endif %}
+      </div>
+      {% set thumb = images["step" ~ step.id] %}
+      <div class="step-thumb">
+        {% if thumb.data_uri %}
+        <img src="{{ thumb.data_uri }}" alt="Foto step {{ step.id }}">
+        {% else %}
+        foto non<br>disponibile
         {% endif %}
       </div>
     </div>

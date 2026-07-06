@@ -84,7 +84,9 @@
     align-items: center;
     justify-content: center;
     height: {{ mm(58) }};
+    overflow: hidden;
   }
+  .render-placeholder img { width: 100%; height: 100%; object-fit: contain; }
 
   /* C006 — Callout */
   .callout {
@@ -153,16 +155,28 @@
       <h1 class="page-title">{{ content.title }}</h1>
 
       <div class="render-placeholder">
-        TODO: render ortogonale FRONTALE — {{ content.renders.front.file }}<br>
+        {% if images.front.data_uri %}
+        <img src="{{ images.front.data_uri }}" alt="{{ content.renders.front.alt }}">
+        {% else %}
+        TODO: render ortogonale FRONTALE — {{ images.front.path }}<br>
         (Fase 4 — non ancora generato)
+        {% endif %}
       </div>
       <div class="render-placeholder">
-        TODO: render ortogonale LATERALE — {{ content.renders.side.file }}<br>
+        {% if images.side.data_uri %}
+        <img src="{{ images.side.data_uri }}" alt="{{ content.renders.side.alt }}">
+        {% else %}
+        TODO: render ortogonale LATERALE — {{ images.side.path }}<br>
         (Fase 4 — non ancora generato)
+        {% endif %}
       </div>
       <div class="render-placeholder">
-        TODO: render ortogonale DALL'ALTO — {{ content.renders.top.file }}<br>
+        {% if images.top.data_uri %}
+        <img src="{{ images.top.data_uri }}" alt="{{ content.renders.top.alt }}">
+        {% else %}
+        TODO: render ortogonale DALL'ALTO — {{ images.top.path }}<br>
         (Fase 4 — non ancora generato)
+        {% endif %}
       </div>
 
       <div class="callout">{{ content.intro }}</div>

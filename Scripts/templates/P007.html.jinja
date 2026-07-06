@@ -55,6 +55,13 @@
   .area-name { font-size: 11pt; font-weight: 700; color: var(--black); }
   .area-desc { font-size: 9.5pt; margin-top: 1px; }
   .area-notes { font-size: 8.5pt; color: var(--mid-gray); margin-top: 1px; font-style: italic; }
+  .area-thumb {
+    flex: none; width: {{ mm(24) }}; height: {{ mm(17) }};
+    border: 1pt dashed var(--light-gray); background: var(--off-white);
+    color: var(--mid-gray); font-size: 6.5pt; text-align: center;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .area-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
   .tip {
     border-left: 3px solid var(--gold-accent); background: var(--white);
@@ -83,6 +90,14 @@
         <div class="area-name">{{ a.name }}</div>
         <div class="area-desc">{{ a.description }}</div>
         <div class="area-notes">{{ a.notes }}</div>
+      </div>
+      {% set thumb = images["area_" ~ a.id] %}
+      <div class="area-thumb">
+        {% if thumb.data_uri %}
+        <img src="{{ thumb.data_uri }}" alt="Zoom {{ a.id }}">
+        {% else %}
+        foto non<br>disponibile
+        {% endif %}
       </div>
     </div>
     {% if not loop.last %}<div class="divider"></div>{% endif %}

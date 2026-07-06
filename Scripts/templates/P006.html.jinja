@@ -54,6 +54,13 @@
   .step-zone { font-size: 8pt; text-transform: uppercase; letter-spacing: 0.5px; color: var(--mid-gray); }
   .step-desc { font-size: 9.5pt; line-height: 1.5; }
   .tip-inline { font-size: 8.5pt; margin-top: {{ mm(1) }}; }
+  .step-thumb {
+    flex: none; width: {{ mm(24) }}; height: {{ mm(17) }};
+    border: 1pt dashed var(--light-gray); background: var(--off-white);
+    color: var(--mid-gray); font-size: 6.5pt; text-align: center;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .step-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
   /* C006 — Callout */
   .callout {
@@ -89,6 +96,14 @@
         <div class="step-zone">{{ zone.id }} — {{ zone.area }} ({{ zone.masking_type }})</div>
         <div class="step-desc">{{ s.description }}</div>
         {% if s.tip %}<div class="tip-inline">💡 {{ s.tip }}</div>{% endif %}
+      </div>
+      {% set thumb = images["zone_" ~ zone.id] %}
+      <div class="step-thumb">
+        {% if thumb.data_uri %}
+        <img src="{{ thumb.data_uri }}" alt="Zoom {{ zone.id }}">
+        {% else %}
+        foto non<br>disponibile
+        {% endif %}
       </div>
     </div>
     {% if not loop.last %}<div class="divider"></div>{% endif %}

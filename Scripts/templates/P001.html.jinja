@@ -59,7 +59,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
   }
+  .cover-render img { width: 100%; height: 100%; object-fit: cover; }
   .render-placeholder-label {
     border: 1.5pt dashed var(--light-gray);
     color: var(--mid-gray);
@@ -93,11 +95,15 @@
   </div>
 
   <div class="cover-render">
+    {% if images.cover.data_uri %}
+    <img src="{{ images.cover.data_uri }}" alt="{{ content.render.alt }}">
+    {% else %}
     <div class="render-placeholder-label">
-      TODO: render di copertina — {{ content.render.file }}<br>
+      TODO: render di copertina — {{ images.cover.path }}<br>
       angolo: {{ content.render.angle }} — illuminazione: {{ content.render.lighting }}<br>
       (Fase 4 — non ancora generato)
     </div>
+    {% endif %}
   </div>
 
   <div class="title-band">
