@@ -95,6 +95,12 @@ STYLE_REFERENCE_FILES = [
 # prompt (non richiede che chi genera l'immagine legga PROJECT.yaml a parte) - utile
 # soprattutto per un futuro nodo locale, dove non esiste un concetto di "allegato in
 # chat" da cui l'AI possa leggere un file a parte.
+#
+# Il path di destinazione NON e' nel testo del prompt: ChatGPT Web non puo' scrivere
+# su un filesystem, restituisce solo l'immagine in chat - istruirlo a "salvare a un
+# path" e' un'istruzione a cui non puo' dare seguito. Il path resta fuori dal
+# prompt copiabile: campo output_path nel JSON (per un futuro nodo batch) e riga
+# "Salva come:" nel .md (per l'operatore umano).
 PROMPT_TEMPLATE = """Genera SOLO un'illustrazione fotorealistica del modellino Mini4WD — {tipo_slot}.
 Nessun testo, nessuna tabella, nessun logo, nessun pannello colorato: solo il
 soggetto isolato su sfondo bianco puro. Questa immagine viene inserita in un
@@ -119,9 +125,6 @@ Schema colori ({scheme_name}):
 {colors_block}
 
 Dettaglio specifico per questo slot: {descrizione_slot}
-
-Salva il risultato come singolo file immagine, senza alcun elemento grafico
-aggiuntivo, al path: {output_path}
 """
 
 
@@ -190,7 +193,6 @@ def build_prompt_entries(variant_dir: Path, model: str, variant: str, project: d
             scheme_name=scheme_name,
             colors_block=colors_txt,
             descrizione_slot=descrizione_slot,
-            output_path=f"{project_prefix}/{rel_path}",
         )
         entries.append({
             "page_id": page_id,

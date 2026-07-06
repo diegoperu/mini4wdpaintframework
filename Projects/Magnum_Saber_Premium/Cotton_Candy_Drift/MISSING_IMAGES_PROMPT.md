@@ -1,7 +1,7 @@
 # Prompt per le immagini mancanti
 
 > File generato automaticamente da `Scripts/render_page.py` — non modificare a mano,
-> viene riscritto ad ogni run. Ultimo aggiornamento: 2026-07-06 14:55.
+> viene riscritto ad ogni run. Ultimo aggiornamento: 2026-07-06 15:02.
 > Versione machine-readable (stessi dati, per un futuro nodo di generazione locale in batch): `MISSING_IMAGES.json`.
 
 Progetto: `Magnum_Saber_Premium/Cotton_Candy_Drift`
@@ -53,9 +53,6 @@ Schema colori (Cotton Candy Drift):
 - Gun Metal (TS-38, METALLIZZATO) — hex #4B4E52 — Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush.
 
 Dettaglio specifico per questo slot: vista 3/4 front-left, illuminazione studio-neutral. Vista a tre quarti anteriore-sinistra della carrozzeria Magnum Saber Premium (telaio Super-II), schema Cotton Candy Drift: azzurro chiaro dominante con pannelli rosa, accenti neri e dettagli gialli.
-
-Salva il risultato come singolo file immagine, senza alcun elemento grafico
-aggiuntivo, al path: Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/cover_3q.png
 ```
 
 ## P002 — front
@@ -105,9 +102,6 @@ Schema colori (Cotton Candy Drift):
 - Gun Metal (TS-38, METALLIZZATO) — hex #4B4E52 — Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush.
 
 Dettaglio specifico per questo slot: nessuna prospettiva, sfondo bianco. Vista ortogonale frontale della carrozzeria Magnum Saber Premium, schema Cotton Candy Drift
-
-Salva il risultato come singolo file immagine, senza alcun elemento grafico
-aggiuntivo, al path: Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/P002_front.png
 ```
 
 ## P002 — side
@@ -157,9 +151,6 @@ Schema colori (Cotton Candy Drift):
 - Gun Metal (TS-38, METALLIZZATO) — hex #4B4E52 — Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush.
 
 Dettaglio specifico per questo slot: nessuna prospettiva, sfondo bianco. Vista ortogonale laterale destra della carrozzeria Magnum Saber Premium, schema Cotton Candy Drift
-
-Salva il risultato come singolo file immagine, senza alcun elemento grafico
-aggiuntivo, al path: Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/P002_side.png
 ```
 
 ## P002 — top
@@ -209,9 +200,6 @@ Schema colori (Cotton Candy Drift):
 - Gun Metal (TS-38, METALLIZZATO) — hex #4B4E52 — Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush.
 
 Dettaglio specifico per questo slot: nessuna prospettiva, sfondo bianco. Vista ortogonale dall'alto della carrozzeria Magnum Saber Premium, schema Cotton Candy Drift
-
-Salva il risultato come singolo file immagine, senza alcun elemento grafico
-aggiuntivo, al path: Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/P002_top.png
 ```
 
 ## P004 — step1
@@ -261,9 +249,6 @@ Schema colori (Cotton Candy Drift):
 - Gun Metal (TS-38, METALLIZZATO) — hex #4B4E52 — Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush.
 
 Dettaglio specifico per questo slot: Step 1 — Lavaggio della carrozzeria: Lava la carrozzeria in ABS con acqua tiepida e detergente neutro. Usa uno spazzolino morbido per rimuovere i residui di stampo. Risciacqua con acqua distillata.
-
-Salva il risultato come singolo file immagine, senza alcun elemento grafico
-aggiuntivo, al path: Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/P004_step1.png
 ```
 
 ## P004 — step2
@@ -313,9 +298,6 @@ Schema colori (Cotton Candy Drift):
 - Gun Metal (TS-38, METALLIZZATO) — hex #4B4E52 — Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush.
 
 Dettaglio specifico per questo slot: Step 2 — Asciugatura completa: Lascia asciugare la carrozzeria all'aria per almeno 2 ore in ambiente pulito e privo di polvere.
-
-Salva il risultato come singolo file immagine, senza alcun elemento grafico
-aggiuntivo, al path: Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/P004_step2.png
 ```
 
 ## P004 — step3
@@ -365,9 +347,6 @@ Schema colori (Cotton Candy Drift):
 - Gun Metal (TS-38, METALLIZZATO) — hex #4B4E52 — Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush.
 
 Dettaglio specifico per questo slot: Step 3 — Carteggiatura leggera: Carteggia delicatamente tutta la superficie con carta abrasiva 400 grit a umido, poi rifinisci con 600 grit. Procedi in direzione unica, mai circolare.
-
-Salva il risultato come singolo file immagine, senza alcun elemento grafico
-aggiuntivo, al path: Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/P004_step3.png
 ```
 
 ## P004 — step4
@@ -417,9 +396,6 @@ Schema colori (Cotton Candy Drift):
 - Gun Metal (TS-38, METALLIZZATO) — hex #4B4E52 — Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush.
 
 Dettaglio specifico per questo slot: Step 4 — Rimozione della polvere: Elimina tutta la polvere di carteggiatura con un panno *tack cloth*, passando su tutta la superficie con movimenti lenti.
-
-Salva il risultato come singolo file immagine, senza alcun elemento grafico
-aggiuntivo, al path: Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/P004_step4.png
 ```
 
 ## P004 — step5
@@ -469,9 +445,6 @@ Schema colori (Cotton Candy Drift):
 - Gun Metal (TS-38, METALLIZZATO) — hex #4B4E52 — Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush.
 
 Dettaglio specifico per questo slot: Step 5 — Applicazione del primer bianco: Applica il primer bianco Tamiya in 2 mani sottili, attendendo 10 minuti tra una mano e l'altra, a 25-30cm di distanza. Lascia asciugare 2 ore prima di procedere.
-
-Salva il risultato come singolo file immagine, senza alcun elemento grafico
-aggiuntivo, al path: Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/P004_step5.png
 ```
 
 ## P006 — zone_M001
@@ -521,9 +494,6 @@ Schema colori (Cotton Candy Drift):
 - Gun Metal (TS-38, METALLIZZATO) — hex #4B4E52 — Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush.
 
 Dettaglio specifico per questo slot: Zona M001 — Ala posteriore e pannelli laterali della cowling (nastro). Mascherare dopo completa asciugatura di PC001 (Light Blue). Nastro 10mm per aree piane, 6mm per bordi curvi, in vista della verniciatura PC002 (Pink).
-
-Salva il risultato come singolo file immagine, senza alcun elemento grafico
-aggiuntivo, al path: Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/P006_M001.png
 ```
 
 ## P006 — zone_M002
@@ -573,9 +543,6 @@ Schema colori (Cotton Candy Drift):
 - Gun Metal (TS-38, METALLIZZATO) — hex #4B4E52 — Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush.
 
 Dettaglio specifico per questo slot: Zona M002 — Linee di cintura e cornice abitacolo (nastro). Nastro 6mm per seguire le curve della cornice prima dell'accento nero PC003 (Black).
-
-Salva il risultato come singolo file immagine, senza alcun elemento grafico
-aggiuntivo, al path: Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/P006_M002.png
 ```
 
 ## P006 — zone_M003
@@ -625,9 +592,6 @@ Schema colori (Cotton Candy Drift):
 - Gun Metal (TS-38, METALLIZZATO) — hex #4B4E52 — Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush.
 
 Dettaglio specifico per questo slot: Zona M003 — Cerchi ruote (per verniciatura PC005 — Silver Leaf) (nastro). Mascherare le gomme con nastro 6mm avvolto sul battistrada. Proteggere il mozzo con un dischetto di carta.
-
-Salva il risultato come singolo file immagine, senza alcun elemento grafico
-aggiuntivo, al path: Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/P006_M003.png
 ```
 
 ## P007 — area_D001
@@ -677,9 +641,6 @@ Schema colori (Cotton Candy Drift):
 - Gun Metal (TS-38, METALLIZZATO) — hex #4B4E52 — Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush.
 
 Dettaglio specifico per questo slot: Abitacolo / cornice interna: Dipingi l'abitacolo e la cornice interna con pennello piatto n.8, applicando 2 mani di TS-14 (Black). Nero come contrasto netto rispetto ad azzurro e rosa della cowling.
-
-Salva il risultato come singolo file immagine, senza alcun elemento grafico
-aggiuntivo, al path: Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/P007_D001.png
 ```
 
 ## P007 — area_D002
@@ -729,9 +690,6 @@ Schema colori (Cotton Candy Drift):
 - Gun Metal (TS-38, METALLIZZATO) — hex #4B4E52 — Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush.
 
 Dettaglio specifico per questo slot: Ingranaggi e meccanica del motore: Applica TS-38 (Gun Metal) su ingranaggi e meccanica del motore con pennello tondo n.000, usando la tecnica dry-brush. Gun metal metallizzato per un effetto meccanico realistico sui componenti visibili del motore.
-
-Salva il risultato come singolo file immagine, senza alcun elemento grafico
-aggiuntivo, al path: Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/P007_D002.png
 ```
 
 ## P007 — area_D003
@@ -781,9 +739,6 @@ Schema colori (Cotton Candy Drift):
 - Gun Metal (TS-38, METALLIZZATO) — hex #4B4E52 — Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush.
 
 Dettaglio specifico per questo slot: Cerchi ruote: Applica TS-30 (Silver Leaf) sui cerchi ruote con pennello tondo n.000, oppure a spray dopo la mascheratura M003. Argento metallizzato coordinato con il telaio Super-II.
-
-Salva il risultato come singolo file immagine, senza alcun elemento grafico
-aggiuntivo, al path: Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/P007_D003.png
 ```
 
 ## P007 — area_D004
@@ -833,7 +788,4 @@ Schema colori (Cotton Candy Drift):
 - Gun Metal (TS-38, METALLIZZATO) — hex #4B4E52 — Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush.
 
 Dettaglio specifico per questo slot: Piccoli dettagli e prese d'aria: Applica TS-16 (Yellow) su piccoli dettagli e prese d'aria con pennello tondo n.000 e tocco leggero. Giallo usato con parsimonia — solo accenti puntuali, mai aree estese.
-
-Salva il risultato come singolo file immagine, senza alcun elemento grafico
-aggiuntivo, al path: Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/P007_D004.png
 ```
