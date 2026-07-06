@@ -250,6 +250,20 @@ layer (HTML+Playwright or PIL) renders all text, tables, badges, and callouts di
 from `content.yaml`/`PROJECT.yaml`/`manifest.yaml` — no model ever generates text, so
 hex/codes/names cannot be hallucinated.
 
+**Confirmed by a full 8-page test (2026-07-06, ChatGPT "Thinking", single continuous
+chat):** a single chat fixes cross-page visual consistency (same car/palette every
+page) and nails P002's color hex/codes exactly, but consistency turns out to be
+anchored to the model's own earlier invention, not to content.yaml — an area-mapping
+error made on P002 (e.g. Silver Leaf mislabeled as "Headlight Surround" instead of
+chassis/motor cover) then repeats faithfully on every later page that reuses that
+color. Prose-heavy pages (P003 Materials, P004 Preparation, P006 Masking, P010
+Checklist) get reconstructed from genre knowledge almost entirely disconnected from
+their actual content.yaml, and every page came back in English despite the
+Italian-only zero-tolerance rule. Full findings: `Docs/LOCAL_RENDER_NODE.md`. This
+confirms the fidelity ceiling is structural (asking one model to generate long
+text/data as pixels), not a chat-management problem — reinforces the case for this
+node regardless of single- vs multi-chat handoff practice.
+
 Full estimate and reasoning: `Docs/LOCAL_RENDER_NODE.md`. Rough sizing: 4-7 weeks
 part-time / 2-3 weeks full-time; main open risk is R&D time on shape+color conditioning
 quality, not hardware or the compositing engine (mechanical, predictable work). No SDK

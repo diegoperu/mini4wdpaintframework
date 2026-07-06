@@ -22,6 +22,50 @@ modello diffusivo generalista di produrre testo/tabelle/hex esatti dentro un'uni
 immagine generata end-to-end. Un nodo locale ben progettato può eliminare questa classe
 di errore **architetturalmente**, non probabilisticamente.
 
+## Evidenza — test su set completo (2026-07-06, ChatGPT "Thinking")
+
+Render delle 8 pagine disponibili (P001-P007, P010) di Cotton Candy Drift in un'unica
+chat continua (non una chat per pagina). Risultato: **la chat singola risolve la
+coerenza visiva tra pagine, non la fedeltà al `content.yaml`.**
+
+**Cosa funziona:**
+- Coerenza cross-page: stessa auto, stessa palette, stesso stile di layout su tutte
+  le 8 pagine (il problema di "veicolo inventato diverso ogni volta" è sparito)
+- P002 (Schema Colori): hex e codici Tamiya **esatti al 100%** (PC001-PC006,
+  TS-23/25/14/16/30/38) — per la prima volta zero errori sui dati numerici
+- Separazione dei componenti rispettata (niente più C010/C011 fusi in un'unica card)
+
+**Cosa non funziona (grave):**
+- **La coerenza è ancorata a un'invenzione, non al content.yaml.** Nella prima pagina
+  "densa" (P002) il modello ha inventato una mappatura colore→area leggermente
+  sbagliata (es. PC005 Silver Leaf = "Headlight Surround" invece di "Telaio Super-II
+  e cover motore" — un errore di fatto, non di forma). Da quel punto in poi, **ogni
+  pagina successiva (P005, P007) ripete fedelmente lo stesso errore** invece di
+  rileggere il content.yaml specifico della pagina. La chat singola dà consistenza
+  interna, non fedeltà alla fonte.
+- **Le pagine a contenuto prosa/lista lunga vengono quasi interamente reinventate:**
+  P003 (Materiali) ha prodotto un inventario di "parti del kit" (viti, ingranaggi,
+  ABS/POM) al posto di vernici/attrezzi/consumabili/sicurezza del content.yaml — zero
+  corrispondenza. P004 (Preparazione) ha sostituito i 5 step reali con 5 sezioni
+  inventate, perdendo lo step tecnicamente più importante (applicazione primer
+  bianco). P006 (Mascheratura) ha inventato 6 zone al posto delle 3 reali (M001-M003).
+  P010 (Checklist) ha prodotto voci generiche da manuale di montaggio meccanico
+  invece delle voci specifiche sulla vernice del content.yaml.
+- **Ordine tecnico perso:** P005 richiede di verniciare PC005 (telaio) per primo per
+  evitare overspray sulla carrozzeria — il render lo mette al passo 5 invece che al
+  passo 1, perdendo la ragione tecnica dietro la sequenza.
+- **Tutto in inglese**, violazione trasversale a tutte le 8 pagine della regola
+  zero-tolerance italiano-only (`Config/LANGUAGE_POLICY.yaml`, Golden Rule G01).
+- **Un "PAGE X OF Y" inventato** (mai in content.yaml) diventa internamente incoerente
+  pagina dopo pagina: "PAGE 1 OF 6" → ... → "PAGE 7 OF 6" (impossibile) → "PAGE 10 OF 10".
+
+**Conclusione:** pagine tabellari/corte (P001, P002) restano abbastanza fedeli ai dati
+puntuali; pagine a prosa lunga (P003, P004, P006, P010) vengono ricostruite a memoria
+come "un manuale Mini4WD plausibile", non dai dati reali. Conferma diretta della tesi
+di questo documento: un generatore di immagini end-to-end ha un tetto strutturale sulla
+fedeltà testuale, indipendentemente da chat singola o multipla — il problema non è la
+gestione della chat, è chiedere a un modello di generare testo/dati lunghi dentro pixel.
+
 ## Hardware disponibile
 
 VM dedicata: NVIDIA A100 48GiB VRAM, 128GiB RAM, 24 core EPYC 7302, 100GiB SSD (OS),
