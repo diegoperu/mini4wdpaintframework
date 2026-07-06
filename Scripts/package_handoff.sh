@@ -93,6 +93,25 @@ cp "Docs/RENDER_HANDOFF_CONTEXT.md" "$STAGE_DIR/HANDOFF_CONTEXT.md"
 mkdir -p "$STAGE_DIR/$(dirname "$PROJECT_DIR")"
 cp -R "$PROJECT_DIR" "$STAGE_DIR/$PROJECT_DIR"
 
+# --- Comprimi le foto di riferimento (JPEG qualità 70%) per ridurre la dimensione
+# dello zip: sono foto smartphone ad alta risoluzione, il peso maggiore del pacchetto,
+# e non serve qualità originale per la sola forma/sagoma di riferimento del render.
+if command -v magick >/dev/null 2>&1; then
+  IMAGEMAGICK_CMD=(magick)
+elif command -v convert >/dev/null 2>&1; then
+  IMAGEMAGICK_CMD=(convert)
+else
+  echo "Errore: ImageMagick ('magick'/'convert') non trovato, necessario per comprimere le immagini." >&2
+  exit 1
+fi
+
+IMAGES_DIR="$STAGE_DIR/${PROJECT_DIR}/Images"
+if [[ -d "$IMAGES_DIR" ]]; then
+  while IFS= read -r -d '' img; do
+    "${IMAGEMAGICK_CMD[@]}" "$img" -quality 70 "$img"
+  done < <(find "$IMAGES_DIR" -type f \( -iname '*.jpg' -o -iname '*.jpeg' \) -print0)
+fi
+
 # --- Zip ---
 OUT_DIR="Build/Handoff"
 mkdir -p "$OUT_DIR"
