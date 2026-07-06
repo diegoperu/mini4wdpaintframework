@@ -334,9 +334,13 @@ torna al PASSO 9 per completarla.
 
 ### 10b — Prepara il pacchetto di handoff
 
-I content.yaml locked sono già nel repository locale. Hai due opzioni:
+> ⚠️ **Repository multi-progetto.** Lo ZIP del repo intero contiene *tutti* i progetti
+> (con le rispettive `Images/` di riferimento, il peso maggiore). Con più di un progetto
+> attivo diventa rapidamente troppo grande per un allegato ChatGPT Web, e non c'è modo
+> di dire a ChatGPT quale progetto renderizzare se ce ne sono più di uno nello ZIP.
+> Usa **Opzione C** per un pacchetto mirato a un solo progetto/variante.
 
-**Opzione A — Handoff via GitHub (consigliata):**
+**Opzione A — Handoff via GitHub (repo intero, solo se hai un unico progetto attivo):**
 1. Esegui `git add . && git commit -m "lock: all pages P001-P010"` e `git push`
 2. Scarica il repository aggiornato come ZIP da GitHub (Code → Download ZIP)
 3. Il ZIP conterrà già tutti i content.yaml locked in `Projects/{Model}/{Variant}/ApprovedText/`
@@ -346,6 +350,22 @@ Per ogni pagina che vuoi renderizzare, copia il file localmente:
 - `Projects/{Model}/{Variant}/ApprovedText/P001/content.yaml` → tieni pronto da allegare
 - `Projects/{Model}/{Variant}/ApprovedText/P002/content.yaml` → ecc.
 
+**Opzione C — Pacchetto mirato (consigliata, multi-progetto):**
+```bash
+Scripts/package_handoff.sh {Model} {Variant}
+# es: Scripts/package_handoff.sh Magnum_Saber_Premium Cotton_Candy_Drift
+```
+Lo script valida che tutte le pagine `ApprovedText/P0xx` siano `status: "locked"`
+(si blocca altrimenti) e produce uno ZIP in `Build/Handoff/{Model}_{Variant}_{timestamp}.zip`
+contenente **solo**:
+- i 5 file richiesti dalla Fase 4 (`Core/RENDER_GUIDE.md`, `Core/DESIGN_LANGUAGE.md`,
+  `Core/STYLE_GUIDE.md`, `Core/COMPONENT_SYSTEM.md`, `Assets/DesignSystem/Tokens/tokens.example.yaml`)
+- `Core/QA_SYSTEM.md` (per la checklist finale)
+- `Projects/{Model}/{Variant}/` completo (PROJECT.yaml, ApprovedText/, Images/)
+
+Nessun altro progetto del repo entra nello ZIP — dimensione minima, nessuna ambiguità
+su quale progetto stai renderizzando.
+
 ---
 
 ### 10c — Rendering in ChatGPT Web (una pagina alla volta)
@@ -354,23 +374,21 @@ Apri **ChatGPT Web**, nuova chat. Carica:
 
 | File | Come ottenerlo |
 |---|---|
-| `Mini4WDFramework.zip` | Il ZIP scaricato al punto 10b (Opzione A) oppure il ZIP originale del repo |
-| `content.yaml` della pagina da renderizzare | Da `Projects/{Model}/{Variant}/ApprovedText/P00x/content.yaml` (allegato separato) |
-| Immagini di riferimento | Da `Projects/{Modello}/Images/` |
+| `{Model}_{Variant}_{timestamp}.zip` | Prodotto al punto 10b (Opzione C, consigliata) — oppure `Mini4WDFramework.zip` (Opzioni A/B) |
+| `content.yaml` della pagina da renderizzare | Da `Projects/{Model}/{Variant}/ApprovedText/P00x/content.yaml` (allegato separato, solo se non già nello ZIP) |
+| Immagini di riferimento | Da `Projects/{Model}/{Variant}/Images/` (solo se non già nello ZIP) |
 
-> Se usi il ZIP aggiornato (Opzione A), `content.yaml` e `Images/` sono già dentro —
-> non serve allegarli separatamente. Se usi il ZIP originale, allega entrambi come file
-> separati: il ZIP originale non ha ancora il progetto, e ChatGPT userebbe il template
-> vuoto invece della versione locked.
->
-> Il ZIP contiene già anche i 5 file richiesti dalla Fase 4 (`Core/RENDER_GUIDE.md`,
-> `Core/DESIGN_LANGUAGE.md`, `Core/STYLE_GUIDE.md`, `Core/COMPONENT_SYSTEM.md`,
-> `Assets/DesignSystem/Tokens/tokens.example.yaml`) — non allegarli a parte.
+> Con il pacchetto mirato (Opzione C), `content.yaml`, `Images/` e i 5 file Fase 4 sono
+> già dentro — non serve allegarli separatamente. Se usi invece il ZIP del repo intero
+> (Opzioni A/B), allega comunque `content.yaml` come file separato e specifica sempre
+> `PROGETTO: {Model}/{Variant}` nel prompt (vedi sotto) — con più progetti nello ZIP
+> ChatGPT non ha altro modo di sapere quale renderizzare.
 
-Copia il prompt qui sotto, sostituisci i due valori in maiuscolo e invialo:
+Copia il prompt qui sotto, sostituisci i valori in maiuscolo e invialo:
 
 ```
 Fase 4 — Render Engine.
+PROGETTO: MODELLO/VARIANTE
 Genera l'illustrazione per la pagina CODICE_PAGINA (NOME_PAGINA).
 
 Il content.yaml allegato è approvato e bloccato (status: locked).
@@ -405,6 +423,7 @@ Sostituisci prima di inviare:
 
 | Placeholder | Cosa scrivere | Esempio |
 |---|---|---|
+| `MODELLO/VARIANTE` | Cartella progetto/variante | `Magnum_Saber_Premium/Cotton_Candy_Drift` |
 | `CODICE_PAGINA` | ID pagina | `P001` |
 | `NOME_PAGINA` | Nome della pagina | `Copertina` |
 
