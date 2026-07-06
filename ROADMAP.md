@@ -232,6 +232,31 @@ Still independent of Compiler, no folding needed:
   the same token-resolution-order mechanism proposed twice under two different names; do
   not design separately.
 
+### Local AI Render Node — Independent of Build Order, long-term ChatGPT replacement
+Originated 2026-07-06, after handoff testing on Cotton Candy Drift exposed structural
+limits in ChatGPT Web as the Fase 4 (Render Engine) runtime: outright refusals when
+asked to certify pixel-exact conformity, and — once that was fixed — content
+hallucination (wrong page layout, invented color codes/hex, cross-page context
+contamination within one chat). These are not prompt bugs; they are inherent to asking
+a single generalist diffusion-backed chat to produce exact text/tables/hex inside one
+generated image.
+
+Goal: a local node (available VM: NVIDIA A100 48GiB, 128GiB RAM, 24-core EPYC 7302 —
+hardware is not the bottleneck for this) that splits the work instead of asking one
+model to do it all: diffusion model (SDXL/Flux.1-dev + ControlNet/IP-Adapter) generates
+only the physical-model illustration, shape-conditioned on reference photos and
+color-conditioned on `content.yaml → colors[]`; a deterministic template/compositing
+layer (HTML+Playwright or PIL) renders all text, tables, badges, and callouts directly
+from `content.yaml`/`PROJECT.yaml`/`manifest.yaml` — no model ever generates text, so
+hex/codes/names cannot be hallucinated.
+
+Full estimate and reasoning: `Docs/LOCAL_RENDER_NODE.md`. Rough sizing: 4-7 weeks
+part-time / 2-3 weeks full-time; main open risk is R&D time on shape+color conditioning
+quality, not hardware or the compositing engine (mechanical, predictable work). No SDK
+version assigned yet — stays here until scoped into a real Build Order step. Compatible
+with the Vision constraint that the SDK stay model-agnostic at the AI layer (this is an
+additional runtime, see `Docs/RUNTIMES.md`, not a replacement requirement).
+
 ---
 
 ## Long-Term Vision
