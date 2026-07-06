@@ -391,6 +391,15 @@ su quale progetto stai renderizzando.
 > - le foto di riferimento (`Images/*.jpg`), come **immagini** allegate direttamente
 >   alla chat (non solo dentro lo zip) — così il tool le usa come input visivo reale
 
+> 🛑 **Una chat = una pagina. Mai continuare nella stessa chat da una pagina all'altra.**
+> Verificato empiricamente (2026-07-06): renderizzando P010 e poi, nella STESSA chat,
+> chiedendo P001, il risultato è stato un'immagine ibrida — titolo "Checklist Finale"
+> (da P010) sotto il badge "P001 Copertina", con una tabella colori inventata di sana
+> pianta (7 codici CC-01...CC-07 mai esistiti, invece dei reali PC001-PC006/TS-23 ecc.
+> da PROJECT.yaml). Il contesto della pagina precedente contamina la generazione
+> successiva anche dopo un passo di verifica corretto. Per ogni pagina: chat nuova,
+> zero eccezioni, anche se ti sembra uno spreco di tempo riattaccare gli stessi file.
+
 Apri **ChatGPT Web**, nuova chat. Carica:
 
 | File | Come ottenerlo |
