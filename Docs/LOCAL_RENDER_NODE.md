@@ -128,12 +128,30 @@ pagine statiche, non ricerca.
   model-agnostic at the AI layer" — il nodo locale è un runtime aggiuntivo, non un
   requisito
 
+## Prototipo compositing (2026-07-06)
+
+La metà deterministica (punto 2 sopra) ha un primo prototipo funzionante, costruito
+prima e indipendentemente dalla parte AI-illustrazione: `Scripts/render_page.py` +
+template Jinja2 in `Scripts/templates/` (`P002.html.jinja` per ora). Legge
+`content.yaml` + `Assets/DesignSystem/Tokens/tokens.example.yaml`, compone HTML/CSS,
+esporta PNG (anteprima) o PDF (Playwright/Chromium headless, `pip install -r
+Scripts/requirements.txt` + `playwright install chromium`).
+
+Risultato su P002: hex, codici Tamiya, aree di applicazione e lingua italiana **esatti
+al 100%** rispetto al content.yaml — zero possibilità di allucinazione, perché il testo
+non è generato da alcun modello. L'illustrazione (viste ortogonali front/side/top) resta
+un placeholder tratteggiato finché non esiste una sorgente immagine reale. Noto: il PDF
+sconfina su 2 pagine con i placeholder a dimensione demo — tuning di impaginazione,
+non un problema concettuale.
+
+Questo decide il punto "compositing" sotto: **HTML/CSS+Playwright**, non PIL diretto.
+
 ## Cosa NON è ancora deciso
 
 - Modello di diffusione specifico (SDXL vs Flux.1-dev vs SD3.5) — richiede confronto
   pratico in fase R&D
-- Se il compositing usi HTML/CSS+Playwright o PIL diretto
 - Se questo sostituisce del tutto ChatGPT Web o resta un runtime alternativo (vedi
   `Docs/RUNTIMES.md`) mantenendo entrambi supportati
+- Se e quando estendere il prototipo alle altre 9 pagine (P001, P003-P010)
 - Nessuna versione SDK assegnata — resta in `ROADMAP.md` → Planned — Unscheduled finché
   non si decide di allocarci tempo

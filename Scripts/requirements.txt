@@ -1,0 +1,7 @@
+# Dipendenze per Scripts/render_page.py (prototipo template statico, vedi
+# Docs/LOCAL_RENDER_NODE.md). Dopo l'installazione, scaricare il browser:
+#   playwright install chromium
+
+Jinja2>=3.1
+playwright>=1.61
+PyYAML>=6.0

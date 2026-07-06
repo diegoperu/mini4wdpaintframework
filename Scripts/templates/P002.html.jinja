@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --violet-primary: {{ tokens.colors.primary.VioletPrimary }};
+    --violet-dark: {{ tokens.colors.primary.VioletDark }};
+    --violet-light: {{ tokens.colors.primary.VioletLight }};
+    --white: {{ tokens.colors.neutral.White }};
+    --off-white: {{ tokens.colors.neutral.OffWhite }};
+    --light-gray: {{ tokens.colors.neutral.LightGray }};
+    --mid-gray: {{ tokens.colors.neutral.MidGray }};
+    --dark-gray: {{ tokens.colors.neutral.DarkGray }};
+    --black: {{ tokens.colors.neutral.Black }};
+    --blue-info: {{ tokens.colors.semantic.BlueInfo }};
+    --blue-info-light: {{ tokens.colors.semantic.BlueInfoLight }};
+    --title-font: {{ tokens.typography.fonts.TitleFont }};
+    --body-font: {{ tokens.typography.fonts.BodyFont }};
+    --mono-font: {{ tokens.typography.fonts.MonoFont }};
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: {{ mm(210) }};
+    height: {{ mm(297) }};
+    background: var(--white);
+    font-family: var(--body-font);
+    color: var(--dark-gray);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* C001 — Header */
+  .header {
+    height: {{ mm(18) }};
+    background: var(--violet-primary);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    padding: 0 {{ mm(6) }};
+  }
+  .header .brand { flex: 0 0 25%; font-family: var(--title-font); font-size: 14pt; letter-spacing: 0.5px; }
+  .header .series { flex: 1; text-align: center; font-size: 13pt; font-weight: 600; }
+  .header .page-label { flex: 0 0 25%; text-align: right; font-size: 8pt; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* C002 — Footer */
+  .footer {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: {{ mm(12) }};
+    background: var(--white);
+    border-top: 1.5pt solid var(--violet-primary);
+    display: flex;
+    align-items: center;
+    padding: 0 {{ mm(6) }};
+    font-size: 9pt;
+    color: var(--mid-gray);
+  }
+  .footer .right { margin-left: auto; font-size: 8pt; color: var(--violet-primary); font-weight: 600; }
+
+  /* Main layout: content column + side panel (P002 = three-view + legend sidebar) */
+  .main {
+    position: absolute;
+    top: {{ mm(18) }};
+    bottom: {{ mm(12) }};
+    left: 0; right: 0;
+    display: flex;
+    padding: {{ mm(6) }};
+    gap: {{ mm(6) }};
+  }
+  .content-col { flex: 0 0 62%; display: flex; flex-direction: column; gap: {{ mm(4) }}; }
+  .side-panel { flex: 1; display: flex; flex-direction: column; gap: {{ mm(4) }}; }
+
+  h1.page-title { font-family: var(--title-font); font-size: 22pt; color: var(--black); margin-bottom: {{ mm(2) }}; }
+
+  /* Placeholder for the not-yet-generated illustration (Fase 4 pending) */
+  .render-placeholder {
+    border: 1.5pt dashed var(--light-gray);
+    background: var(--off-white);
+    color: var(--mid-gray);
+    font-size: 9pt;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: {{ mm(58) }};
+  }
+
+  /* C006 — Callout */
+  .callout {
+    background: var(--off-white);
+    border-left: 4px solid var(--blue-info);
+    border-radius: 0 4px 4px 0;
+    padding: {{ mm(3) }} {{ mm(4) }};
+    font-size: 9.5pt;
+    line-height: 1.5;
+    color: var(--dark-gray);
+  }
+
+  /* C003 — Palette */
+  .palette { display: flex; flex-wrap: wrap; gap: {{ mm(3) }}; }
+  .swatch-block { width: {{ mm(20) }}; text-align: center; font-size: 8pt; }
+  .swatch { width: {{ mm(20) }}; height: {{ mm(20) }}; border: 1pt solid var(--light-gray); border-radius: 2px; }
+  .swatch-name { margin-top: 2px; color: var(--black); font-size: 8pt; }
+  .swatch-code { font-family: var(--mono-font); color: var(--violet-dark); font-size: 7.5pt; }
+
+  /* C010 — Paint Legend */
+  .legend-table { width: 100%; border-collapse: collapse; font-size: 8.5pt; }
+  .legend-table th {
+    background: var(--violet-primary); color: var(--white);
+    font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.5px;
+    padding: {{ mm(1.5) }} {{ mm(1.5) }}; text-align: left;
+  }
+  .legend-table td {
+    padding: {{ mm(1.5) }} {{ mm(1.5) }};
+    border-bottom: 1pt solid var(--light-gray);
+    vertical-align: top;
+  }
+  .legend-table .name-cell { color: var(--black); font-weight: 600; white-space: nowrap; }
+  .legend-table .area-cell { color: var(--dark-gray); }
+  .legend-swatch { width: {{ mm(12) }}; height: {{ mm(8) }}; border-radius: 2px; border: 1pt solid var(--light-gray); }
+
+  /* C011 — Paint Code Box */
+  .code-box {
+    display: flex; align-items: center; gap: {{ mm(2) }};
+    background: var(--off-white);
+    border: 1pt solid var(--light-gray);
+    border-radius: 4px;
+    padding: {{ mm(1.5) }} {{ mm(2) }};
+    font-size: 8pt;
+  }
+  .code-box .swatch-mini { width: {{ mm(8) }}; height: {{ mm(8) }}; border-radius: 2px; flex: none; }
+  .code-box .code { font-family: var(--mono-font); color: var(--violet-dark); flex: none; width: {{ mm(14) }}; }
+  .code-box .name { color: var(--black); flex: 1; }
+  .code-box .finish {
+    background: var(--violet-dark); color: var(--white);
+    font-size: 6.5pt; text-transform: uppercase; letter-spacing: 0.5px;
+    padding: 1px {{ mm(1.5) }}; border-radius: 2px; flex: none;
+  }
+  .section-label { font-size: 7.5pt; text-transform: uppercase; letter-spacing: 1px; color: var(--mid-gray); margin-bottom: {{ mm(1) }}; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="brand">Mini4WD Manual</div>
+    <div class="series">{{ content.footer.series }}</div>
+    <div class="page-label">{{ content.title }}</div>
+  </div>
+
+  <div class="main">
+    <div class="content-col">
+      <h1 class="page-title">{{ content.title }}</h1>
+
+      <div class="render-placeholder">
+        TODO: render ortogonale FRONTALE — {{ content.renders.front.file }}<br>
+        (Fase 4 — non ancora generato)
+      </div>
+      <div class="render-placeholder">
+        TODO: render ortogonale LATERALE — {{ content.renders.side.file }}<br>
+        (Fase 4 — non ancora generato)
+      </div>
+      <div class="render-placeholder">
+        TODO: render ortogonale DALL'ALTO — {{ content.renders.top.file }}<br>
+        (Fase 4 — non ancora generato)
+      </div>
+
+      <div class="callout">{{ content.intro }}</div>
+      <div class="callout" style="border-left-color: var(--violet-light);">{{ content.color_notes }}</div>
+    </div>
+
+    <div class="side-panel">
+      <div>
+        <div class="section-label">Tavolozza</div>
+        <div class="palette">
+          {% for c in content.colors %}
+          <div class="swatch-block">
+            <div class="swatch" style="background: {{ c.hex }};"></div>
+            <div class="swatch-name">{{ c.name }}</div>
+            <div class="swatch-code">{{ c.paint_code }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label">Legenda Colori</div>
+        <table class="legend-table">
+          <thead>
+            <tr><th></th><th>Nome</th><th>Area di applicazione</th></tr>
+          </thead>
+          <tbody>
+            {% for c in content.colors %}
+            <tr>
+              <td><div class="legend-swatch" style="background: {{ c.hex }};"></div></td>
+              <td class="name-cell">{{ c.name }}</td>
+              <td class="area-cell">{{ c.area }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <div class="section-label">Codici Vernice</div>
+        {% for c in content.colors %}
+        <div class="code-box">
+          <div class="swatch-mini" style="background: {{ c.hex }};"></div>
+          <div class="code">{{ c.paint_code }}</div>
+          <div class="name">{{ c.name }}</div>
+          <div class="finish">{{ c.finish }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="left">Mini4WD Manual SDK</div>
+    <div class="right">{{ content.footer.page_id }}</div>
+  </div>
+
+</body>
+</html>
