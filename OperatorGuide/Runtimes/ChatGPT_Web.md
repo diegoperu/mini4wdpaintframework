@@ -341,6 +341,21 @@ Non aprire una nuova chat tra una pagina e l'altra.
 
 ## PASSO 12 — Rendering (NUOVA CHAT)
 
+> ⚠️ **Cambio di meccanismo (2026-07-06).** Il testo e il layout di ogni pagina sono
+> ora prodotti da un template deterministico (`Scripts/render_page.py`), non più da
+> ChatGPT — vedi `Docs/LOCAL_RENDER_NODE.md` per il perché (un modello generativo non
+> può garantire fedeltà di testo/tabelle dentro un'immagine). Quel template richiede
+> Python locale (`pip install -r Scripts/requirements.txt` + `playwright install
+> chromium`) e va eseguito da riga di comando — se hai **anche solo un minimo di
+> accesso a un terminale** (anche non su questa stessa macchina), usalo: è nettamente
+> più affidabile. La procedura completa è in `OperatorGuide/Runtimes/Claude_Code.md`
+> § PASSO 10, valida per qualunque runtime testi, non solo Claude Code.
+>
+> Se non hai **nessun** accesso a un terminale, ChatGPT resta l'unica opzione per
+> l'intera pagina: usa il prompt qui sotto sapendo che i test hanno mostrato limiti
+> reali di fedeltà su tabelle/aree/lingua — verifica con attenzione ogni dato rispetto
+> al content.yaml prima di considerare la pagina finale.
+
 Apri una **nuova chat** in ChatGPT.
 
 Carica:
@@ -348,9 +363,15 @@ Carica:
 2. Il `content.yaml` **locked** della pagina da renderizzare
 3. Le tue immagini di riferimento
 
-Usa il **Prompt Fase 4** da `Docs/AI_BOOTSTRAP_PROMPT.md`.
+Usa il **Prompt Fase 4** da `Docs/AI_BOOTSTRAP_PROMPT.md` — la variante **4b** genera
+solo l'illustrazione (da combinare col template se hai un terminale); in assenza di
+terminale, adatta il prompt chiedendo l'intera pagina e applica comunque tutte le
+regole operative elencate (colori solo da `content.yaml`/`PROJECT.yaml`, niente
+elementi non dichiarati, niente mescolare layout di pagine diverse).
 
-Ripeti per ogni pagina.
+Ripeti per ogni pagina — **chat nuova ogni volta**, mai continuare nella stessa chat
+da una pagina all'altra (contaminazione di contesto verificata empiricamente, vedi
+`Docs/LOCAL_RENDER_NODE.md`).
 
 ---
 

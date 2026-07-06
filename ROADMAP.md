@@ -271,6 +271,22 @@ version assigned yet — stays here until scoped into a real Build Order step. C
 with the Vision constraint that the SDK stay model-agnostic at the AI layer (this is an
 additional runtime, see `Docs/RUNTIMES.md`, not a replacement requirement).
 
+**Update 2026-07-06 — compositing half shipped, in production use.** The deterministic
+half of the split (`Scripts/render_page.py` + Jinja2/HTML/CSS templates) is built and
+now the primary path in `OperatorGuide/Runtimes/Claude_Code.md` § PASSO 10 and
+`OperatorGuide/Runtimes/ChatGPT_Web.md` § PASSO 12 (not just this roadmap doc) — covers
+all 9 pages that exist in the test project (P001-P008, P010; P009 has no populated
+content.yaml to build/validate against yet). AI generation scope is now narrowed to
+individual illustration slots only (cover render, 3 orthographic views, per-step/zone/area
+detail photos — image path convention documented in `Docs/LOCAL_RENDER_NODE.md` §
+Contratto), never a whole page. `Scripts/package_handoff.sh` and
+`Docs/RENDER_HANDOFF_CONTEXT.md` were slimmed accordingly (no more `ApprovedText/`,
+`COMPONENT_SYSTEM.md`, `QA_SYSTEM.md` in the ChatGPT handoff — an image generator no
+longer touches page text/layout at all). Remaining scope for this roadmap item is
+narrower than originally estimated: only the R&D + compositing-engine phases from the
+table above are actually still open; the "Pipeline glue" step is effectively the
+image-slot contract, already defined.
+
 ---
 
 ## Long-Term Vision

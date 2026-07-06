@@ -185,55 +185,92 @@ Riporta:
 
 ## FASE 4 — Rendering
 
-*(ex Prompt D)*
+*(ex Prompt D — riscritta 2026-07-06: layout/testo ora deterministico, l'AI genera
+solo le illustrazioni mancanti)*
+
+> ⚠️ **Cambio di meccanismo.** Fino al 2026-07-06 questa fase chiedeva a un'AI
+> generativa di produrre l'intera pagina (testo, tabelle, layout, illustrazione)
+> in un colpo solo. Test estesi su un progetto reale hanno mostrato che un modello
+> diffusivo non può garantire fedeltà di testo/tabelle/hex dentro un'immagine
+> generata — vedi `Docs/LOCAL_RENDER_NODE.md` per l'evidenza completa. Il layout e
+> il testo di ogni pagina sono ora prodotti da un template deterministico
+> (`Scripts/render_page.py`), che legge `content.yaml` direttamente: zero
+> allucinazioni possibili su hex, nomi, aree o lingua. Il compito che resta per
+> un'AI generativa (qui o su un futuro nodo locale, vedi `Docs/LOCAL_RENDER_NODE.md`)
+> è molto più piccolo: produrre **solo l'illustrazione** del modellino per gli slot
+> immagine ancora vuoti — nessun testo, nessuna tabella, nessuna certificazione di
+> conformità pixel-esatta da dichiarare.
 
 **Nuova chat: SÌ** — il rendering usa un contesto diverso (design, non testi).
+
+### 4a — Genera la pagina con il template (nessuna AI coinvolta)
+
+```bash
+pip install -r Scripts/requirements.txt   # una tantum
+playwright install chromium                # una tantum
+Scripts/render_page.py Projects/{Model}/{Variant}/ApprovedText/P00x/content.yaml Build/Preview
+```
+
+Lo script stampa quali slot immagine mancano ancora, col path esatto atteso, es.:
+```
+Immagini mancanti (3): front -> Images/P002_front.png, side -> Images/P002_side.png, top -> Images/P002_top.png
+```
+Se non manca nulla, la pagina è già completa — vai a Fase 5. Se manca qualcosa,
+continua con 4b per ciascuno slot mancante.
+
+### 4b — Genera SOLO l'illustrazione mancante (una alla volta)
 
 **Input (file da allegare):**
 1. `Core/RENDER_GUIDE.md`
 2. `Core/DESIGN_LANGUAGE.md`
 3. `Core/STYLE_GUIDE.md`
-4. `Core/COMPONENT_SYSTEM.md`
-5. `Assets/DesignSystem/Tokens/tokens.example.yaml`
-6. il `content.yaml` **locked** della pagina
-7. le foto da `Projects/{Modello}/Images/`
+4. le foto da `Projects/{Model}/{Variant}/Images/`
+5. `Assets/DesignSystem/Tokens/tokens.example.yaml` (solo se lo slot richiede colori — vedi content.yaml → colors[])
 
-**Output atteso:** pagina illustrata completa, pronta per la validazione visiva
-(`Core/QA_SYSTEM.md`). Da salvare in `Projects/{Model}/{Variant}/ApprovedImages/P00x/`.
+**Output atteso:** un singolo file immagine (nessun testo, nessuna tabella, nessun
+logo, nessun pannello header/footer) da salvare esattamente al path indicato dallo
+script in 4a (es. `Images/P002_front.png`).
 
-**Prompt:**
+**Prompt (adatta TIPO_SLOT: copertina / vista ortogonale / dettaglio):**
 
 ```
-Fase 4 — Render Engine.
-Genera l'illustrazione per la pagina {PAGINA} ({NOME_PAGINA}).
+Genera SOLO un'illustrazione fotorealistica del modellino Mini4WD — {TIPO_SLOT}.
+Nessun testo, nessuna tabella, nessun logo, nessun pannello colorato: solo il
+soggetto isolato su sfondo bianco puro. Questa immagine viene inserita in un
+template già pronto che aggiunge testo/tabelle/header per conto suo — se aggiungi
+tu del testo o una cornice, il risultato finale avrà doppioni o elementi in
+conflitto col template.
 
-Il content.yaml allegato è approvato e bloccato (status: locked).
+Regole:
+- Forma fisica (sagoma, proporzioni, componenti meccanici) il più fedele possibile
+  alle foto di riferimento allegate.
+- Colori, livrea, fiamme, decal e grafica NON derivano dalle foto di riferimento —
+  sono quasi sempre box-art stock con schema colori diverso da quello da
+  documentare. Palette e aree di applicazione vengono SOLO da content.yaml →
+  colors[] (allegato separatamente o riportato qui sotto). Se la livrea della foto
+  reference è in conflitto con lo schema colori, ignora la livrea della foto e
+  ridipingi secondo colors[] — non mescolare o "tingere" i colori esistenti. Non
+  aggiungere grafiche (fiamme, strisce, numeri di gara) assenti dallo schema colori.
+- Applica Core/DESIGN_LANGUAGE.md e Core/STYLE_GUIDE.md per stile fotografico/
+  illuminazione, non per layout di pagina (quello lo fa il template).
 
-Regole operative:
-- Leggi ESCLUSIVAMENTE da content.yaml. Non generare, modificare o riformulare testo.
-- Usa solo i Design Token di tokens.example.yaml. Nessun valore hardcoded.
-- La forma fisica del modello (sagoma, proporzioni, componenti meccanici) deve
-  corrispondere esattamente alle immagini di riferimento. Colori, livrea, fiamme,
-  decal e grafica NON derivano dalle immagini di riferimento — sono quasi sempre
-  box-art stock con schema colori diverso da quello da documentare. Palette e aree
-  di applicazione provengono ESCLUSIVAMENTE da content.yaml → colors[]. Se la livrea
-  della foto reference è in conflitto con lo schema colori, scarta completamente la
-  livrea della foto e ridipingi secondo colors[] — non mescolare o "tingere" i colori
-  esistenti. Non inventare grafiche (fiamme, strisce) assenti dallo schema colori.
-- Applica Core/DESIGN_LANGUAGE.md e Core/STYLE_GUIDE.md.
-- Componenti secondo Core/COMPONENT_SYSTEM.md. Non fondere componenti diversi in un
-  unico elemento: es. C010 Paint Legend (tabella, senza badge) e C011 Paint Code Box
-  (box indipendente con badge finitura) sono componenti separati con collocazioni
-  diverse — non unirli in un'unica card.
-- Se un componente ha altezza variabile, il box deve espandersi per contenere tutto
-  il testo. Non troncare mai il testo per farlo entrare in uno spazio fisso.
-- Sfondo bianco puro. Pannello header viola (token.PrimaryViolet).
-
-Output atteso: pagina illustrata completa. Poi esegui la checklist visiva di
-Core/QA_SYSTEM.md sulle voci applicabili e riporta PASS/FAIL per ciascuna — per la
-voce colori, verifica ogni colors[].hex contro i pixel del render singolarmente, non
-per impressione generale.
+Dettaglio specifico per questo slot: {DESCRIZIONE_SLOT}
+(es. "vista 3/4 anteriore-sinistra, elevazione 15°, illuminazione studio-neutral,
+per la copertina" oppure "vista ortogonale frontale, nessuna prospettiva" oppure
+"primo piano dell'area ala posteriore e pannelli laterali durante la mascheratura
+zona M001").
 ```
+
+Dopo aver ricevuto l'immagine: salvala al path esatto, poi ripeti 4a per
+confermare che il template la incorpori (lo script non mostra più quello slot
+tra le immagini mancanti).
+
+### 4c — Nodo locale (quando disponibile)
+
+Stesso identico contratto input/output di 4b (foto reference + colors[] in,
+un'immagine al path esatto out) — vedi `Docs/LOCAL_RENDER_NODE.md` § Contratto.
+Nessuna differenza di procedura per l'operatore: cambia solo dove gira la
+generazione.
 
 **Guida passo-passo:** `FIRST_RENDER.md`
 

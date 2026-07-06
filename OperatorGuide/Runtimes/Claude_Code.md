@@ -311,17 +311,29 @@ Non aprire una nuova sessione tra una pagina e l'altra.
 
 ---
 
-## PASSO 10 — Handoff al Runtime Immagini
+## PASSO 10 — Generazione pagina (template + illustrazioni)
 
-> ⚠️ **Claude Code non può generare immagini.**
-> Il rendering (Fase 4) richiede un'AI generativa visuale: ChatGPT Web (DALL-E) o altro runtime supportato (vedi `Docs/RUNTIMES.md`).
-> Questo passo descrive come trasferire tutto il lavoro fatto con Claude Code al runtime immagini.
+> ⚠️ **Cambio di meccanismo (2026-07-06).** Fino a questa data, questo passo chiedeva
+> a un'AI generativa (ChatGPT Web) di produrre l'intera pagina — testo, tabelle,
+> layout, illustrazione — in un solo colpo. Test estesi su un progetto reale hanno
+> mostrato che un modello diffusivo non può garantire fedeltà di testo/tabelle/hex
+> dentro un'immagine generata: layout mescolati tra pagine diverse, aree/colori
+> inventati, contenuto interi reinventati per le pagine più dense di testo. Vedi
+> `Docs/LOCAL_RENDER_NODE.md` per l'evidenza completa.
+>
+> **Claude Code non può generare immagini** — questo non cambia. Quello che cambia è
+> che ora il testo e il layout di ogni pagina sono prodotti da un **template
+> deterministico** (`Scripts/render_page.py`), che legge `content.yaml` direttamente:
+> zero possibilità di allucinazione su hex, nomi, aree o lingua, perché nessun modello
+> genera quel testo. Serve ancora un'AI generativa visuale — ma solo per le
+> **illustrazioni mancanti** (copertina, viste ortogonali, foto di dettaglio), non
+> più per l'intera pagina.
 
 ---
 
 ### 10a — Verifica che tutte le pagine siano locked
 
-Prima di passare al rendering, controlla che ogni pagina da P001 a P010 abbia `status: locked`:
+Prima di generare le pagine finali, controlla che ogni pagina da P001 a P010 abbia `status: locked`:
 
 ```bash
 grep -r "status:" Projects/CARTELLA_MODELLO/CARTELLA_VARIANTE/ApprovedText/*/metadata.yaml
@@ -332,166 +344,79 @@ torna al PASSO 9 per completarla.
 
 ---
 
-### 10b — Prepara il pacchetto di handoff
+### 10b — Genera la pagina con il template
 
-> ⚠️ **Repository multi-progetto.** Lo ZIP del repo intero contiene *tutti* i progetti
-> (con le rispettive `Images/` di riferimento, il peso maggiore). Con più di un progetto
-> attivo diventa rapidamente troppo grande per un allegato ChatGPT Web, e non c'è modo
-> di dire a ChatGPT quale progetto renderizzare se ce ne sono più di uno nello ZIP.
-> Usa **Opzione C** per un pacchetto mirato a un solo progetto/variante.
+```bash
+pip install -r Scripts/requirements.txt   # una tantum
+playwright install chromium                # una tantum
 
-**Opzione A — Handoff via GitHub (repo intero, solo se hai un unico progetto attivo):**
-1. Esegui `git add . && git commit -m "lock: all pages P001-P010"` e `git push`
-2. Scarica il repository aggiornato come ZIP da GitHub (Code → Download ZIP)
-3. Il ZIP conterrà già tutti i content.yaml locked in `Projects/{Model}/{Variant}/ApprovedText/`
+Scripts/render_page.py \
+  Projects/CARTELLA_MODELLO/CARTELLA_VARIANTE/ApprovedText/P00x/content.yaml \
+  Build/Preview
+```
 
-**Opzione B — Handoff diretto (senza push):**
-Per ogni pagina che vuoi renderizzare, copia il file localmente:
-- `Projects/{Model}/{Variant}/ApprovedText/P001/content.yaml` → tieni pronto da allegare
-- `Projects/{Model}/{Variant}/ApprovedText/P002/content.yaml` → ecc.
+Genera `Build/Preview/{Model}_{Variant}_{PageID}.png` (o `.pdf` come terzo argomento)
+e stampa l'elenco di eventuali immagini ancora mancanti, col path esatto atteso:
 
-**Opzione C — Pacchetto mirato (consigliata, multi-progetto):**
+```
+Immagini mancanti (3): front -> Images/P002_front.png, side -> Images/P002_side.png, top -> Images/P002_top.png
+```
+
+Se non manca nulla, la pagina è già completa — salvala (PASSO 10d) e passa alla
+pagina successiva. Se manca qualcosa, continua con 10c per ciascuno slot mancante.
+
+Le pagine P003, P005, P010 non richiedono mai illustrazioni (solo testo/tabelle) —
+per queste, 10b è l'unico passo necessario.
+
+---
+
+### 10c — Genera le illustrazioni mancanti (ChatGPT Web, una alla volta)
+
+> 🛑 **Una chat = una immagine.** Verificato empiricamente (2026-07-06): riusare la
+> stessa chat ChatGPT tra una generazione e l'altra contamina il risultato successivo
+> col contesto della precedente (es. titolo di una pagina mescolato col badge di
+> un'altra). Anche se ora l'immagine non contiene più testo, resta buona norma: chat
+> nuova per ogni illustrazione, zero eccezioni.
+
+**Prepara il pacchetto** (una volta per progetto/variante, riusabile per tutte le
+illustrazioni mancanti dello stesso progetto — non dipende dalla pagina specifica):
+
 ```bash
 Scripts/package_handoff.sh {Model} {Variant}
 # es: Scripts/package_handoff.sh Magnum_Saber_Premium Cotton_Candy_Drift
 ```
-Lo script valida che tutte le pagine `ApprovedText/P0xx` siano `status: "locked"`
-(si blocca altrimenti) e produce uno ZIP in `Build/Handoff/{Model}_{Variant}_{timestamp}.zip`
-contenente **solo**:
-- i 5 file richiesti dalla Fase 4 (`Core/RENDER_GUIDE.md`, `Core/DESIGN_LANGUAGE.md`,
-  `Core/STYLE_GUIDE.md`, `Core/COMPONENT_SYSTEM.md`, `Assets/DesignSystem/Tokens/tokens.example.yaml`)
-- `Core/QA_SYSTEM.md` (per la checklist finale)
-- `Projects/{Model}/{Variant}/` completo (PROJECT.yaml, ApprovedText/, Images/)
-- `HANDOFF_CONTEXT.md` alla radice (da `Docs/RENDER_HANDOFF_CONTEXT.md`) — senza
-  `AI_ENTRYPOINT.md` (che forzerebbe un bootstrap report completo, sbagliato per un
-  handoff di singola pagina) il pacchetto mirato rischiava di essere letto da ChatGPT
-  come corpus documentale da analizzare invece che come istruzione a generare
-  un'immagine: riprodotto 2/2 volte un rifiuto ("non posso produrre l'illustrazione
-  né verificare i pixel del render") con il pacchetto mirato privo di framing. Questo
-  file dichiara esplicitamente il ruolo di Render Engine e ammorbidisce la richiesta
-  di verifica colore da "lettura pixel esatta" a "confronto visivo best-effort".
 
-Nessun altro progetto del repo entra nello ZIP — dimensione minima, nessuna ambiguità
-su quale progetto stai renderizzando.
+Produce uno ZIP in `Build/Handoff/{Model}_{Variant}_{timestamp}.zip` contenente
+**solo**: `Core/RENDER_GUIDE.md`, `Core/DESIGN_LANGUAGE.md`, `Core/STYLE_GUIDE.md`
+(stile fotografico), `PROJECT.yaml` (schema colori), `Images/` (foto reference,
+compresse JPEG q70), `HANDOFF_CONTEXT.md` (dichiara il ruolo: genera SOLO
+un'illustrazione isolata, non una pagina). Niente più `ApprovedText/`,
+`COMPONENT_SYSTEM.md`, `QA_SYSTEM.md` o `tokens.example.yaml` — non servono più,
+l'AI non tocca più testo o layout di pagina.
 
----
+Apri **ChatGPT Web** (usa **"Thinking"**, non **"Pro"** — vedi nota sotto), nuova
+chat. Carica lo ZIP **e in aggiunta separatamente le foto di riferimento**
+(`Images/*.jpg`) come allegati immagine diretti — lo strumento di generazione le usa
+meglio come input visivo diretto che come file dentro un archivio.
 
-### 10c — Rendering in ChatGPT Web (una pagina alla volta)
+Copia il prompt da **`Docs/AI_BOOTSTRAP_PROMPT.md` § FASE 4 → 4b** (fonte unica,
+non duplicato qui per evitare che le due copie divergano nel tempo), sostituisci
+`{TIPO_SLOT}` e `{DESCRIZIONE_SLOT}` con lo slot che ti serve — es.:
 
-> ⚠️ **Lo zip da solo non basta a "ancorare" il render.** Verificato empiricamente
-> (2026-07-06, P001 Cotton Candy Drift): con solo lo zip allegato, ChatGPT ha generato
-> un'immagine scollegata dal progetto — layout di un'altra pagina, veicolo inventato
-> senza relazione con le foto reference, campi (scala, autore, data) mai presenti nel
-> content.yaml. Lo strumento di generazione immagini di ChatGPT compone internamente
-> un prompt testuale sintetico per il motore immagini: quella sintesi è lossy e non
-> garantisce che i file dentro lo zip vengano letti con precisione, specie le foto
-> (serve un input visivo diretto, non testo). Per questo, oltre allo zip, allega
-> **sempre separatamente in chat**:
-> - `content.yaml` della pagina da renderizzare, come file a parte
-> - le foto di riferimento (`Images/*.jpg`), come **immagini** allegate direttamente
->   alla chat (non solo dentro lo zip) — così il tool le usa come input visivo reale
-
-> 🛑 **Una chat = una pagina. Mai continuare nella stessa chat da una pagina all'altra.**
-> Verificato empiricamente (2026-07-06): renderizzando P010 e poi, nella STESSA chat,
-> chiedendo P001, il risultato è stato un'immagine ibrida — titolo "Checklist Finale"
-> (da P010) sotto il badge "P001 Copertina", con una tabella colori inventata di sana
-> pianta (7 codici CC-01...CC-07 mai esistiti, invece dei reali PC001-PC006/TS-23 ecc.
-> da PROJECT.yaml). Il contesto della pagina precedente contamina la generazione
-> successiva anche dopo un passo di verifica corretto. Per ogni pagina: chat nuova,
-> zero eccezioni, anche se ti sembra uno spreco di tempo riattaccare gli stessi file.
-
-Apri **ChatGPT Web**, nuova chat. Carica:
-
-| File | Come ottenerlo |
-|---|---|
-| `{Model}_{Variant}_{timestamp}.zip` | Prodotto al punto 10b (Opzione C, consigliata) — oppure `Mini4WDFramework.zip` (Opzioni A/B) |
-| `content.yaml` della pagina da renderizzare | Da `Projects/{Model}/{Variant}/ApprovedText/P00x/content.yaml` — **sempre come allegato separato**, anche se già nello ZIP |
-| Immagini di riferimento | Da `Projects/{Model}/{Variant}/Images/` — **sempre come allegati immagine diretti**, anche se già nello ZIP |
-
-Specifica sempre `PROGETTO: {Model}/{Variant}` nel prompt (vedi sotto) — con più
-progetti nello ZIP ChatGPT non ha altro modo di sapere quale renderizzare.
-
-**Passo di verifica (obbligatorio prima di generare):** prima di incollare il prompt
-di rendering, invia questo messaggio e leggi la risposta con attenzione:
-
-```
-Prima di generare qualunque immagine, conferma per iscritto, senza inventare nulla:
-1. title, subtitle, series letti da content.yaml (riportali testuali)
-2. se presente, l'elenco colors[] con hex letto da content.yaml
-3. una breve descrizione di cosa vedi in ciascuna foto di riferimento allegata
-   (forma del telaio, colore box-art originale, angolazione)
-Non generare ancora l'immagine. Attendi la mia conferma.
-```
-
-Se i valori riportati non corrispondono al content.yaml reale o la descrizione delle
-foto è generica/inventata, **non procedere**: la generazione successiva erediterebbe
-lo stesso errore. Correggi l'allegato o riprova in chat nuova prima di continuare.
-
-Solo dopo conferma corretta, copia il prompt qui sotto, sostituisci i valori in
-maiuscolo e invialo:
-
-```
-Fase 4 — Render Engine.
-PROGETTO: MODELLO/VARIANTE
-Genera l'illustrazione per la pagina CODICE_PAGINA (NOME_PAGINA).
-
-Il content.yaml allegato è approvato e bloccato (status: locked).
-
-Regole operative:
-- Il testo viene solo da content.yaml. Non generare, modificare o riformulare testo.
-- Usa i Design Token di tokens.example.yaml per i valori visivi (colori, spaziature).
-- La forma fisica del modello (sagoma, proporzioni, componenti meccanici) segue le
-  immagini di riferimento allegate, il più fedelmente possibile. Colori, livrea,
-  fiamme, decal e grafica NON vanno presi dalle immagini di riferimento — sono quasi
-  sempre box-art stock con schema colori diverso da quello da documentare. Palette e
-  aree di applicazione vengono da content.yaml → colors[]. Se la livrea della foto
-  reference è in conflitto con lo schema colori, ignora la livrea della foto e
-  ridipingi secondo colors[] — non mescolare o "tingere" i colori esistenti. Non
-  aggiungere grafiche (fiamme, strisce) assenti dallo schema colori.
-- Applica Core/DESIGN_LANGUAGE.md e Core/STYLE_GUIDE.md.
-- Componenti secondo Core/COMPONENT_SYSTEM.md. Non fondere componenti diversi in un
-  unico elemento: es. C010 Paint Legend (tabella, senza badge) e C011 Paint Code Box
-  (box indipendente con badge finitura) sono componenti separati con collocazioni
-  diverse — non unirli in un'unica card.
-- **Includi SOLO i componenti/campi presenti nel content.yaml di QUESTA pagina.** Se
-  un campo (es. colors[], checklist_sections[]) non esiste in questo content.yaml,
-  quel componente non esiste su questa pagina — non aggiungerlo per "completare" la
-  pagina, anche se ti sembra una pagina di manuale incompleta senza. Esempio concreto:
-  la Copertina (P001) non ha mai Paint Legend né Paint Code Box — quelli sono
-  componenti esclusivi di Schema Colori (P002), pagina diversa. Non mescolare layout
-  di pagine diverse.
-- **Non aggiungere NESSUN elemento non presente in content.yaml**, in particolare:
-  loghi di brand reali (es. Tamiya), timbri versione/data (es. "VERSION 1.0", date),
-  badge di finitura (GLOSS/FLAT/METALLIC) non elencati nel content.yaml, numeri di
-  gara o scritte/decal sulla carrozzeria o sull'alettone non presenti in colors[]. Se
-  non è scritto in content.yaml, non esiste in questa pagina, punto.
-- Se un componente ha altezza variabile, il box deve espandersi per contenere tutto
-  il testo. Non troncare mai il testo per farlo entrare in uno spazio fisso.
-- Sfondo bianco puro. Pannello header viola (token.PrimaryViolet).
-
-Output atteso: pagina illustrata completa. Poi fai una tua auto-review visiva
-best-effort con la checklist di Core/QA_SYSTEM.md sulle voci applicabili, indicando
-per ciascuna il tuo giudizio (non una certificazione formale, la tua valutazione
-visiva più accurata) — per i colori, confronta a occhio il render con colors[].hex
-e segnala eventuali scostamenti percepiti.
-```
-
-Sostituisci prima di inviare:
-
-| Placeholder | Cosa scrivere | Esempio |
+| Slot | TIPO_SLOT | DESCRIZIONE_SLOT |
 |---|---|---|
-| `MODELLO/VARIANTE` | Cartella progetto/variante | `Magnum_Saber_Premium/Cotton_Candy_Drift` |
-| `CODICE_PAGINA` | ID pagina | `P001` |
-| `NOME_PAGINA` | Nome della pagina | `Copertina` |
+| P001 copertina | copertina | vista 3/4 anteriore-sinistra, elevazione 15°, illuminazione studio-neutral |
+| P002 vista ortogonale | vista ortogonale frontale/laterale/dall'alto | nessuna prospettiva, sfondo bianco |
+| P004/P006/P007 dettaglio | foto di dettaglio/mascheratura | area e tecnica specifica dello step/zona/area (vedi content.yaml) |
+
+Salva l'immagine ricevuta **esattamente** al path indicato da 10b (es.
+`Projects/{Model}/{Variant}/Images/P002_front.png`), poi ripeti 10b: lo slot non
+comparirà più tra le immagini mancanti se il path è corretto.
 
 > ⚠️ **Variante ChatGPT: usa "Thinking", non "Pro".** Test 2026-07-06: "Pro" sovra-pensa
 > il task e produce un output scarso in tempi lunghi; "Thinking" risponde in meno di un
-> minuto con risultato nettamente migliore (per la prima volta ha letto correttamente
-> i codici PC001-PC006/TS-xx reali da PROJECT.yaml invece di inventarli). Difetti residui
-> osservati con "Thinking" su P001: layout mescolato con P002 (Paint Legend/Paint Code Box
-> aggiunti a una Copertina che non li prevede) ed elementi inventati (logo Tamiya, timbro
-> versione/data, badge finitura, numero gara/decal su carrozzeria) — da qui le due regole
-> aggiunte sopra ("Includi SOLO i componenti..." e "Non aggiungere NESSUN elemento...").
+> minuto con risultato nettamente migliore e legge correttamente i colori da
+> PROJECT.yaml invece di inventarli.
 
 ---
 
@@ -501,11 +426,11 @@ Sostituisci prima di inviare:
 
 ---
 
-### 10d — Salva le immagini generate
+### 10d — Salva la pagina finale
 
-Per ogni pagina renderizzata:
-1. Scarica l'immagine prodotta dall'AI generativa
-2. Salvala in `Projects/{Model}/{Variant}/ApprovedImages/P00x/` nel repository locale
+Quando `Scripts/render_page.py` (10b) non segnala più immagini mancanti:
+1. La pagina in `Build/Preview/{Model}_{Variant}_{PageID}.png` (o `.pdf`) è quella finale
+2. Copiala in `Projects/{Model}/{Variant}/ApprovedImages/P00x/` nel repository locale
 3. Aggiorna `Projects/{Model}/{Variant}/ApprovedText/P00x/metadata.yaml → status: rendered`
 
 ---
@@ -514,20 +439,21 @@ Per ogni pagina renderizzata:
 
 Con tutte le pagine in `status: rendered`, usa il **Prompt Fase 5** da `Docs/AI_BOOTSTRAP_PROMPT.md`.
 
-Il PDF può essere assemblato con ChatGPT Web (stessa procedura handoff del PASSO 10).
+Il PDF può essere assemblato con ChatGPT Web (stessa procedura di handoff del PASSO 10c).
 Prerequisito: copia compilata di `Templates/PDF_CONFIG.yaml` in `Projects/{Modello}/PDF_CONFIG.yaml`.
 
 ---
 
 ## Riepilogo fasi
 
-| Fase | Runtime | Cosa fa l'AI |
+| Fase | Runtime | Cosa fa |
 |---|---|---|
 | Bootstrap | **Claude Code** | Legge dal repo, produce Bootstrap Report |
 | Testi P001–P010 | **Claude Code** | Scrive content.yaml nel repo |
 | QA Testi | **Claude Code** | Valida content.yaml, APPROVED/REJECTED |
 | Sigillatura | **Claude Code** | Imposta metadata.yaml → locked |
-| **Rendering** | **AI immagini** (ChatGPT Web) | Genera pagine illustrate da content.yaml |
+| **Layout + testo pagina** | **Scripts/render_page.py** (locale, deterministico) | Compone testo/tabelle/layout da content.yaml — zero AI |
+| **Illustrazioni mancanti** | **AI immagini** (ChatGPT Web, o nodo locale futuro) | Genera SOLO copertina/viste ortogonali/foto dettaglio, nessun testo |
 | PDF | **AI immagini** (ChatGPT Web) | Assembla 3 varianti PDF |
 
 ---

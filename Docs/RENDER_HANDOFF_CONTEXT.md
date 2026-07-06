@@ -1,37 +1,41 @@
-# Contesto Handoff — Render Engine (Fase 3–4)
+# Contesto Handoff — Illustrazione singola (Fase 4)
 
-Questo pacchetto contiene SOLO i file necessari per renderizzare UNA pagina di un
-manuale Mini4WD già approvata e bloccata (`status: locked`). Non è un bootstrap
-completo del framework Mini4WD Manual SDK: non serve produrre un Bootstrap Report
-né attendere approvazione preventiva — il contenuto è già stato validato a monte
-(Text QA, Content QA, seal) nella pipeline Claude Code.
+Questo pacchetto contiene SOLO i file necessari per generare **una singola
+illustrazione** del modellino Mini4WD (copertina, vista ortogonale, o foto di
+dettaglio/mascheratura) — non una pagina intera di manuale.
+
+> ⚠️ **Cambio di ruolo (2026-07-06).** Fino a questa data, questo pacchetto chiedeva
+> di generare l'intera pagina (testo, tabelle, layout, illustrazione). Test estesi
+> hanno mostrato che un modello generativo non può garantire fedeltà di testo/tabelle
+> dentro un'immagine — vedi `Docs/LOCAL_RENDER_NODE.md` per l'evidenza completa. Il
+> layout e il testo di ogni pagina sono ora prodotti da un template deterministico
+> (`Scripts/render_page.py`) che legge `content.yaml` direttamente. Il tuo compito in
+> questa chat è molto più piccolo e specifico.
 
 ## Il tuo ruolo in questa chat
 
-Sei il **Render Engine** del framework Mini4WD Manual SDK. Il tuo compito è generare
-**direttamente**, usando lo strumento di generazione immagini disponibile in questa
-interfaccia, l'illustrazione richiesta nel prossimo messaggio dell'utente: una pagina
-di manuale tecnico in stile editoriale (sfondo bianco, pannello header viola,
-componenti numerati). L'output atteso è un'immagine raster completa, non una
-descrizione testuale, non una specifica di layout.
+Genera **direttamente**, usando lo strumento di generazione immagini disponibile in
+questa interfaccia, **solo l'illustrazione richiesta** nel prossimo messaggio
+dell'utente — un'immagine isolata su sfondo bianco, senza testo, senza tabelle,
+senza loghi, senza pannelli colorati o header. Quell'immagine verrà inserita da un
+template già pronto che aggiunge testo/tabelle/header per conto suo: se aggiungi tu
+del testo o una cornice, il risultato finale avrà doppioni o elementi in conflitto
+con il template.
 
 ## Cosa trovi in questo pacchetto
 
-- `Core/RENDER_GUIDE.md`, `Core/DESIGN_LANGUAGE.md`, `Core/STYLE_GUIDE.md`,
-  `Core/COMPONENT_SYSTEM.md` — regole visive vincolanti
-- `Core/QA_SYSTEM.md` — checklist di revisione post-render
-- `Assets/DesignSystem/Tokens/tokens.example.yaml` — tutti i valori di colore/spaziatura
-- `Projects/{Model}/{Variant}/PROJECT.yaml` — dati del modello
-- `Projects/{Model}/{Variant}/ApprovedText/P00x/content.yaml` — testo approvato e
-  bloccato per la pagina da renderizzare (fonte primaria, non modificare)
+- `Core/RENDER_GUIDE.md`, `Core/DESIGN_LANGUAGE.md`, `Core/STYLE_GUIDE.md` — regole
+  di stile fotografico/illuminazione (non layout di pagina — quello non ti riguarda)
+- `Projects/{Model}/{Variant}/PROJECT.yaml` — dati del modello, incluso
+  `paintScheme.colors[]` (fonte primaria per i colori, non modificare)
 - `Projects/{Model}/{Variant}/Images/` — foto di riferimento del modello fisico reale
-  (forma/sagoma). NON la palette colori: quella viene solo da `content.yaml → colors[]`
+  (forma/sagoma). NON la palette colori: quella viene solo da
+  `PROJECT.yaml → paintScheme.colors[]` — le foto reference sono quasi sempre
+  box-art stock con uno schema colori diverso da quello da documentare
 
-## QA post-render (Fase 4)
+## Dopo la generazione
 
-Dopo aver generato l'immagine, esegui una review **best-effort** della checklist di
-`Core/QA_SYSTEM.md` sulle voci applicabili. La verifica colore è un confronto visivo
-ragionato tra il render e `colors[].hex` — non è richiesta una lettura pixel esatta
-(impossibile da garantire con certezza per un modello generativo): riporta PASS/FAIL
-con il tuo miglior giudizio visivo, segnalando eventuali incertezze invece di rifiutare
-l'intero task per non poter fornire una garanzia assoluta.
+Non serve alcuna checklist QA testuale (niente più tabelle/hex da verificare a
+parole — quelli li disegna il template dai dati, non tu). Basta confermare
+visivamente che forma e colori corrispondano a quanto richiesto prima di consegnare
+il file.

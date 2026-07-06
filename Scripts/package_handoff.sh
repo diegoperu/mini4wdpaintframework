@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
-# Prepara un pacchetto di handoff (zip) per il rendering in ChatGPT Web,
-# contenente SOLO i file necessari per un singolo progetto/variante:
-# Core files fissi (Design Language/Style/Component/QA/RENDER_GUIDE) +
-# tokens.example.yaml + Projects/{Model}/{Variant}/** (ApprovedText, Images,
-# PROJECT.yaml, PDF_CONFIG.yaml).
+# Prepara un pacchetto di handoff (zip) per generare UNA illustrazione mancante
+# (Fase 4, vedi Docs/AI_BOOTSTRAP_PROMPT.md) in ChatGPT Web o altro runtime immagini.
+#
+# Dal 2026-07-06 il layout/testo di ogni pagina è prodotto da Scripts/render_page.py
+# (template deterministico): l'AI non genera più pagine intere, solo illustrazioni
+# isolate (copertina, viste ortogonali, foto di dettaglio). Per questo il pacchetto
+# NON contiene più Core/COMPONENT_SYSTEM.md, Core/QA_SYSTEM.md, tokens.example.yaml
+# né ApprovedText/ — l'AI non deve più leggere layout di pagina o testo, solo stile
+# fotografico (RENDER_GUIDE/DESIGN_LANGUAGE/STYLE_GUIDE) e schema colori
+# (PROJECT.yaml → paintScheme.colors[]).
 #
 # Uso:
 #   Scripts/package_handoff.sh <Model> <Variant>
 #   Scripts/package_handoff.sh Magnum_Saber_Premium Cotton_Candy_Drift
-#
-# Blocca se una pagina in ApprovedText/P0xx non ha status: "locked".
 
 set -euo pipefail
 
@@ -25,36 +28,14 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
 
 PROJECT_DIR="Projects/${MODEL}/${VARIANT}"
-APPROVED_TEXT_DIR="${PROJECT_DIR}/ApprovedText"
 
 if [[ ! -d "$PROJECT_DIR" ]]; then
   echo "Errore: cartella progetto non trovata: ${PROJECT_DIR}" >&2
   exit 1
 fi
 
-if [[ ! -d "$APPROVED_TEXT_DIR" ]]; then
-  echo "Errore: cartella ApprovedText non trovata: ${APPROVED_TEXT_DIR}" >&2
-  exit 1
-fi
-
-# --- Validazione: ogni pagina P0xx deve essere locked ---
-UNLOCKED=()
-for page_dir in "$APPROVED_TEXT_DIR"/P[0-9][0-9][0-9]; do
-  [[ -d "$page_dir" ]] || continue
-  metadata_file="${page_dir}/metadata.yaml"
-  if [[ ! -f "$metadata_file" ]]; then
-    UNLOCKED+=("$(basename "$page_dir") (metadata.yaml mancante)")
-    continue
-  fi
-  if ! grep -q '^status: *"locked"' "$metadata_file"; then
-    UNLOCKED+=("$(basename "$page_dir")")
-  fi
-done
-
-if [[ ${#UNLOCKED[@]} -gt 0 ]]; then
-  echo "Errore: pagine non locked in ${APPROVED_TEXT_DIR}:" >&2
-  printf '  - %s\n' "${UNLOCKED[@]}" >&2
-  echo "Completa il PASSO 9/10a prima di impacchettare." >&2
+if [[ ! -f "$PROJECT_DIR/PROJECT.yaml" ]]; then
+  echo "Errore: PROJECT.yaml non trovato in ${PROJECT_DIR}" >&2
   exit 1
 fi
 
@@ -66,9 +47,6 @@ CORE_FILES=(
   "Core/RENDER_GUIDE.md"
   "Core/DESIGN_LANGUAGE.md"
   "Core/STYLE_GUIDE.md"
-  "Core/COMPONENT_SYSTEM.md"
-  "Core/QA_SYSTEM.md"
-  "Assets/DesignSystem/Tokens/tokens.example.yaml"
 )
 
 for f in "${CORE_FILES[@]}"; do
@@ -80,18 +58,22 @@ for f in "${CORE_FILES[@]}"; do
   cp "$f" "$STAGE_DIR/$f"
 done
 
-# File di framing/ruolo alla radice dello zip: senza AI_ENTRYPOINT.md (che forza un
-# bootstrap report completo, sbagliato per un handoff di singola pagina) il pacchetto
-# mirato è solo un mucchio di yaml/md tecnici e ChatGPT può leggerlo come corpus da
-# analizzare invece che come istruzione a generare un'immagine.
+# File di framing/ruolo alla radice dello zip: senza indicare esplicitamente che il
+# compito è generare SOLO un'illustrazione (non una pagina intera), un modello che
+# vede un mucchio di file di stile può ancora provare a produrre una pagina completa
+# con testo — vedi Docs/RENDER_HANDOFF_CONTEXT.md per la cronologia del problema.
 if [[ ! -f "Docs/RENDER_HANDOFF_CONTEXT.md" ]]; then
   echo "Errore: file core mancante: Docs/RENDER_HANDOFF_CONTEXT.md" >&2
   exit 1
 fi
 cp "Docs/RENDER_HANDOFF_CONTEXT.md" "$STAGE_DIR/HANDOFF_CONTEXT.md"
 
-mkdir -p "$STAGE_DIR/$(dirname "$PROJECT_DIR")"
-cp -R "$PROJECT_DIR" "$STAGE_DIR/$PROJECT_DIR"
+mkdir -p "$STAGE_DIR/$PROJECT_DIR"
+cp "$PROJECT_DIR/PROJECT.yaml" "$STAGE_DIR/$PROJECT_DIR/PROJECT.yaml"
+
+if [[ -d "$PROJECT_DIR/Images" ]]; then
+  cp -R "$PROJECT_DIR/Images" "$STAGE_DIR/$PROJECT_DIR/Images"
+fi
 
 # --- Comprimi le foto di riferimento (JPEG qualità 70%) per ridurre la dimensione
 # dello zip: sono foto smartphone ad alta risoluzione, il peso maggiore del pacchetto,

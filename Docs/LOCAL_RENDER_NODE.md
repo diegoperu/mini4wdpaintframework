@@ -128,30 +128,64 @@ pagine statiche, non ricerca.
   model-agnostic at the AI layer" — il nodo locale è un runtime aggiuntivo, non un
   requisito
 
-## Prototipo compositing (2026-07-06)
+## Prototipo compositing (2026-07-06, completo)
 
-La metà deterministica (punto 2 sopra) ha un primo prototipo funzionante, costruito
-prima e indipendentemente dalla parte AI-illustrazione: `Scripts/render_page.py` +
-template Jinja2 in `Scripts/templates/` (`P002.html.jinja` per ora). Legge
-`content.yaml` + `Assets/DesignSystem/Tokens/tokens.example.yaml`, compone HTML/CSS,
-esporta PNG (anteprima) o PDF (Playwright/Chromium headless, `pip install -r
-Scripts/requirements.txt` + `playwright install chromium`).
+La metà deterministica (punto 2 sopra) è costruita e copre **tutte le 9 pagine** del
+progetto di test (P001-P008, P010 — P009 escluso, nessun `content.yaml` da cui
+costruirlo/validarlo per mancanza di progetti con variante premium):
+`Scripts/render_page.py` + template Jinja2 in `Scripts/templates/`. Legge
+`content.yaml` + `PROJECT.yaml` + `Assets/DesignSystem/Tokens/tokens.example.yaml`,
+compone HTML/CSS, esporta PNG (anteprima) o PDF (Playwright/Chromium headless,
+`pip install -r Scripts/requirements.txt` + `playwright install chromium`).
 
-Risultato su P002: hex, codici Tamiya, aree di applicazione e lingua italiana **esatti
-al 100%** rispetto al content.yaml — zero possibilità di allucinazione, perché il testo
-non è generato da alcun modello. L'illustrazione (viste ortogonali front/side/top) resta
-un placeholder tratteggiato finché non esiste una sorgente immagine reale. Noto: il PDF
-sconfina su 2 pagine con i placeholder a dimensione demo — tuning di impaginazione,
-non un problema concettuale.
+Risultato su tutte e 9: hex, codici Tamiya, aree di applicazione, ordine dei passaggi
+e lingua italiana **esatti al 100%** rispetto al content.yaml — zero possibilità di
+allucinazione, perché il testo non è generato da alcun modello. Corretti
+strutturalmente i 3 difetti peggiori osservati nei test ChatGPT: area sbagliata per
+Silver Leaf (P002/P005/P007), ordine di verniciatura invertito (P005), contenuto
+interamente reinventato (P003 materiali, P004 preparazione, P006 mascheratura).
 
-Questo decide il punto "compositing" sotto: **HTML/CSS+Playwright**, non PIL diretto.
+Questo decide il punto "compositing" sopra: **HTML/CSS+Playwright**, non PIL diretto.
+
+## Contratto generazione immagine (2026-07-06)
+
+Le illustrazioni mancanti (renderizzatore del modellino: copertina, viste
+ortogonali, foto di dettaglio/mascheratura) restano un placeholder tratteggiato nel
+template finché il file non esiste al path atteso. Il contratto è identico sia che
+la generazione avvenga oggi via ChatGPT sia — in futuro — via questo nodo locale:
+nessuna differenza di procedura per l'operatore, cambia solo dove gira il modello.
+
+**Input:**
+- foto di riferimento reali del modello fisico: `Projects/{Model}/{Variant}/Images/ref_*.jpg`
+- schema colori: `content.yaml → colors[]` (mai il box-art delle foto reference, che
+  ha quasi sempre uno schema colori diverso da quello da documentare)
+- descrizione dello slot specifico (angolo, area, tecnica) — vedi
+  `Docs/AI_BOOTSTRAP_PROMPT.md` § Fase 4 per il prompt esatto usato con ChatGPT oggi
+
+**Output:** un singolo file immagine, **senza testo/tabelle/loghi/UI** (quelli li
+aggiunge il template), salvato esattamente al path che `Scripts/render_page.py`
+segnala come mancante. Convenzione path per pagina: vedi `Scripts/render_page.py`
+→ `image_slots()`.
+
+**Path già dichiarati in content.yaml:**
+- P001: `render.file` (es. `Images/cover_3q.png`)
+- P002: `renders.front/side/top.file` (es. `Images/P002_front.png`)
+
+**Path fissati dalla convenzione (nessun campo dedicato in content.yaml oggi):**
+- P004: `Images/P004_step{N}.png` per ogni step
+- P006: `Images/P006_{zone_id}.png` per zona di mascheratura
+- P007: `Images/P007_{area_id}.png` per area di dettaglio
+- P008: `Images/P008_decal{N}.png` per decal (solo se `decals[]` non vuoto)
+
+Verifica: `Scripts/render_page.py content.yaml Build/Preview` stampa sempre l'elenco
+esatto degli slot ancora mancanti col path atteso — è il modo per sapere cosa manca
+e confermare che un'immagine appena generata sia stata agganciata correttamente.
 
 ## Cosa NON è ancora deciso
 
 - Modello di diffusione specifico (SDXL vs Flux.1-dev vs SD3.5) — richiede confronto
   pratico in fase R&D
 - Se questo sostituisce del tutto ChatGPT Web o resta un runtime alternativo (vedi
-  `Docs/RUNTIMES.md`) mantenendo entrambi supportati
-- Se e quando estendere il prototipo alle altre 9 pagine (P001, P003-P010)
+  `Docs/RUNTIMES.md`) mantenendo entrambi supportati, con lo stesso contratto sopra
 - Nessuna versione SDK assegnata — resta in `ROADMAP.md` → Planned — Unscheduled finché
   non si decide di allocarci tempo
