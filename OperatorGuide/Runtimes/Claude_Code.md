@@ -378,21 +378,48 @@ su quale progetto stai renderizzando.
 
 ### 10c — Rendering in ChatGPT Web (una pagina alla volta)
 
+> ⚠️ **Lo zip da solo non basta a "ancorare" il render.** Verificato empiricamente
+> (2026-07-06, P001 Cotton Candy Drift): con solo lo zip allegato, ChatGPT ha generato
+> un'immagine scollegata dal progetto — layout di un'altra pagina, veicolo inventato
+> senza relazione con le foto reference, campi (scala, autore, data) mai presenti nel
+> content.yaml. Lo strumento di generazione immagini di ChatGPT compone internamente
+> un prompt testuale sintetico per il motore immagini: quella sintesi è lossy e non
+> garantisce che i file dentro lo zip vengano letti con precisione, specie le foto
+> (serve un input visivo diretto, non testo). Per questo, oltre allo zip, allega
+> **sempre separatamente in chat**:
+> - `content.yaml` della pagina da renderizzare, come file a parte
+> - le foto di riferimento (`Images/*.jpg`), come **immagini** allegate direttamente
+>   alla chat (non solo dentro lo zip) — così il tool le usa come input visivo reale
+
 Apri **ChatGPT Web**, nuova chat. Carica:
 
 | File | Come ottenerlo |
 |---|---|
 | `{Model}_{Variant}_{timestamp}.zip` | Prodotto al punto 10b (Opzione C, consigliata) — oppure `Mini4WDFramework.zip` (Opzioni A/B) |
-| `content.yaml` della pagina da renderizzare | Da `Projects/{Model}/{Variant}/ApprovedText/P00x/content.yaml` (allegato separato, solo se non già nello ZIP) |
-| Immagini di riferimento | Da `Projects/{Model}/{Variant}/Images/` (solo se non già nello ZIP) |
+| `content.yaml` della pagina da renderizzare | Da `Projects/{Model}/{Variant}/ApprovedText/P00x/content.yaml` — **sempre come allegato separato**, anche se già nello ZIP |
+| Immagini di riferimento | Da `Projects/{Model}/{Variant}/Images/` — **sempre come allegati immagine diretti**, anche se già nello ZIP |
 
-> Con il pacchetto mirato (Opzione C), `content.yaml`, `Images/` e i 5 file Fase 4 sono
-> già dentro — non serve allegarli separatamente. Se usi invece il ZIP del repo intero
-> (Opzioni A/B), allega comunque `content.yaml` come file separato e specifica sempre
-> `PROGETTO: {Model}/{Variant}` nel prompt (vedi sotto) — con più progetti nello ZIP
-> ChatGPT non ha altro modo di sapere quale renderizzare.
+Specifica sempre `PROGETTO: {Model}/{Variant}` nel prompt (vedi sotto) — con più
+progetti nello ZIP ChatGPT non ha altro modo di sapere quale renderizzare.
 
-Copia il prompt qui sotto, sostituisci i valori in maiuscolo e invialo:
+**Passo di verifica (obbligatorio prima di generare):** prima di incollare il prompt
+di rendering, invia questo messaggio e leggi la risposta con attenzione:
+
+```
+Prima di generare qualunque immagine, conferma per iscritto, senza inventare nulla:
+1. title, subtitle, series letti da content.yaml (riportali testuali)
+2. se presente, l'elenco colors[] con hex letto da content.yaml
+3. una breve descrizione di cosa vedi in ciascuna foto di riferimento allegata
+   (forma del telaio, colore box-art originale, angolazione)
+Non generare ancora l'immagine. Attendi la mia conferma.
+```
+
+Se i valori riportati non corrispondono al content.yaml reale o la descrizione delle
+foto è generica/inventata, **non procedere**: la generazione successiva erediterebbe
+lo stesso errore. Correggi l'allegato o riprova in chat nuova prima di continuare.
+
+Solo dopo conferma corretta, copia il prompt qui sotto, sostituisci i valori in
+maiuscolo e invialo:
 
 ```
 Fase 4 — Render Engine.
