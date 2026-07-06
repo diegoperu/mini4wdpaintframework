@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --violet-primary: {{ tokens.colors.primary.VioletPrimary }};
+    --violet-dark: {{ tokens.colors.primary.VioletDark }};
+    --violet-light: {{ tokens.colors.primary.VioletLight }};
+    --white: {{ tokens.colors.neutral.White }};
+    --off-white: {{ tokens.colors.neutral.OffWhite }};
+    --light-gray: {{ tokens.colors.neutral.LightGray }};
+    --mid-gray: {{ tokens.colors.neutral.MidGray }};
+    --dark-gray: {{ tokens.colors.neutral.DarkGray }};
+    --black: {{ tokens.colors.neutral.Black }};
+    --red-warning: {{ tokens.colors.semantic.RedWarning }};
+    --red-warning-light: {{ tokens.colors.semantic.RedWarningLight }};
+    --title-font: {{ tokens.typography.fonts.TitleFont }};
+    --body-font: {{ tokens.typography.fonts.BodyFont }};
+    --mono-font: {{ tokens.typography.fonts.MonoFont }};
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: {{ mm(210) }};
+    height: {{ mm(297) }};
+    background: var(--white);
+    font-family: var(--body-font);
+    color: var(--dark-gray);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header {
+    height: {{ mm(18) }};
+    background: var(--violet-primary);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    padding: 0 {{ mm(6) }};
+  }
+  .header .brand { flex: 0 0 25%; font-family: var(--title-font); font-size: 14pt; }
+  .header .series { flex: 1; text-align: center; font-size: 13pt; font-weight: 600; }
+  .header .page-label { flex: 0 0 25%; text-align: right; font-size: 8pt; text-transform: uppercase; letter-spacing: 1px; }
+
+  .footer {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: {{ mm(12) }};
+    background: var(--white);
+    border-top: 1.5pt solid var(--violet-primary);
+    display: flex;
+    align-items: center;
+    padding: 0 {{ mm(6) }};
+    font-size: 9pt;
+    color: var(--mid-gray);
+  }
+  .footer .right { margin-left: auto; font-size: 8pt; color: var(--violet-primary); font-weight: 600; }
+
+  .main {
+    position: absolute;
+    top: {{ mm(18) }};
+    bottom: {{ mm(12) }};
+    left: 0; right: 0;
+    padding: {{ mm(6) }};
+    display: flex;
+    flex-direction: column;
+    gap: {{ mm(3.5) }};
+  }
+
+  h1.page-title { font-family: var(--title-font); font-size: 22pt; color: var(--black); margin-bottom: {{ mm(1) }}; }
+
+  /* C004 — Shopping List */
+  table.shopping { width: 100%; border-collapse: collapse; font-size: 8pt; }
+  table.shopping .category-row td {
+    background: var(--violet-light); color: var(--white);
+    font-size: 8pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+    padding: {{ mm(1) }} {{ mm(2) }};
+  }
+  table.shopping th {
+    background: var(--violet-primary); color: var(--white);
+    font-size: 7pt; text-transform: uppercase; letter-spacing: 0.5px;
+    padding: {{ mm(1) }} {{ mm(2) }}; text-align: left;
+  }
+  table.shopping td { padding: {{ mm(1) }} {{ mm(2) }}; border-bottom: 1pt solid var(--light-gray); vertical-align: top; }
+  table.shopping tr:nth-child(even):not(.category-row) td { background: var(--off-white); }
+  table.shopping .name-cell { color: var(--black); font-weight: 600; }
+  table.shopping .code-cell { font-family: var(--mono-font); color: var(--violet-dark); }
+
+  /* C008 — Warning */
+  .warning {
+    background: var(--white);
+    border-left: 4px solid var(--red-warning);
+    padding: {{ mm(2.5) }} {{ mm(3.5) }};
+    font-size: 9pt;
+  }
+  .warning .label { font-size: 7.5pt; text-transform: uppercase; letter-spacing: 1px; color: var(--red-warning); font-weight: 700; margin-bottom: 2px; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="brand">Mini4WD Manual</div>
+    <div class="series">{{ content.footer.series }}</div>
+    <div class="page-label">{{ content.title }}</div>
+  </div>
+
+  <div class="main">
+    <h1 class="page-title">{{ content.title }}</h1>
+
+    <table class="shopping">
+      <tr class="category-row"><td colspan="4">Vernici</td></tr>
+      <tr><th>Nome</th><th>Marca</th><th>Codice</th><th>Finitura</th></tr>
+      {% for p in content.paints %}
+      <tr>
+        <td class="name-cell">{{ p.name }}</td>
+        <td>{{ p.brand }}</td>
+        <td class="code-cell">{{ p.code }}</td>
+        <td>{{ p.finish }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <table class="shopping">
+      <tr class="category-row"><td colspan="3">Attrezzi</td></tr>
+      <tr><th>Nome</th><th>Opzionale</th><th>Note</th></tr>
+      {% for t in content.tools %}
+      <tr>
+        <td class="name-cell">{{ t.name }}</td>
+        <td>{{ "Sì" if t.optional else "No" }}</td>
+        <td>{{ t.notes }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <table class="shopping">
+      <tr class="category-row"><td colspan="3">Materiali di Consumo</td></tr>
+      <tr><th>Nome</th><th>Specifica</th><th>Opzionale</th></tr>
+      {% for c in content.consumables %}
+      <tr>
+        <td class="name-cell">{{ c.name }}</td>
+        <td>{{ c.specification }}</td>
+        <td>{{ "Sì" if c.optional else "No" }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    {% for note in content.safety_notes %}
+    <div class="warning">
+      <div class="label">⚠ Attenzione</div>
+      {{ note }}
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="footer">
+    <div class="left">Mini4WD Manual SDK</div>
+    <div class="right">{{ content.footer.page_id }}</div>
+  </div>
+
+</body>
+</html>

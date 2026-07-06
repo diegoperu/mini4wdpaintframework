@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --violet-primary: {{ tokens.colors.primary.VioletPrimary }};
+    --violet-light: {{ tokens.colors.primary.VioletLight }};
+    --white: {{ tokens.colors.neutral.White }};
+    --off-white: {{ tokens.colors.neutral.OffWhite }};
+    --light-gray: {{ tokens.colors.neutral.LightGray }};
+    --mid-gray: {{ tokens.colors.neutral.MidGray }};
+    --dark-gray: {{ tokens.colors.neutral.DarkGray }};
+    --black: {{ tokens.colors.neutral.Black }};
+    --gold-accent: {{ tokens.colors.accent.GoldAccent }};
+    --green-success: {{ tokens.colors.semantic.GreenSuccess }};
+    --green-success-light: {{ tokens.colors.semantic.GreenSuccessLight }};
+    --title-font: {{ tokens.typography.fonts.TitleFont }};
+    --body-font: {{ tokens.typography.fonts.BodyFont }};
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: {{ mm(210) }}; height: {{ mm(297) }}; background: var(--white);
+    font-family: var(--body-font); color: var(--dark-gray); position: relative; overflow: hidden;
+  }
+  .header {
+    height: {{ mm(18) }}; background: var(--violet-primary); color: var(--white);
+    display: flex; align-items: center; padding: 0 {{ mm(6) }};
+  }
+  .header .brand { flex: 0 0 25%; font-family: var(--title-font); font-size: 14pt; }
+  .header .series { flex: 1; text-align: center; font-size: 13pt; font-weight: 600; }
+  .header .page-label { flex: 0 0 25%; text-align: right; font-size: 8pt; text-transform: uppercase; letter-spacing: 1px; }
+
+  .footer {
+    position: absolute; bottom: 0; left: 0; right: 0; height: {{ mm(12) }};
+    background: var(--white); border-top: 1.5pt solid var(--violet-primary);
+    display: flex; align-items: center; padding: 0 {{ mm(6) }};
+    font-size: 9pt; color: var(--mid-gray);
+  }
+  .footer .right { margin-left: auto; font-size: 8pt; color: var(--violet-primary); font-weight: 600; }
+
+  .main {
+    position: absolute; top: {{ mm(18) }}; bottom: {{ mm(12) }}; left: 0; right: 0;
+    padding: {{ mm(6) }}; display: flex; gap: {{ mm(6) }};
+  }
+  .col { flex: 1; display: flex; flex-direction: column; gap: {{ mm(2.5) }}; min-width: 0; }
+  h1.page-title { font-family: var(--title-font); font-size: 20pt; color: var(--black); margin-bottom: {{ mm(1) }}; grid-column: 1 / -1; }
+
+  .section-title {
+    background: var(--violet-light); color: var(--white); font-size: 8pt;
+    text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700;
+    padding: {{ mm(1) }} {{ mm(2) }}; border-radius: 2px;
+  }
+  .check-item { display: flex; gap: {{ mm(1.5) }}; font-size: 8pt; line-height: 1.4; align-items: flex-start; }
+  .check-box { flex: none; width: {{ mm(3) }}; height: {{ mm(3) }}; border: 1pt solid var(--mid-gray); border-radius: 2px; margin-top: 1px; }
+
+  .care-item { display: flex; gap: {{ mm(1.5) }}; font-size: 8pt; line-height: 1.4; }
+  .care-item .bullet { color: var(--gold-accent); flex: none; }
+
+  .notes-box {
+    background: var(--off-white); border: 1pt solid var(--light-gray); border-radius: 4px;
+    padding: {{ mm(3) }}; font-size: 8.5pt; line-height: 1.5;
+  }
+  .notes-box .storage-label { font-size: 7pt; text-transform: uppercase; color: var(--mid-gray); letter-spacing: 0.5px; margin-bottom: 2px; }
+
+  .completion {
+    background: var(--green-success-light); border-left: 4px solid var(--green-success);
+    border-radius: 0 4px 4px 0; padding: {{ mm(3) }}; font-size: 9.5pt; color: var(--black);
+  }
+
+  .full-width { grid-column: 1 / -1; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="brand">Mini4WD Manual</div>
+    <div class="series">{{ content.footer.series }}</div>
+    <div class="page-label">{{ content.title }}</div>
+  </div>
+
+  <div style="position:absolute; top: {{ mm(24) }}; left: {{ mm(6) }};">
+    <h1 class="page-title">{{ content.title }}</h1>
+  </div>
+
+  <div class="main" style="top: {{ mm(30) }};">
+    <div class="col">
+      {% for section in content.checklist_sections %}
+      <div class="section-title">{{ section.title }}</div>
+      {% for item in section["items"] %}
+      <div class="check-item"><div class="check-box"></div><div>{{ item }}</div></div>
+      {% endfor %}
+      {% endfor %}
+    </div>
+
+    <div class="col">
+      <div class="section-title">Cura e Manutenzione</div>
+      {% for c in content.care_instructions %}
+      <div class="care-item"><div class="bullet">●</div><div>{{ c }}</div></div>
+      {% endfor %}
+
+      <div class="notes-box">
+        <div class="storage-label">Conservazione</div>
+        {{ content.storage_notes }}
+      </div>
+
+      <div class="completion">{{ content.completion_note }}</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="left">Mini4WD Manual SDK</div>
+    <div class="right">{{ content.footer.page_id }}</div>
+  </div>
+
+</body>
+</html>

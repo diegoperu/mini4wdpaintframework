@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --violet-primary: {{ tokens.colors.primary.VioletPrimary }};
+    --violet-dark: {{ tokens.colors.primary.VioletDark }};
+    --white: {{ tokens.colors.neutral.White }};
+    --off-white: {{ tokens.colors.neutral.OffWhite }};
+    --light-gray: {{ tokens.colors.neutral.LightGray }};
+    --mid-gray: {{ tokens.colors.neutral.MidGray }};
+    --dark-gray: {{ tokens.colors.neutral.DarkGray }};
+    --black: {{ tokens.colors.neutral.Black }};
+    --red-warning: {{ tokens.colors.semantic.RedWarning }};
+    --title-font: {{ tokens.typography.fonts.TitleFont }};
+    --body-font: {{ tokens.typography.fonts.BodyFont }};
+    --mono-font: {{ tokens.typography.fonts.MonoFont }};
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: {{ mm(210) }}; height: {{ mm(297) }}; background: var(--white);
+    font-family: var(--body-font); color: var(--dark-gray); position: relative; overflow: hidden;
+  }
+  .header {
+    height: {{ mm(18) }}; background: var(--violet-primary); color: var(--white);
+    display: flex; align-items: center; padding: 0 {{ mm(6) }};
+  }
+  .header .brand { flex: 0 0 25%; font-family: var(--title-font); font-size: 14pt; }
+  .header .series { flex: 1; text-align: center; font-size: 13pt; font-weight: 600; }
+  .header .page-label { flex: 0 0 25%; text-align: right; font-size: 8pt; text-transform: uppercase; letter-spacing: 1px; }
+
+  .footer {
+    position: absolute; bottom: 0; left: 0; right: 0; height: {{ mm(12) }};
+    background: var(--white); border-top: 1.5pt solid var(--violet-primary);
+    display: flex; align-items: center; padding: 0 {{ mm(6) }};
+    font-size: 9pt; color: var(--mid-gray);
+  }
+  .footer .right { margin-left: auto; font-size: 8pt; color: var(--violet-primary); font-weight: 600; }
+
+  .main {
+    position: absolute; top: {{ mm(18) }}; bottom: {{ mm(12) }}; left: 0; right: 0;
+    padding: {{ mm(6) }}; display: flex; flex-direction: column; gap: {{ mm(2.5) }};
+  }
+  h1.page-title { font-family: var(--title-font); font-size: 22pt; color: var(--black); margin-bottom: {{ mm(1) }}; }
+
+  /* C005 — Paint Sequence */
+  .seq-step { display: flex; align-items: center; gap: {{ mm(3) }}; }
+  .seq-number {
+    flex: none; width: {{ mm(7) }}; height: {{ mm(7) }}; background: var(--violet-primary);
+    color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 9pt;
+  }
+  .seq-swatch { flex: none; width: {{ mm(10) }}; height: {{ mm(10) }}; border-radius: 3px; border: 1pt solid var(--light-gray); }
+  .seq-body { flex: 1; }
+  .seq-area { font-size: 10.5pt; font-weight: 700; color: var(--black); }
+  .seq-detail { font-size: 8.5pt; color: var(--dark-gray); }
+  .seq-code {
+    flex: none; display: flex; align-items: center; gap: {{ mm(1.5) }};
+    background: var(--off-white); border: 1pt solid var(--light-gray); border-radius: 4px;
+    padding: {{ mm(1) }} {{ mm(2) }}; font-size: 8pt;
+  }
+  .seq-code .code { font-family: var(--mono-font); color: var(--violet-dark); }
+  .seq-code .finish {
+    background: var(--violet-dark); color: var(--white); font-size: 6.5pt; text-transform: uppercase;
+    padding: 1px {{ mm(1.5) }}; border-radius: 2px;
+  }
+  .arrow { text-align: center; color: var(--violet-primary); font-size: 10pt; margin-left: {{ mm(3.5) }}; }
+
+  .warning {
+    background: var(--white); border-left: 4px solid var(--red-warning);
+    padding: {{ mm(2.5) }} {{ mm(3.5) }}; font-size: 9pt; margin-top: {{ mm(1) }};
+  }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="brand">Mini4WD Manual</div>
+    <div class="series">{{ content.footer.series }}</div>
+    <div class="page-label">{{ content.title }}</div>
+  </div>
+
+  <div class="main">
+    <h1 class="page-title">{{ content.title }}</h1>
+
+    {% for s in content.sequence %}
+    {% set col = colors_by_id[s.color_id] %}
+    <div class="seq-step">
+      <div class="seq-number">{{ s.step }}</div>
+      <div class="seq-swatch" style="background: {{ col.hex }};"></div>
+      <div class="seq-body">
+        <div class="seq-area">{{ s.area }}</div>
+        <div class="seq-detail">{{ s.technique | capitalize }} — {{ s.coats }} man{{ "o" if s.coats == 1 else "i" }} — {{ s.drying_time }}</div>
+        <div class="seq-detail">{{ s.notes }}</div>
+      </div>
+      <div class="seq-code">
+        <span class="code">{{ col.paintCode }}</span>
+        <span>{{ col.paintName }}</span>
+        <span class="finish">{{ col.finish | finish_it }}</span>
+      </div>
+    </div>
+    {% if not loop.last %}<div class="arrow">↓</div>{% endif %}
+    {% endfor %}
+
+    {% for w in content.warnings %}
+    <div class="warning">⚠ {{ w }}</div>
+    {% endfor %}
+  </div>
+
+  <div class="footer">
+    <div class="left">Mini4WD Manual SDK</div>
+    <div class="right">{{ content.footer.page_id }}</div>
+  </div>
+
+</body>
+</html>

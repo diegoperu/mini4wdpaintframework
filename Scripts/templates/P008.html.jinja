@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --violet-primary: {{ tokens.colors.primary.VioletPrimary }};
+    --violet-dark: {{ tokens.colors.primary.VioletDark }};
+    --white: {{ tokens.colors.neutral.White }};
+    --off-white: {{ tokens.colors.neutral.OffWhite }};
+    --light-gray: {{ tokens.colors.neutral.LightGray }};
+    --mid-gray: {{ tokens.colors.neutral.MidGray }};
+    --dark-gray: {{ tokens.colors.neutral.DarkGray }};
+    --black: {{ tokens.colors.neutral.Black }};
+    --red-warning: {{ tokens.colors.semantic.RedWarning }};
+    --gold-accent: {{ tokens.colors.accent.GoldAccent }};
+    --title-font: {{ tokens.typography.fonts.TitleFont }};
+    --body-font: {{ tokens.typography.fonts.BodyFont }};
+    --mono-font: {{ tokens.typography.fonts.MonoFont }};
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: {{ mm(210) }}; height: {{ mm(297) }}; background: var(--white);
+    font-family: var(--body-font); color: var(--dark-gray); position: relative; overflow: hidden;
+  }
+  .header {
+    height: {{ mm(18) }}; background: var(--violet-primary); color: var(--white);
+    display: flex; align-items: center; padding: 0 {{ mm(6) }};
+  }
+  .header .brand { flex: 0 0 25%; font-family: var(--title-font); font-size: 14pt; }
+  .header .series { flex: 1; text-align: center; font-size: 13pt; font-weight: 600; }
+  .header .page-label { flex: 0 0 25%; text-align: right; font-size: 8pt; text-transform: uppercase; letter-spacing: 1px; }
+
+  .footer {
+    position: absolute; bottom: 0; left: 0; right: 0; height: {{ mm(12) }};
+    background: var(--white); border-top: 1.5pt solid var(--violet-primary);
+    display: flex; align-items: center; padding: 0 {{ mm(6) }};
+    font-size: 9pt; color: var(--mid-gray);
+  }
+  .footer .right { margin-left: auto; font-size: 8pt; color: var(--violet-primary); font-weight: 600; }
+
+  .main {
+    position: absolute; top: {{ mm(18) }}; bottom: {{ mm(12) }}; left: 0; right: 0;
+    padding: {{ mm(6) }}; display: flex; flex-direction: column; gap: {{ mm(3) }};
+  }
+  h1.page-title { font-family: var(--title-font); font-size: 22pt; color: var(--black); margin-bottom: {{ mm(1) }}; }
+
+  .empty-state {
+    background: var(--off-white); border: 1pt solid var(--light-gray); border-radius: 4px;
+    padding: {{ mm(6) }}; font-size: 11pt; color: var(--dark-gray); text-align: center;
+    margin-top: {{ mm(4) }};
+  }
+
+  .decal-row { display: flex; gap: {{ mm(3) }}; align-items: flex-start; }
+  .decal-id {
+    flex: none; width: {{ mm(8) }}; height: {{ mm(8) }}; background: var(--violet-primary);
+    color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 9pt;
+  }
+  .decal-body { flex: 1; font-size: 9.5pt; }
+
+  .warning { border-left: 4px solid var(--red-warning); padding: {{ mm(2.5) }} {{ mm(3.5) }}; font-size: 9pt; }
+  .tip { border-left: 3px solid var(--gold-accent); padding: {{ mm(1.5) }} {{ mm(2.5) }}; font-size: 8.5pt; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="brand">Mini4WD Manual</div>
+    <div class="series">{{ content.footer.series }}</div>
+    <div class="page-label">{{ content.title }}</div>
+  </div>
+
+  <div class="main">
+    <h1 class="page-title">{{ content.title }}</h1>
+
+    {% if content.decals %}
+      <p style="font-size: 9.5pt;">{{ content.intro }}</p>
+      {% for d in content.decals %}
+      <div class="decal-row">
+        <div class="decal-id">{{ loop.index }}</div>
+        <div class="decal-body">{{ d }}</div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div class="empty-state">{{ content.intro }}</div>
+    {% endif %}
+
+    {% for w in content.warnings %}
+    <div class="warning">⚠ {{ w }}</div>
+    {% endfor %}
+    {% for t in content.tips %}
+    <div class="tip">💡 {{ t }}</div>
+    {% endfor %}
+  </div>
+
+  <div class="footer">
+    <div class="left">Mini4WD Manual SDK</div>
+    <div class="right">{{ content.footer.page_id }}</div>
+  </div>
+
+</body>
+</html>

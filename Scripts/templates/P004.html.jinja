@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --violet-primary: {{ tokens.colors.primary.VioletPrimary }};
+    --violet-dark: {{ tokens.colors.primary.VioletDark }};
+    --white: {{ tokens.colors.neutral.White }};
+    --off-white: {{ tokens.colors.neutral.OffWhite }};
+    --light-gray: {{ tokens.colors.neutral.LightGray }};
+    --mid-gray: {{ tokens.colors.neutral.MidGray }};
+    --dark-gray: {{ tokens.colors.neutral.DarkGray }};
+    --black: {{ tokens.colors.neutral.Black }};
+    --red-warning: {{ tokens.colors.semantic.RedWarning }};
+    --gold-accent: {{ tokens.colors.accent.GoldAccent }};
+    --gold-light: {{ tokens.colors.accent.GoldLight }};
+    --title-font: {{ tokens.typography.fonts.TitleFont }};
+    --body-font: {{ tokens.typography.fonts.BodyFont }};
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: {{ mm(210) }};
+    height: {{ mm(297) }};
+    background: var(--white);
+    font-family: var(--body-font);
+    color: var(--dark-gray);
+    position: relative;
+    overflow: hidden;
+  }
+  .header {
+    height: {{ mm(18) }}; background: var(--violet-primary); color: var(--white);
+    display: flex; align-items: center; padding: 0 {{ mm(6) }};
+  }
+  .header .brand { flex: 0 0 25%; font-family: var(--title-font); font-size: 14pt; }
+  .header .series { flex: 1; text-align: center; font-size: 13pt; font-weight: 600; }
+  .header .page-label { flex: 0 0 25%; text-align: right; font-size: 8pt; text-transform: uppercase; letter-spacing: 1px; }
+
+  .footer {
+    position: absolute; bottom: 0; left: 0; right: 0; height: {{ mm(12) }};
+    background: var(--white); border-top: 1.5pt solid var(--violet-primary);
+    display: flex; align-items: center; padding: 0 {{ mm(6) }};
+    font-size: 9pt; color: var(--mid-gray);
+  }
+  .footer .right { margin-left: auto; font-size: 8pt; color: var(--violet-primary); font-weight: 600; }
+
+  .main {
+    position: absolute; top: {{ mm(18) }}; bottom: {{ mm(12) }}; left: 0; right: 0;
+    padding: {{ mm(6) }}; display: flex; flex-direction: column; gap: {{ mm(3) }};
+  }
+  h1.page-title { font-family: var(--title-font); font-size: 22pt; color: var(--black); margin-bottom: {{ mm(1) }}; }
+
+  /* Step sequence (C013 Step Number + C014 Time Box) */
+  .step { display: flex; gap: {{ mm(3) }}; }
+  .step-number {
+    flex: none; width: {{ mm(8) }}; height: {{ mm(8) }};
+    background: var(--violet-primary); color: var(--white);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 10pt;
+  }
+  .step-body { flex: 1; }
+  .step-title-row { display: flex; align-items: baseline; gap: {{ mm(3) }}; }
+  .step-title { font-size: 12pt; font-weight: 700; color: var(--black); }
+  .time-box {
+    font-size: 7.5pt; color: var(--violet-dark); background: var(--off-white);
+    border: 1pt solid var(--light-gray); border-radius: 3px; padding: 1px {{ mm(1.5) }};
+  }
+  .step-desc { font-size: 9.5pt; margin-top: 2px; line-height: 1.5; }
+
+  .warning-inline {
+    border-left: 3px solid var(--red-warning); background: var(--white);
+    padding: {{ mm(1.5) }} {{ mm(2.5) }}; margin-top: {{ mm(1.5) }};
+    font-size: 8.5pt;
+  }
+
+  .tip-inline {
+    border-left: 3px solid var(--gold-accent); background: var(--white);
+    padding: {{ mm(1.5) }} {{ mm(2.5) }}; margin-top: {{ mm(1) }};
+    font-size: 8.5pt;
+  }
+
+  .divider { border-bottom: 1pt solid var(--light-gray); margin: {{ mm(1) }} 0; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="brand">Mini4WD Manual</div>
+    <div class="series">{{ content.footer.series }}</div>
+    <div class="page-label">{{ content.title }}</div>
+  </div>
+
+  <div class="main">
+    <h1 class="page-title">{{ content.title }}</h1>
+
+    {% for step in content.steps %}
+    <div class="step">
+      <div class="step-number">{{ step.id }}</div>
+      <div class="step-body">
+        <div class="step-title-row">
+          <div class="step-title">{{ step.title }}</div>
+          <div class="time-box">{{ step.duration }}</div>
+        </div>
+        <div class="step-desc">{{ step.description }}</div>
+        {% if step.warning %}
+        <div class="warning-inline">⚠ {{ step.warning }}</div>
+        {% endif %}
+        {% if step.tip %}
+        <div class="tip-inline">💡 {{ step.tip }}</div>
+        {% endif %}
+      </div>
+    </div>
+    {% if not loop.last %}<div class="divider"></div>{% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="footer">
+    <div class="left">Mini4WD Manual SDK</div>
+    <div class="right">{{ content.footer.page_id }}</div>
+  </div>
+
+</body>
+</html>

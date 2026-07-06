@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --violet-primary: {{ tokens.colors.primary.VioletPrimary }};
+    --violet-light: {{ tokens.colors.primary.VioletLight }};
+    --white: {{ tokens.colors.neutral.White }};
+    --off-white: {{ tokens.colors.neutral.OffWhite }};
+    --light-gray: {{ tokens.colors.neutral.LightGray }};
+    --mid-gray: {{ tokens.colors.neutral.MidGray }};
+    --dark-gray: {{ tokens.colors.neutral.DarkGray }};
+    --black: {{ tokens.colors.neutral.Black }};
+    --red-warning: {{ tokens.colors.semantic.RedWarning }};
+    --blue-info: {{ tokens.colors.semantic.BlueInfo }};
+    --title-font: {{ tokens.typography.fonts.TitleFont }};
+    --body-font: {{ tokens.typography.fonts.BodyFont }};
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: {{ mm(210) }}; height: {{ mm(297) }}; background: var(--white);
+    font-family: var(--body-font); color: var(--dark-gray); position: relative; overflow: hidden;
+  }
+  .header {
+    height: {{ mm(18) }}; background: var(--violet-primary); color: var(--white);
+    display: flex; align-items: center; padding: 0 {{ mm(6) }};
+  }
+  .header .brand { flex: 0 0 25%; font-family: var(--title-font); font-size: 14pt; }
+  .header .series { flex: 1; text-align: center; font-size: 13pt; font-weight: 600; }
+  .header .page-label { flex: 0 0 25%; text-align: right; font-size: 8pt; text-transform: uppercase; letter-spacing: 1px; }
+
+  .footer {
+    position: absolute; bottom: 0; left: 0; right: 0; height: {{ mm(12) }};
+    background: var(--white); border-top: 1.5pt solid var(--violet-primary);
+    display: flex; align-items: center; padding: 0 {{ mm(6) }};
+    font-size: 9pt; color: var(--mid-gray);
+  }
+  .footer .right { margin-left: auto; font-size: 8pt; color: var(--violet-primary); font-weight: 600; }
+
+  .main {
+    position: absolute; top: {{ mm(18) }}; bottom: {{ mm(12) }}; left: 0; right: 0;
+    padding: {{ mm(6) }}; display: flex; flex-direction: column; gap: {{ mm(3) }};
+  }
+  h1.page-title { font-family: var(--title-font); font-size: 22pt; color: var(--black); margin-bottom: {{ mm(1) }}; }
+
+  .step { display: flex; gap: {{ mm(3) }}; align-items: flex-start; }
+  .step-number {
+    flex: none; width: {{ mm(7) }}; height: {{ mm(7) }}; background: var(--violet-primary);
+    color: var(--white); border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 9pt;
+  }
+  .step-body { flex: 1; }
+  .step-zone { font-size: 8pt; text-transform: uppercase; letter-spacing: 0.5px; color: var(--mid-gray); }
+  .step-desc { font-size: 9.5pt; line-height: 1.5; }
+  .tip-inline { font-size: 8.5pt; margin-top: {{ mm(1) }}; }
+
+  /* C006 — Callout */
+  .callout {
+    background: var(--off-white); border-left: 4px solid var(--blue-info);
+    border-radius: 0 4px 4px 0; padding: {{ mm(3) }} {{ mm(4) }}; font-size: 9pt; line-height: 1.5;
+  }
+  .callout .callout-title { font-weight: 700; color: var(--black); margin-bottom: {{ mm(1) }}; }
+
+  .warning {
+    background: var(--white); border-left: 4px solid var(--red-warning);
+    padding: {{ mm(2.5) }} {{ mm(3.5) }}; font-size: 9pt;
+  }
+
+  .divider { border-bottom: 1pt solid var(--light-gray); margin: {{ mm(0.5) }} 0; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="brand">Mini4WD Manual</div>
+    <div class="series">{{ content.footer.series }}</div>
+    <div class="page-label">{{ content.title }}</div>
+  </div>
+
+  <div class="main">
+    <h1 class="page-title">{{ content.title }}</h1>
+
+    {% for s in content.sequence %}
+    {% set zone = (content.zones | selectattr("id", "equalto", s.zone_id) | first) %}
+    <div class="step">
+      <div class="step-number">{{ s.step }}</div>
+      <div class="step-body">
+        <div class="step-zone">{{ zone.id }} — {{ zone.area }} ({{ zone.masking_type }})</div>
+        <div class="step-desc">{{ s.description }}</div>
+        {% if s.tip %}<div class="tip-inline">💡 {{ s.tip }}</div>{% endif %}
+      </div>
+    </div>
+    {% if not loop.last %}<div class="divider"></div>{% endif %}
+    {% endfor %}
+
+    {% for c in content.callouts %}
+    <div class="callout">
+      <div class="callout-title">{{ c.title }}</div>
+      {{ c.body }}
+    </div>
+    {% endfor %}
+
+    {% for w in content.warnings %}
+    <div class="warning">⚠ {{ w }}</div>
+    {% endfor %}
+  </div>
+
+  <div class="footer">
+    <div class="left">Mini4WD Manual SDK</div>
+    <div class="right">{{ content.footer.page_id }}</div>
+  </div>
+
+</body>
+</html>

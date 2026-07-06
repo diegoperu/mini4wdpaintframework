@@ -29,9 +29,20 @@ TOKENS_PATH = REPO_ROOT / "Assets/DesignSystem/Tokens/tokens.example.yaml"
 
 PX_PER_MM = 150 / 25.4  # A4 @ 150dpi
 
+# PROJECT.yaml tiene paintScheme.colors[].finish in inglese ("gloss"/"metallic") --
+# valore di lavoro interno, mai da mostrare cosi' com'e' in una pagina (Core/
+# AI_OPERATING_RULES.md, italiano zero-tolerance). I content.yaml delle pagine di
+# testo gia' traducono a mano ("Lucido"/"Metallizzato"); quando il template risolve
+# il colore direttamente da PROJECT.yaml (color_id -> colore), serve la stessa resa.
+FINISH_IT = {"gloss": "LUCIDO", "metallic": "METALLIZZATO"}
+
 
 def mm(value: float) -> str:
     return f"{value * PX_PER_MM:.2f}px"
+
+
+def finish_it(value: str) -> str:
+    return FINISH_IT.get(value, value.upper())
 
 
 def load_yaml(path: Path) -> dict:
@@ -50,6 +61,15 @@ def main() -> None:
     content = load_yaml(content_path)
     tokens = load_yaml(TOKENS_PATH)["tokens"]
 
+    # Variant dir: .../{Model}/{Variant}/ApprovedText/{Page}/content.yaml
+    variant_dir = content_path.resolve().parents[2]
+    project_yaml_path = variant_dir / "PROJECT.yaml"
+    colors_by_id = {}
+    if project_yaml_path.exists():
+        project = load_yaml(project_yaml_path)
+        for c in project.get("paintScheme", {}).get("colors", []):
+            colors_by_id[c["id"]] = c
+
     page_id = content["page"]["id"]
     template_name = f"{page_id}.html.jinja"
     if not (TEMPLATES_DIR / template_name).exists():
@@ -58,11 +78,12 @@ def main() -> None:
 
     env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)))
     env.filters["mm"] = mm
+    env.filters["finish_it"] = finish_it
     # anche disponibile come funzione globale nel template (usata per le dimensioni pagina)
     env.globals["mm"] = mm
 
     template = env.get_template(template_name)
-    html = template.render(content=content, tokens=tokens)
+    html = template.render(content=content, tokens=tokens, colors_by_id=colors_by_id)
 
     with sync_playwright() as p:
         browser = p.chromium.launch()

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --violet-primary: {{ tokens.colors.primary.VioletPrimary }};
+    --violet-dark: {{ tokens.colors.primary.VioletDark }};
+    --white: {{ tokens.colors.neutral.White }};
+    --off-white: {{ tokens.colors.neutral.OffWhite }};
+    --light-gray: {{ tokens.colors.neutral.LightGray }};
+    --mid-gray: {{ tokens.colors.neutral.MidGray }};
+    --title-font: {{ tokens.typography.fonts.TitleFont }};
+    --body-font: {{ tokens.typography.fonts.BodyFont }};
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: {{ mm(210) }};
+    height: {{ mm(297) }};
+    background: var(--white);
+    font-family: var(--body-font);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* C001 — Header (variant: cover — right zone empty) */
+  .header {
+    height: {{ mm(18) }};
+    background: var(--violet-primary);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    padding: 0 {{ mm(6) }};
+  }
+  .header .brand { font-family: var(--title-font); font-size: 14pt; letter-spacing: 0.5px; }
+
+  /* C002 — Footer */
+  .footer {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: {{ mm(12) }};
+    background: var(--white);
+    border-top: 1.5pt solid var(--violet-primary);
+    display: flex;
+    align-items: center;
+    padding: 0 {{ mm(6) }};
+    font-size: 9pt;
+    color: var(--mid-gray);
+  }
+  .footer .right { margin-left: auto; font-size: 8pt; color: var(--violet-primary); font-weight: 600; }
+
+  /* Full-bleed cover render zone: header bottom -> footer top */
+  .cover-render {
+    position: absolute;
+    top: {{ mm(18) }};
+    bottom: {{ mm(12) }};
+    left: 0; right: 0;
+    background: var(--off-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .render-placeholder-label {
+    border: 1.5pt dashed var(--light-gray);
+    color: var(--mid-gray);
+    font-size: 9pt;
+    text-align: center;
+    padding: {{ mm(4) }};
+    width: 80%;
+  }
+
+  /* Title overlay band: bottom quarter of the render, semi-transparent violet */
+  .title-band {
+    position: absolute;
+    left: 0; right: 0; bottom: {{ mm(12) }};
+    height: 25%;
+    background: rgba(91, 45, 142, 0.88); /* VioletPrimary @ 88% */
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 {{ mm(10) }};
+  }
+  .title-band .model-name { font-family: var(--title-font); font-size: 34pt; line-height: 1.1; }
+  .title-band .scheme-name { font-size: 18pt; margin-top: {{ mm(2) }}; opacity: 0.95; }
+  .title-band .series { font-size: 10pt; margin-top: {{ mm(3) }}; opacity: 0.85; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="brand">Mini4WD Manual</div>
+  </div>
+
+  <div class="cover-render">
+    <div class="render-placeholder-label">
+      TODO: render di copertina — {{ content.render.file }}<br>
+      angolo: {{ content.render.angle }} — illuminazione: {{ content.render.lighting }}<br>
+      (Fase 4 — non ancora generato)
+    </div>
+  </div>
+
+  <div class="title-band">
+    <div class="model-name">{{ content.title }}</div>
+    <div class="scheme-name">{{ content.subtitle }}</div>
+    <div class="series">{{ content.series }}</div>
+  </div>
+
+  <div class="footer">
+    <div class="left">Mini4WD Manual SDK</div>
+    <div class="right">{{ content.footer.page_id }}</div>
+  </div>
+
+</body>
+</html>
