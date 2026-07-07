@@ -450,10 +450,16 @@ Quando `Scripts/render_page.py` (10b) non segnala più immagini mancanti:
 
 ## PASSO 11 — PDF
 
-Con tutte le pagine in `status: rendered`, usa il **Prompt Fase 5** da `Docs/AI_BOOTSTRAP_PROMPT.md`.
+Con tutte le pagine in `status: rendered` (nessuna immagine mancante in
+`MISSING_IMAGES.md`):
 
-Il PDF può essere assemblato con ChatGPT Web (stessa procedura di handoff del PASSO 10c).
-Prerequisito: copia compilata di `Templates/PDF_CONFIG.yaml` in `Projects/{Modello}/PDF_CONFIG.yaml`.
+```bash
+Scripts/render_page.py {Modello} {Variante} pdf
+```
+
+Genera `Projects/{Modello}/{Variante}/{Modello}_{Variante}.pdf` — tutte le pagine
+unite in un unico file (via `pdfunite`), nell'ordine P001→P010. Nessuna chat,
+nessuna AI coinvolta.
 
 ---
 
@@ -467,7 +473,7 @@ Prerequisito: copia compilata di `Templates/PDF_CONFIG.yaml` in `Projects/{Model
 | Sigillatura | **Claude Code** | Imposta metadata.yaml → locked |
 | **Layout + testo pagina** | **Scripts/render_page.py** (locale, deterministico) | Compone testo/tabelle/layout da content.yaml — zero AI |
 | **Illustrazioni mancanti** | **AI immagini** (ChatGPT Web, o nodo locale futuro) | Genera SOLO copertina/viste ortogonali/foto dettaglio, nessun testo |
-| PDF | **AI immagini** (ChatGPT Web) | Assembla 3 varianti PDF |
+| PDF | **Scripts/render_page.py** (locale, deterministico) | Unisce le pagine in un unico PDF — zero AI |
 
 ---
 
