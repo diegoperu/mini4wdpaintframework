@@ -29,6 +29,8 @@ Esempio:
 import base64
 import json
 import re
+import shutil
+import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -333,6 +335,19 @@ def resolve_images(variant_dir: Path, slots: dict) -> dict:
     return resolved
 
 
+def merge_pdfs(pdf_paths: list, merged_path: Path) -> None:
+    """Unisce i PDF per-pagina (gia' in ordine P001->P010) in un unico file con
+    pdfunite (poppler-utils), poi elimina i singoli file - non ha senso tenere sia
+    il manuale completo sia le 9 pagine separate nella stessa cartella progetto."""
+    if shutil.which("pdfunite") is None:
+        print("Attenzione: 'pdfunite' non trovato (poppler-utils) - salto l'unione PDF, "
+              "restano i file per pagina in Build/Preview.", file=sys.stderr)
+        return
+    subprocess.run(["pdfunite", *(str(p) for p in pdf_paths), str(merged_path)], check=True)
+    for p in pdf_paths:
+        p.unlink()
+
+
 def write_missing_report(report_path: Path, model: str, variant: str, missing_by_page: dict, skipped_pages: list) -> None:
     lines = [
         "# Immagini mancanti",
@@ -410,6 +425,7 @@ def main() -> None:
     skipped_pages = []
     rendered_count = 0
     prompt_entries = []
+    pdf_paths = []
 
     with sync_playwright() as p:
         browser = p.chromium.launch()
@@ -446,6 +462,7 @@ def main() -> None:
                     margin={"top": "0", "bottom": "0", "left": "0", "right": "0"},
                     scale=96 / 150,
                 )
+                pdf_paths.append(output_path)
             else:
                 browser_page.screenshot(path=str(output_path), full_page=True)
             browser_page.close()
@@ -471,6 +488,11 @@ def main() -> None:
     prompt_md_path = variant_dir / "MISSING_IMAGES_PROMPT.md"
     prompt_json_path = variant_dir / "MISSING_IMAGES.json"
     write_prompt_files(prompt_md_path, prompt_json_path, model_name, variant_name, prompt_entries)
+
+    if fmt == "pdf" and pdf_paths:
+        merged_path = variant_dir / f"{model_name}_{variant_name}.pdf"
+        merge_pdfs(pdf_paths, merged_path)
+        print(f"PDF unico: {merged_path}")
 
     total_missing = sum(len(v) for v in missing_by_page.values())
     print(f"\n{rendered_count} pagine renderizzate. {total_missing} immagini mancanti.")
