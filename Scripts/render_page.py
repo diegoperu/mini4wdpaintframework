@@ -45,6 +45,8 @@ OUTPUT_DIR = REPO_ROOT / "Build/Preview"
 PAGE_DIR_PATTERN = re.compile(r"^P\d{3}$")
 
 PX_PER_MM = 150 / 25.4  # A4 @ 150dpi
+PAGE_WIDTH_PX = round(210 * PX_PER_MM)
+PAGE_HEIGHT_PX = round(297 * PX_PER_MM)
 
 # PROJECT.yaml tiene paintScheme.colors[].finish in inglese ("gloss"/"metallic") --
 # valore di lavoro interno, mai da mostrare cosi' com'e' in una pagina (Core/
@@ -293,7 +295,7 @@ def write_prompt_files(md_path: Path, json_path: Path, model: str, variant: str,
 
 
 def mm(value: float) -> str:
-    return f"{value * PX_PER_MM:.2f}px"
+    return f"{round(value * PX_PER_MM)}px"
 
 
 def finish_it(value: str) -> str:
@@ -430,11 +432,20 @@ def main() -> None:
             html = template.render(content=content, tokens=tokens, colors_by_id=colors_by_id, images=images)
 
             output_path = OUTPUT_DIR / f"{model_name}_{variant_name}_{page_id}.{fmt}"
-            browser_page = browser.new_page()
+            browser_page = browser.new_page(viewport={"width": PAGE_WIDTH_PX, "height": PAGE_HEIGHT_PX})
             browser_page.set_content(html)
             browser_page.wait_for_timeout(100)
             if fmt == "pdf":
-                browser_page.pdf(path=str(output_path), width="210mm", height="297mm", print_background=True)
+                # I nostri px CSS sono pensati a 150dpi (PX_PER_MM), ma Chromium converte
+                # i CSS px in mm usando lo standard browser (96dpi) quando genera il PDF -
+                # 1240px a 96dpi sono ~328mm, non 210mm: il contenuto sconfina ben oltre la
+                # pagina dichiarata e Chromium apre una seconda pagina per il residuo.
+                # scale=96/150 compensa esattamente questo scarto di densita'.
+                browser_page.pdf(
+                    path=str(output_path), width="210mm", height="297mm", print_background=True,
+                    margin={"top": "0", "bottom": "0", "left": "0", "right": "0"},
+                    scale=96 / 150,
+                )
             else:
                 browser_page.screenshot(path=str(output_path), full_page=True)
             browser_page.close()
