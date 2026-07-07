@@ -49,6 +49,22 @@
   }
   .footer .right { margin-left: auto; font-size: 8pt; color: var(--violet-primary); font-weight: 600; }
 
+  /* Kicker: dicitura fissa (uguale per ogni progetto SDK, non da content.yaml -
+     stesso trattamento del wordmark header e del footer) che riempie lo spazio
+     altrimenti vuoto sopra il render 3/4 (landscape) e dichiara cos'e' il documento. */
+  .kicker {
+    position: absolute;
+    top: {{ mm(50) }};
+    left: 0; right: 0;
+    text-align: center;
+    padding: 0 {{ mm(6) }};
+    color: var(--violet-primary);
+    font-size: 28pt;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
   /* Full-bleed cover render zone: header bottom -> footer top */
   .cover-render {
     position: absolute;
@@ -109,6 +125,8 @@
     </div>
     {% endif %}
   </div>
+
+  <div class="kicker">Guida alla Verniciatura</div>
 
   <div class="title-band">
     <div class="model-name">{{ content.title }}</div>
