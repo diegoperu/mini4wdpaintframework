@@ -1,28 +1,8 @@
 {
   "model": "Magnum_Saber_Premium",
   "variant": "Cotton_Candy_Drift",
-  "generated_at": "2026-07-06T16:11",
+  "generated_at": "2026-07-07T08:38",
   "entries": [
-    {
-      "page_id": "P004",
-      "slot": "step2",
-      "output_path": "Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/P004_step2.png",
-      "tipo_slot": "foto di dettaglio/preparazione",
-      "descrizione_slot": "Step 2 — Asciugatura completa: Lascia asciugare la carrozzeria all'aria per almeno 2 ore in ambiente pulito e privo di polvere.",
-      "reference_files": [
-        "Core/RENDER_GUIDE.md",
-        "Core/DESIGN_LANGUAGE.md",
-        "Core/STYLE_GUIDE.md",
-        "Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/PROJECT.yaml",
-        "Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/ref_3q_front.jpg",
-        "Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/ref_front.jpg",
-        "Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/ref_rear.jpg",
-        "Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/ref_side_left.jpg",
-        "Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/ref_side_right.jpg",
-        "Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/ref_top.jpg"
-      ],
-      "prompt": "Genera SOLO un'illustrazione fotorealistica del modellino Mini4WD — foto di dettaglio/preparazione.\nNessun testo, nessuna tabella, nessun logo, nessun pannello colorato: solo il\nsoggetto isolato su sfondo bianco puro. Questa immagine viene inserita in un\ntemplate gia' pronto che aggiunge testo/tabelle/header per conto suo — se aggiungi\ntu del testo o una cornice, il risultato finale avra' doppioni o elementi in\nconflitto col template.\n\nRegole:\n- Forma fisica (sagoma, proporzioni, componenti meccanici) il piu' fedele possibile\n  alle foto di riferimento allegate.\n- IMPORTANTE — questa e' una fase di PREPARAZIONE, precedente alla verniciatura:\n  Il corpo e' plastica ABS grezza non verniciata, nel colore naturale di stampo (bianco/neutro/traslucido) — nessuna vernice applicata. Non mostrare NESSUNO dei colori dello schema di verniciatura\n  finale del progetto (niente azzurro, rosa, o altri colori — quelli vengono\n  applicati solo a partire dalla Fase 5, non in questa pagina). Se le foto di\n  riferimento mostrano una livrea box-art colorata, ignorala: qui il soggetto deve\n  apparire neutro/non verniciato, non nella sua colorazione finale.\n- Applica Core/DESIGN_LANGUAGE.md e Core/STYLE_GUIDE.md per stile fotografico/\n  illuminazione, non per layout di pagina (quello lo fa il template).\n\nDettaglio specifico per questo slot: Step 2 — Asciugatura completa: Lascia asciugare la carrozzeria all'aria per almeno 2 ore in ambiente pulito e privo di polvere.\n"
-    },
     {
       "page_id": "P004",
       "slot": "step3",

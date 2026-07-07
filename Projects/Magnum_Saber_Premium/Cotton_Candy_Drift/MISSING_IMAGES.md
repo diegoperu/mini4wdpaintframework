@@ -1,14 +1,13 @@
 # Immagini mancanti
 
 > File generato automaticamente da `Scripts/render_page.py` — non modificare a mano,
-> viene riscritto ad ogni run. Ultimo aggiornamento: 2026-07-06 16:11.
+> viene riscritto ad ogni run. Ultimo aggiornamento: 2026-07-07 08:38.
 
 Progetto: `Magnum_Saber_Premium/Cotton_Candy_Drift`
 
-**11 immagini mancanti** su 3 pagine:
+**10 immagini mancanti** su 3 pagine:
 
 ## P004
-- `step2` → `Images/P004_step2.png`
 - `step3` → `Images/P004_step3.png`
 - `step4` → `Images/P004_step4.png`
 - `step5` → `Images/P004_step5.png`

@@ -305,18 +305,29 @@ def load_yaml(path: Path) -> dict:
         return yaml.safe_load(f)
 
 
+IMAGE_EXTENSIONS = (".png", ".jpg", ".jpeg")
+
+
 def resolve_images(variant_dir: Path, slots: dict) -> dict:
-    """Per ogni slot: {"path": path_relativo, "data_uri": stringa o None se il file non esiste}."""
+    """Per ogni slot: {"path": path_relativo, "data_uri": stringa o None se il file non esiste}.
+
+    Il path dichiarato (in content.yaml o nella convenzione fissa) usa sempre
+    estensione .png, ma accetta anche .jpg/.jpeg allo stesso nome file — l'AI che
+    genera l'immagine puo' restituire l'uno o l'altro formato indifferentemente."""
     resolved = {}
     for slot, rel_path in slots.items():
-        full_path = variant_dir / rel_path
+        stem_path = Path(rel_path).with_suffix("")
+        candidates = [rel_path] + [f"{stem_path}{ext}" for ext in IMAGE_EXTENSIONS]
+        found_path = next((c for c in dict.fromkeys(candidates) if (variant_dir / c).exists()), None)
+
         data_uri = None
-        if full_path.exists():
+        if found_path:
+            full_path = variant_dir / found_path
             ext = full_path.suffix.lstrip(".").lower()
             mime = "jpeg" if ext == "jpg" else ext
             encoded = base64.b64encode(full_path.read_bytes()).decode("ascii")
             data_uri = f"data:image/{mime};base64,{encoded}"
-        resolved[slot] = {"path": rel_path, "data_uri": data_uri}
+        resolved[slot] = {"path": found_path or rel_path, "data_uri": data_uri}
     return resolved
 
 

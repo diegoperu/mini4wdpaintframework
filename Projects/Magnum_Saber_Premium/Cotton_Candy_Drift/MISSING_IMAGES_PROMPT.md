@@ -1,50 +1,10 @@
 # Prompt per le immagini mancanti
 
 > File generato automaticamente da `Scripts/render_page.py` — non modificare a mano,
-> viene riscritto ad ogni run. Ultimo aggiornamento: 2026-07-06 16:11.
+> viene riscritto ad ogni run. Ultimo aggiornamento: 2026-07-07 08:38.
 > Versione machine-readable (stessi dati, per un futuro nodo di generazione locale in batch): `MISSING_IMAGES.json`.
 
 Progetto: `Magnum_Saber_Premium/Cotton_Candy_Drift`
-
-## P004 — step2
-
-**Salva come:** `Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/P004_step2.png`
-
-**File da allegare:**
-- `Core/RENDER_GUIDE.md`
-- `Core/DESIGN_LANGUAGE.md`
-- `Core/STYLE_GUIDE.md`
-- `Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/PROJECT.yaml`
-- `Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/ref_3q_front.jpg`
-- `Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/ref_front.jpg`
-- `Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/ref_rear.jpg`
-- `Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/ref_side_left.jpg`
-- `Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/ref_side_right.jpg`
-- `Projects/Magnum_Saber_Premium/Cotton_Candy_Drift/Images/ref_top.jpg`
-
-**Prompt:**
-```
-Genera SOLO un'illustrazione fotorealistica del modellino Mini4WD — foto di dettaglio/preparazione.
-Nessun testo, nessuna tabella, nessun logo, nessun pannello colorato: solo il
-soggetto isolato su sfondo bianco puro. Questa immagine viene inserita in un
-template gia' pronto che aggiunge testo/tabelle/header per conto suo — se aggiungi
-tu del testo o una cornice, il risultato finale avra' doppioni o elementi in
-conflitto col template.
-
-Regole:
-- Forma fisica (sagoma, proporzioni, componenti meccanici) il piu' fedele possibile
-  alle foto di riferimento allegate.
-- IMPORTANTE — questa e' una fase di PREPARAZIONE, precedente alla verniciatura:
-  Il corpo e' plastica ABS grezza non verniciata, nel colore naturale di stampo (bianco/neutro/traslucido) — nessuna vernice applicata. Non mostrare NESSUNO dei colori dello schema di verniciatura
-  finale del progetto (niente azzurro, rosa, o altri colori — quelli vengono
-  applicati solo a partire dalla Fase 5, non in questa pagina). Se le foto di
-  riferimento mostrano una livrea box-art colorata, ignorala: qui il soggetto deve
-  apparire neutro/non verniciato, non nella sua colorazione finale.
-- Applica Core/DESIGN_LANGUAGE.md e Core/STYLE_GUIDE.md per stile fotografico/
-  illuminazione, non per layout di pagina (quello lo fa il template).
-
-Dettaglio specifico per questo slot: Step 2 — Asciugatura completa: Lascia asciugare la carrozzeria all'aria per almeno 2 ore in ambiente pulito e privo di polvere.
-```
 
 ## P004 — step3
 
