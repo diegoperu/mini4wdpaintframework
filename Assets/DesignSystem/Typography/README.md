@@ -36,12 +36,22 @@ sans-serif, nello stesso ordine di prima (nessuna rottura se il font custom manc
 - C013 Step Number badge: 22pt
 - C001 Header wordmark: 14pt
 - Kicker copertina (P001, "Guida alla Verniciatura"): 28pt
+- C002 Footer label: 8pt uppercase
+
+**Fallback rationale:**
+- `Bebas Neue`: incorporato anch'esso (vedi sotto) — rete di sicurezza reale, non solo un nome nello stack, se il file custom dovesse mancare
+- `Impact`: closest system font in weight and condensation — widely available on Windows/macOS
+- `Arial Black`: heavy weight, broader letterforms — fallback for systems without Impact
+- `sans-serif`: generic category fallback
 
 <details>
-<summary>Bebas Neue (fallback, storico) — dettagli</summary>
+<summary>Bebas Neue (fallback, incorporato) — dettagli</summary>
 
+**File:** `Assets/DesignSystem/Typography/Fonts/BebasNeue-Regular.ttf` — incorporato
+via `@font-face` come gli altri, non solo un nome nello stack
 **Download:** [Google Fonts — Bebas Neue](https://fonts.google.com/specimen/Bebas+Neue)
-**License:** SIL Open Font License 1.1 (free for commercial use)
+**License:** SIL Open Font License 1.1 (free for commercial use). Testo completo:
+`Assets/DesignSystem/Typography/Fonts/BebasNeue_OFL.txt`
 **Designer:** Ryoichi Tsunekawa
 
 **Characteristics:**
@@ -51,12 +61,6 @@ sans-serif, nello stesso ordine di prima (nessuna rottura se il font custom manc
 - Zero kerning required at display sizes
 
 </details>
-- C002 Footer label: 8pt uppercase
-
-**Fallback rationale:**
-- `Impact`: closest system font in weight and condensation — widely available on Windows/macOS
-- `Arial Black`: heavy weight, broader letterforms — fallback for systems without Impact
-- `sans-serif`: generic category fallback
 
 ---
 
@@ -64,14 +68,19 @@ sans-serif, nello stesso ordine di prima (nessuna rottura se il font custom manc
 
 **Token:** `{{token.BodyFont}}`
 **Stack:** `"Source Sans Pro, Open Sans, Helvetica Neue, sans-serif"`
-**Download:** [Google Fonts — Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+3)
-**License:** SIL Open Font License 1.1 (free for commercial use)
+**File:** 4 pesi incorporati via `@font-face` in `Scripts/render_page.py`
+(`CUSTOM_FONTS`) da `Assets/DesignSystem/Typography/Fonts/SourceSans3-*.ttf`
+(distribuito oggi come "Source Sans 3" su Google Fonts, stesso disegno —
+`font-family` dichiarata "Source Sans Pro" per restare compatibile col token
+esistente senza doverlo cambiare)
+**License:** SIL Open Font License 1.1 — free for commercial use. Testo completo:
+`Assets/DesignSystem/Typography/Fonts/SourceSans3_OFL.txt`
 **Designer:** Paul D. Hunt (Adobe)
 
 **Characteristics:**
 - Humanist sans-serif optimized for UI and long-form reading
 - High readability at 9pt–14pt
-- Available in 6 weights (ExtraLight through Black)
+- Available in 6 weights (ExtraLight through Black) — 4 incorporati: ExtraLight, Regular, SemiBold, Bold (vedi Weight usage)
 - Excellent Latin diacritics support for Italian text
 
 **Usage:**
@@ -99,8 +108,11 @@ sans-serif, nello stesso ordine di prima (nessuna rottura se il font custom manc
 
 **Token:** `{{token.MonoFont}}`
 **Stack:** `"JetBrains Mono, Courier New, monospace"`
+**File:** `Assets/DesignSystem/Typography/Fonts/JetBrainsMono-Regular.ttf` —
+incorporato via `@font-face` in `Scripts/render_page.py` (`CUSTOM_FONTS`)
 **Download:** [JetBrains Mono](https://www.jetbrains.com/lp/mono/)
-**License:** SIL Open Font License 1.1 (free for commercial use)
+**License:** SIL Open Font License 1.1 (free for commercial use). Testo completo:
+`Assets/DesignSystem/Typography/Fonts/JetBrainsMono_OFL.txt`
 **Designer:** Philipp Nurullin, Konstantin Bulenkov
 
 **Characteristics:**

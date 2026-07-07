@@ -51,24 +51,35 @@ OUTPUT_DIR = REPO_ROOT / "Build/Preview"
 # ricade silenziosamente sui fallback dello stack (Impact/Arial Black/sans-serif per
 # TitleFont) - stesso motivo per cui servono le foto embeddate in base64, non un
 # semplice <link>/@import.
-CUSTOM_FONTS = {
-    "J_Audio_Cassette.otf": "J Audio Cassette",
-}
+# family deve combaciare esattamente col nome usato negli stack dei token
+# (tokens.example.yaml -> typography.fonts.*), altrimenti il font si incorpora ma
+# non viene mai selezionato. Piu' pesi sulla stessa family = piu' @font-face con
+# lo stesso font-family e weight diverso: il browser sceglie il file giusto da solo
+# in base a font-weight, senza bisogno di famiglie CSS separate per peso.
+CUSTOM_FONTS = [
+    {"file": "J_Audio_Cassette.otf", "family": "J Audio Cassette", "weight": "400"},
+    {"file": "BebasNeue-Regular.ttf", "family": "Bebas Neue", "weight": "400"},
+    {"file": "SourceSans3-ExtraLight.ttf", "family": "Source Sans Pro", "weight": "200"},
+    {"file": "SourceSans3-Regular.ttf", "family": "Source Sans Pro", "weight": "400"},
+    {"file": "SourceSans3-SemiBold.ttf", "family": "Source Sans Pro", "weight": "600"},
+    {"file": "SourceSans3-Bold.ttf", "family": "Source Sans Pro", "weight": "700"},
+    {"file": "JetBrainsMono-Regular.ttf", "family": "JetBrains Mono", "weight": "400"},
+]
 
 
 def font_faces_css() -> str:
     """@font-face per ogni font in CUSTOM_FONTS trovato in FONTS_DIR, incorporato
     come data URI base64 - nessuna dipendenza da font installati sul sistema."""
     rules = []
-    for filename, family in CUSTOM_FONTS.items():
-        font_path = FONTS_DIR / filename
+    for entry in CUSTOM_FONTS:
+        font_path = FONTS_DIR / entry["file"]
         if not font_path.exists():
             continue
         ext = font_path.suffix.lstrip(".").lower()
         fmt = {"otf": "opentype", "ttf": "truetype", "woff": "woff", "woff2": "woff2"}.get(ext, ext)
         encoded = base64.b64encode(font_path.read_bytes()).decode("ascii")
         rules.append(
-            f"@font-face {{ font-family: '{family}'; "
+            f"@font-face {{ font-family: '{entry['family']}'; font-weight: {entry['weight']}; "
             f"src: url(data:font/{ext};base64,{encoded}) format('{fmt}'); }}"
         )
     return "\n".join(rules)
