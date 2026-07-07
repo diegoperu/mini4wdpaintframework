@@ -7,7 +7,7 @@
 | Scopo | Indice navigabile dell'intero sistema Quality Management |
 | Destinatario | Tutti |
 | Source of Truth | `19_QMS_README.md` per l'organizzazione; questo documento è solo navigazione |
-| Versione | 1.0.0 · SDK v2.4.1 · 2026-07-02 |
+| Versione | 1.0.0 · SDK v2.5.5 · 2026-07-02 |
 
 ---
 

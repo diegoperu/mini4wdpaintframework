@@ -7,7 +7,7 @@
 | Scopo | Registro dei Golden Projects — manuali completi che certificano una versione del framework |
 | Destinatario | Maintainer (aggiornamento), tutti (consultazione) |
 | Source of Truth | Questo documento |
-| Versione | 1.0.0 · SDK v2.4.1 · 2026-07-02 |
+| Versione | 1.0.0 · SDK v2.5.5 · 2026-07-02 |
 
 ---
 

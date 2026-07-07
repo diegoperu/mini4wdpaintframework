@@ -7,7 +7,7 @@
 | Scopo | Definire le regole minime che ogni nuovo documento del repository deve rispettare |
 | Destinatario | Maintainer, Developer, Contributor |
 | Source of Truth | Questo documento per i requisiti di intestazione; `Core/DOCUMENTATION_STYLE.md` per lo stile di scrittura |
-| Versione | 1.0.0 · SDK v2.4.1 · 2026-07-02 |
+| Versione | 1.0.0 · SDK v2.5.5 · 2026-07-02 |
 
 ---
 

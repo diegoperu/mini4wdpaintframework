@@ -7,7 +7,7 @@
 | Scopo | Template da compilare quando un manuale NON viene completato |
 | Destinatario | Operatore (compilazione), Maintainer (analisi) |
 | Source of Truth | Questo documento (per il formato) |
-| Versione | 1.0.0 · SDK v2.4.1 · 2026-07-02 |
+| Versione | 1.0.0 · SDK v2.5.5 · 2026-07-02 |
 
 ---
 

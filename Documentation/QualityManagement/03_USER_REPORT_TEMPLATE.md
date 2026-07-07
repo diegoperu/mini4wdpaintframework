@@ -7,7 +7,7 @@
 | Scopo | Template compilabile per il report di utilizzo di un operatore |
 | Destinatario | Operatore |
 | Source of Truth | Questo documento (per il formato); i report compilati sono evidenze |
-| Versione | 1.0.0 · SDK v2.4.1 · 2026-07-02 |
+| Versione | 1.0.0 · SDK v2.5.5 · 2026-07-02 |
 
 ---
 

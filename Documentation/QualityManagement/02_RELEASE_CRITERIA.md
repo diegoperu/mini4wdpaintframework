@@ -7,7 +7,7 @@
 | Scopo | Definire le soglie oggettive che autorizzano una nuova release |
 | Destinatario | Maintainer |
 | Source of Truth | Questo documento |
-| Versione | 1.0.0 · SDK v2.4.1 · 2026-07-02 |
+| Versione | 1.0.0 · SDK v2.5.5 · 2026-07-02 |
 
 ---
 

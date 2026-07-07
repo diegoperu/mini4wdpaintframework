@@ -7,7 +7,7 @@
 | Scopo | Definire le metriche qualitative del framework e come raccoglierle |
 | Destinatario | Maintainer (analisi), Operatore (raccolta via User Report) |
 | Source of Truth | Questo documento per le definizioni; `09_TEST_HISTORY.md` e i report per i dati grezzi |
-| Versione | 1.0.0 · SDK v2.4.1 · 2026-07-02 |
+| Versione | 1.0.0 · SDK v2.5.5 · 2026-07-02 |
 
 ---
 

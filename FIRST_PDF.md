@@ -1,9 +1,18 @@
 # FIRST_PDF.md — Tutorial: dal Rendering al PDF
 
-**Mini4WD Manual SDK v2.5.0** · Tutorial operatore · Tempo: ~45 minuti
+**Mini4WD Manual SDK v2.5.5** · Tutorial operatore · Tempo: ~45 minuti (export
+di produzione) — pochi secondi per un'anteprima unica
 
 > Da dove parti: tutte le pagine in `status: rendered` (vedi `FIRST_RENDER.md`).
 > Dove arrivi: il manuale PDF nelle 3 varianti (screen / print / archive).
+
+> ⚠️ **Anteprima veloce (2026-07-07):** `Scripts/render_page.py {Modello}
+> {Variante} pdf` unisce già tutte le pagine in un unico PDF in
+> `Projects/{Modello}/{Variante}/{Modello}_{Variante}.pdf` (via `pdfunite` —
+> vedi `FIRST_RENDER.md`). È un'**anteprima RGB da schermo**, utile per controllare
+> l'intero manuale prima dell'export formale — non sostituisce questo passo: non fa
+> conversione CMYK, non aggiunge bleed, non produce PDF/A o PDF/X validi per stampa.
+> Le 3 varianti di produzione restano il processo guidato descritto sotto.
 
 ---
 

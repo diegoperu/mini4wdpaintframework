@@ -7,7 +7,7 @@
 | Scopo | Registro storico sintetico delle versioni del framework: motivazione, ambito, compatibilità |
 | Destinatario | Maintainer (aggiornamento), tutti (consultazione) |
 | Source of Truth | `CHANGELOG.md` (root) per il dettaglio delle modifiche; questo documento per motivazione e compatibilità |
-| Versione | 1.0.0 · SDK v2.4.1 · 2026-07-02 |
+| Versione | 1.0.0 · SDK v2.5.5 · 2026-07-02 |
 
 ---
 

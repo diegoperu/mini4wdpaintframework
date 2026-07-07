@@ -7,7 +7,7 @@
 | Scopo | Registro delle decisioni architetturali e di processo del framework |
 | Destinatario | Maintainer, Developer, futuri contributor |
 | Source of Truth | Questo documento per le decisioni QMS/processo; `STYLE_DECISIONS.md` per le decisioni di design editoriale |
-| Versione | 1.0.0 · SDK v2.4.1 · 2026-07-02 |
+| Versione | 1.0.0 · SDK v2.5.5 · 2026-07-02 |
 
 ---
 

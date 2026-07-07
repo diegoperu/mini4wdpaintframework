@@ -7,7 +7,7 @@
 | Scopo | Introdurre la cartella QualityManagement: perché esiste, come si usa, chi ne è responsabile |
 | Destinatario | Tutti (primo documento da leggere di questa cartella) |
 | Source of Truth | Questo documento per l'organizzazione del QMS; `20_INDEX.md` per la navigazione |
-| Versione | 1.0.0 · SDK v2.4.1 · 2026-07-02 |
+| Versione | 1.0.0 · SDK v2.5.5 · 2026-07-02 |
 
 ---
 

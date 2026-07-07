@@ -7,7 +7,7 @@
 | Scopo | Template per proporre nuove funzionalità del framework |
 | Destinatario | Operatore, Contributor, Maintainer |
 | Source of Truth | Questo documento (per il formato); le richieste approvate entrano in 11_ROADMAP.md |
-| Versione | 1.0.0 · SDK v2.4.1 · 2026-07-02 |
+| Versione | 1.0.0 · SDK v2.5.5 · 2026-07-02 |
 
 ---
 

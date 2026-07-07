@@ -4,8 +4,8 @@
 # Machine-readable index of all files, their purpose, type, status, and dependencies.
 # Updated at every release. See MANIFEST.yaml for the full SDK descriptor.
 
-manifest_version: "2.4.1"
-generated: "2026-07-02"
+manifest_version: "2.5.5"
+generated: "2026-07-07"
 
 # ─────────────────────────────────────────────
 # ROOT FILES

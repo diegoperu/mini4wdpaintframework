@@ -1,6 +1,6 @@
 # 01 — Il Tuo Primo Manuale
 
-**OperatorGuide · Mini4WD Manual SDK v2.5.0**
+**OperatorGuide · Mini4WD Manual SDK v2.5.5**
 
 > Il percorso completo, dall'inizio alla fine, in un'unica pagina. Ogni tappa rimanda
 > al tutorial dettagliato. Se è la prima volta che usi l'SDK, segui questo documento
@@ -13,7 +13,8 @@
 ```
 TAPPA 1          TAPPA 2         TAPPA 3          TAPPA 4        TAPPA 5      TAPPA 6
 Prepara     →    Bootstrap  →    Testi + QA  →    Rendering  →   PDF     →    Pubblica
-(tu, no AI)      (chat #1)       (chat #1)        (chat #2)      (chat #3)    (Maintainer)
+(tu, no AI)      (chat #1)       (chat #1)        (script + chat solo   (Maintainer)
+                                                    per illustrazioni)
 ```
 
 ---
@@ -58,18 +59,24 @@ template dà FAIL per costruzione. Prima si genera, poi si valida.
 
 Esito atteso: tutte le pagine con `status: locked`.
 
-## TAPPA 4 — Rendering (chat #2, NUOVA)
+## TAPPA 4 — Rendering (template locale + chat solo per le illustrazioni)
 
-Per ogni pagina locked: allega specifiche di design + content.yaml + foto, prompt
-Fase 4, poi QA visivo.
+Il testo e il layout di ogni pagina si generano **senza AI**, con un comando:
+`Scripts/render_page.py {Modello} {Variante}`. Solo per le illustrazioni ancora
+mancanti (copertina, viste ortogonali, foto di dettaglio) serve una chat nuova —
+una per ciascuna illustrazione, mai la stessa chat per due immagini diverse.
 
 - Guida completa: **`../FIRST_RENDER.md`**
 
-Esito atteso: tutte le pagine `status: rendered`, immagini in `Projects/{Modello}/{Variante}/ApprovedImages/`.
+Esito atteso: tutte le pagine `status: rendered`, illustrazioni in
+`Projects/{Modello}/{Variante}/Images/` (stessa cartella delle foto di riferimento).
 
-## TAPPA 5 — PDF (chat #3, NUOVA)
+## TAPPA 5 — PDF (script + processo guidato per l'export di produzione)
 
-Assembla le pagine nelle 3 varianti PDF.
+`Scripts/render_page.py {Modello} {Variante} pdf` produce già un'anteprima unica
+(tutte le pagine unite in un PDF, in `Projects/{Modello}/{Variante}/`). Per le 3
+varianti di produzione (screen/print/archive, CMYK, bleed) serve ancora il
+processo guidato in chat nuova.
 
 - Guida completa: **`../FIRST_PDF.md`**
 
@@ -87,6 +94,7 @@ Il tuo progetto diventa un Golden Project.
 1. **Una pagina alla volta.** Mai "generami tutto il manuale".
 2. **Genera prima di validare.** Il QA sui template vuoti fallisce sempre.
 3. **Tocca solo `Projects/{TuoModello}/`.** Tutto il resto è sola lettura.
-4. **Nuova chat a ogni cambio di motore** (testi → render → PDF).
+4. **Una chat nuova per ogni illustrazione** (TAPPA 4) e a ogni cambio di motore
+   (testi → rendering → PDF di produzione).
 5. **`TODO:` invece di inventare.** Un dato mancante marcato è recuperabile, un dato
    inventato è un manuale sbagliato.

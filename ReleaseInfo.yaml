@@ -3,84 +3,69 @@
 # Mini4WD Manual SDK — Release Metadata
 # Updated at every release. See CHANGELOG.md for full history.
 
-version: "2.5.0"
-release_date: "2026-07-03"
+version: "2.5.5"
+release_date: "2026-07-07"
 release_type: "minor"
 codename: "MultiProject"
-release_name: "Multi-Project Content Isolation"
+release_name: "Deterministic Rendering & Runtime Consistency"
 
 breaking_changes:
-  - field: content_path
-    old: "ApprovedAssets/Text/P{NNN}/content.yaml"
-    new: "Projects/{ModelFolder}/{VariantFolder}/ApprovedText/P{NNN}/content.yaml"
   - field: images_path
-    old: "ApprovedAssets/Images/P{NNN}/"
-    new: "Projects/{ModelFolder}/{VariantFolder}/ApprovedImages/P{NNN}/"
-  - field: index_path
-    old: "ApprovedAssets/index.yaml"
-    new: "Projects/{ModelFolder}/{VariantFolder}/index.yaml"
-  - field: project_structure
-    old: "Projects/{Model}/"
-    new: "Projects/{Model}/{Variant}/"
-  - field: paintScheme_slug
-    status: "NEW REQUIRED FIELD"
-    description: "paintScheme.slug (kebab-case) required in PROJECT.yaml from v2.5.0"
+    old: "Projects/{ModelFolder}/{VariantFolder}/ApprovedImages/P{NNN}/ (pianificato in v2.5.0, mai implementato)"
+    new: "Projects/{ModelFolder}/{VariantFolder}/Images/ — stessa cartella delle foto di riferimento, path esatto dichiarato da Scripts/render_page.py -> image_slots()"
+    description: "Correzione di rotta rispetto al piano originale v2.5.0: l'implementazione reale (Scripts/render_page.py) non ha mai usato ApprovedImages/P{NNN}/ — usa Images/ direttamente. La documentazione ora riflette quello che esiste davvero."
 
 migration_notes:
-  from: "2.4.1"
-  to: "2.5.0"
-  guide: "CHANGELOG.md §[2.5.0] Migration from v2.4.x"
+  from: "2.5.0"
+  to: "2.5.5"
+  guide: "CHANGELOG.md §[2.5.5]"
   summary: >
-    Per-project content isolation. ApprovedAssets/ (global shared directory) is
-    deprecated and replaced by per-variant directories inside each project.
-    Each project now lives at Projects/{Model}/{Variant}/ with its own
-    ApprovedText/ and ApprovedImages/ subdirectories. No functional change to
-    Prompt Engine, Text Engine, QA logic, or page/component specifications.
+    Il rendering (Fase 4) non è più un singolo prompt whole-page verso un'AI
+    generativa. Scripts/render_page.py genera testo/layout di ogni pagina
+    direttamente da content.yaml (template Jinja2/HTML/CSS + Playwright/Chromium,
+    zero AI coinvolta) — un'AI generativa serve solo per le illustrazioni isolate
+    ancora mancanti (copertina, viste ortogonali, foto di dettaglio), generate una
+    alla volta con i prompt già pronti in MISSING_IMAGES_PROMPT.md. Nessuna
+    modifica allo schema di content.yaml/PROJECT.yaml — solo al meccanismo di
+    generazione dell'illustrazione.
   required_actions:
-    - "Add paintScheme.slug field to existing PROJECT.yaml files"
-    - "Create Projects/{Model}/{Variant}/ subfolder for each project"
-    - "Move PROJECT.yaml, Images/, Output/, Notes/ into the variant subfolder"
-    - "Move ApprovedAssets/Text/ content to Projects/{Model}/{Variant}/ApprovedText/"
+    - "pip install -r Scripts/requirements.txt && playwright install chromium (una tantum)"
+    - "Sostituire il vecchio flusso 'Prompt Fase 4 whole-page' con Scripts/render_page.py {Model} {Variant}"
+    - "Le illustrazioni salvate vanno in Images/, non in un'ipotetica ApprovedImages/P{NNN}/ mai esistita"
 
 new_in_this_version:
-  - "Projects/{Model}/{Variant}/ two-level project structure"
-  - "paintScheme.slug field (REQUIRED) in Templates/PROJECT.yaml and Projects/PROJECT.yaml"
-  - "ApprovedText/ and ApprovedImages/ per-variant directories"
-  - "Core/NAMING_CONVENTION.md §3.1 — variant folder naming rule"
-  - "Scripts/generate_prompts.py — pre-filled prompt generator (reads PROJECT.yaml, dynamic paths)"
-  - "Docs/RUNTIMES.md — runtime concept, ChatGPT Web vs Claude Code comparison"
-  - "OperatorGuide/Runtimes/ChatGPT_Web.md — standalone ChatGPT Web guide"
-  - "OperatorGuide/Runtimes/Claude_Code.md — standalone Claude Code guide with handoff procedure"
-  - "Documentation/QualityManagement/Reports/UR-0001.md — first user report"
+  - "Scripts/render_page.py — template deterministico (Jinja2 + Playwright) per testo/layout di ogni pagina, letto da content.yaml"
+  - "Scripts/package_handoff.sh — pacchetto ridotto per generare solo illustrazioni isolate (non più pagine intere)"
+  - "MISSING_IMAGES.md / MISSING_IMAGES_PROMPT.md / MISSING_IMAGES.json — generati per progetto, prompt pronti + formato machine-readable per un futuro nodo locale"
+  - "Font custom incorporati via @font-face (J Audio Cassette, Bebas Neue, Source Sans Pro, JetBrains Mono) — Assets/DesignSystem/Typography/Fonts/"
+  - "PDF unico per progetto via pdfunite (Scripts/render_page.py ... pdf)"
+  - "Gemini ripristinato come runtime supportato, limitatamente alla Fase 4 (UAT-004) — UAT-002 restava valido per il vecchio scope whole-page"
+  - "Docs/LOCAL_RENDER_NODE.md — evidenza e contratto input/output per un futuro nodo di generazione locale"
 
 changed_in_this_version:
-  - "PromptEngine/*.md (all 10) — Save output to: path updated to per-project variant structure"
-  - "Core/TEXT_ENGINE.md — v2.5.0 output format row; Render Engine contract path"
-  - "Core/PAGE_SYSTEM.md — module storage path"
-  - "AI_ENTRYPOINT.md — Bootstrap Contract paths; CMS layer description"
-  - "BOOTSTRAP.md — Phase 2a/3/7 paths; PROJECT.yaml path"
-  - "Docs/LOAD_ORDER.md — Step 12 path"
-  - "Docs/AI_BOOTSTRAP_PROMPT.md — Fase 1 split ChatGPT/Claude; Fase 2 colorId JOIN fix; Fase 4 path"
-  - "FILE_MATRIX.md — new Projects/{M}/{V}/ section; ApprovedAssets/ marked deprecated"
-  - "PROJECT_STRUCTURE.md — two-level structure; new mkdir commands"
-  - "FIRST_PROJECT.md, FIRST_RENDER.md, FIRST_PDF.md — paths updated"
-  - "OperatorGuide/01-07 — v2.5.0 header; path references updated"
-  - "WHO_MODIFIES_WHAT.md, LIFECYCLE.md, WORKFLOW.md, OPERATOR_PROFILE.md — paths updated"
-  - "START_HERE.md — PASSO 0 runtime selection; checklist updated to variant structure"
-  - "Templates/ (all) — sdk_version bumped to 2.5.0"
-  - "Projects/Proto_Emperor/Violet_Phantom/ — reference project migrated to v2.5.0"
+  - "Docs/AI_BOOTSTRAP_PROMPT.md — Fase 4 riscritta, fonte unica del prompt (4a template, 4b illustrazione, 4c nodo locale)"
+  - "Docs/RENDER_HANDOFF_CONTEXT.md — ruolo riscritto da 'render pagina intera' a 'genera solo l'illustrazione'"
+  - "OperatorGuide/Runtimes/Claude_Code.md, ChatGPT_Web.md — PASSO 10/12 riscritti sul nuovo flusso"
+  - "FIRST_RENDER.md, FIRST_PDF.md — riscritti (erano ancora sul flusso whole-page pre-refactor)"
+  - "OperatorGuide/01_Primo_Manuale.md, 02_Workflow.md, 05_Checklist.md — TAPPA/Fase 4-5 allineate"
+  - "Documentation/OperationalManual/09_ApprovedAssets.md — riscritto per Projects/{Model}/{Variant}/ApprovedText/, ApprovedAssets/ (rimossa v2.5.0) non più descritta come struttura corrente"
+  - "ROADMAP.md — stato Local AI Render Node aggiornato (meta' deterministica in uso in produzione)"
 
 compatibility:
-  backward_compatible_with: []
-  breaking_from: "2.4.x"
-  project_yaml_schema: "EXTENDED — paintScheme.slug field added (required)"
+  backward_compatible_with: ["2.5.0"]
+  breaking_from: "nessuno — content.yaml/PROJECT.yaml invariati, solo il meccanismo di rendering cambia"
+  project_yaml_schema: "unchanged"
   page_ids: "P001–P010 unchanged"
   component_ids: "C001–C015 unchanged"
-  token_names: "unchanged"
-  prompt_files: "PromptEngine/*.md output paths updated — functional change"
-  approved_text: "Moved from ApprovedAssets/Text/ to Projects/{Model}/{Variant}/ApprovedText/"
+  token_names: "unchanged (TitleFont ora punta a J Audio Cassette con Bebas Neue come fallback reale, non solo nominale)"
+  prompt_files: "PromptEngine/*.md invariati — riguarda solo Fase 4, non Fase 2/3"
+  approved_text: "invariato — Projects/{Model}/{Variant}/ApprovedText/"
 
 previous_releases:
+  - version: "2.5.0"
+    date: "2026-07-03"
+    codename: "MultiProject"
+    key: "Multi-Project Content Isolation — per-variant Projects/{Model}/{Variant}/ structure"
   - version: "2.4.1"
     date: "2026-07-02"
     codename: "Operator"
@@ -107,7 +92,7 @@ next_release:
   planned_features:
     - "Compiler/ — automated pipeline executor"
     - "Prompt Orchestrator"
-    - "Documentation/OperationalManual/ update to v2.5.0 paths"
+    - "Documentation/OperationalManual/ full audit pass (KI-004)"
     - "Icon Library (15 SVG icons)"
     - "Multi-language support (Italian, Japanese, English)"
   see: "ROADMAP.md"

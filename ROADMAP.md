@@ -32,6 +32,7 @@ The SDK must remain model-agnostic at the AI layer. No feature will be added tha
 | 2.4.0 | CMS | 2026-07-01 | CMS layer (`ApprovedAssets/`), content.yaml as source of truth, page lifecycle |
 | 2.4.1 | Operator | 2026-07-02 | UX & Operator Workflow — START_HERE, OperatorGuide/, runtime-aware docs, UAT-001 fixes |
 | 2.5.0 | MultiProject | 2026-07-03 | Multi-Project Content Isolation — per-variant `Projects/{Model}/{Variant}/` structure |
+| 2.5.5 | MultiProject | 2026-07-07 | Deterministic Rendering — `Scripts/render_page.py` template replaces whole-page AI rendering, custom fonts embedded, PDF merge, Gemini restored for Fase 4 (UAT-004) |
 
 Full detail for each release: `CHANGELOG.md`. Machine-readable metadata for the current and prior releases: `ReleaseInfo.yaml`. Pre-2.1.0 history (1.0.0–2.0.0) exists only in `CHANGELOG.md` as early scaffolding and predates the current release process.
 

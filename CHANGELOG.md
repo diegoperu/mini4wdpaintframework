@@ -7,6 +7,53 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [2.5.5] - 2026-07-07 — Deterministic Rendering & Runtime Consistency
+
+Fase 4 (rendering) no longer asks an AI to generate an entire page. Extensive
+testing (`UAT/UAT-002.md`, ChatGPT/Gemini test sessions on Cotton Candy Drift)
+showed that no generative model can reliably produce exact text/tables/hex codes
+inside a generated image. `Scripts/render_page.py` now produces every page's
+text and layout deterministically from `content.yaml`; an AI model is only
+needed for isolated illustrations (cover, orthographic views, detail photos).
+No change to `content.yaml`/`PROJECT.yaml` schema — only to how Fase 4 works.
+
+### Added
+- `Scripts/render_page.py` — Jinja2/HTML/CSS template + Playwright/Chromium, generates PNG/PDF per page directly from `content.yaml`
+- `Scripts/templates/P001.html.jinja` … `P010.html.jinja` — one template per page type
+- `Scripts/package_handoff.sh` (rewritten) — now bundles only what an AI needs to generate a single illustration (style guides + `PROJECT.yaml` + reference photos), not page text/layout
+- `Projects/{Model}/{Variant}/MISSING_IMAGES.md` — auto-generated report of missing illustrations, regenerated every run
+- `Projects/{Model}/{Variant}/MISSING_IMAGES_PROMPT.md` — ready-to-paste prompt + file list per missing illustration slot
+- `Projects/{Model}/{Variant}/MISSING_IMAGES.json` — same data, structured, for a future local batch generation node
+- `Assets/DesignSystem/Typography/Fonts/` — J Audio Cassette, Bebas Neue, Source Sans Pro (4 weights), JetBrains Mono, embedded via `@font-face` (base64), all SIL OFL 1.1
+- `Docs/LOCAL_RENDER_NODE.md` — evidence for the architecture split, plus the input/output contract shared by ChatGPT/Gemini today and a future local node
+- `UAT/UAT-004.md` — Gemini retest under the new narrow Fase 4 scope: PASS, restoring Gemini as a supported runtime limited to Fase 4
+
+### Changed
+- `Docs/AI_BOOTSTRAP_PROMPT.md` — Fase 4 rewritten as the single source of truth for the render prompt (4a template, 4b single illustration, 4c future local node)
+- `Docs/RENDER_HANDOFF_CONTEXT.md` — role rewritten from "render the whole page" to "generate only the isolated illustration"
+- `OperatorGuide/Runtimes/Claude_Code.md`, `ChatGPT_Web.md` — Fase 4 sections rewritten for the new flow; Gemini re-added as an option with the same instructions
+- `FIRST_RENDER.md`, `FIRST_PDF.md` — rewritten (were still describing the pre-refactor whole-page flow)
+- `OperatorGuide/01_Primo_Manuale.md`, `02_Workflow.md`, `05_Checklist.md` — Fase 4/5 sections aligned to the script-based flow
+- `Documentation/OperationalManual/09_ApprovedAssets.md` — rewritten for `Projects/{Model}/{Variant}/ApprovedText/`; `ApprovedAssets/` (removed in v2.5.0) no longer described as current structure
+- `ROADMAP.md` — Local AI Render Node entry updated (deterministic half shipped, in production use)
+- `Docs/RUNTIMES.md`, `SDK_CONTEXT.yaml`, `README.md`, `PromptEngine/README.md`, FAQ files — Gemini compatibility corrected (Fase 4 only, not full pipeline)
+- `Documentation/QualityManagement/07_KNOWN_ISSUES.md` — KI-005 (Gemini) moved to resolved archive
+
+### Fixed
+- P001 cover illustration: `object-fit: cover` cropped the model to fill the frame — changed to `contain` so the whole model is visible, fit to width
+- P001 empty space above the cover render — filled with a fixed "Guida alla Verniciatura" kicker (invariant SDK copy, not project data — same treatment as the header wordmark)
+- PNG output had a fractional-pixel white sliver on the right/bottom edge on every page — `mm()` now rounds to whole pixels, and the Playwright viewport is set explicitly instead of relying on the default
+- PDF output opened as 2 pages per manual page — Chromium's PDF export interprets CSS px at 96dpi regardless of our 150dpi screenshot convention; added `scale=96/150` to `page.pdf()`
+- `render_page.py` now accepts `.jpg`/`.jpeg` in addition to `.png` for illustration files at the same base name
+- P004 (Preparazione) illustration prompts no longer describe the painted color scheme — this phase happens before painting (Fase 5); prompts now describe bare ABS plastic or white primer instead
+- Detail thumbnails (P004/P006/P007/P008) doubled in size (24×17mm → 48×34mm, same position) — were too small to be useful
+
+### Documentation Consistency Pass
+- Version bumped to 2.5.5 across `VERSION`, `SDK_CONTEXT.yaml`, `ReleaseInfo.yaml`, `MANIFEST.yaml`, `README.md`, `Templates/PROJECT.yaml`, `STATUS.md` (was stale at 2.4.1), `RepositoryManifest.yaml` (was stale at 2.4.1), `Projects/Proto_Emperor/*/PROJECT.yaml` (were stale at 2.4.1), 20 `Documentation/QualityManagement/*.md` headers (were stale at 2.4.1)
+- `STATUS.md` — full rewrite, was an entire version behind (still said 2.4.1/Planned for a 2.5.0 already released) and listed "Known Issues: None" despite 5 tracked KIs
+
+---
+
 ## [2.5.0] - 2026-07-03 — Multi-Project Content Isolation
 
 Breaking change: per-project content isolation. `ApprovedAssets/Text/` and

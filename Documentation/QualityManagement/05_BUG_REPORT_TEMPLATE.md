@@ -7,7 +7,7 @@
 | Scopo | Template standard per la segnalazione di bug del framework |
 | Destinatario | Operatore, Tester, Reviewer, Maintainer |
 | Source of Truth | Questo documento (per il formato); i bug confermati alimentano i Release Criteria |
-| Versione | 1.0.0 · SDK v2.4.1 · 2026-07-02 |
+| Versione | 1.0.0 · SDK v2.5.5 · 2026-07-02 |
 
 ---
 

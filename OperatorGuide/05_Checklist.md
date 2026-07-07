@@ -1,6 +1,6 @@
 # 05 — Checklist Operative
 
-**OperatorGuide · Mini4WD Manual SDK v2.5.0**
+**OperatorGuide · Mini4WD Manual SDK v2.5.5**
 
 > Una checklist per ogni fase. Stampale o tienile aperte di fianco alla chat.
 
@@ -47,25 +47,46 @@
 [ ] content.yaml salvato in Projects/{Modello}/{Variante}/ApprovedText/P00x/
 ```
 
-## Per OGNI pagina — rendering (chat #2)
+## Rendering — tutte le pagine (script locale, nessuna chat)
 
 ```
-[ ] Nuova chat (la prima volta)
-[ ] status: locked verificato PRIMA di renderizzare
-[ ] File di design + content.yaml + foto allegati (lista Fase 4)
-[ ] Prompt Fase 4 inviato
-[ ] Testo sulla pagina IDENTICO a content.yaml
-[ ] Sfondo bianco, header viola, footer presente
-[ ] QA visivo eseguito (QA_SYSTEM.md)
-[ ] Immagine salvata col naming corretto in Projects/{Modello}/{Variante}/ApprovedImages/P00x/
-[ ] metadata.yaml → rendered
+[ ] pip install -r Scripts/requirements.txt (una tantum)
+[ ] playwright install chromium (una tantum)
+[ ] Tutte le pagine in status: locked verificato PRIMA di lanciare lo script
+[ ] Scripts/render_page.py {Modello} {Variante} eseguito
+[ ] Build/Preview/*.png generato per ogni pagina
+[ ] Projects/{Modello}/{Variante}/MISSING_IMAGES.md controllato
+[ ] Se vuoto → salta alla checklist PDF
+[ ] Se non vuoto → continua con la checklist "Illustrazione mancante" sotto
+```
+
+## Per OGNI illustrazione mancante (chat nuova)
+
+```
+[ ] Scripts/package_handoff.sh {Modello} {Variante} eseguito (una volta per progetto)
+[ ] Nuova chat aperta (MAI la stessa di un'illustrazione precedente)
+[ ] ZIP + foto di riferimento allegati come immagini dirette
+[ ] Blocco prompt copiato da MISSING_IMAGES_PROMPT.md per lo slot giusto
+[ ] Immagine ricevuta: nessun testo/tabella/logo, solo il soggetto isolato
+[ ] Colori dell'immagine corrispondono a PROJECT.yaml → colors[], non al box-art delle foto
+[ ] Immagine salvata ESATTAMENTE al path indicato nel blocco prompt
+[ ] Scripts/render_page.py {Modello} {Variante} rilanciato — slot sparito da MISSING_IMAGES.md
+[ ] metadata.yaml della pagina → rendered (quando tutti i suoi slot sono completi)
 [ ] Esito annotato in Notes/qa_log.md
 ```
 
-## PDF (chat #3)
+## PDF anteprima (script locale, nessuna chat)
 
 ```
 [ ] Tutte le pagine in status: rendered
+[ ] Scripts/render_page.py {Modello} {Variante} pdf eseguito
+[ ] Projects/{Modello}/{Variante}/{Modello}_{Variante}.pdf generato (tutte le pagine unite)
+[ ] Controllo visivo rapido: ordine pagine, nessuna riga bianca, nessuna pagina doppia
+```
+
+## PDF produzione (chat nuova)
+
+```
 [ ] PDF_CONFIG.yaml copiato nel progetto e compilato
 [ ] Nuova chat con Core/PDF_MASTER.md + config allegati
 [ ] Variante screen esportata

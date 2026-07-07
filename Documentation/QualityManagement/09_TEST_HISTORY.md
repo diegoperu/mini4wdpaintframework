@@ -7,7 +7,7 @@
 | Scopo | Cronologia di tutti i test eseguiti sul framework (UAT, test di release, prove operative) |
 | Destinatario | Maintainer (aggiornamento), tutti (consultazione) |
 | Source of Truth | Questo documento per la cronologia; i singoli UAT/report per il dettaglio |
-| Versione | 1.0.0 · SDK v2.4.1 · 2026-07-02 |
+| Versione | 1.0.0 · SDK v2.5.5 · 2026-07-02 |
 
 ---
 

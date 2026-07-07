@@ -7,7 +7,7 @@
 | Scopo | Definire quando, come e con quali template raccogliere il feedback degli operatori, e chi lo analizza |
 | Destinatario | Operatore, Reviewer, Maintainer |
 | Source of Truth | Questo documento |
-| Versione | 1.0.0 · SDK v2.4.1 · 2026-07-02 |
+| Versione | 1.0.0 · SDK v2.5.5 · 2026-07-02 |
 
 ---
 

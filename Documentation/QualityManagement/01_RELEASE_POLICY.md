@@ -7,7 +7,7 @@
 | Scopo | Definire quali modifiche possono entrare in ciascun tipo di release |
 | Destinatario | Maintainer, Developer |
 | Source of Truth | Questo documento (per la classificazione delle release); `CHANGELOG.md` (per lo storico) |
-| Versione | 1.0.0 · SDK v2.4.1 · 2026-07-02 |
+| Versione | 1.0.0 · SDK v2.5.5 · 2026-07-02 |
 
 ---
 

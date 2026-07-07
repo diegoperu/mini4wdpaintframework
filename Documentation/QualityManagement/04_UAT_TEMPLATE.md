@@ -7,7 +7,7 @@
 | Scopo | Template ufficiale per gli User Acceptance Test del framework |
 | Destinatario | Tester, Reviewer, Maintainer |
 | Source of Truth | Questo documento (per il formato); gli UAT compilati sono evidenze |
-| Versione | 1.0.0 · SDK v2.4.1 · 2026-07-02 |
+| Versione | 1.0.0 · SDK v2.5.5 · 2026-07-02 |
 
 ---
 

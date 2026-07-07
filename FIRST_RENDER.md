@@ -1,95 +1,124 @@
 # FIRST_RENDER.md — Tutorial: da Approved Text alla Prima Pagina Illustrata
 
-**Mini4WD Manual SDK v2.5.0** · Tutorial operatore · Tempo: ~30 minuti per pagina
+**Mini4WD Manual SDK v2.5.5** · Tutorial operatore · Tempo: pochi minuti per pagina
+(più il tempo di generare le illustrazioni mancanti — vedi PASSO 3)
 
-> Da dove parti: almeno una pagina con `metadata.yaml → status: locked`
+> ⚠️ **Riscritto 2026-07-07.** Fino al 2026-07-06 questo tutorial chiedeva di
+> generare l'intera pagina (testo, tabelle, layout, illustrazione) via ChatGPT in un
+> solo turno. Test estesi hanno mostrato che un modello generativo non può
+> garantire fedeltà di testo/tabelle dentro un'immagine generata — vedi
+> `Docs/LOCAL_RENDER_NODE.md` per l'evidenza completa. Il layout e il testo di ogni
+> pagina sono ora prodotti da un template deterministico (`Scripts/render_page.py`);
+> un'AI generativa serve solo per le illustrazioni isolate (copertina, viste
+> ortogonali, foto di dettaglio).
+
+> Da dove parti: tutte le pagine con `metadata.yaml → status: locked`
 > (testo generato e validato — vedi `FIRST_PROJECT.md` e `OperatorGuide/01_Primo_Manuale.md`).
-> Dove arrivi: la prima pagina illustrata, validata e registrata.
+> Dove arrivi: tutte le pagine renderizzate, pronte per l'assemblaggio PDF (`FIRST_PDF.md`).
 
 ---
 
 ## PASSO 1 — Verifica il punto di partenza
 
-Controlla `Projects/{Modello}/{Variante}/ApprovedText/P001/metadata.yaml`:
+Controlla che ogni pagina abbia `status: "locked"`:
 
-```yaml
-status: "locked"
-approved: true
-locked: true
+```bash
+grep -r "status:" Projects/{Modello}/{Variante}/ApprovedText/*/metadata.yaml
 ```
 
-Se `status` non è `locked`, fermati: il Render Engine parte **solo** da contenuto
+Se qualche pagina non è `locked`, fermati: il template legge solo contenuto
 sigillato (Golden Rule G08). Torna alla fase QA testi.
 
-## PASSO 2 — Apri una NUOVA chat
+## PASSO 2 — Genera tutte le pagine con il template
 
-Il rendering usa un contesto diverso (design, non generazione testi). **Non riusare
-la chat dei testi.**
+```bash
+pip install -r Scripts/requirements.txt   # una tantum
+playwright install chromium                # una tantum
 
-## PASSO 3 — Allega i file per il rendering
+Scripts/render_page.py {Modello} {Variante}
+```
 
-Nell'ordine (lista anche in `Docs/AI_BOOTSTRAP_PROMPT.md → Fase 4`):
+Un solo comando per l'intero progetto — nessuna chat, nessun prompt, nessuna AI
+coinvolta in questo passo. Genera `Build/Preview/{Modello}_{Variante}_{PageID}.png`
+per ogni pagina e scrive, dentro `Projects/{Modello}/{Variante}/`:
+- `MISSING_IMAGES.md` — elenco di tutte le immagini ancora mancanti
+- `MISSING_IMAGES_PROMPT.md` — per ciascuna, il prompt già pronto da copiare + i
+  file da allegare
+- `MISSING_IMAGES.json` — stessi dati in forma strutturata (uso futuro: nodo locale)
 
-1. `Core/RENDER_GUIDE.md`
-2. `Core/DESIGN_LANGUAGE.md`
-3. `Core/STYLE_GUIDE.md`
-4. `Core/COMPONENT_SYSTEM.md`
-5. `Assets/DesignSystem/Tokens/tokens.example.yaml`
-6. `Projects/{Modello}/{Variante}/ApprovedText/P001/content.yaml` (quello locked)
-7. Le foto di riferimento da `Projects/{Modello}/Images/`
+Se `MISSING_IMAGES.md` dice "nessuna immagine mancante", **tutte le pagine sono già
+complete** — salta al PASSO 4.
 
-## PASSO 4 — Lancia il prompt di rendering
+## PASSO 3 — Genera le illustrazioni mancanti (una alla volta)
 
-Usa il **Prompt Fase 4 — Rendering** da `Docs/AI_BOOTSTRAP_PROMPT.md`, sostituendo
-`{PAGINA}` e `{NOME_PAGINA}` (es. `P001`, `Copertina`).
+> 🛑 **Una chat = una immagine.** Riusare la stessa chat tra una generazione e
+> l'altra contamina il risultato successivo col contesto della precedente
+> (verificato empiricamente). Chat nuova per ogni illustrazione, zero eccezioni.
+
+Prepara il pacchetto (una volta per progetto, riusabile per tutte le illustrazioni
+mancanti):
+
+```bash
+Scripts/package_handoff.sh {Modello} {Variante}
+```
+
+Produce uno ZIP in `Projects/{Modello}/{Variante}/{Modello}_{Variante}_{timestamp}.zip`
+con solo gli stili (`Core/RENDER_GUIDE.md`, `DESIGN_LANGUAGE.md`, `STYLE_GUIDE.md`),
+lo schema colori (`PROJECT.yaml`) e le foto di riferimento — niente testo/layout,
+l'AI non lo tocca più.
+
+Per ciascuno slot in `MISSING_IMAGES_PROMPT.md`:
+1. Apri **ChatGPT Web** (usa **"Thinking"**, non **"Pro"**) o **Gemini**, chat nuova
+2. Carica lo ZIP + le foto di riferimento come allegati immagine diretti
+3. Copia il blocco prompt di quello slot da `MISSING_IMAGES_PROMPT.md` — è già
+   compilato con schema colori e descrizione, niente da riempire a mano
+4. Salva l'immagine ricevuta **esattamente** al path indicato nel blocco (es.
+   `Projects/{Modello}/{Variante}/Images/P002_front.png`)
 
 Cosa deve fare l'AI (e cosa NON deve fare):
 
 | Deve | Non deve |
 |---|---|
-| Posizionare ESATTAMENTE il testo di content.yaml | Inventare o riformulare testo |
-| Usare i Design Token (`token.PrimaryViolet`, ecc.) | Hardcodare colori/dimensioni |
+| Generare SOLO l'illustrazione isolata | Aggiungere testo, tabelle, loghi, pannelli |
 | Riprodurre la forma del modello dalle foto | Modificare forma o proporzioni |
-| Sfondo bianco puro, header viola | Aggiungere decorazioni non previste |
+| Usare i colori da `PROJECT.yaml → colors[]` | Copiare la livrea box-art delle foto reference |
+| Sfondo bianco puro | Aggiungere grafiche non previste dallo schema colori |
 
-## PASSO 5 — QA del render
+## PASSO 4 — Conferma l'aggancio e ripeti
 
-Nella stessa chat, valida contro la checklist:
+Rilancia il PASSO 2 (`Scripts/render_page.py {Modello} {Variante}`): ogni slot
+salvato correttamente sparisce da `MISSING_IMAGES.md`. Ripeti il PASSO 3 per gli
+slot rimanenti, finché il report è vuoto.
 
-```
-Esegui la validazione visiva della pagina appena generata secondo
-Core/QA_SYSTEM.md. Riporta ogni voce applicabile: PASS / FAIL.
-Elenca i FAIL con la correzione necessaria.
-```
+## PASSO 5 — Verifica visiva rapida
 
-Verifiche manuali rapide da fare TU:
+Apri i PNG in `Build/Preview/` (o il PDF, vedi `FIRST_PDF.md`) e controlla:
 
-- [ ] Il testo sulla pagina è identico a content.yaml (nessuna parola cambiata)
+- [ ] Il testo su ogni pagina corrisponde a content.yaml (non serve verificarlo,
+  lo garantisce il template — controlla solo che non manchi un'illustrazione)
 - [ ] Sfondo bianco puro, pannello header viola
-- [ ] Il modello somiglia alle tue foto (forma, non solo colori)
-- [ ] Footer presente: ID pagina + nome modello
+- [ ] Il modello nelle illustrazioni somiglia alle foto di riferimento (forma)
+- [ ] I colori nelle illustrazioni corrispondono allo schema del progetto, non
+  alla livrea box-art delle foto
 
-## PASSO 6 — FAIL? Correggi e rigenera
+## PASSO 6 — Problema su un'illustrazione?
 
-- **Problema visivo** (layout, colori, forma) → correggi il prompt di render nella stessa
-  chat, rigenera. NON toccare content.yaml.
-- **Problema di testo** (refuso nel contenuto) → il testo è locked: si riapre la pagina
-  con una riga in `changelog.md`, si corregge via Text Engine, si rifà QA e seal, poi
-  si ri-renderizza. Vedi `LIFECYCLE.md`.
+- **Problema visivo** (forma, colori sbagliati) → rigenera solo quello slot
+  (PASSO 3), non serve toccare le altre pagine né il testo
+- **Problema di testo** (refuso nel contenuto) → il testo è locked: si riapre la
+  pagina con una riga in `changelog.md`, si corregge via Text Engine, si rifà QA e
+  seal, poi si rilancia `render_page.py`. Vedi `LIFECYCLE.md`. Il template non va
+  mai modificato per correggere un refuso di un singolo progetto.
 
-## PASSO 7 — Salva e registra
+## PASSO 7 — Registra l'esito
 
-1. Salva l'immagine in `Projects/{Modello}/{Variante}/ApprovedImages/P001/` seguendo il naming
-   (`Core/NAMING_CONVENTION.md`): es. `dash-01-shadow-emperor_P001_cover_v1.png`
-2. Aggiorna (o fai aggiornare all'AI) `Projects/{Modello}/{Variante}/ApprovedText/P001/metadata.yaml`:
+Aggiorna `Projects/{Modello}/{Variante}/ApprovedText/P00x/metadata.yaml` per ogni
+pagina completata:
 
 ```yaml
 status: "rendered"
 rendered: true
-rendered_date: "2026-07-02"
+rendered_date: "2026-07-07"
 ```
 
-3. Annota l'esito in `Projects/{Modello}/Notes/qa_log.md`.
-
-**→ Prima pagina illustrata completata.** Ripeti PASSO 3–7 per le altre pagine
-(stessa chat va bene finché resta ordinata). Poi: `FIRST_PDF.md`.
+**→ Tutte le pagine renderizzate.** Prossimo passo: `FIRST_PDF.md`.

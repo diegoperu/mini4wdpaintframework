@@ -7,7 +7,7 @@
 | Scopo | Registro governato delle evoluzioni del framework, per stato di approvazione |
 | Destinatario | Maintainer (aggiornamento), Contributor (consultazione e proposte) |
 | Source of Truth | Questo documento per lo STATO delle proposte; `ROADMAP.md` (root) per la visione di lungo periodo |
-| Versione | 1.0.0 · SDK v2.4.1 · 2026-07-02 |
+| Versione | 1.0.0 · SDK v2.5.5 · 2026-07-02 |
 
 ---
 
