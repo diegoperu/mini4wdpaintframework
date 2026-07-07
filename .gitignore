@@ -1,3 +1,4 @@
 Build/Preview/
 Projects/*/*/*.zip
 Projects/*/*/*.pdf
+__pycache__/

@@ -124,8 +124,10 @@ tokens:
 
     fonts:
       # Display and heading font — condensed, high-impact, uppercase.
-      # Download: https://fonts.google.com/specimen/Bebas+Neue (OFL license)
-      TitleFont: "Bebas Neue, Impact, Arial Black, sans-serif"
+      # File: Assets/DesignSystem/Typography/Fonts/J_Audio_Cassette.otf (incorporato
+      # via @font-face da Scripts/render_page.py — vedi CUSTOM_FONTS). Bebas Neue e
+      # i fallback di sistema restano come rete di sicurezza se il file manca.
+      TitleFont: "J Audio Cassette, Bebas Neue, Impact, Arial Black, sans-serif"
 
       # Body and UI text font — humanist sans, optimized for reading in small sizes.
       # Download: https://fonts.google.com/specimen/Source+Sans+Pro (OFL license)

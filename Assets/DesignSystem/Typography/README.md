@@ -14,10 +14,32 @@ This document defines the typography system of the Mini4WD Manual SDK: font fami
 
 ## Font Families
 
-### TitleFont — Bebas Neue
+### TitleFont — J Audio Cassette (Bebas Neue come fallback)
 
 **Token:** `{{token.TitleFont}}`
-**Stack:** `"Bebas Neue, Impact, Arial Black, sans-serif"`
+**Stack:** `"J Audio Cassette, Bebas Neue, Impact, Arial Black, sans-serif"`
+**File:** `Assets/DesignSystem/Typography/Fonts/J_Audio_Cassette.otf` — incorporato
+via `@font-face` (base64) da `Scripts/render_page.py` (`CUSTOM_FONTS`), non richiede
+installazione a livello di sistema
+**License:** SIL Open Font License 1.1 — free for commercial and non-commercial use.
+Testo completo: `Assets/DesignSystem/Typography/Fonts/J_Audio_Cassette_OFL.txt`
+**Designer:** Yuriy Shlyapnikov
+
+**Nota:** copertura glifi incompleta per il cirillico (non rilevante, testo SDK è
+italiano/latino). Copertura latino/cifre/punteggiatura di base completa (verificato).
+Se il file `.otf` manca, il render ricade su Bebas Neue → Impact → Arial Black →
+sans-serif, nello stesso ordine di prima (nessuna rottura se il font custom manca).
+
+**Usage:**
+- Display level (48pt): model name on cover page
+- H1 level (36pt): main page title
+- C013 Step Number badge: 22pt
+- C001 Header wordmark: 14pt
+- Kicker copertina (P001, "Guida alla Verniciatura"): 28pt
+
+<details>
+<summary>Bebas Neue (fallback, storico) — dettagli</summary>
+
 **Download:** [Google Fonts — Bebas Neue](https://fonts.google.com/specimen/Bebas+Neue)
 **License:** SIL Open Font License 1.1 (free for commercial use)
 **Designer:** Ryoichi Tsunekawa
@@ -28,11 +50,7 @@ This document defines the typography system of the Mini4WD Manual SDK: font fami
 - Excellent legibility at large sizes (24pt+)
 - Zero kerning required at display sizes
 
-**Usage:**
-- Display level (48pt): model name on cover page
-- H1 level (36pt): main page title
-- C013 Step Number badge: 22pt
-- C001 Header wordmark: 14pt
+</details>
 - C002 Footer label: 8pt uppercase
 
 **Fallback rationale:**
@@ -229,7 +247,8 @@ For print and PDF export tools (Affinity Publisher, InDesign, Scribus), install 
 
 | Font | License | Commercial Use | Modification |
 |------|---------|----------------|--------------|
-| Bebas Neue | OFL 1.1 | ✅ Free | ✅ Allowed |
+| J Audio Cassette | OFL 1.1 | ✅ Free | ✅ Allowed |
+| Bebas Neue (fallback) | OFL 1.1 | ✅ Free | ✅ Allowed |
 | Source Sans Pro | OFL 1.1 | ✅ Free | ✅ Allowed |
 | JetBrains Mono | OFL 1.1 | ✅ Free | ✅ Allowed |
 

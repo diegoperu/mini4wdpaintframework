@@ -2,6 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
+<style>{{ font_faces }}</style>
 <style>
   :root {
     --violet-primary: {{ tokens.colors.primary.VioletPrimary }};
@@ -59,6 +60,7 @@
     text-align: center;
     padding: 0 {{ mm(6) }};
     color: var(--violet-primary);
+    font-family: var(--title-font);
     font-size: 28pt;
     font-weight: 600;
     letter-spacing: 4px;

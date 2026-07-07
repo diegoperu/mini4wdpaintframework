@@ -42,7 +42,36 @@ from playwright.sync_api import sync_playwright
 REPO_ROOT = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = Path(__file__).resolve().parent / "templates"
 TOKENS_PATH = REPO_ROOT / "Assets/DesignSystem/Tokens/tokens.example.yaml"
+FONTS_DIR = REPO_ROOT / "Assets/DesignSystem/Typography/Fonts"
 OUTPUT_DIR = REPO_ROOT / "Build/Preview"
+
+# Font custom incorporati via @font-face (nome file -> font-family dichiarato in CSS).
+# Chromium headless (Playwright, sandbox senza rete) non ha nessun font installato a
+# livello di sistema: un font-family nel token che non sia gia' incorporato qui
+# ricade silenziosamente sui fallback dello stack (Impact/Arial Black/sans-serif per
+# TitleFont) - stesso motivo per cui servono le foto embeddate in base64, non un
+# semplice <link>/@import.
+CUSTOM_FONTS = {
+    "J_Audio_Cassette.otf": "J Audio Cassette",
+}
+
+
+def font_faces_css() -> str:
+    """@font-face per ogni font in CUSTOM_FONTS trovato in FONTS_DIR, incorporato
+    come data URI base64 - nessuna dipendenza da font installati sul sistema."""
+    rules = []
+    for filename, family in CUSTOM_FONTS.items():
+        font_path = FONTS_DIR / filename
+        if not font_path.exists():
+            continue
+        ext = font_path.suffix.lstrip(".").lower()
+        fmt = {"otf": "opentype", "ttf": "truetype", "woff": "woff", "woff2": "woff2"}.get(ext, ext)
+        encoded = base64.b64encode(font_path.read_bytes()).decode("ascii")
+        rules.append(
+            f"@font-face {{ font-family: '{family}'; "
+            f"src: url(data:font/{ext};base64,{encoded}) format('{fmt}'); }}"
+        )
+    return "\n".join(rules)
 
 PAGE_DIR_PATTERN = re.compile(r"^P\d{3}$")
 
@@ -415,6 +444,8 @@ def main() -> None:
     # anche disponibile come funzione globale nel template (usata per le dimensioni pagina)
     env.globals["mm"] = mm
 
+    font_faces = font_faces_css()
+
     page_dirs = sorted(
         d for d in approved_text_dir.iterdir() if d.is_dir() and PAGE_DIR_PATTERN.match(d.name)
     )
@@ -445,7 +476,10 @@ def main() -> None:
 
             images = resolve_images(variant_dir, image_slots(page_id, content))
             template = env.get_template(template_name)
-            html = template.render(content=content, tokens=tokens, colors_by_id=colors_by_id, images=images)
+            html = template.render(
+                content=content, tokens=tokens, colors_by_id=colors_by_id, images=images,
+                font_faces=font_faces,
+            )
 
             output_path = OUTPUT_DIR / f"{model_name}_{variant_name}_{page_id}.{fmt}"
             browser_page = browser.new_page(viewport={"width": PAGE_WIDTH_PX, "height": PAGE_HEIGHT_PX})
