@@ -55,14 +55,18 @@
     top: {{ mm(18) }};
     bottom: {{ mm(12) }};
     left: 0; right: 0;
-    background: var(--off-white);
+    background: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
   }
-  .cover-render img { width: 100%; height: 100%; object-fit: cover; }
+  /* contain, non cover: una vista 3/4 e' tipicamente piu' larga che alta - "cover"
+     dentro un contenitore verticale riempie l'altezza e ritaglia i lati (muso/coda).
+     "contain" adatta alla larghezza e mostra il modello intero, senza tagli. */
+  .cover-render img { width: 100%; height: 100%; object-fit: contain; }
   .render-placeholder-label {
+    background: var(--off-white);
     border: 1.5pt dashed var(--light-gray);
     color: var(--mid-gray);
     font-size: 9pt;
