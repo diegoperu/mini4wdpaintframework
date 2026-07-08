@@ -4,23 +4,23 @@
 page_id: "P005"
 page_name: "Verniciatura"
 
-status: "review"
-locked: false
+status: "locked"
+locked: true
 
-approved: false
-approved_by: ""
-approved_date: ""
-approval_notes: "Revisione 2 in corso: sequence[step 6].area/notes correggevano un errore di contenuto (verniciatura di ingranaggi/boccole/meccanica interna del motore, parti mobili/funzionali — vedi Knowledge/MechanicalSafety.md, TEST-CV-008). Da ri-approvare dopo ri-esecuzione ContentValidation/TextValidation."
+approved: true
+approved_by: "diego.peruselli@polimi.it"
+approved_date: "2026-07-08"
+approval_notes: "Rev 2: sequence[step 6].area/notes corretti (Knowledge/MechanicalSafety.md, TEST-CV-008 — non più verniciatura di ingranaggi/meccanica interna del motore). ContentValidation (8 suite) + TextValidation (9 test) ri-eseguite: 0 FAIL bloccanti. Un ALL CAPS (TX-007-D) trovato e corretto durante la revisione."
 
 rendered: false
 render_version: ""
 rendered_date: ""
 rendered_images: []
 
-qa_status: "pending"
+qa_status: "passed"
 qa_log: ""
-content_validation_passed: false
-text_validation_passed: false
+content_validation_passed: true
+text_validation_passed: true
 layout_validation_passed: false
 
 sdk_version: "2.5.5"

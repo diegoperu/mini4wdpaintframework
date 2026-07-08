@@ -85,7 +85,7 @@ paintScheme:
       hex: "#4B4E52"
       finish: "metallic"
       coverage: "1-2 mani"
-      notes: "Metallizzato scuro per la cover ingranaggi esterna e altri dettagli meccanici cosmetici — MAI su ingranaggi, boccole o meccanica interna del motore (parti mobili/funzionali, vedi Knowledge/MechanicalSafety.md). Ideale a pennello con tecnica dry-brush."
+      notes: "Metallizzato scuro per la cover ingranaggi esterna e altri dettagli meccanici cosmetici — non su ingranaggi, boccole o meccanica interna del motore (parti mobili/funzionali, vedi Knowledge/MechanicalSafety.md). Ideale a pennello con tecnica dry-brush."
 
   colorNotes: "Usare esclusivamente vernici Tamiya TS in spray a 20-25°C. Data la natura pastello dello schema, applicare sempre Primer Bianco Tamiya prima dei colori PC001/PC002/PC004 — un primer grigio scurirebbe eccessivamente la resa. Finitura consigliata: TS-13 Clear (lucido) su tutta la carrozzeria, 24 ore dopo l'ultima mano colore. I metallizzati (PC005/PC006) non richiedono clear coat."
 
@@ -242,7 +242,7 @@ paintSequence:
     technique: "brush"
     coats: 1
     dryingTime: "2 ore prima dell'assemblaggio finale"
-    notes: "Pennello tondo n.000, tecnica dry-brush per accentuare i rilievi meccanici. NON verniciare ingranaggi o meccanica interna del motore — comprometterebbe il funzionamento del modello."
+    notes: "Pennello tondo n.000, tecnica dry-brush per accentuare i rilievi meccanici. non verniciare ingranaggi o meccanica interna del motore — comprometterebbe il funzionamento del modello."
 
 # ============================================================
 # MASKING
@@ -280,7 +280,7 @@ detailAreas:
     name: "Cover ingranaggi esterna (guscio Super-II)"
     colorId: "PC006"
     technique: "Pennello tondo n.000, dry-brush"
-    notes: "Gun metal metallizzato per un effetto meccanico realistico sulla cover esterna del cambio. NON verniciare ingranaggi o meccanica interna del motore — comprometterebbe il funzionamento del modello (vedi Knowledge/MechanicalSafety.md)."
+    notes: "Gun metal metallizzato per un effetto meccanico realistico sulla cover esterna del cambio. non verniciare ingranaggi o meccanica interna del motore — comprometterebbe il funzionamento del modello (vedi Knowledge/MechanicalSafety.md)."
 
   - id: "D003"
     name: "Cerchi ruote"

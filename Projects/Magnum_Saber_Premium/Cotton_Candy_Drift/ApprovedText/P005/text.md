@@ -67,7 +67,7 @@ warning: "DERIVED from content.yaml — do not edit independently."
 **Tecnica:** pennello
 **Mani:** 1
 **Tempo di asciugatura:** 2 ore prima dell'assemblaggio finale
-*Pennello tondo n.000, tecnica dry-brush per accentuare i rilievi meccanici. NON verniciare ingranaggi o meccanica interna del motore — comprometterebbe il funzionamento del modello.*
+*Pennello tondo n.000, tecnica dry-brush per accentuare i rilievi meccanici. non verniciare ingranaggi o meccanica interna del motore — comprometterebbe il funzionamento del modello.*
 
 ---
 

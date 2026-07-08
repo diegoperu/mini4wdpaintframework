@@ -64,7 +64,7 @@ sequence:
     technique: "pennello"
     coats: 1
     drying_time: "2 ore prima dell'assemblaggio finale"
-    notes: "Pennello tondo n.000, tecnica dry-brush per accentuare i rilievi meccanici. NON verniciare ingranaggi o meccanica interna del motore — comprometterebbe il funzionamento del modello."
+    notes: "Pennello tondo n.000, tecnica dry-brush per accentuare i rilievi meccanici. non verniciare ingranaggi o meccanica interna del motore — comprometterebbe il funzionamento del modello."
 
 warnings:
   - "Attenzione: non applicare mai la mano successiva prima che quella precedente sia completamente asciutta al tatto. Applicare vernice su una mano ancora umida causa raggrinzimento, sollevamento e difetti superficiali che non possono essere corretti se non rimuovendo tutto e ricominciando da capo. In caso di dubbio, attendi più a lungo."

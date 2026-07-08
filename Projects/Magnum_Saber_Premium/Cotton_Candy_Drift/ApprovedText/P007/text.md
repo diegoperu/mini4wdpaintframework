@@ -42,7 +42,7 @@ Dipingi l'abitacolo e la cornice interna con pennello piatto n.8, applicando 2 m
 
 Applica TS-38 (Gun Metal) sulla cover esterna del cambio con pennello tondo n.000, usando la tecnica dry-brush.
 
-> **Nota:** Gun metal metallizzato per un effetto meccanico realistico sulla cover esterna. NON verniciare ingranaggi o meccanica interna del motore — comprometterebbe il funzionamento del modello (vedi Knowledge/MechanicalSafety.md).
+> **Nota:** Gun metal metallizzato per un effetto meccanico realistico sulla cover esterna. non verniciare ingranaggi o meccanica interna del motore — comprometterebbe il funzionamento del modello (vedi Knowledge/MechanicalSafety.md).
 
 ---
 
