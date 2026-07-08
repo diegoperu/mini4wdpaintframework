@@ -1,5 +1,5 @@
 # Mini4WD Manual SDK — Global SDK Configuration
-# Version: 2.2.0
+# Version: 2.5.5
 # Reference: Build/Pipeline.md, Core/WORKFLOW.md, Core/MANUAL_SYSTEM.md
 #
 # This file is the machine-readable registry for all SDK constants.
@@ -8,7 +8,7 @@
 
 sdk:
   name: "Mini4WD Manual SDK"
-  version: "2.4.0"
+  version: "2.5.5"
 
   # ============================================================
   # PROJECT SCHEMA VALIDATION
@@ -47,8 +47,12 @@ sdk:
 
     supported_qa_statuses:
       - "draft"
-      - "in-review"
+      - "review"
       - "approved"
+      - "locked"
+      - "rendered"
+      - "released"
+      - "archived"
 
     supported_finish_types:
       - "gloss"
@@ -69,9 +73,13 @@ sdk:
     core: "Core/"
     build: "Build/"
     config: "Config/"
+    scripts: "Scripts/"
     tests: "Tests/"
     knowledge: "Knowledge/"
     docs: "Docs/"
+    documentation: "Documentation/"
+    operator_guide: "OperatorGuide/"
+    uat: "UAT/"
     approved_manual: "Assets/ApprovedManual/"
     reference_models: "Assets/ReferenceModels/"
     design_system: "Assets/DesignSystem/"
@@ -171,11 +179,17 @@ sdk:
   # Reference: Core/NAMING_CONVENTION.md
   # ============================================================
   naming:
-    page_output_pattern: "{modelSlug}_{pageId}_{variant}_v{n}.png"
+    # v2.5.5: matches Scripts/render_page.py actual output — no version suffix,
+    # single merged file per format (png emits one file per page, pdf merges all
+    # pages into one file via pdfunite).
+    page_output_pattern: "Build/Preview/{Model}_{Variant}_{PageID}.png"
+    pdf_output_pattern: "Projects/{Model}/{Variant}/{Model}_{Variant}.pdf"
     cover_render: "cover_3q.png"
     pdf_screen_pattern: "{modelSlug}_manual_screen_v{n}.pdf"
     pdf_print_pattern: "{modelSlug}_manual_print_v{n}.pdf"
     pdf_archive_pattern: "{modelSlug}_manual_archive_v{n}.pdf"
-    qa_log_path: "Notes/qa_log.md"
+    # qa_log_path: NOT YET a per-project file. Current practice: qa_log field inside
+    # each ApprovedText/P0xx/metadata.yaml. "Notes/qa_log.md" is the planned output of
+    # the not-yet-built Long-Term CLI Tool (see ROADMAP.md) — do not assume it exists.
     checksum_file: "checksums.sha256"
     project_config: "PROJECT.yaml"

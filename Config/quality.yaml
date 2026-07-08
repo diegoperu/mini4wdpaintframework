@@ -76,7 +76,7 @@ quality:
     blocking_failures_allowed: 0          # Zero tolerance on blocking items
     non_blocking_failures_allowed: 3      # Max 3 non-blocking exceptions, each must be documented
     reviewer_signature_required: true     # README.md in ApprovedManual/ must be signed
-    qa_log_required: true                 # Notes/qa_log.md must exist and record all items
+    qa_log_required: true                 # ApprovedText/P0xx/metadata.yaml §qa_log must record the validation outcome
 
   # ============================================================
   # CONTENT VALIDATION
