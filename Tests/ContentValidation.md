@@ -163,8 +163,12 @@ Run after all 10 pages are generated:
 
 ## TEST-CV-008: Mechanical Safety Compliance
 
-Applies to `steps[]` (P004), `zones[]` (P006), `areas[]` (P007) — any field naming
-a component to paint, mask, or otherwise finish. Reference: `Knowledge/MechanicalSafety.md`,
+Applies to **any field in any page** naming a component to paint, mask, or
+otherwise finish — not just `steps[]` (P004), `zones[]` (P006), `areas[]` (P007).
+The same violation has been found in `colors[].area`/`colors[].notes` (P002),
+`sequence[].area`/`sequence[].notes` (P005), `tools[].notes` (P003), and
+`checklist_sections[].items` (P010) — anywhere a color/step/tool is tied to a
+named physical area of the model. Reference: `Knowledge/MechanicalSafety.md`,
 `Knowledge/Masking.md §Mascheratura di Cerchi Ruota`, `Core/AI_OPERATING_RULES.md §RULE-101–102`.
 
 - [ ] CV-008-A: No area/zone/step name or description instructs painting a moving or

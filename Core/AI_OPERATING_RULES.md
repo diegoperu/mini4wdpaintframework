@@ -416,12 +416,15 @@ If any PromptEngine prompt, PROJECT.yaml note, or author instruction conflicts w
 ## [SAFETY] Mechanical Safety Rules (v2.5.5)
 
 **RULE-101 [SAFETY] Never instruct painting a moving or electrically functional component.**
-`detailAreas[]` (P007), `maskingZones[]` (P006), and preparation `steps[]` (P004)
-must never target gears, motor internals (brushes, commutator, windings),
-bearing/bushing rolling surfaces, motor/transmission shafts, electrical contacts,
-tire tread, or the wheel-axle contact point — paint on any of these impairs the
-model's function, not just its appearance. See `Knowledge/MechanicalSafety.md` for
-the full list and safe cosmetic alternatives (e.g. external motor cover shell
+No field in any page — `detailAreas[]` (P007), `maskingZones[]` (P006),
+preparation `steps[]` (P004), `paintScheme.colors[].area`/`.notes` (P002),
+`paintSequence[].area`/`.notes` (P005), `materials.tools[].notes` (P003), or
+`checklist_sections[].items` (P010) — may target gears, motor internals
+(brushes, commutator, windings), bearing/bushing rolling surfaces,
+motor/transmission shafts, electrical contacts, tire tread, or the wheel-axle
+contact point — paint on any of these impairs the model's function, not just
+its appearance. See `Knowledge/MechanicalSafety.md` for the full list and safe
+cosmetic alternatives (e.g. external motor cover shell
 instead of the motor itself). Validated by `Tests/ContentValidation.md §TEST-CV-008`.
 
 **RULE-102 [SAFETY] Mask the rim's contact surface, never the tire itself.**
