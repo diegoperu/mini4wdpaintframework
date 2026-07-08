@@ -184,6 +184,14 @@ default skin. Two new components are candidates to ship alongside this system, n
 
 Each new theme must still pass Rule 1 (function over decoration) for whatever tone it targets.
 
+> **2026-07-08 — narrow prototype, not this mechanism.** `Scripts/render_page.py` gained
+> an optional 4th CLI arg (`[theme]`) that swaps `Assets/DesignSystem/Tokens/
+> tokens.example.yaml` for `tokens.theme-{name}.yaml` — same token keys, different color
+> values, no template changes. This is a render-time-only color-combo comparison tool for
+> testing, **not** a PROJECT.yaml-level selection, has no collana/series concept, and does
+> not migrate the hardcoded token name out of `Docs/AI_BOOTSTRAP_PROMPT.md` mentioned
+> below. Does not fulfill this Build Order step.
+
 **Manual frame chrome must become config-driven, not prompt-hardcoded.** Today the page
 frame itself (background, header/footer color) is literal text in the Fase 4 prompt —
 e.g. `Docs/AI_BOOTSTRAP_PROMPT.md`: *"Sfondo bianco puro. Pannello header viola

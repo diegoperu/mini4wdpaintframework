@@ -10,20 +10,32 @@ altrimenti resta un placeholder tratteggiato con il path esatto mancante — cos
 gap si vede e si corregge subito, non genera un errore silenzioso.
 
 Uso:
-  Scripts/render_page.py <Model> <Variant> [png|pdf]
+  Scripts/render_page.py <Model> <Variant> [png|pdf] [theme]
 
 Esegue in automatico su TUTTE le pagine ApprovedText/P0xx del progetto indicato
 (nessun input interattivo, nessun path da costruire a mano). {Model} e {Variant}
 sono nomi di cartella sotto Projects/ — risolti sempre a partire dalla root del
 repository, non dalla directory corrente: lo script funziona da qualunque cwd.
 
+[theme] e' un prototipo di test per confrontare palette colore alternative
+(Build Order step 2 di ROADMAP.md — "Theme/collana mechanism" — NON e' quel
+meccanismo: qui non tocca PROJECT.yaml, non ha gerarchia collana, e' solo uno
+scambio di file token a riga di comando per guardare varianti colore fianco a
+fianco). Omesso -> usa il tema di default (Assets/DesignSystem/Tokens/
+tokens.example.yaml). Se specificato, carica invece Assets/DesignSystem/Tokens/
+tokens.theme-{theme}.yaml — stesse chiavi, valori colore diversi; nessun
+template cambia. Richiede che [png|pdf] sia specificato esplicitamente.
+
 Output:
-- Build/Preview/{Model}_{Variant}_{PageID}.png (o .pdf) per ogni pagina
+- Build/Preview/{Model}_{Variant}_{PageID}.png (o .pdf) per ogni pagina —
+  con tema non-default, suffisso _{theme} per non sovrascrivere il default
 - Projects/{Model}/{Variant}/MISSING_IMAGES.md — report di tutte le immagini
-  mancanti in tutto il progetto, riscritto ad ogni run
+  mancanti in tutto il progetto, riscritto ad ogni run SOLO col tema default
+  (le immagini mancanti non dipendono dal colore della cornice)
 
 Esempio:
   Scripts/render_page.py Magnum_Saber_Premium Cotton_Candy_Drift
+  Scripts/render_page.py Magnum_Saber_Premium Cotton_Candy_Drift png dark
 """
 
 import base64
@@ -435,16 +447,17 @@ def write_missing_report(report_path: Path, model: str, variant: str, missing_by
 
 
 def main() -> None:
-    if len(sys.argv) not in (3, 4):
-        print(f"Uso: {sys.argv[0]} <Model> <Variant> [png|pdf]", file=sys.stderr)
+    if len(sys.argv) not in (3, 4, 5):
+        print(f"Uso: {sys.argv[0]} <Model> <Variant> [png|pdf] [theme]", file=sys.stderr)
         sys.exit(1)
 
     model_name = sys.argv[1]
     variant_name = sys.argv[2]
-    fmt = sys.argv[3] if len(sys.argv) == 4 else "png"
+    fmt = sys.argv[3] if len(sys.argv) >= 4 else "png"
     if fmt not in ("png", "pdf"):
         print("Errore: formato deve essere 'png' o 'pdf'", file=sys.stderr)
         sys.exit(1)
+    theme = sys.argv[4] if len(sys.argv) == 5 else None
 
     variant_dir = REPO_ROOT / "Projects" / model_name / variant_name
     if not variant_dir.is_dir():
@@ -456,7 +469,16 @@ def main() -> None:
         print(f"Errore: cartella ApprovedText non trovata: {approved_text_dir}", file=sys.stderr)
         sys.exit(1)
 
-    tokens = load_yaml(TOKENS_PATH)["tokens"]
+    if theme is None:
+        tokens_path = TOKENS_PATH
+    else:
+        tokens_path = REPO_ROOT / "Assets/DesignSystem/Tokens" / f"tokens.theme-{theme}.yaml"
+        if not tokens_path.exists():
+            print(f"Errore: tema '{theme}' non trovato — atteso {tokens_path}", file=sys.stderr)
+            sys.exit(1)
+
+    tokens = load_yaml(tokens_path)["tokens"]
+    output_suffix = f"_{theme}" if theme else ""
 
     project_yaml_path = variant_dir / "PROJECT.yaml"
     project = {}
@@ -509,7 +531,7 @@ def main() -> None:
                 font_faces=font_faces,
             )
 
-            output_path = OUTPUT_DIR / f"{model_name}_{variant_name}_{page_id}.{fmt}"
+            output_path = OUTPUT_DIR / f"{model_name}_{variant_name}_{page_id}{output_suffix}.{fmt}"
             browser_page = browser.new_page(viewport={"width": PAGE_WIDTH_PX, "height": PAGE_HEIGHT_PX})
             browser_page.set_content(html)
             browser_page.wait_for_timeout(100)
@@ -544,22 +566,27 @@ def main() -> None:
     if skipped_pages:
         print(f"Pagine saltate (nessun template): {', '.join(skipped_pages)}")
 
-    report_path = variant_dir / "MISSING_IMAGES.md"
-    write_missing_report(report_path, model_name, variant_name, missing_by_page, skipped_pages)
+    total_missing = sum(len(v) for v in missing_by_page.values())
 
-    prompt_md_path = variant_dir / "MISSING_IMAGES_PROMPT.md"
-    prompt_json_path = variant_dir / "MISSING_IMAGES.json"
-    write_prompt_files(prompt_md_path, prompt_json_path, model_name, variant_name, prompt_entries)
+    if theme is None:
+        report_path = variant_dir / "MISSING_IMAGES.md"
+        write_missing_report(report_path, model_name, variant_name, missing_by_page, skipped_pages)
+
+        prompt_md_path = variant_dir / "MISSING_IMAGES_PROMPT.md"
+        prompt_json_path = variant_dir / "MISSING_IMAGES.json"
+        write_prompt_files(prompt_md_path, prompt_json_path, model_name, variant_name, prompt_entries)
+    else:
+        print(f"Tema '{theme}': MISSING_IMAGES.md/.json/_PROMPT.md non toccati (indipendenti dal colore).")
 
     if fmt == "pdf" and pdf_paths:
-        merged_path = variant_dir / f"{model_name}_{variant_name}.pdf"
+        merged_path = variant_dir / f"{model_name}_{variant_name}{output_suffix}.pdf"
         merge_pdfs(pdf_paths, merged_path)
         print(f"PDF unico: {merged_path}")
 
-    total_missing = sum(len(v) for v in missing_by_page.values())
     print(f"\n{rendered_count} pagine renderizzate. {total_missing} immagini mancanti.")
-    print(f"Report: {report_path}")
-    print(f"Prompt pronti: {prompt_md_path} ({prompt_json_path} per uso batch)")
+    if theme is None:
+        print(f"Report: {report_path}")
+        print(f"Prompt pronti: {prompt_md_path} ({prompt_json_path} per uso batch)")
 
 
 if __name__ == "__main__":
