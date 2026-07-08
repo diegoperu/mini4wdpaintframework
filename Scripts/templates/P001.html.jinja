@@ -98,7 +98,7 @@
     position: absolute;
     left: 0; right: 0; bottom: {{ mm(12) }};
     height: 25%;
-    background: rgba(17, 75, 105, 0.88); /* TamiyaPrimary @ 88% */
+    background: color-mix(in srgb, var(--tamiya-primary) 88%, transparent); /* TamiyaPrimary @ 88% — token-driven, not hardcoded (was rgba() literal, broke theme swapping) */
     color: var(--white);
     display: flex;
     flex-direction: column;
