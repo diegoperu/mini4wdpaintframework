@@ -31,7 +31,7 @@ Applica il nastro da 6mm lungo le linee di cintura e la cornice dell'abitacolo, 
 
 ### Passo 3 — M003
 
-Avvolgi il nastro da 6mm sul battistrada delle gomme per proteggerle durante la verniciatura PC005 (Silver Leaf) dei cerchi. Proteggi il mozzo con un dischetto di carta.
+Rimuovi le gomme dal cerchio (si sfilano a mano) prima di verniciare in PC005 (Silver Leaf). Se necessario, proteggi la sola superficie di contatto cerchio-gomma con un dischetto di nastro/carta.
 
 ---
 

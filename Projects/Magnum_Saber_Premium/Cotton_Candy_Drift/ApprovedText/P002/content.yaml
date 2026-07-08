@@ -67,8 +67,8 @@ colors:
     paint_brand: "Tamiya"
     finish: "Metallizzato"
     hex: "#4B4E52"
-    area: "Ingranaggi visibili, boccole e dettagli meccanici del motore"
-    notes: "Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush."
+    area: "Cover ingranaggi esterna (guscio Super-II)"
+    notes: "Metallizzato scuro per la cover ingranaggi esterna e altri dettagli meccanici cosmetici — MAI su ingranaggi, boccole o meccanica interna del motore (parti mobili/funzionali). Ideale a pennello con tecnica dry-brush."
 
 color_notes: "Usare esclusivamente vernici Tamiya TS in spray a 20-25°C. Data la natura pastello dello schema, applicare sempre Primer Bianco Tamiya prima dei colori PC001/PC002/PC004 — un primer grigio scurirebbe eccessivamente la resa. Finitura consigliata: TS-13 Clear (lucido) su tutta la carrozzeria, 24 ore dopo l'ultima mano colore. I metallizzati (PC005/PC006) non richiedono clear coat."
 palette_overview: ""         # OPTIONAL — non richiesto da PromptEngine/ColorScheme.md, nessun dato distinto disponibile

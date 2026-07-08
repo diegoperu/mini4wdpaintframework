@@ -16,7 +16,7 @@ warning: "DERIVED from content.yaml — do not edit independently."
 | ID | Area | Colore | Tecnica |
 |----|------|--------|---------|
 | D001 | Abitacolo / cornice interna | Black (TS-14) | pennello |
-| D002 | Ingranaggi e meccanica del motore | Gun Metal (TS-38) | pennello |
+| D002 | Cover ingranaggi esterna (guscio Super-II) | Gun Metal (TS-38) | pennello |
 | D003 | Cerchi ruote | Silver Leaf (TS-30) | pennello |
 | D004 | Piccoli dettagli e prese d'aria | Yellow (TS-16) | pennello |
 
@@ -35,14 +35,14 @@ Dipingi l'abitacolo e la cornice interna con pennello piatto n.8, applicando 2 m
 
 ---
 
-### Ingranaggi e meccanica del motore
+### Cover ingranaggi esterna (guscio Super-II)
 
 **Colore:** Gun Metal (TS-38, Metallizzato)
 **Tecnica:** pennello
 
-Applica TS-38 (Gun Metal) su ingranaggi e meccanica del motore con pennello tondo n.000, usando la tecnica dry-brush.
+Applica TS-38 (Gun Metal) sulla cover esterna del cambio con pennello tondo n.000, usando la tecnica dry-brush.
 
-> **Nota:** Gun metal metallizzato per un effetto meccanico realistico sui componenti visibili del motore.
+> **Nota:** Gun metal metallizzato per un effetto meccanico realistico sulla cover esterna. NON verniciare ingranaggi o meccanica interna del motore — comprometterebbe il funzionamento del modello (vedi Knowledge/MechanicalSafety.md).
 
 ---
 

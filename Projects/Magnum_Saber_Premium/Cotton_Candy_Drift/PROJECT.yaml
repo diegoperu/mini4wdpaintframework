@@ -78,14 +78,14 @@ paintScheme:
       notes: "Metallizzato — applicare sempre nella stessa direzione per uniformità. Usato su telaio e cover motore."
 
     - id: "PC006"
-      name: "Motor & Mechanical Details"
+      name: "External Mechanical Details"
       paintBrand: "Tamiya"
       paintCode: "TS-38"
       paintName: "Gun Metal"
       hex: "#4B4E52"
       finish: "metallic"
       coverage: "1-2 mani"
-      notes: "Metallizzato scuro per ingranaggi visibili, boccole e dettagli meccanici del motore. Ideale a pennello con tecnica dry-brush."
+      notes: "Metallizzato scuro per la cover ingranaggi esterna e altri dettagli meccanici cosmetici — MAI su ingranaggi, boccole o meccanica interna del motore (parti mobili/funzionali, vedi Knowledge/MechanicalSafety.md). Ideale a pennello con tecnica dry-brush."
 
   colorNotes: "Usare esclusivamente vernici Tamiya TS in spray a 20-25°C. Data la natura pastello dello schema, applicare sempre Primer Bianco Tamiya prima dei colori PC001/PC002/PC004 — un primer grigio scurirebbe eccessivamente la resa. Finitura consigliata: TS-13 Clear (lucido) su tutta la carrozzeria, 24 ore dopo l'ultima mano colore. I metallizzati (PC005/PC006) non richiedono clear coat."
 
@@ -109,7 +109,7 @@ materials:
     - name: "Pennello sintetico tondo n.000"
       type: "brush"
       optional: false
-      notes: "Per dettagli fini: abitacolo, meccanica del motore, dry-brush metallizzati."
+      notes: "Per dettagli fini: abitacolo, cover ingranaggi esterna, dry-brush metallizzati."
 
     - name: "Coltellino da modellismo"
       type: "tool"
@@ -238,11 +238,11 @@ paintSequence:
 
   - step: 6
     colorId: "PC006"
-    area: "Ingranaggi visibili, boccole e dettagli meccanici del motore"
+    area: "Cover ingranaggi esterna (guscio Super-II)"
     technique: "brush"
     coats: 1
     dryingTime: "2 ore prima dell'assemblaggio finale"
-    notes: "Pennello tondo n.000, tecnica dry-brush per accentuare i rilievi meccanici."
+    notes: "Pennello tondo n.000, tecnica dry-brush per accentuare i rilievi meccanici. NON verniciare ingranaggi o meccanica interna del motore — comprometterebbe il funzionamento del modello."
 
 # ============================================================
 # MASKING

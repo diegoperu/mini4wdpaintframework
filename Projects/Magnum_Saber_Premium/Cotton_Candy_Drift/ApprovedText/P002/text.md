@@ -24,7 +24,7 @@ Schema pastello allegro e giocoso: azzurro cielo come colore dominante della car
 | TS-14 | Black | Tamiya | Lucido | Rifiniture e linee di accento (cintura, cornici, abitacolo) |
 | TS-16 | Yellow | Tamiya | Lucido | Accenti in evidenza — piccoli dettagli e punti luce |
 | TS-30 | Silver Leaf | Tamiya | Metallizzato | Telaio Super-II e cover motore |
-| TS-38 | Gun Metal | Tamiya | Metallizzato | Ingranaggi visibili, boccole e dettagli meccanici del motore |
+| TS-38 | Gun Metal | Tamiya | Metallizzato | Cover ingranaggi esterna (guscio Super-II) |
 
 ---
 

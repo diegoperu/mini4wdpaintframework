@@ -69,7 +69,7 @@ tools:
   - name: "Pennello sintetico tondo n.000"
     type: "pennello"
     optional: false
-    notes: "Per dettagli fini: abitacolo, meccanica del motore, dry-brush metallizzati."
+    notes: "Per dettagli fini: abitacolo, cover ingranaggi esterna, dry-brush metallizzati."
 
   - name: "Coltellino da modellismo"
     type: "strumento"
