@@ -1,0 +1,245 @@
+# Mini4WD Manual SDK — Design Tokens (Theme: eva01)
+# Version: 2.5.5
+# Reference: Core/STYLE_GUIDE.md, Core/COMPONENT_SYSTEM.md
+# Schema: tokens.schema.yaml
+#
+# PROTOTYPE THEME — render-time color-combo test, not ROADMAP.md Build Order
+# step 2 ("Theme/collana mechanism"). Loaded only via:
+#   Scripts/render_page.py <Model> <Variant> [png|pdf] eva01
+# Same token keys as tokens.example.yaml (the SDK default) — only the primary/
+# accent/panel/callout color group differs. Typography, spacing, sizing,
+# borders, shadows and render specs are intentionally identical to the default
+# theme: this is a color test, not a layout test.
+#
+# Origin: colors sampled directly from the official settei/reference art of
+# Evangelion Unit-01 (Neon Genesis Evangelion, mecha design by Ikuto
+# Yamashita) — deep purple armor plating with acid/lime-green joint stripes
+# and black segment plating. Requested explicitly to test a dark-primary +
+# acid-accent combination (as opposed to "dark"'s neutral carbon and
+# "jehuty"'s muted sage-green). Sampled via pixel-frequency analysis of the
+# reference image (most common non-background colors), not eyeballed:
+#   - Main body armor (lilac-purple): average #A86CC0
+#   - Shadow/joint armor (dark purple): average #602460
+#   - Joint/stripe highlight (acid green): average #9CD854
+#
+# Primary is a darkened/saturated derivative of the main purple (raw sample
+# only reaches ~4:1 contrast on white, short of AA for header text; this
+# derivative reaches 12.7:1). Accent keeps close to the raw sampled acid
+# green's high lightness/saturation rather than darkening it — same lesson
+# as "jehuty": a darker green derivative reads too close to GreenSuccess
+# (#388E3C). This accent's hue (~87°, yellow-green/lime) is also further from
+# GreenSuccess's hue (~123°, pure green) than jehuty's was (~151°), on top of
+# the lightness/saturation gap — contrast 2.4:1 against GreenSuccess.
+#
+# Token reference syntax in prompts: {{token.TokenName}}
+# Example: "Background color: {{token.TamiyaPrimary}}"
+
+tokens:
+
+  # ============================================================
+  # COLOR TOKENS
+  # ============================================================
+  # Colors are organized into semantic groups.
+  # Never reference a hex value directly in a prompt — always use a token.
+  # ============================================================
+
+  colors:
+
+    primary:
+      # Deep purple — darkened/saturated derivative of EVA-01's lilac armor
+      # plating (#A86CC0 raw sample only reaches ~4:1 contrast on white,
+      # fails AA for header text; this derivative reaches 12.7:1).
+      TamiyaPrimary: "#492258"
+
+      # Darker variant — near-black purple, for hover states and depth
+      # shadows within primary-color zones.
+      TamiyaDark: "#2D1537"
+
+      # Lighter variant — used for dividers/secondary elements inside the
+      # panel. Never for body text regardless of its own contrast math
+      # (RULE-030/COLOR_SYSTEM.md fix the role, not the theme).
+      TamiyaLight: "#B992C9"
+
+      # Ultra-light variant — faint lavender tint for callout backgrounds and
+      # alternating zones. Never use for text.
+      TamiyaUltraLight: "#F1EDF2"
+
+    neutral:
+      # Page background. Mandatory for all page areas outside the primary-color panel.
+      # This value must never be changed — even in a themed variant, Rule 6
+      # (Core/STYLE_GUIDE.md) keeps the page background pure white.
+      White: "#FFFFFF"
+
+      # Alternate background — used for table alternating rows and off-white zones.
+      # Must not be used as the primary page background.
+      OffWhite: "#F8F8F8"
+
+      # Border color for dividers, table lines, and component outlines.
+      LightGray: "#E8E8E8"
+
+      # Secondary label color — placeholder text, inactive states, metadata.
+      MidGray: "#9B9B9B"
+
+      # Primary body text color. All body copy must use this value.
+      DarkGray: "#4A4A4A"
+
+      # Maximum contrast — used for headlines on white backgrounds.
+      # Not for body text (use DarkGray).
+      Black: "#1A1A1A"
+
+    accent:
+      # Gold accent — unchanged from the default theme. Semantic/functional
+      # tokens (Gold/Red/Green/Blue) do not vary per theme — only the
+      # structural brand identity (primary group) does.
+      GoldAccent: "#C8A838"
+
+      # Light gold background — fill for Tips boxes. Pair with GoldAccent border.
+      GoldLight: "#F5E9B8"
+
+      # EVA-01 accent — acid/lime-green joint-stripe highlight, kept close to
+      # the sampled source value rather than darkened (see file header note).
+      # Sparing decorative use only (e.g. cover kicker underline) — never for
+      # success indicators; GreenSuccess remains the only green permitted for
+      # that semantic role.
+      TamiyaAccent: "#95D944"
+
+      # Light EVA-01-accent background — pair with TamiyaAccent border.
+      TamiyaAccentLight: "#EBF1E4"
+
+    semantic:
+      # Warning state — left-border color for C008 Warning components.
+      # Never use for decoration.
+      RedWarning: "#D32F2F"
+
+      # Warning fill — background of C008 Warning boxes. Pair with RedWarning border.
+      RedWarningLight: "#FFEBEE"
+
+      # Success state — checkmarks, completion indicators, Final Checklist (P010).
+      GreenSuccess: "#388E3C"
+
+      # Success fill — background of success zones.
+      GreenSuccessLight: "#E8F5E9"
+
+      # Info state — general informational callouts not requiring primary-color branding.
+      BlueInfo: "#1976D2"
+
+      # Info fill — background of info callout boxes.
+      BlueInfoLight: "#E3F2FD"
+
+    panel:
+      # Side panel background — the 4-column right panel in two-column layouts.
+      # Must use TamiyaPrimary; do not use TamiyaDark or TamiyaLight here.
+      PanelBackground: "#492258"
+
+      # Side panel border — visible only where the panel meets white content.
+      PanelBorder: "#2D1537"
+
+    callout:
+      # General callout background (C006) — informational boxes.
+      CalloutBackground: "#F1EDF2"
+
+      # General callout left-border (C006).
+      CalloutBorder: "#B992C9"
+
+      # Warning callout accent (C008) — used as left-border and icon color.
+      WarningColor: "#D32F2F"
+
+      # Success callout accent — used for completed checklist items.
+      SuccessColor: "#388E3C"
+
+      # Annotation arrow color — used in C012 Zoom and C007 Exploded View.
+      ArrowColor: "#492258"
+
+  # ============================================================
+  # TYPOGRAPHY TOKENS — identical to default theme
+  # ============================================================
+
+  typography:
+
+    fonts:
+      TitleFont: "J Audio Cassette, Bebas Neue, Impact, Arial Black, sans-serif"
+      BodyFont: "Source Sans Pro, Open Sans, Helvetica Neue, sans-serif"
+      MonoFont: "JetBrains Mono, Courier New, monospace"
+
+    scale:
+      DisplaySize: "48pt"
+      DisplayLineHeight: "1.1"
+      H1Size: "36pt"
+      H1LineHeight: "1.2"
+      H2Size: "28pt"
+      H2LineHeight: "1.3"
+      H3Size: "22pt"
+      H3LineHeight: "1.4"
+      H4Size: "16pt"
+      H4LineHeight: "1.5"
+      BodySize: "11pt"
+      BodyLineHeight: "1.6"
+      CaptionSize: "9pt"
+      CaptionLineHeight: "1.5"
+      LabelSize: "8pt"
+      LabelLineHeight: "1.4"
+
+    FontScale: "48/36/28/22/16/11/9/8"
+
+  # ============================================================
+  # SPACING TOKENS — identical to default theme
+  # ============================================================
+
+  spacing:
+    SpacingBase: "4px"
+    SpacingScale: "4/8/12/16/24/32/48/64/96"
+    XS: "4px"
+    S: "8px"
+    M: "12px"
+    L: "16px"
+    XL: "24px"
+    XXL: "32px"
+    XXXL: "48px"
+    PageMargin: "18mm"
+    PageMarginTop: "15mm"
+    PageMarginBottom: "20mm"
+    ColumnGap: "4mm"
+    ImagePadding: "8px"
+
+  # ============================================================
+  # SIZING TOKENS — identical to default theme
+  # ============================================================
+
+  sizing:
+    HeaderHeight: "18mm"
+    FooterHeight: "12mm"
+    GridColumns: "12"
+    PageWidth: "210mm"
+    PageHeight: "297mm"
+
+  # ============================================================
+  # BORDER TOKENS — identical to default theme
+  # ============================================================
+
+  borders:
+    BorderRadius: "4px"
+    BorderThickness: "1px"
+    BorderThickAccent: "4px"
+    CornerRadius: "4px"
+
+  # ============================================================
+  # SHADOW TOKENS — identical to default theme
+  # ============================================================
+
+  shadows:
+    ShadowSubtle: "0 1px 3px rgba(0,0,0,0.12)"
+    ShadowMedium: "0 4px 6px rgba(0,0,0,0.16)"
+    ShadowStrong: "0 8px 16px rgba(0,0,0,0.20)"
+    ShadowOpacity: "0.16"
+
+  # ============================================================
+  # RENDER TOKENS — identical to default theme
+  # ============================================================
+
+  render:
+    RenderLighting: "studio-neutral"
+    RenderBackground: "#FFFFFF"
+    RenderPaddingMin: "8px"
+    CoverResolution: "2480x3508px"
+    BodyResolution: "1240x1754px"
+    DetailResolution: "800x800px"
