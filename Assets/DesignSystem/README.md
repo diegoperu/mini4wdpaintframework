@@ -35,7 +35,7 @@ This directory is the **single source of truth for all visual values** used when
 Core/STYLE_GUIDE.md          Assets/DesignSystem/
 ─────────────────────        ──────────────────────────────
 "Header background:          Tokens/tokens.example.yaml:
- VioletPrimary"          →     colors.primary.VioletPrimary: "#5B2D8E"
+ TamiyaPrimary"          →     colors.primary.TamiyaPrimary: "#114B69"
 
 "Header height: 18mm"    →   sizing.HeaderHeight: "18mm"
 
@@ -52,7 +52,7 @@ Core/STYLE_GUIDE.md          Assets/DesignSystem/
 All PromptEngine/ prompts and component specifications reference tokens using double-brace syntax:
 
 ```
-{{token.VioletPrimary}}        → resolves to "#5B2D8E"
+{{token.TamiyaPrimary}}        → resolves to "#114B69"
 {{token.HeaderHeight}}         → resolves to "18mm"
 {{token.TitleFont}}            → resolves to "Bebas Neue, Impact, Arial Black, sans-serif"
 {{token.ShadowMedium}}         → resolves to "0 4px 6px rgba(0,0,0,0.16)"
@@ -68,10 +68,10 @@ The following pattern is **forbidden** in any prompt or configuration file:
 
 ```
 # WRONG — hardcoded value
-Header background: #5B2D8E
+Header background: #114B69
 
 # CORRECT — token reference
-Header background: {{token.VioletPrimary}}
+Header background: {{token.TamiyaPrimary}}
 ```
 
 This rule ensures that if the brand color ever changes, updating one YAML file updates every page in every future manual.

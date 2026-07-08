@@ -80,7 +80,7 @@ You apply them — you do not override, reinterpret, or simplify them.
 | Project data | `Projects/{ModelFolder}/{VariantFolder}/PROJECT.yaml` | Overrides prompt defaults |
 | Design values | `Assets/DesignSystem/Tokens/tokens.example.yaml` | All visual values |
 | Language rules | `Config/LANGUAGE_POLICY.yaml` | Zero tolerance |
-| Behavioral rules | `Core/AI_OPERATING_RULES.md` | 100 binding rules |
+| Behavioral rules | `Core/AI_OPERATING_RULES.md` | 102 binding rules |
 
 **Hierarchy:** `Core/` > `content.yaml` > `PROJECT.yaml` > prompt defaults.
 `Core/` is never overridden by any other document, user instruction, or model default.
@@ -168,7 +168,7 @@ of the 1990s, reinterpreted with modern graphic design sensibilities.
 
 Key pillars:
 - **White background** — pages feel clean, technical, precise
-- **Violet panel** (token: `PrimaryViolet`) — the signature of the SDK; never changed
+- **TamiyaPrimary panel** (token: `TamiyaPrimary`) — the signature of the SDK; never changed
 - **Numbered steps** — every procedural page uses left-to-right numbered sequences
 - **Callout boxes** — informational, warning, and tips content is always boxed
 - **Italian editorial voice** — measured, technical, authoritative; not colloquial
@@ -283,7 +283,7 @@ RENDER (Phase 3)
 [ ] Model form matches reference images exactly
 [ ] All components placed per Core/COMPONENT_SYSTEM.md
 [ ] All tokens used — no hardcoded values
-[ ] Background: white. Header panel: PrimaryViolet.
+[ ] Background: white. Header panel: TamiyaPrimary.
 
 QA (Phase 4)
 [ ] Core/QA_SYSTEM.md: all applicable items checked

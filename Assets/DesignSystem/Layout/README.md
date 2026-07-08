@@ -106,7 +106,7 @@ The render or image fills the entire Content Zone, edge-to-edge between side mar
 **Rules:**
 - Image padding minimum: `{{token.ImagePadding}}` (8px) from content zone edges
 - Title overlay must have sufficient contrast against the render
-- A semi-transparent violet scrim (VioletPrimary at 70% opacity) may be used behind the title overlay only
+- A semi-transparent primary-color scrim (TamiyaPrimary at 70% opacity) may be used behind the title overlay only
 
 ---
 
@@ -114,7 +114,7 @@ The render or image fills the entire Content Zone, edge-to-edge between side mar
 
 **Used for:** P002 Color Scheme, P003 Materials, P009 Premium Variant
 
-Main content in 8 columns; violet side panel in 4 columns.
+Main content in 8 columns; primary-color side panel in 4 columns.
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -124,7 +124,7 @@ Main content in 8 columns; violet side panel in 4 columns.
 │   MAIN CONTENT AREA            │  (4 columns)   │
 │   (8 columns)                  │                │
 │                                │  Background:   │
-│   BodyFont 11pt DarkGray       │  VioletPrimary │
+│   BodyFont 11pt DarkGray       │  TamiyaPrimary │
 │                                │                │
 │   [Color swatches, steps,      │  White text    │
 │    materials list, etc.]       │  BodyFont 10pt │
@@ -139,7 +139,7 @@ Main content in 8 columns; violet side panel in 4 columns.
 ```
 
 **Rules:**
-- Side panel background: `{{token.VioletPrimary}}` (solid, no gradient)
+- Side panel background: `{{token.TamiyaPrimary}}` (solid, no gradient)
 - Side panel text: `{{token.White}}`
 - Side panel padding: `{{token.XL}}` (24px) all sides
 - No shadow between main content and side panel (they are flush)
@@ -226,7 +226,7 @@ Two-column checklist layout with header section.
 
 The Header (C001) and Footer (C002) are **always the same** regardless of which layout pattern is used:
 
-- Header: full page width, `{{token.HeaderHeight}}` (18mm), `{{token.VioletPrimary}}` background
+- Header: full page width, `{{token.HeaderHeight}}` (18mm), `{{token.TamiyaPrimary}}` background
 - Footer: full page width, `{{token.FooterHeight}}` (12mm), `{{token.LightGray}}` background with `{{token.MidGray}}` top border
 
 The Content Zone layout pattern is independent of the Header and Footer.

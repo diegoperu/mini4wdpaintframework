@@ -13,7 +13,7 @@ Color in this system is not decoration — it is communication. Every color has 
 The palette is intentionally minimal. Fewer colors used consistently is more powerful than many colors used loosely. When reviewing a page, ask: does every color here have a reason to be here?
 
 The hierarchy of color roles:
-1. **Structural** — defines the identity and layout of the page (violet, white)
+1. **Structural** — defines the identity and layout of the page (primary, white)
 2. **Functional** — communicates a specific type of information (red = danger, gold = important, green = complete, blue = info)
 3. **Content** — represents real-world data (paint swatches only)
 
@@ -23,51 +23,57 @@ Colors in roles 1 and 2 are fully specified here. Colors in role 3 (paint swatch
 
 ## 2. Primary Colors
 
-### VioletPrimary
+Derived from the Tamiya "Star Mark" logo (blue star, `#1D95D3`), darkened and
+desaturated so it never reads as `BlueInfo` at a glance — see `STYLE_DECISIONS.md`
+ADR-023 (supersedes ADR-007, which chose violet specifically to avoid any
+manufacturer association; ADR-023 records the tradeoff of adopting a
+Tamiya-derived identity instead).
+
+### TamiyaPrimary
 
 The primary brand color and the most important structural color in the system.
 
 | Property | Value |
 |---|---|
-| Hex | `#5B2D8E` |
-| RGB | 91, 45, 142 |
-| CMYK | 36, 68, 0, 44 |
-| Pantone (approx.) | 2627 C |
-| Token | `{{token.VioletPrimary}}` |
+| Hex | `#114B69` |
+| RGB | 17, 75, 105 |
+| CMYK | 84, 29, 0, 59 |
+| Pantone | Not determined — verify against a physical swatch before print production |
+| Token | `{{token.TamiyaPrimary}}` |
 
-**Usage:** Header band (C001), side panel background, step number circles (C013), component borders where a violet accent is specified.
+**Usage:** Header band (C001), side panel background, step number circles (C013), component borders where a primary-color accent is specified.
 
 **Never use for:** Body text on white, warning indicators, backgrounds other than the defined zones.
 
 ---
 
-### VioletDark
+### TamiyaDark
 
-Used for depth, pressed states, and text rendered within violet zones when additional contrast is needed.
+Used for depth, pressed states, and text rendered within primary-color zones when additional contrast is needed.
 
 | Property | Value |
 |---|---|
-| Hex | `#3D1E60` |
-| RGB | 61, 30, 96 |
-| CMYK | 36, 69, 0, 62 |
-| Token | `{{token.VioletDark}}` |
+| Hex | `#0B2F42` |
+| RGB | 11, 47, 66 |
+| CMYK | 83, 29, 0, 74 |
+| Token | `{{token.TamiyaDark}}` |
 
-**Usage:** Monospace paint codes on white background, text shadow on violet header, decorative ruled lines in violet zones.
+**Usage:** Monospace paint codes on white background, text shadow on primary-color header, decorative ruled lines in primary-color zones.
 
 ---
 
-### VioletLight
+### TamiyaLight
 
-Used for dividers and secondary elements within violet-background zones.
+Used for dividers and secondary elements within primary-color-background zones.
 
 | Property | Value |
 |---|---|
-| Hex | `#8B5FBF` |
-| RGB | 139, 95, 191 |
-| CMYK | 27, 50, 0, 25 |
-| Token | `{{token.VioletLight}}` |
+| Hex | `#76ABC7` |
+| RGB | 118, 171, 199 |
+| CMYK | 41, 14, 0, 22 |
+| Token | `{{token.TamiyaLight}}` |
 
-**Usage:** Divider lines inside the side panel, secondary borders on violet components.
+**Usage:** Divider lines inside the side panel, secondary borders on primary-color components.
 
 ---
 
@@ -171,6 +177,24 @@ The premium highlight color. Used sparingly to draw attention to the most import
 
 ---
 
+### TamiyaAccent
+
+Derived from the Tamiya "Star Mark" logo's red star (`#EC2227`), darkened and
+desaturated so it never reads as `RedWarning` at a glance — see
+`STYLE_DECISIONS.md` ADR-023. Sparing decorative use only.
+
+| Property | Value |
+|---|---|
+| Hex | `#851E21` |
+| RGB | 133, 30, 33 |
+| CMYK | 0, 77, 75, 48 |
+| Token | `{{token.TamiyaAccent}}` |
+
+**Usage:** Cover kicker underline, optional decorative brand accent.
+**Never use for:** Warning indicators — `RedWarning` is the only red permitted for danger/error signaling. If it signals danger, it must be `RedWarning`, not `TamiyaAccent`.
+
+---
+
 ### RedWarning
 
 Exclusive to warnings, errors, and critical information. Never used decoratively.
@@ -221,9 +245,9 @@ Used for informational callouts and notes that are neither warnings nor tips.
 
 | Color | Role | May appear in |
 |---|---|---|
-| VioletPrimary | Structural — identity | Header, side panel, step circles |
-| VioletDark | Structural — depth | Mono codes on white, text shadow |
-| VioletLight | Structural — secondary | Dividers inside violet zones |
+| TamiyaPrimary | Structural — identity | Header, side panel, step circles |
+| TamiyaDark | Structural — depth | Mono codes on white, text shadow |
+| TamiyaLight | Structural — secondary | Dividers inside primary-color zones |
 | White | Structural — background | Page background (mandatory) |
 | OffWhite | Structural — subtle fill | Tables, code blocks |
 | LightGray | Structural — dividers | Borders, rules on white |
@@ -231,6 +255,7 @@ Used for informational callouts and notes that are neither warnings nor tips.
 | DarkGray | Functional — tertiary text | Notes, supplementary |
 | Black | Functional — primary text | All body text, headings |
 | GoldAccent | Functional — important | Tips, premium, max 3 per page |
+| TamiyaAccent | Functional — decorative brand accent | Cover kicker underline, sparingly |
 | RedWarning | Functional — danger | Warnings only |
 | GreenSuccess | Functional — complete | Checklist completion |
 | BlueInfo | Functional — information | Informational callouts |
@@ -245,21 +270,21 @@ The following combinations are prohibited for accessibility and design integrity
 |---|---|
 | Red text on white at below 14pt | Fails WCAG 2.1 AA contrast at small sizes |
 | Gold text on white | Fails WCAG 2.1 AA (ratio 2.3:1) — use Black text with gold border instead |
-| VioletLight on White body text | Fails WCAG 2.1 AA (ratio 2.7:1) |
+| TamiyaLight on White body text | Fails WCAG 2.1 AA (ratio 2.5:1) |
 | Red on green or green on red | Color blindness failure; cannot be distinguished by deuteranopia |
-| Violet on violet (primary on dark) | Insufficient contrast between VioletPrimary and VioletDark for text |
+| TamiyaPrimary on TamiyaDark (or reverse) | Insufficient contrast (ratio 1.5:1) for text |
 
 ---
 
 ## 7. Dark Background Rules
 
-Dark backgrounds (VioletPrimary, VioletDark) appear only in these defined zones:
+Dark backgrounds (TamiyaPrimary, TamiyaDark) appear only in these defined zones:
 - C001 Header band
 - C002 Footer accent line (3px top border only — background is white)
 - Side panel (4-column zone on right of content pages)
 - C013 Step Number circles
 
-**Text on dark backgrounds must be White (#FFFFFF).** No exceptions. Do not use Black, Gold, or any other color for text on violet backgrounds.
+**Text on dark backgrounds must be White (#FFFFFF).** No exceptions. Do not use Black, Gold, or any other color for text on primary-color backgrounds.
 
 ---
 
@@ -309,7 +334,7 @@ Paint swatches in C003 Palette and C011 Paint Code Box represent real model pain
 
 All colors in the SDK follow the pattern: `{Role}{Descriptor}` in PascalCase.
 
-- Role prefix: `Violet`, `Gray`, `Red`, `Green`, `Blue`, `Gold`, `White`, `Black`
+- Role prefix: `Tamiya`, `Gray`, `Red`, `Green`, `Blue`, `Gold`, `White`, `Black`
 - Descriptor suffix (optional): `Primary`, `Dark`, `Light`, `Accent`, `Warning`, `Success`, `Info`
 
 New colors added to the palette (via ADR) must follow this convention. Color names must be unique across the token file. Avoid names that imply a specific use case that might change (e.g., do not name a color `ButtonBackground` — name it by its visual property).
@@ -322,9 +347,9 @@ Every color in this document maps to exactly one Design Token in `Assets/DesignS
 
 | Color Name | Token Key |
 |---|---|
-| VioletPrimary | `token.VioletPrimary` |
-| VioletDark | `token.VioletDark` |
-| VioletLight | `token.VioletLight` |
+| TamiyaPrimary | `token.TamiyaPrimary` |
+| TamiyaDark | `token.TamiyaDark` |
+| TamiyaLight | `token.TamiyaLight` |
 | White | `token.White` |
 | OffWhite | `token.OffWhite` |
 | LightGray | `token.LightGray` |
@@ -332,6 +357,7 @@ Every color in this document maps to exactly one Design Token in `Assets/DesignS
 | DarkGray | `token.DarkGray` |
 | Black | `token.Black` |
 | GoldAccent | `token.GoldAccent` |
+| TamiyaAccent | `token.TamiyaAccent` |
 | RedWarning | `token.RedWarning` |
 | GreenSuccess | `token.GreenSuccess` |
 | BlueInfo | `token.BlueInfo` |

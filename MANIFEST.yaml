@@ -267,7 +267,7 @@ design_tokens:
   source_file: "Assets/DesignSystem/Tokens/tokens.example.yaml"
   schema_file: "Assets/DesignSystem/Tokens/tokens.schema.yaml"
   required_tokens:
-    - "tokens.colors.primary.VioletPrimary"
+    - "tokens.colors.primary.TamiyaPrimary"
     - "tokens.colors.neutral.White"
     - "tokens.colors.semantic.RedWarning"
     - "tokens.typography.fonts.TitleFont"

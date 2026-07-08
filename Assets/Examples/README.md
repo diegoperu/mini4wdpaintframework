@@ -31,7 +31,7 @@ When examples are released, each page type will have one approved example file:
 
 | File | Page Type | Description |
 |------|-----------|-------------|
-| `P001_example.png` | Cover | Demo model, full-bleed render, violet header, display title |
+| `P001_example.png` | Cover | Demo model, full-bleed render, primary-color header, display title |
 | `P002_example.png` | Color Scheme | 3-view renders, color legend, paint code boxes |
 | `P003_example.png` | Materials | Shopping list in two-column layout, safety warnings |
 | `P004_example.png` | Preparation | Numbered steps, exploded view, time boxes |

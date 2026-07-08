@@ -35,10 +35,10 @@ A manual that omits P009 is valid. All other pages are required. A manual that o
 - `{{project.paintScheme.name}}` — paint scheme name, displayed as subtitle
 - `{{project.renders.cover}}` — path to approved cover render image
 
-**Output:** Single full-bleed illustration page. The render fills the page from the bottom of the header to the top of the footer. Title information overlays the lower quarter of the render on a semi-transparent violet band.
+**Output:** Single full-bleed illustration page. The render fills the page from the bottom of the header to the top of the footer. Title information overlays the lower quarter of the render on a semi-transparent TamiyaPrimary band.
 
 **Dependencies:**
-- `C001` Header (violet band, top)
+- `C001` Header (TamiyaPrimary band, top)
 - `C002` Footer (page reference, bottom)
 - `RENDER_GUIDE.md` §2 (cover angle: 3/4 front-left, elevated 15°)
 - `RENDER_GUIDE.md` §3 (Studio Neutral or Drama lighting)
@@ -51,11 +51,11 @@ A manual that omits P009 is valid. All other pages are required. A manual that o
 - [ ] Series name present, Caption size, white
 - [ ] Cover render is 3/4 front-left angle per RENDER_GUIDE.md §2
 - [ ] Render background is white or transparent
-- [ ] Violet header band present (C001)
+- [ ] TamiyaPrimary header band present (C001)
 - [ ] Footer contains page identifier P001 (C002)
 - [ ] Render minimum resolution: 2480×3508px (A4 @300dpi)
 
-**Best Practice:** The cover render should show the model with its most visually striking angle. The violet title band at the bottom must not obscure more than 25% of the render. If the render is too dark in the lower quarter, choose Drama lighting which concentrates illumination on the upper two-thirds.
+**Best Practice:** The cover render should show the model with its most visually striking angle. The TamiyaPrimary title band at the bottom must not obscure more than 25% of the render. If the render is too dark in the lower quarter, choose Drama lighting which concentrates illumination on the upper two-thirds.
 
 **Common Errors:**
 - Using a render with a gray or gradient background

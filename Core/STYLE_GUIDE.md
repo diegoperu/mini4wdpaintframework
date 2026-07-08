@@ -16,9 +16,9 @@ All colors are documented in full in `COLOR_SYSTEM.md`. The values below are the
 
 | Token | Name | Hex | RGB | Usage |
 |---|---|---|---|---|
-| `{{token.VioletPrimary}}` | VioletPrimary | `#5B2D8E` | 91, 45, 142 | Header band, side panel, primary borders |
-| `{{token.VioletDark}}` | VioletDark | `#3D1E60` | 61, 30, 96 | Header text shadow, pressed states |
-| `{{token.VioletLight}}` | VioletLight | `#8B5FBF` | 139, 95, 191 | Divider lines on violet background, hover states |
+| `{{token.TamiyaPrimary}}` | TamiyaPrimary | `#114B69` | 17, 75, 105 | Header band, side panel, primary borders |
+| `{{token.TamiyaDark}}` | TamiyaDark | `#0B2F42` | 11, 47, 66 | Header text shadow, pressed states |
+| `{{token.TamiyaLight}}` | TamiyaLight | `#76ABC7` | 118, 171, 199 | Divider lines on primary-color background, hover states |
 
 ### 1.2 Neutral Colors
 
@@ -91,9 +91,9 @@ All colors are documented in full in `COLOR_SYSTEM.md`. The values below are the
 |---|---|---|
 | Body text on white | Black | `#1A1A1A` |
 | Headers on white | Black | `#1A1A1A` |
-| Text on VioletPrimary | White | `#FFFFFF` |
+| Text on TamiyaPrimary | White | `#FFFFFF` |
 | Captions | MidGray | `#9B9B9B` |
-| Part codes (mono) | VioletDark | `#3D1E60` |
+| Part codes (mono) | TamiyaDark | `#0B2F42` |
 | Warning text | RedWarning | `#D32F2F` |
 
 ---
@@ -139,12 +139,12 @@ For A4: `(210 - 18 - 18 - 44) / 12 = 10.8mm per column`
 
 ```
 ┌────────────────────────────────────────────────────┐
-│  C001 HEADER  (full width, 18mm, VioletPrimary)   │
+│  C001 HEADER  (full width, 18mm, TamiyaPrimary)   │
 ├──────────────────────────────┬─────────────────────┤
 │                              │                     │
 │   MAIN CONTENT AREA          │  SIDE PANEL         │
 │   (8 columns)                │  (4 columns)        │
-│                              │  VioletPrimary bg   │
+│                              │  TamiyaPrimary bg   │
 │                              │                     │
 │                              │                     │
 │                              │                     │
@@ -182,13 +182,13 @@ Full component specifications are in `Core/COMPONENT_SYSTEM.md`. The values belo
 
 | Component | Height | Background | Border |
 |---|---|---|---|
-| C001 Header | 18mm | VioletPrimary | None |
+| C001 Header | 18mm | TamiyaPrimary | None |
 | C002 Footer | 12mm | White | LightGray top, 0.5pt |
 | C003 Palette | Variable | White | LightGray, 1pt |
 | C006 Callout | Variable | OffWhite | BlueInfo left, 4px |
 | C008 Warning | Variable | White | RedWarning left, 4px |
 | C009 Tips | Variable | White | GoldAccent left, 4px |
-| C013 Step Number | 12mm × 12mm | VioletPrimary | None (circle) |
+| C013 Step Number | 12mm × 12mm | TamiyaPrimary | None (circle) |
 | C014 Time Box | 10mm × 18mm | OffWhite | LightGray, 1pt |
 
 ---
@@ -231,7 +231,7 @@ Shadows are used only on floating elements (rendered car images, callout boxes t
 
 ### 8.3 Icons
 - Size: 24×24px base (scalable)
-- Color: matches component role (white on violet, gold on white, red for warnings)
+- Color: matches component role (white on primary color, gold on white, red for warnings)
 - Format: SVG preferred, PNG fallback at 2× resolution
 - No icon may be recolored outside its defined role
 
@@ -300,7 +300,7 @@ Shadows are used only on floating elements (rendered car images, callout boxes t
 ### Callout and Warning Box Typography
 
 **C006 Callout:**
-- Lead-in: H4 (16pt, BodyFont SemiBold, VioletPrimary)
+- Lead-in: H4 (16pt, BodyFont SemiBold, TamiyaPrimary)
 - Body: 11pt BodyFont Regular, DarkGray (#4A4A4A)
 
 **C008 Warning:**

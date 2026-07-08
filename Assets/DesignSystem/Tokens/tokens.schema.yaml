@@ -52,25 +52,25 @@ properties:
 
           primary:
             type: object
-            description: "Brand violet palette. Both fields are required."
+            description: "Brand primary palette (Tamiya-derived). Both fields are required."
             required:
-              - VioletPrimary
-              - VioletDark
+              - TamiyaPrimary
+              - TamiyaDark
             additionalProperties: true
             properties:
-              VioletPrimary:
+              TamiyaPrimary:
                 type: string
                 pattern: "^#[0-9A-Fa-f]{6}$"
                 description: "Primary brand color. Hex format required. Used on every page header."
-              VioletDark:
+              TamiyaDark:
                 type: string
                 pattern: "^#[0-9A-Fa-f]{6}$"
-                description: "Dark variant of VioletPrimary. Must be visually darker."
-              VioletLight:
+                description: "Dark variant of TamiyaPrimary. Must be visually darker."
+              TamiyaLight:
                 type: string
                 pattern: "^#[0-9A-Fa-f]{6}$"
                 description: "Light variant. Optional but strongly recommended."
-              VioletUltraLight:
+              TamiyaUltraLight:
                 type: string
                 pattern: "^#[0-9A-Fa-f]{6}$"
                 description: "Ultra-light tint. For background fills only, never for text."

@@ -260,7 +260,7 @@ Before generating any content, internalize the following constraints:
    C001 Header and C002 Footer mandatory on every page.
 
 5. DESIGN TOKENS: All visual values from tokens.example.yaml.
-   VioletPrimary #5B2D8E, White #FFFFFF, DarkGray #4A4A4A.
+   TamiyaPrimary #114B69, White #FFFFFF, DarkGray #4A4A4A.
 
 [PROJECT DATA]
 Model: {{project.modelName}}
@@ -305,7 +305,7 @@ Paint Scheme: {{project.paintScheme.name}}
 | `{{project.decals[N].name}}` | PROJECT.yaml | P008 |
 | `{{project.decals[N].position}}` | PROJECT.yaml | P008 |
 | `{{project.premiumVariant.name}}` | PROJECT.yaml | P009 |
-| `{{token.VioletPrimary}}` | tokens.example.yaml | All (render) |
+| `{{token.TamiyaPrimary}}` | tokens.example.yaml | All (render) |
 | `{{token.HeaderHeight}}` | tokens.example.yaml | C001 (render) |
 
 ---

@@ -174,7 +174,7 @@ Verify that the SDK itself is internally consistent: all referenced documents ex
 **Success Criteria:** All required tokens in schema are present in example file with correct values
 
 - [ ] All `required` keys in `tokens.schema.yaml` exist in `tokens.example.yaml`
-- [ ] `tokens.colors.primary.VioletPrimary` = `#5B2D8E` (exact)
+- [ ] `tokens.colors.primary.TamiyaPrimary` = `#114B69` (exact)
 - [ ] `tokens.colors.neutral.White` = `#FFFFFF` (exact — any other value is FAIL)
 - [ ] All color token values match hex pattern `^#[0-9A-Fa-f]{6}$`
 - [ ] All size tokens include unit (pt or px or mm)

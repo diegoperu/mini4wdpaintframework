@@ -35,24 +35,24 @@ This is the last page. The reader has completed the painting. This page guides a
 
 **Page Layout: A4 (210x297mm), white background White**
 
-**HEADER (C001):** Violet band VioletPrimary, 18mm. Left: "Mini4WD Manual". Right: "FINAL CHECK".
+**HEADER (C001):** Primary-color band TamiyaPrimary, 18mm. Left: "Mini4WD Manual". Right: "FINAL CHECK".
 **FOOTER (C002):** LightGray, 12mm.
 Left: "{{project.modelName}} — {{paintScheme.name}}" Source Sans Pro Regular 8pt DarkGray.
-Center: "P010" Source Sans Pro Bold 8pt VioletPrimary.
+Center: "P010" Source Sans Pro Bold 8pt TamiyaPrimary.
 Right: "Mini4WD Manual SDK v2.4.0" Source Sans Pro Regular 8pt MidGray.
 
 **PAGE TITLE (22mm from top):**
-"Final Inspection Checklist" in Bebas Neue Bold 28pt VioletPrimary, left margin 18mm.
+"Final Inspection Checklist" in Bebas Neue Bold 28pt TamiyaPrimary, left margin 18mm.
 Subtitle: "Verify every item before reassembly." Source Sans Pro Regular 11pt DarkGray, 32mm from top.
 
 **TWO-COLUMN LAYOUT (from 42mm to 200mm):**
 
 Left column (18mm to 101mm): QUALITY INSPECTION
 
-Section heading: "QUALITY CHECKS" Source Sans Pro SemiBold 10pt VioletPrimary uppercase, violet underline.
+Section heading: "QUALITY CHECKS" Source Sans Pro SemiBold 10pt TamiyaPrimary uppercase, primary-color underline.
 
 Checklist items — render each as a checkbox row:
-Checkbox style: open square 12x12mm, border 1.5px VioletPrimary, border-radius 2px. Text to right: Source Sans Pro Regular 9pt Black.
+Checkbox style: open square 12x12mm, border 1.5px TamiyaPrimary, border-radius 2px. Text to right: Source Sans Pro Regular 9pt Black.
 
 Paint Quality:
 - [ ] Base coat fully opaque (no body color showing through)
@@ -87,7 +87,7 @@ Top Coat:
 
 Right column (109mm to 192mm): CARE & STORAGE
 
-Section heading: "CARE & STORAGE" Source Sans Pro SemiBold 10pt VioletPrimary uppercase, violet underline.
+Section heading: "CARE & STORAGE" Source Sans Pro SemiBold 10pt TamiyaPrimary uppercase, primary-color underline.
 
 **CARE INSTRUCTIONS list (C015 style, compact):**
 Icon: shield symbol or [S], 10pt GreenSuccess.
@@ -112,10 +112,10 @@ Body:
 Source Sans Pro Regular 9pt DarkGray.
 
 **COMPLETION BADGE (center, 210mm from top):**
-Badge rectangle: 120x32mm, background gradient from VioletPrimary to VioletDark, border-radius 8px, centered horizontally.
+Badge rectangle: 120x32mm, background gradient from TamiyaPrimary to TamiyaDark, border-radius 8px, centered horizontally.
 Left: checkmark icon [V] 18pt White.
 Center text: "SCHEME COMPLETE" Bebas Neue Bold 16pt White, letter-spacing 3px.
-Sub-text: "{{paintScheme.name}}" Source Sans Pro Regular 9pt VioletLight, below main text.
+Sub-text: "{{paintScheme.name}}" Source Sans Pro Regular 9pt TamiyaLight, below main text.
 
 **MANUAL METADATA (240mm from top, below badge):**
 Gray section background OffWhite, full width minus margins, border-radius 3px, padding 8px.

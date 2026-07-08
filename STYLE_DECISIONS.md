@@ -16,7 +16,7 @@ Before modifying any specification in `Core/`, you must either reference an exis
 | ADR-004 | Component-first page assembly | Accepted | 2.0.0 |
 | ADR-005 | Design Token system for all visual values | Accepted | 2.1.0 |
 | ADR-006 | White background mandatory for all pages | Accepted | 1.0.0 |
-| ADR-007 | Violet/purple as primary brand color | Accepted | 1.0.0 |
+| ADR-007 | Violet/purple as primary brand color | Superseded by ADR-023 | 1.0.0 |
 | ADR-008 | Render-based illustrations only | Accepted | 1.0.0 |
 | ADR-009 | AI-model-agnostic prompt design | Accepted | 2.0.0 |
 | ADR-010 | Semantic Versioning for all SDK releases | Accepted | 1.0.0 |
@@ -25,6 +25,7 @@ Before modifying any specification in `Core/`, you must either reference an exis
 | ADR-013 | AI Operating Rules as Mandatory Document | Accepted | 2.2.0 |
 | ADR-014 | Knowledge Base Separate from Prompt Templates | Accepted | 2.2.0 |
 | ADR-015 | MANIFEST.yaml as Machine-Readable SDK Identity | Accepted | 2.2.0 |
+| ADR-023 | Tamiya-derived primary brand color (supersedes ADR-007) | Accepted | 2.5.5 |
 
 ---
 
@@ -121,7 +122,7 @@ Visual values (colors, sizes, fonts) were hardcoded in COMPONENT_SYSTEM.md and S
 All visual values are defined once in `Assets/DesignSystem/Tokens/tokens.example.yaml`. Every occurrence in Core/ documents, PromptEngine/ prompts, and component specs uses token references in the format `{{token.TokenName}}`. The `tokens.schema.yaml` file defines the allowed token names and their types.
 
 ### Consequences
-- Changing the primary violet color requires editing one value in one file
+- Changing the primary brand color requires editing one value in one file
 - AI models receive token values injected at prompt time (by substituting `{{token.X}}` before submitting the prompt)
 - Token names are part of the public SDK API; renaming a token is a breaking change requiring a MAJOR version bump
 - Token values must be concrete (hex, pt, mm) — no token may reference another token
@@ -502,3 +503,87 @@ Three related findings were deliberately left unfixed because they require a mai
 - The PROJECT.yaml schema shown in `Core/MANUAL_SYSTEM.md` and `Projects/PROJECT_BOOTSTRAP.md` can now be copy-pasted without producing a file that fails validation against `Templates/PROJECT.yaml`
 - `Core/PDF_MASTER.md` is now a complete specification for all three variants actually implemented in `Config/pdf.yaml`
 - The three explicitly-unresolved findings remain open and are tracked in `Documentation/OperationalManual/Validation/DOCUMENTATION_STATUS.yaml → status.pending_review` pending a maintainer decision
+
+---
+
+## ADR-023 — Tamiya-Derived Primary Brand Color (Supersedes ADR-007)
+
+**ID:** ADR-023
+**Title:** Tamiya-derived primary brand color, replacing violet
+**Version:** 2.5.5
+**Date:** 2026-07-08
+**Status:** Accepted
+
+### Context
+ADR-007 chose violet (`#5B2D8E`) specifically because it was *not* associated
+with any Mini4WD/Tamiya brand color — deliberately avoiding both red (reserved
+for `RedWarning`) and blue (reserved for `BlueInfo`). The maintainer requested
+a primary color that visually recalls the real Tamiya "Star Mark" logo instead,
+while explicitly acknowledging the semantic-conflict risk ADR-007 was written
+to avoid.
+
+The Tamiya corporate logo ("Star Mark") consists of a red star (`#EC2227`,
+described by Tamiya as representing creativity/passion) and a blue star
+(`#1D95D3`, representing youth/sincerity), verified directly from the official
+SVG source files on Wikimedia Commons (cross-checked across two independently
+uploaded logo files, both agreeing on these values). Using either color at
+full saturation/lightness would collide with `RedWarning` (`#D32F2F`) or
+`BlueInfo` (`#1976D2`) — both are close in hue and lightness to the
+corresponding Tamiya star color, which is exactly the ambiguity ADR-007 was
+avoiding.
+
+### Decision
+Adopt derived, not literal, versions of both Tamiya star colors: darkened and
+desaturated enough that neither is confusable with the existing semantic
+red/blue at a glance.
+
+- `TamiyaPrimary` (`#114B69`) replaces `VioletPrimary` as the SDK's structural
+  brand color (header, side panel, step circles). Derived from the Tamiya blue
+  star (`#1D95D3`): same hue family, lightness reduced from L=0.47 to L=0.24.
+  Contrast against `BlueInfo` (`#1976D2`) is 2.0:1 — clearly distinct in
+  lightness even though both are blue.
+- `TamiyaDark` (`#0B2F42`) and `TamiyaLight` (`#76ABC7`) replace `VioletDark`/
+  `VioletLight` as directly derived tints/shades of `TamiyaPrimary`.
+- `TamiyaUltraLight` (`#E8EFF2`) replaces `VioletUltraLight`.
+- `TamiyaAccent` (`#851E21`, new token) is derived from the Tamiya red star
+  (`#EC2227`): lightness reduced from L=0.53 to L=0.32, saturation reduced by
+  25%. Contrast against `RedWarning` (`#D32F2F`) is 1.9:1. Sparing decorative
+  use only (e.g. cover kicker underline) — **never** for warnings; `RedWarning`
+  remains the only red permitted for danger/error signaling.
+- `RedWarning` and `BlueInfo` are unchanged. This decision does not reopen the
+  semantic-color question ADR-007 settled — it solves the same collision
+  problem with derived shades instead of avoidance.
+
+All four renamed color tokens (`VioletPrimary`→`TamiyaPrimary`,
+`VioletDark`→`TamiyaDark`, `VioletLight`→`TamiyaLight`,
+`VioletUltraLight`→`TamiyaUltraLight`) keep their structural role unchanged —
+only the name and hex value change. Updated in: `Assets/DesignSystem/Tokens/
+tokens.example.yaml`, `tokens.schema.yaml`, `Scripts/templates/*.jinja`,
+`Core/STYLE_GUIDE.md`, `Core/COLOR_SYSTEM.md`, `Core/DESIGN_LANGUAGE.md`
+(Rule 13–15, 45, 48–50), `Core/AI_OPERATING_RULES.md` (RULE-016, 018, 026, 030,
+034, 054), `Core/PDF_MASTER.md`, `Core/NAMING_CONVENTION.md`,
+`Core/PAGE_SYSTEM.md`, `Core/QA_SYSTEM.md` (QA-048, 049, 058),
+`Core/COMPONENT_SYSTEM.md`.
+
+Not touched: the `Violet_Phantom` project/variant name
+(`Projects/Proto_Emperor/Violet_Phantom/`) and any illustrative example paint
+scheme names containing the word "violet" (e.g. "Midnight Violet" in
+`Core/MANUAL_SYSTEM.md`/`Core/DOCUMENTATION_STYLE.md`/`Core/PDF_MASTER.md`
+example snippets) — these are unrelated project/paint names, not the design
+token, and renaming them would be a fabricated, unrequested change to example
+or real project content.
+
+### Consequences
+- Per ADR-005, "renaming a token is a breaking change requiring a MAJOR version
+  bump." This ADR is filed under 2.5.5 rather than a new MAJOR version because,
+  at time of writing, no project has ever created a `tokens.override.yaml`
+  (the only documented per-project token-customization path) — there is no
+  known consumer of the old `Violet*` token names to break. If that changes,
+  this decision should be revisited and the version bump reconsidered.
+- `Projects/Magnum_Saber_Premium/Cotton_Candy_Drift` and other existing locked
+  pages were **not** re-rendered or re-touched as part of this ADR — the
+  project's own paint scheme (Light Blue/Pink/Black/Yellow/Silver Leaf/Gun
+  Metal) is unrelated to the SDK's own theme tokens; only the framework chrome
+  (header/footer/panel color) changes on next render.
+- No Pantone spot-color equivalent is claimed for either new color — none has
+  been verified against a physical swatch (see `Core/PDF_MASTER.md`).

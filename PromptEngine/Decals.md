@@ -32,11 +32,11 @@ This page guides the application of all decals: numbers, logos, stripes, sponsor
 
 **Page Layout: A4 (210x297mm), white background White**
 
-**HEADER (C001):** Violet band VioletPrimary, 18mm. Left: "Mini4WD Manual". Right: "DECALS".
+**HEADER (C001):** Primary-color band TamiyaPrimary, 18mm. Left: "Mini4WD Manual". Right: "DECALS".
 **FOOTER (C002):** LightGray, 12mm. Center: "{{project.modelName}} — Decals  |  P008".
 
 **PAGE TITLE (22mm from top):**
-"Decal Application Guide" in Bebas Neue Bold 28pt VioletPrimary, left margin 18mm.
+"Decal Application Guide" in Bebas Neue Bold 28pt TamiyaPrimary, left margin 18mm.
 Subtitle: "Apply decals only after the top coat is fully cured (minimum 24 hours)." Source Sans Pro Regular 11pt DarkGray, 32mm from top.
 
 **PLACEMENT OVERVIEW RENDER (upper area, 42mm to 140mm):**
@@ -50,7 +50,7 @@ Annotation style:
 - Note: if render not available: [DECAL PLACEMENT OVERVIEW PLACEHOLDER - show model outline with numbered positions]
 
 **DECAL REFERENCE TABLE (from 144mm):**
-Section heading: "DECAL REFERENCE" Source Sans Pro SemiBold 10pt VioletPrimary uppercase, violet underline.
+Section heading: "DECAL REFERENCE" Source Sans Pro SemiBold 10pt TamiyaPrimary uppercase, primary-color underline.
 
 Table columns: | # | Decal Name | Position Description | Size | Application Notes |
 

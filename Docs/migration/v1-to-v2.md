@@ -220,7 +220,7 @@ Body font: Source Sans Pro, 11pt
 
 **After (tokens):**
 ```
-Header background: {{token.VioletPrimary}}
+Header background: {{token.TamiyaPrimary}}
 Header height: {{token.HeaderHeight}}
 Body font: {{token.BodyFont}}, {{token.BodySize}}
 ```

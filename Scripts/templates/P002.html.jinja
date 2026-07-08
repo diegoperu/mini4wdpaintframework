@@ -5,9 +5,9 @@
 <style>{{ font_faces }}</style>
 <style>
   :root {
-    --violet-primary: {{ tokens.colors.primary.VioletPrimary }};
-    --violet-dark: {{ tokens.colors.primary.VioletDark }};
-    --violet-light: {{ tokens.colors.primary.VioletLight }};
+    --tamiya-primary: {{ tokens.colors.primary.TamiyaPrimary }};
+    --tamiya-dark: {{ tokens.colors.primary.TamiyaDark }};
+    --tamiya-light: {{ tokens.colors.primary.TamiyaLight }};
     --white: {{ tokens.colors.neutral.White }};
     --off-white: {{ tokens.colors.neutral.OffWhite }};
     --light-gray: {{ tokens.colors.neutral.LightGray }};
@@ -34,7 +34,7 @@
   /* C001 — Header */
   .header {
     height: {{ mm(18) }};
-    background: var(--violet-primary);
+    background: var(--tamiya-primary);
     color: var(--white);
     display: flex;
     align-items: center;
@@ -50,14 +50,14 @@
     bottom: 0; left: 0; right: 0;
     height: {{ mm(12) }};
     background: var(--white);
-    border-top: 1.5pt solid var(--violet-primary);
+    border-top: 1.5pt solid var(--tamiya-primary);
     display: flex;
     align-items: center;
     padding: 0 {{ mm(6) }};
     font-size: 9pt;
     color: var(--mid-gray);
   }
-  .footer .right { margin-left: auto; font-size: 8pt; color: var(--violet-primary); font-weight: 600; }
+  .footer .right { margin-left: auto; font-size: 8pt; color: var(--tamiya-primary); font-weight: 600; }
 
   /* Main layout: content column + side panel (P002 = three-view + legend sidebar) */
   .main {
@@ -105,12 +105,12 @@
   .swatch-block { width: {{ mm(20) }}; text-align: center; font-size: 8pt; }
   .swatch { width: {{ mm(20) }}; height: {{ mm(20) }}; border: 1pt solid var(--light-gray); border-radius: 2px; }
   .swatch-name { margin-top: 2px; color: var(--black); font-size: 8pt; }
-  .swatch-code { font-family: var(--mono-font); color: var(--violet-dark); font-size: 7.5pt; }
+  .swatch-code { font-family: var(--mono-font); color: var(--tamiya-dark); font-size: 7.5pt; }
 
   /* C010 — Paint Legend */
   .legend-table { width: 100%; border-collapse: collapse; font-size: 8.5pt; }
   .legend-table th {
-    background: var(--violet-primary); color: var(--white);
+    background: var(--tamiya-primary); color: var(--white);
     font-size: 7.5pt; text-transform: uppercase; letter-spacing: 0.5px;
     padding: {{ mm(1.5) }} {{ mm(1.5) }}; text-align: left;
   }
@@ -133,10 +133,10 @@
     font-size: 8pt;
   }
   .code-box .swatch-mini { width: {{ mm(8) }}; height: {{ mm(8) }}; border-radius: 2px; flex: none; }
-  .code-box .code { font-family: var(--mono-font); color: var(--violet-dark); flex: none; width: {{ mm(14) }}; }
+  .code-box .code { font-family: var(--mono-font); color: var(--tamiya-dark); flex: none; width: {{ mm(14) }}; }
   .code-box .name { color: var(--black); flex: 1; }
   .code-box .finish {
-    background: var(--violet-dark); color: var(--white);
+    background: var(--tamiya-dark); color: var(--white);
     font-size: 6.5pt; text-transform: uppercase; letter-spacing: 0.5px;
     padding: 1px {{ mm(1.5) }}; border-radius: 2px; flex: none;
   }
@@ -181,7 +181,7 @@
       </div>
 
       <div class="callout">{{ content.intro }}</div>
-      <div class="callout" style="border-left-color: var(--violet-light);">{{ content.color_notes }}</div>
+      <div class="callout" style="border-left-color: var(--tamiya-light);">{{ content.color_notes }}</div>
     </div>
 
     <div class="side-panel">

@@ -12,19 +12,19 @@ See also: `PAGE_SYSTEM.md` for which components each page uses, `Assets/DesignSy
 
 | ID | Name | Required On | Token Refs |
 |---|---|---|---|
-| C001 | Header | All pages | VioletPrimary, HeaderHeight, TitleFont |
+| C001 | Header | All pages | TamiyaPrimary, HeaderHeight, TitleFont |
 | C002 | Footer | All pages | FooterHeight, Black, LightGray |
 | C003 | Palette | P002, P009 | White, LightGray |
 | C004 | Shopping List | P003 | OffWhite, LightGray |
-| C005 | Paint Sequence | P004, P005 | VioletPrimary, OffWhite |
+| C005 | Paint Sequence | P004, P005 | TamiyaPrimary, OffWhite |
 | C006 | Callout | P004–P008 | BlueInfo, OffWhite |
 | C007 | Exploded View | P006 | LightGray, Black |
 | C008 | Warning | P003–P008 | RedWarning, White |
 | C009 | Tips | P004–P009 | GoldAccent, White |
 | C010 | Paint Legend | P002 | White, LightGray |
-| C011 | Paint Code Box | P002, P005–P007 | VioletDark, OffWhite, MonoFont |
+| C011 | Paint Code Box | P002, P005–P007 | TamiyaDark, OffWhite, MonoFont |
 | C012 | Zoom | P006–P008 | LightGray, Black |
-| C013 | Step Number | P004–P008 | VioletPrimary, White, TitleFont |
+| C013 | Step Number | P004–P008 | TamiyaPrimary, White, TitleFont |
 | C014 | Time Box | P004–P006 | OffWhite, LightGray, MidGray |
 | C015 | Notes | P010 | OffWhite, LightGray |
 
@@ -32,11 +32,11 @@ See also: `PAGE_SYSTEM.md` for which components each page uses, `Assets/DesignSy
 
 ## C001 — Header
 
-**Description:** The top band of every page. Contains the brand mark on the left, an optional series name in the center, and a page type label on the right. The violet background is the primary visual signal that this page belongs to the Mini4WD Manual SDK.
+**Description:** The top band of every page. Contains the brand mark on the left, an optional series name in the center, and a page type label on the right. The TamiyaPrimary background is the primary visual signal that this page belongs to the Mini4WD Manual SDK.
 
 **Dimensions:** Full page width × 18mm height (`{{token.HeaderHeight}}`)
 
-**Background:** `{{token.VioletPrimary}}` (#5B2D8E)
+**Background:** `{{token.TamiyaPrimary}}` (#114B69)
 
 **Layout:**
 - Left zone (25% width): SDK logo mark (20×18mm, white) + "Mini4WD Manual" wordmark in TitleFont, 14pt, white
@@ -44,16 +44,16 @@ See also: `PAGE_SYSTEM.md` for which components each page uses, `Assets/DesignSy
 - Right zone (25% width): Page type label (e.g., "COLOR SCHEME") in Label font (8pt), uppercase, white, right-aligned
 
 **Variants:**
-- `standard`: White text on VioletPrimary, right zone shows page type label
+- `standard`: White text on TamiyaPrimary, right zone shows page type label
 - `cover`: Right zone is empty. Center zone may show the series name at larger scale.
 
-**Token References:** `{{token.VioletPrimary}}`, `{{token.HeaderHeight}}`, `{{token.TitleFont}}`, `{{token.BodyFont}}`
+**Token References:** `{{token.TamiyaPrimary}}`, `{{token.HeaderHeight}}`, `{{token.TitleFont}}`, `{{token.BodyFont}}`
 
 **Dependencies:** `tokens.example.yaml`, `Core/COLOR_SYSTEM.md` §2
 
 **Best Practice:** The right-zone label must match the page ID exactly (e.g., the header on P002 reads "COLOR SCHEME", not "Color Scheme" or "Colors"). Use the label names defined in `PAGE_SYSTEM.md`.
 
-**Common Errors:** Using a gradient instead of solid VioletPrimary; wrong font weight for the page label (must be SemiBold 600); reducing header height below 18mm.
+**Common Errors:** Using a gradient instead of solid TamiyaPrimary; wrong font weight for the page label (must be SemiBold 600); reducing header height below 18mm.
 
 **Wireframe:**
 ```
@@ -66,30 +66,30 @@ See also: `PAGE_SYSTEM.md` for which components each page uses, `Assets/DesignSy
 
 ## C002 — Footer
 
-**Description:** The bottom band of every page. Contains the page number and optional copyright or version information. The footer is white with a thin violet rule at the top edge.
+**Description:** The bottom band of every page. Contains the page number and optional copyright or version information. The footer is white with a thin TamiyaPrimary rule at the top edge.
 
 **Dimensions:** Full page width × 12mm height (`{{token.FooterHeight}}`)
 
 **Background:** `{{token.White}}`
 
-**Border:** Top edge: 1.5pt solid `{{token.VioletPrimary}}`
+**Border:** Top edge: 1.5pt solid `{{token.TamiyaPrimary}}`
 
 **Layout:**
 - Left zone: "Mini4WD Manual SDK" in Caption font (9pt), MidGray
 - Center zone: Optional project-level subtitle or empty
-- Right zone: Page number in format "P001" in Label font (8pt), VioletPrimary, right-aligned
+- Right zone: Page number in format "P001" in Label font (8pt), TamiyaPrimary, right-aligned
 
 **Variants:**
 - `standard`: As described above
 - `print`: Adds "Printed: {date}" in MidGray at far right, before page number
 
-**Token References:** `{{token.FooterHeight}}`, `{{token.VioletPrimary}}`, `{{token.MidGray}}`, `{{token.BodyFont}}`
+**Token References:** `{{token.FooterHeight}}`, `{{token.TamiyaPrimary}}`, `{{token.MidGray}}`, `{{token.BodyFont}}`
 
-**Common Errors:** Missing the top violet rule; using the manual name instead of "Mini4WD Manual SDK" in the left zone; incorrect page ID format (must be P001, not 1 or 01).
+**Common Errors:** Missing the top TamiyaPrimary rule; using the manual name instead of "Mini4WD Manual SDK" in the left zone; incorrect page ID format (must be P001, not 1 or 01).
 
 **Wireframe:**
 ```
-──────────────────────────────────────────────────────────  ← 1.5pt violet rule
+──────────────────────────────────────────────────────────  ← 1.5pt TamiyaPrimary rule
  Mini4WD Manual SDK                                  P002   12mm
 ```
 
@@ -106,7 +106,7 @@ See also: `PAGE_SYSTEM.md` for which components each page uses, `Assets/DesignSy
 **Layout:**
 - Each color is a rectangular swatch: 20mm wide × 20mm tall
 - Below each swatch: color name in Caption (9pt), Black
-- Below color name: paint code in Mono font (8pt), VioletDark
+- Below color name: paint code in Mono font (8pt), TamiyaDark
 - Swatches are arranged in a horizontal row, left to right in application order
 - If more than 6 colors, wrap to a second row
 
@@ -141,15 +141,15 @@ Metallic   Chrome    Flat    Pearl
 
 **Layout:**
 - Table with 4 columns: Category | Item | Qty | Notes
-- Header row: VioletPrimary background, white Label text
+- Header row: TamiyaPrimary background, white Label text
 - Body rows: alternating White and OffWhite backgrounds
-- Category rows span all 4 columns with VioletLight background
+- Category rows span all 4 columns with TamiyaLight background
 
 **Variants:**
 - `compact`: 3 columns (no Notes column) for short lists
 - `full`: 4 columns (default)
 
-**Token References:** `{{token.OffWhite}}`, `{{token.VioletPrimary}}`, `{{token.VioletLight}}`, `{{token.LightGray}}`
+**Token References:** `{{token.OffWhite}}`, `{{token.TamiyaPrimary}}`, `{{token.TamiyaLight}}`, `{{token.LightGray}}`
 
 **Common Errors:** Items not categorized (reader cannot scan quickly); missing quantities; using a freeform list instead of the table structure.
 
@@ -166,10 +166,10 @@ Metallic   Chrome    Flat    Pearl
 **Layout:**
 - Vertical sequence, top to bottom
 - Each step: [C013 Step Number] + [20mm color swatch] + [Step title in H3] + [Instruction in Body]
-- Arrow connecting each step to the next (VioletPrimary, 1.5pt)
+- Arrow connecting each step to the next (TamiyaPrimary, 1.5pt)
 - Drying time appears as C014 Time Box to the right of the step
 
-**Token References:** `{{token.VioletPrimary}}`, `{{token.OffWhite}}`, `{{token.Black}}`
+**Token References:** `{{token.TamiyaPrimary}}`, `{{token.OffWhite}}`, `{{token.Black}}`
 
 **Common Errors:** Missing arrows between steps; combining multiple colors in one step; no drying times.
 
@@ -212,7 +212,7 @@ Metallic   Chrome    Flat    Pearl
 - Main diagram: isometric or top-down view of model with parts separated
 - Leader lines: 0.5pt `{{token.LightGray}}` connecting parts to labels
 - Labels: Caption (9pt), Black, on white background
-- Part numbers: Mono font, VioletDark
+- Part numbers: Mono font, TamiyaDark
 
 **Variants:**
 - `masking`: Shows masking tape zones highlighted in GoldAccent at 40% opacity
@@ -278,7 +278,7 @@ Metallic   Chrome    Flat    Pearl
 
 **Layout:**
 - Table: 3 columns — [Swatch 12×12mm] | [Color Name] | [Area Description]
-- Header: VioletPrimary background, white Label text ("PAINT LEGEND")
+- Header: TamiyaPrimary background, white Label text ("PAINT LEGEND")
 - Rows: White background, 1pt LightGray bottom border per row
 - Color names: Caption (9pt), Black
 - Area descriptions: Caption (9pt), DarkGray
@@ -302,11 +302,11 @@ Metallic   Chrome    Flat    Pearl
 
 **Layout:**
 - Left: Color swatch (10×10mm)
-- Center-left: Paint code in MonoFont (9pt), VioletDark (e.g., `TS-29`)
+- Center-left: Paint code in MonoFont (9pt), TamiyaDark (e.g., `TS-29`)
 - Center-right: Paint name in Caption (9pt), Black (e.g., "Semi-Gloss Black")
-- Right: Finish badge — "GLOSS" / "FLAT" / "METALLIC" in Label (8pt), white on VioletDark background, 2px border-radius
+- Right: Finish badge — "GLOSS" / "FLAT" / "METALLIC" in Label (8pt), white on TamiyaDark background, 2px border-radius
 
-**Token References:** `{{token.OffWhite}}`, `{{token.VioletDark}}`, `{{token.MonoFont}}`, `{{token.LightGray}}`
+**Token References:** `{{token.OffWhite}}`, `{{token.TamiyaDark}}`, `{{token.MonoFont}}`, `{{token.LightGray}}`
 
 **Common Errors:** Omitting the finish badge; using a generic color name instead of the official paint name; paint code not in monospace; placing this component inside C010 Paint Legend (they are separate components — C010 is the table on P002, C011 is a standalone inline box next to step instructions on P002/P005–P007).
 
@@ -344,7 +344,7 @@ Metallic   Chrome    Flat    Pearl
 
 **Dimensions:** 12mm diameter circle
 
-**Background:** `{{token.VioletPrimary}}`
+**Background:** `{{token.TamiyaPrimary}}`
 
 **Layout:**
 - Circle shape (border-radius: 50%)
@@ -352,10 +352,10 @@ Metallic   Chrome    Flat    Pearl
 - If step count > 9: number at 14pt to maintain legibility within circle
 
 **Variants:**
-- `standard`: VioletPrimary circle, white number
+- `standard`: TamiyaPrimary circle, white number
 - `complete`: GreenSuccess circle, white checkmark (used in P010 when reviewing completed steps)
 
-**Token References:** `{{token.VioletPrimary}}`, `{{token.GreenSuccess}}`, `{{token.TitleFont}}`
+**Token References:** `{{token.TamiyaPrimary}}`, `{{token.GreenSuccess}}`, `{{token.TitleFont}}`
 
 **Common Errors:** Using square instead of circle; number not centered; using BodyFont instead of TitleFont; steps numbered in a non-sequential order.
 
@@ -396,7 +396,7 @@ Metallic   Chrome    Flat    Pearl
 **Border:** 1pt `{{token.LightGray}}` all sides, 4px border-radius
 
 **Layout:**
-- Header: "NOTES" in Label (8pt), uppercase, VioletPrimary
+- Header: "NOTES" in Label (8pt), uppercase, TamiyaPrimary
 - Body: Horizontal ruled lines, 1pt `{{token.LightGray}}`, spaced 8mm apart
 - Minimum 4 ruled lines, maximum 8 (unless page height permits more)
 
@@ -404,7 +404,7 @@ Metallic   Chrome    Flat    Pearl
 - `lined`: Ruled lines (default)
 - `blank`: No ruled lines (for digital use where reader types freely)
 
-**Token References:** `{{token.OffWhite}}`, `{{token.LightGray}}`, `{{token.VioletPrimary}}`
+**Token References:** `{{token.OffWhite}}`, `{{token.LightGray}}`, `{{token.TamiyaPrimary}}`
 
 **Common Errors:** Too few lines for meaningful notes; no header label (reader doesn't know what this space is for); placing C015 in the middle of a page (it is always at the bottom).
 

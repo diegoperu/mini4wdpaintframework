@@ -82,7 +82,7 @@ Token references in wireframes use `{{token.Name}}` notation.
 │  [LOGO]  Mini4WD Manual           [Series Name]            [PAGE LABEL] │ (18mm)
 │  20×20mm  TitleFont 14pt White     H3 White (optional)     Label 8pt    │ ↓
 └──────────────────────────────────────────────────────────────────────────┘
-Background: {{token.VioletPrimary}}
+Background: {{token.TamiyaPrimary}}
 Text color: {{token.White}}
 
 VARIANT — Cover (P001):
@@ -95,7 +95,7 @@ VARIANT — Cover (P001):
 **Tokens used:**
 | Property | Token |
 |----------|-------|
-| Background | `{{token.VioletPrimary}}` |
+| Background | `{{token.TamiyaPrimary}}` |
 | Height | `{{token.HeaderHeight}}` |
 | Text color | `{{token.White}}` |
 | Logo typeface | `{{token.TitleFont}}` |
@@ -127,7 +127,7 @@ Background: {{token.LightGray}} (top border 1px {{token.MidGray}})
 ┌ {{token.CalloutBorder}} 4px left-border ─────────────────────────────────┐
 │                                                                          │
 │  ℹ  CALLOUT TITLE                                                        │
-│     H4 {{token.VioletPrimary}} 16pt                                      │
+│     H4 {{token.TamiyaPrimary}} 16pt                                      │
 │                                                                          │
 │     Callout body text. Explains a technique, material choice,            │
 │     or design decision relevant to the current step.                     │
@@ -185,7 +185,7 @@ Border: 4px left solid {{token.GoldAccent}}
   ╔═══╗
   ║ 1 ║  ← Circle/square badge
   ╚═══╝
-  Background: {{token.VioletPrimary}}
+  Background: {{token.TamiyaPrimary}}
   Text: {{token.White}}, TitleFont, 22pt
   Size: 32×32px (minimum)
 ```
@@ -198,9 +198,9 @@ Border: 4px left solid {{token.GoldAccent}}
   ┌───────────┐
   │  ⏱ 30min │  ← Inline time estimate
   └───────────┘
-  Background: {{token.VioletUltraLight}}
-  Border: 1px {{token.VioletLight}}
-  Text: {{token.VioletPrimary}}, BodyFont 11pt
+  Background: {{token.TamiyaUltraLight}}
+  Border: 1px {{token.TamiyaLight}}
+  Text: {{token.TamiyaPrimary}}, BodyFont 11pt
 ```
 
 ---

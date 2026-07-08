@@ -22,7 +22,7 @@
 
 ## Identità visiva in sintesi
 
-Bianco è il colore dominante su ogni pagina; violetto è l'accento che marca il framework; oro evidenzia l'eccellenza; rosso è esclusivo per gli avvisi (Rule 13). La banda header violetto è la firma dello SDK — deve comparire su ogni pagina (Rule 14). Nessun elemento decorativo è ammesso a meno che non serva uno scopo informativo (Rule 18).
+Bianco è il colore dominante su ogni pagina; il colore primario TamiyaPrimary è l'accento che marca il framework; oro evidenzia l'eccellenza; rosso è esclusivo per gli avvisi (Rule 13). La banda header TamiyaPrimary è la firma dello SDK — deve comparire su ogni pagina (Rule 14). Nessun elemento decorativo è ammesso a meno che non serva uno scopo informativo (Rule 18).
 
 ### Rules 55–65 — Identità editoriale (v2.3.0)
 
@@ -36,11 +36,11 @@ Palette chiusa — colori strutturali e funzionali:
 
 | Ruolo | Colori | Uso |
 |-------|--------|-----|
-| Strutturale | VioletPrimary `#5B2D8E`, VioletDark, VioletLight, White, OffWhite, LightGray | Identità, layout, background |
+| Strutturale | TamiyaPrimary `#114B69`, TamiyaDark, TamiyaLight, White, OffWhite, LightGray | Identità, layout, background |
 | Funzionale | Black `#1A1A1A` (mai #000000 puro), DarkGray, MidGray | Testo |
 | Funzionale — segnale | RedWarning (solo avvisi), GoldAccent (max 3 per pagina), GreenSuccess, BlueInfo | Comunicazione a colore fisso |
 
-Regola assoluta (`Core/COLOR_SYSTEM.md §7`): testo su sfondo scuro (violetto) è sempre bianco, nessuna eccezione.
+Regola assoluta (`Core/COLOR_SYSTEM.md §7`): testo su sfondo scuro (TamiyaPrimary) è sempre bianco, nessuna eccezione.
 
 ## Component System: C001–C015
 
@@ -82,7 +82,7 @@ Pattern per le immagini: `{model-slug}_{pageId}_{descriptor}_{version}.{ext}` �
 |--------|-------------|-----|
 | Colore hex hardcoded invece del token | Grep di pattern `#[0-9A-Fa-f]{6}` fuori da tokens.example.yaml | Sostituire con `{{token.NomeColore}}` |
 | Render con sfondo grigio/gradiente | Ispezione visiva | Rigenerare — solo bianco puro o trasparente |
-| Header con gradiente invece di violetto solido | Ispezione visiva | Sostituire con `#5B2D8E` piatto (via token) |
+| Header con gradiente invece di TamiyaPrimary solido | Ispezione visiva | Sostituire con `#114B69` piatto (via token) |
 | Componente C008/C009 usato per lo scopo sbagliato | Confronto contenuto vs ruolo (avviso vs consiglio) | C008 solo per rischio, C009 solo per best practice |
 | Più di 3 elementi oro per pagina | Conteggio visivo | Ridurre — l'oro perde significato se sovrautilizzato |
 

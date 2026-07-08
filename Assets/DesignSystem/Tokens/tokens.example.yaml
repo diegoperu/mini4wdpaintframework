@@ -1,5 +1,5 @@
 # Mini4WD Manual SDK — Design Tokens (Example / SDK Default)
-# Version: 2.4.0
+# Version: 2.5.5
 # Reference: Core/STYLE_GUIDE.md, Core/COMPONENT_SYSTEM.md
 # Schema: tokens.schema.yaml
 #
@@ -8,7 +8,7 @@
 # and override only the values that differ from these defaults.
 #
 # Token reference syntax in prompts: {{token.TokenName}}
-# Example: "Background color: {{token.VioletPrimary}}"
+# Example: "Background color: {{token.TamiyaPrimary}}"
 
 tokens:
 
@@ -23,23 +23,26 @@ tokens:
 
     primary:
       # The SDK's defining color. Used for header bands, side panels, and all
-      # primary brand elements. Must appear on every page.
-      VioletPrimary: "#5B2D8E"
+      # primary brand elements. Must appear on every page. Derived from the
+      # blue star of the Tamiya "Star Mark" logo (#1D95D3), darkened and
+      # slightly desaturated so it never reads as BlueInfo (#1976D2) at a
+      # glance — see STYLE_DECISIONS.md ADR-023.
+      TamiyaPrimary: "#114B69"
 
-      # Darker variant — used for hover states, borders on violet backgrounds,
-      # and depth shadows within violet zones.
-      VioletDark: "#3D1E60"
+      # Darker variant — used for hover states, borders on Tamiya-tinted
+      # backgrounds, and depth shadows within primary-color zones.
+      TamiyaDark: "#0B2F42"
 
       # Lighter variant — used for secondary text on white backgrounds when
-      # violet tinting is needed, and for tinted UI elements.
-      VioletLight: "#8B5FBF"
+      # primary-color tinting is needed, and for tinted UI elements.
+      TamiyaLight: "#76ABC7"
 
       # Ultra-light variant — used for background tints, alternating panel fills,
       # and subtle zone delineation. Never use for text.
-      VioletUltraLight: "#EDE5F5"
+      TamiyaUltraLight: "#E8EFF2"
 
     neutral:
-      # Page background. Mandatory for all page areas outside the violet panel.
+      # Page background. Mandatory for all page areas outside the primary-color panel.
       # This value must never be changed.
       White: "#FFFFFF"
 
@@ -68,6 +71,15 @@ tokens:
       # Light gold background — fill for Tips boxes. Pair with GoldAccent border.
       GoldLight: "#F5E9B8"
 
+      # Tamiya accent — derived from the red star of the Tamiya "Star Mark" logo
+      # (#EC2227), darkened and desaturated so it never reads as RedWarning
+      # (#D32F2F) at a glance. Sparing decorative use only (e.g. cover kicker
+      # underline) — never for warnings. See STYLE_DECISIONS.md ADR-023.
+      TamiyaAccent: "#851E21"
+
+      # Light Tamiya-accent background — pair with TamiyaAccent border.
+      TamiyaAccentLight: "#EDDEDE"
+
     semantic:
       # Warning state — left-border color for C008 Warning components.
       # Never use for decoration.
@@ -82,7 +94,7 @@ tokens:
       # Success fill — background of success zones.
       GreenSuccessLight: "#E8F5E9"
 
-      # Info state — general informational callouts not requiring violet branding.
+      # Info state — general informational callouts not requiring primary-color branding.
       BlueInfo: "#1976D2"
 
       # Info fill — background of info callout boxes.
@@ -90,18 +102,18 @@ tokens:
 
     panel:
       # Side panel background — the 4-column right panel in two-column layouts.
-      # Must use VioletPrimary; do not use VioletDark or VioletLight here.
-      PanelBackground: "#5B2D8E"
+      # Must use TamiyaPrimary; do not use TamiyaDark or TamiyaLight here.
+      PanelBackground: "#114B69"
 
       # Side panel border — visible only where the panel meets white content.
-      PanelBorder: "#3D1E60"
+      PanelBorder: "#0B2F42"
 
     callout:
       # General callout background (C006) — informational boxes.
-      CalloutBackground: "#EDE5F5"
+      CalloutBackground: "#E8EFF2"
 
       # General callout left-border (C006).
-      CalloutBorder: "#8B5FBF"
+      CalloutBorder: "#76ABC7"
 
       # Warning callout accent (C008) — used as left-border and icon color.
       WarningColor: "#D32F2F"
@@ -110,7 +122,7 @@ tokens:
       SuccessColor: "#388E3C"
 
       # Annotation arrow color — used in C012 Zoom and C007 Exploded View.
-      ArrowColor: "#5B2D8E"
+      ArrowColor: "#114B69"
 
   # ============================================================
   # TYPOGRAPHY TOKENS

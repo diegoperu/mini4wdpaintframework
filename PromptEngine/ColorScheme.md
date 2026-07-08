@@ -37,7 +37,7 @@ You are generating the COLOR SCHEME page (P002) of a Mini4WD painting manual for
 **Page Layout: A4 (210x297mm), white background White**
 
 **HEADER (C001):**
-Full-width violet band (VioletPrimary), 18mm height.
+Full-width primary-color band (TamiyaPrimary), 18mm height.
 Left: "Mini4WD Manual" Bebas Neue 16pt white.
 Right: "COLOR SCHEME" Source Sans Pro SemiBold 9pt uppercase white.
 
@@ -51,24 +51,24 @@ Divide the main area horizontally into three equal columns (each ~63mm wide, 4mm
 
 Left column — FRONT VIEW:
 - Image: {{paths.colorSchemeRenderFront}}
-- Label below image: "FRONT" in Source Sans Pro SemiBold 8pt uppercase VioletPrimary, centered
+- Label below image: "FRONT" in Source Sans Pro SemiBold 8pt uppercase TamiyaPrimary, centered
 - Orthographic projection, no perspective
 
 Center column — SIDE VIEW:
 - Image: {{paths.colorSchemeRenderSide}}
-- Label below image: "SIDE" in Source Sans Pro SemiBold 8pt uppercase VioletPrimary, centered
+- Label below image: "SIDE" in Source Sans Pro SemiBold 8pt uppercase TamiyaPrimary, centered
 - Orthographic projection, no perspective
 
 Right column — TOP VIEW:
 - Image: {{paths.colorSchemeRenderTop}}
-- Label below image: "TOP" in Source Sans Pro SemiBold 8pt uppercase VioletPrimary, centered
+- Label below image: "TOP" in Source Sans Pro SemiBold 8pt uppercase TamiyaPrimary, centered
 - Orthographic projection, no perspective
 
 All renders: white background, no shadows, equal scale.
 
 **SECTION DIVIDER (at 168mm from top):**
 Full-width horizontal rule, 1px, color LightGray.
-Label: "PAINT LEGEND" in Source Sans Pro SemiBold 9pt VioletPrimary, uppercase, left-aligned at 18mm, 172mm from top.
+Label: "PAINT LEGEND" in Source Sans Pro SemiBold 9pt TamiyaPrimary, uppercase, left-aligned at 18mm, 172mm from top.
 
 **COLOR LEGEND TABLE (C010 + C011, from 178mm to 272mm):**
 
@@ -79,7 +79,7 @@ For each color in the paint scheme, render one row with these columns:
 
 SWATCH (C003): Filled rectangle 18x12mm, background = the color's hex value, border 1px LightGray, border-radius 2px.
 
-CODE BOX (C011): Rectangle with violet border (VioletPrimary, 1.5px), border-radius 3px, padding 4px. Inside: brand name in 7pt MidGray above the product code in 10pt Bebas Neue VioletPrimary. Width 36mm.
+CODE BOX (C011): Rectangle with primary-color border (TamiyaPrimary, 1.5px), border-radius 3px, padding 4px. Inside: brand name in 7pt MidGray above the product code in 10pt Bebas Neue TamiyaPrimary. Width 36mm.
 
 COLOR NAME: Source Sans Pro SemiBold 10pt Black.
 
@@ -93,8 +93,8 @@ Paint colors to render (from PROJECT.yaml paintScheme.colors):
 {{paintScheme.colors}}
 
 **CALLOUT C006 (if colorNotes is non-empty, at 274mm from top):**
-Violet-left-border callout box (border 3px VioletPrimary, background #F5F0FA, border-radius 3px, padding 8px).
-Heading: "NOTE" Source Sans Pro SemiBold 9pt VioletPrimary.
+Primary-color-left-border callout box (border 3px TamiyaPrimary, background #F5F0FA, border-radius 3px, padding 8px).
+Heading: "NOTE" Source Sans Pro SemiBold 9pt TamiyaPrimary.
 Body: "{{paintScheme.colorNotes}}" Source Sans Pro Regular 9pt DarkGray.
 
 **REQUIRED ELEMENTS:**

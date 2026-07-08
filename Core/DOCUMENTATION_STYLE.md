@@ -27,7 +27,7 @@ This document applies to SDK documentation — not to manual content. Manual con
 ## 2. Tense
 
 Use **present tense** for specification statements:
-> "The header background is VioletPrimary."
+> "The header background is TamiyaPrimary."
 > "Each step requires a C013 Step Number."
 
 Use **imperative mood** for procedural instructions:
@@ -97,8 +97,8 @@ Languages used in this SDK:
 Use **inline code** (single backticks) for:
 - File names: `PROJECT.yaml`
 - Directory paths: `Assets/DesignSystem/Tokens/`
-- Token references: `{{token.VioletPrimary}}`
-- Values: `#5B2D8E`, `18mm`
+- Token references: `{{token.TamiyaPrimary}}`
+- Values: `#114B69`, `18mm`
 - Identifiers: `P001`, `C013`, `QA-046`
 
 ---
@@ -188,7 +188,7 @@ When showing correct vs. incorrect, use the Do / Don't table format:
 
 | Do | Don't |
 |---|---|
-| `{{token.VioletPrimary}}` | `#5B2D8E` (hardcoded) |
+| `{{token.TamiyaPrimary}}` | `#114B69` (hardcoded) |
 | `C001 Header` | `the purple bar at the top` |
 
 ---

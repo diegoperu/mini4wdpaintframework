@@ -75,8 +75,8 @@ QA-NNN: PASS | FAIL — [description of failure if FAIL]
 
 - [ ] QA-046: All structural colors (header, footer, side panel, borders) use token values from tokens.example.yaml — hardcoded colors may drift from the authoritative values
 - [ ] QA-047: Page background is pure white (#FFFFFF) on every page — no tint, no OffWhite page background
-- [ ] QA-048: Violet-background zones (C001, side panel) use exactly VioletPrimary (#5B2D8E) — any other violet is incorrect
-- [ ] QA-049: Text on VioletPrimary is white (#FFFFFF) — no other color is permitted for text on violet
+- [ ] QA-048: TamiyaPrimary-background zones (C001, side panel) use exactly TamiyaPrimary (#114B69) — any other shade is incorrect
+- [ ] QA-049: Text on TamiyaPrimary is white (#FFFFFF) — no other color is permitted for text on TamiyaPrimary
 - [ ] QA-050: Text on white is Black (#1A1A1A) for primary text — not #000000, not pure gray
 - [ ] QA-051: Red (#D32F2F) appears only in C008 Warning components — no decorative use
 - [ ] QA-052: Gold (#C8A838) appears only in C009 Tips components — no decorative use
@@ -85,7 +85,7 @@ QA-NNN: PASS | FAIL — [description of failure if FAIL]
 - [ ] QA-055: Blue (#1976D2) appears only in C006 Callout components — no decorative use
 - [ ] QA-056: No color combination in the manual fails WCAG 2.1 AA contrast (minimum 4.5:1 for body text) — inaccessible color combinations are a quality failure
 - [ ] QA-057: Gold on white is never used for text (contrast ratio 2.3:1 fails WCAG) — use Black text with gold border instead
-- [ ] QA-058: VioletLight (#8B5FBF) is not used for body text on white (contrast ratio 2.7:1 fails WCAG) — use VioletPrimary or Black instead
+- [ ] QA-058: TamiyaLight (#76ABC7) is not used for body text on white (contrast ratio 2.5:1 fails WCAG) — use TamiyaPrimary or Black instead
 - [ ] QA-059: Paint swatch hex values in C011 match the `swatchHex` field in COLOR_SCHEME.yaml — inconsistent swatches mislead the reader
 - [ ] QA-060: CMYK print variant has been color-proofed (or at minimum, designer has reviewed the CMYK conversion) — RGB-to-CMYK shift can significantly change perceived hue
 

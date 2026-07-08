@@ -45,7 +45,7 @@ This page presents the "{{premiumVariant.name}}" — an advanced version of the 
 
 **Page Layout: A4 (210x297mm), white background White**
 
-**HEADER (C001):** Violet band VioletPrimary, 18mm. Left: "Mini4WD Manual". Right: "PREMIUM".
+**HEADER (C001):** Primary-color band TamiyaPrimary, 18mm. Left: "Mini4WD Manual". Right: "PREMIUM".
 **FOOTER (C002):** LightGray, 12mm. Center: "{{project.modelName}} — Premium Variant  |  P009".
 
 **PREMIUM BADGE (top-right of main area, 20mm from right, 22mm from top):**
@@ -53,11 +53,11 @@ Hexagonal badge shape (or pill), background: gradient from GoldAccent to #E8C84A
 Text: "PREMIUM" Bebas Neue Bold 14pt White, letter-spacing 3px.
 
 **PAGE TITLE (22mm from top, left margin):**
-"{{premiumVariant.name}}" in Bebas Neue Bold 32pt VioletPrimary.
+"{{premiumVariant.name}}" in Bebas Neue Bold 32pt TamiyaPrimary.
 Subtitle: "{{premiumVariant.description}}" Source Sans Pro Light Italic 13pt DarkGray, 34mm from top.
 
 **COMPARISON PANEL (40mm to 140mm, full width):**
-Two-column comparison layout. Violet divider line (2px VioletPrimary) in center at 105mm.
+Two-column comparison layout. Primary-color divider line (2px TamiyaPrimary) in center at 105mm.
 
 Left column (18mm to 97mm): BASE SCHEME
 - Column heading: "BASE: {{paintScheme.name}}" Source Sans Pro SemiBold 10pt MidGray uppercase.
@@ -65,27 +65,27 @@ Left column (18mm to 97mm): BASE SCHEME
 - Caption: Source Sans Pro Regular 8pt MidGray italic, centered below render.
 
 Right column (113mm to 192mm): PREMIUM VARIANT
-- Column heading: "PREMIUM: {{premiumVariant.name}}" Source Sans Pro SemiBold 10pt VioletPrimary uppercase.
+- Column heading: "PREMIUM: {{premiumVariant.name}}" Source Sans Pro SemiBold 10pt TamiyaPrimary uppercase.
 - Render: 3/4 view of model in premium scheme. If not available: [PREMIUM RENDER PLACEHOLDER]
-- Caption: Source Sans Pro Regular 8pt VioletPrimary italic, centered below render.
+- Caption: Source Sans Pro Regular 8pt TamiyaPrimary italic, centered below render.
 
 **WHAT MAKES IT PREMIUM callout C006 (144mm from top, full width minus margins):**
-Violet-left-border callout: border-left 4px VioletPrimary, background #F5F0FA, border-radius 0 4px 4px 0, padding 12px.
-Heading: "WHAT ELEVATES THIS SCHEME" Source Sans Pro Bold 10pt VioletPrimary.
-Body: List all specialTechniques from {{premiumVariant.specialTechniques}}, one per line, Source Sans Pro Regular 10pt DarkGray, bullet VioletPrimary 4px circle.
+Primary-color-left-border callout: border-left 4px TamiyaPrimary, background #F5F0FA, border-radius 0 4px 4px 0, padding 12px.
+Heading: "WHAT ELEVATES THIS SCHEME" Source Sans Pro Bold 10pt TamiyaPrimary.
+Body: List all specialTechniques from {{premiumVariant.specialTechniques}}, one per line, Source Sans Pro Regular 10pt DarkGray, bullet TamiyaPrimary 4px circle.
 If no techniques defined: "Pearl topcoat adds depth and iridescence to the base color, creating a finish that changes character under different lighting conditions."
 
 **ADDITIONAL MATERIALS (from 170mm, if additionalMaterials non-empty):**
-Section heading: "ADDITIONAL MATERIALS REQUIRED" Source Sans Pro SemiBold 10pt VioletPrimary uppercase, violet underline.
+Section heading: "ADDITIONAL MATERIALS REQUIRED" Source Sans Pro SemiBold 10pt TamiyaPrimary uppercase, primary-color underline.
 
 For each item in {{premiumVariant.additionalMaterials}}, render a compact row:
-- Code Box mini C011: brand 6pt above code 8pt Bebas Neue VioletPrimary, violet border 1px, width 30mm.
+- Code Box mini C011: brand 6pt above code 8pt Bebas Neue TamiyaPrimary, primary-color border 1px, width 30mm.
 - Name: Source Sans Pro SemiBold 9pt Black.
 - Purpose: Source Sans Pro Regular 8pt DarkGray.
 Row separator: 1px LightGray.
 
 **TECHNIQUE STEPS (from 200mm or below materials):**
-Section heading: "PREMIUM TECHNIQUE SEQUENCE" Source Sans Pro SemiBold 10pt VioletPrimary uppercase, violet underline.
+Section heading: "PREMIUM TECHNIQUE SEQUENCE" Source Sans Pro SemiBold 10pt TamiyaPrimary uppercase, primary-color underline.
 
 For each technique in {{premiumVariant.specialTechniques}}, render a compact numbered step (same style as preparation steps, but with gold step circles C013 in GoldAccent to indicate premium content).
 

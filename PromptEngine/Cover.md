@@ -57,7 +57,7 @@ You are a professional graphic designer generating the COVER PAGE (P001) of a Mi
 **COMPONENT C001 -- HEADER (top of page)**
 
 Position: top edge, full width, height 18mm
-Background: solid VioletPrimary
+Background: solid TamiyaPrimary
 Left zone (from left margin, 18mm in): logotype "Mini4WD Manual" in Bebas Neue Bold, 16pt, color White, vertically centered
 Right zone (from right margin, 18mm in): label "COVER" in Source Sans Pro SemiBold, 9pt, uppercase, color White, letter-spacing 2px, vertically centered
 No dividers, no gradient, no shadow on header band.
@@ -85,14 +85,14 @@ SERIES LABEL (text overlay, upper-left zone of main area):
 - Position: left margin (18mm from left), 24mm from top edge (6mm below header bottom)
 - Text: "{{project.seriesName}}"
 - Font: Source Sans Pro Regular, 13pt
-- Color: VioletLight
+- Color: TamiyaLight
 - Letter-spacing: 1px
 
 MODEL NAME (text overlay, lower-center zone of main area):
 - Position: horizontally centered, 242mm from top (approximately 40mm above footer)
 - Text: "{{project.modelName}}"
 - Font: Bebas Neue Bold, 52pt
-- Color: VioletPrimary
+- Color: TamiyaPrimary
 - Letter-spacing: 3px
 
 PAINT SCHEME NAME (text overlay, below model name):
@@ -103,16 +103,16 @@ PAINT SCHEME NAME (text overlay, below model name):
 
 VIOLET ACCENT LINE (decorative, above model name):
 - Position: horizontally centered, width 60mm, height 2px, at 238mm from top
-- Color: VioletPrimary
+- Color: TamiyaPrimary
 
 REQUIRED ELEMENTS CHECKLIST -- verify all are present:
-- C001 Header: full width, 18mm, solid VioletPrimary, "Mini4WD Manual" left, "COVER" right
+- C001 Header: full width, 18mm, solid TamiyaPrimary, "Mini4WD Manual" left, "COVER" right
 - C002 Footer: full width, 12mm, LightGray, centered model name and page number
 - Model render: white background, 3/4 front-left angle, centered
-- Series label: VioletLight, 13pt, upper-left
-- Model name: VioletPrimary, Bebas Neue 52pt, lower-center
+- Series label: TamiyaLight, 13pt, upper-left
+- Model name: TamiyaPrimary, Bebas Neue 52pt, lower-center
 - Paint scheme name: DarkGray, italic, below model name
-- Violet accent line: 60mm wide, above model name
+- Primary-color accent line: 60mm wide, above model name
 
 OUTPUT FORMAT:
 
@@ -151,9 +151,9 @@ Save approved output to: `Assets/ApprovedManual/{{project.modelSlug}}/P001.png`
 | Error | How to Detect | Fix |
 |-------|--------------|-----|
 | Gray background on render | Visual inspection | Regenerate render with white background |
-| Missing series name label | Check element table | Add VioletLight text overlay |
+| Missing series name label | Check element table | Add TamiyaLight text overlay |
 | Model name in wrong font | Check font spec | Must be Bebas Neue, not Source Sans Pro |
-| Header gradient instead of solid | Visual inspection | Replace with flat VioletPrimary |
+| Header gradient instead of solid | Visual inspection | Replace with flat TamiyaPrimary |
 | Page number missing in footer | Check C002 spec | Footer must contain "P001" |
 | Render too small (<50% page width) | Measure in output | Scale render to 70% page width |
 

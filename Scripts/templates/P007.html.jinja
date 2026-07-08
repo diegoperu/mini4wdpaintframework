@@ -5,8 +5,8 @@
 <style>{{ font_faces }}</style>
 <style>
   :root {
-    --violet-primary: {{ tokens.colors.primary.VioletPrimary }};
-    --violet-dark: {{ tokens.colors.primary.VioletDark }};
+    --tamiya-primary: {{ tokens.colors.primary.TamiyaPrimary }};
+    --tamiya-dark: {{ tokens.colors.primary.TamiyaDark }};
     --white: {{ tokens.colors.neutral.White }};
     --off-white: {{ tokens.colors.neutral.OffWhite }};
     --light-gray: {{ tokens.colors.neutral.LightGray }};
@@ -24,7 +24,7 @@
     font-family: var(--body-font); color: var(--dark-gray); position: relative; overflow: hidden;
   }
   .header {
-    height: {{ mm(18) }}; background: var(--violet-primary); color: var(--white);
+    height: {{ mm(18) }}; background: var(--tamiya-primary); color: var(--white);
     display: flex; align-items: center; padding: 0 {{ mm(6) }};
   }
   .header .brand { flex: 0 0 25%; font-family: var(--title-font); font-size: 14pt; }
@@ -33,11 +33,11 @@
 
   .footer {
     position: absolute; bottom: 0; left: 0; right: 0; height: {{ mm(12) }};
-    background: var(--white); border-top: 1.5pt solid var(--violet-primary);
+    background: var(--white); border-top: 1.5pt solid var(--tamiya-primary);
     display: flex; align-items: center; padding: 0 {{ mm(6) }};
     font-size: 9pt; color: var(--mid-gray);
   }
-  .footer .right { margin-left: auto; font-size: 8pt; color: var(--violet-primary); font-weight: 600; }
+  .footer .right { margin-left: auto; font-size: 8pt; color: var(--tamiya-primary); font-weight: 600; }
 
   .main {
     position: absolute; top: {{ mm(18) }}; bottom: {{ mm(12) }}; left: 0; right: 0;
@@ -47,7 +47,7 @@
 
   .area-row { display: flex; gap: {{ mm(3) }}; align-items: flex-start; }
   .area-id {
-    flex: none; width: {{ mm(9) }}; height: {{ mm(7) }}; background: var(--violet-primary);
+    flex: none; width: {{ mm(9) }}; height: {{ mm(7) }}; background: var(--tamiya-primary);
     color: var(--white); border-radius: 3px; display: flex; align-items: center; justify-content: center;
     font-family: var(--mono-font); font-weight: 700; font-size: 8pt;
   }

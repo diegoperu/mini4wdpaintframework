@@ -32,11 +32,11 @@ Surface preparation determines the quality of the final result. Every step is ma
 
 **Page Layout: A4 (210x297mm), white background White**
 
-**HEADER (C001):** Violet band VioletPrimary, 18mm. Left: "Mini4WD Manual". Right: "PREPARATION".
+**HEADER (C001):** Primary-color band TamiyaPrimary, 18mm. Left: "Mini4WD Manual". Right: "PREPARATION".
 **FOOTER (C002):** LightGray, 12mm. Center: "{{project.modelName}} — Preparation  |  P004".
 
 **PAGE TITLE (22mm from top):**
-"Surface Preparation" in Bebas Neue Bold 28pt VioletPrimary, left margin 18mm.
+"Surface Preparation" in Bebas Neue Bold 28pt TamiyaPrimary, left margin 18mm.
 Subtitle: "Follow every step in order. Do not skip." Source Sans Pro Regular 11pt DarkGray, 32mm from top.
 
 **EXPLODED VIEW DIAGRAM (C007, right column 130mm to 192mm, 40mm to 140mm):**
@@ -47,9 +47,9 @@ A schematic diagram showing the body shell disassembled into its main components
 For each step in {{preparationSteps}}, render:
 
 STEP BLOCK:
-- Step Number (C013): circle 18x18mm, background VioletPrimary, text = step number in Bebas Neue Bold 14pt White, centered. Position: left edge of column.
+- Step Number (C013): circle 18x18mm, background TamiyaPrimary, text = step number in Bebas Neue Bold 14pt White, centered. Position: left edge of column.
 - Title: Source Sans Pro Bold 11pt Black, 24mm from left, vertically aligned with step circle center.
-- Time Box (C014): small pill shape, background #F5F0FA, border 1px VioletPrimary, border-radius 10px, padding 3px 8px. Text: duration value from step.durationSeconds formatted as "~X min" in Source Sans Pro Regular 8pt VioletPrimary. Position: right of title, same baseline.
+- Time Box (C014): small pill shape, background #F5F0FA, border 1px TamiyaPrimary, border-radius 10px, padding 3px 8px. Text: duration value from step.durationSeconds formatted as "~X min" in Source Sans Pro Regular 8pt TamiyaPrimary. Position: right of title, same baseline.
 - Description: Source Sans Pro Regular 10pt DarkGray, 24mm from left, below title, line-height 1.5.
 - Warning (if step.warning is set): inline C008 mini — left border 3px RedWarning, background #FFF8F8, text Source Sans Pro Italic 9pt RedWarning. Immediately below description.
 - Tip (if step.tip is set): inline C009 mini — left border 3px GoldAccent, background #FFFDF0, text Source Sans Pro Italic 9pt DarkGray. Immediately below warning or description.

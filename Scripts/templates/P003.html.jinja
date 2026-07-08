@@ -5,9 +5,9 @@
 <style>{{ font_faces }}</style>
 <style>
   :root {
-    --violet-primary: {{ tokens.colors.primary.VioletPrimary }};
-    --violet-dark: {{ tokens.colors.primary.VioletDark }};
-    --violet-light: {{ tokens.colors.primary.VioletLight }};
+    --tamiya-primary: {{ tokens.colors.primary.TamiyaPrimary }};
+    --tamiya-dark: {{ tokens.colors.primary.TamiyaDark }};
+    --tamiya-light: {{ tokens.colors.primary.TamiyaLight }};
     --white: {{ tokens.colors.neutral.White }};
     --off-white: {{ tokens.colors.neutral.OffWhite }};
     --light-gray: {{ tokens.colors.neutral.LightGray }};
@@ -33,7 +33,7 @@
 
   .header {
     height: {{ mm(18) }};
-    background: var(--violet-primary);
+    background: var(--tamiya-primary);
     color: var(--white);
     display: flex;
     align-items: center;
@@ -48,14 +48,14 @@
     bottom: 0; left: 0; right: 0;
     height: {{ mm(12) }};
     background: var(--white);
-    border-top: 1.5pt solid var(--violet-primary);
+    border-top: 1.5pt solid var(--tamiya-primary);
     display: flex;
     align-items: center;
     padding: 0 {{ mm(6) }};
     font-size: 9pt;
     color: var(--mid-gray);
   }
-  .footer .right { margin-left: auto; font-size: 8pt; color: var(--violet-primary); font-weight: 600; }
+  .footer .right { margin-left: auto; font-size: 8pt; color: var(--tamiya-primary); font-weight: 600; }
 
   .main {
     position: absolute;
@@ -73,19 +73,19 @@
   /* C004 — Shopping List */
   table.shopping { width: 100%; border-collapse: collapse; font-size: 8pt; }
   table.shopping .category-row td {
-    background: var(--violet-light); color: var(--white);
+    background: var(--tamiya-light); color: var(--white);
     font-size: 8pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
     padding: {{ mm(1) }} {{ mm(2) }};
   }
   table.shopping th {
-    background: var(--violet-primary); color: var(--white);
+    background: var(--tamiya-primary); color: var(--white);
     font-size: 7pt; text-transform: uppercase; letter-spacing: 0.5px;
     padding: {{ mm(1) }} {{ mm(2) }}; text-align: left;
   }
   table.shopping td { padding: {{ mm(1) }} {{ mm(2) }}; border-bottom: 1pt solid var(--light-gray); vertical-align: top; }
   table.shopping tr:nth-child(even):not(.category-row) td { background: var(--off-white); }
   table.shopping .name-cell { color: var(--black); font-weight: 600; }
-  table.shopping .code-cell { font-family: var(--mono-font); color: var(--violet-dark); }
+  table.shopping .code-cell { font-family: var(--mono-font); color: var(--tamiya-dark); }
 
   /* C008 — Warning */
   .warning {

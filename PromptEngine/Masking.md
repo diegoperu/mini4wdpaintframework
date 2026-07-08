@@ -32,11 +32,11 @@ This page must show: which areas to mask, in what order, and with what technique
 
 **Page Layout: A4 (210x297mm), white background White**
 
-**HEADER (C001):** Violet band VioletPrimary, 18mm. Left: "Mini4WD Manual". Right: "MASKING".
+**HEADER (C001):** Primary-color band TamiyaPrimary, 18mm. Left: "Mini4WD Manual". Right: "MASKING".
 **FOOTER (C002):** LightGray, 12mm. Center: "{{project.modelName}} — Masking  |  P006".
 
 **PAGE TITLE (22mm from top):**
-"Masking Guide" in Bebas Neue Bold 28pt VioletPrimary, left margin 18mm.
+"Masking Guide" in Bebas Neue Bold 28pt TamiyaPrimary, left margin 18mm.
 Subtitle: "Apply masks in numbered order to prevent bleed and lifting." Source Sans Pro Regular 11pt DarkGray, 32mm from top.
 
 **ANNOTATED RENDER (upper area, 40mm to 155mm):**
@@ -52,23 +52,23 @@ Annotation style:
 Place the annotated render centered, maximum width fitting between 18mm left margin and 192mm right margin.
 
 **MASKING CALLOUT C006 (right side panel if space, or below render):**
-Violet-left-border callout: border-left 3px VioletPrimary, background #F5F0FA, padding 8px.
-Heading: "TAPE TYPES" Source Sans Pro SemiBold 9pt VioletPrimary.
+Primary-color-left-border callout: border-left 3px TamiyaPrimary, background #F5F0FA, padding 8px.
+Heading: "TAPE TYPES" Source Sans Pro SemiBold 9pt TamiyaPrimary.
 Body:
 - "Standard masking tape (18mm): for straight edges and flat areas"
 - "Low-tack washi tape (6mm): for curves and delicate previously painted surfaces"
 - "Liquid masking fluid: for irregular shapes and complex areas"
 - "Pre-cut masks: for windows and precise geometric shapes"
-Source Sans Pro Regular 9pt DarkGray, bullet list with VioletPrimary filled circles 3px.
+Source Sans Pro Regular 9pt DarkGray, bullet list with TamiyaPrimary filled circles 3px.
 
 **MASKING SEQUENCE TABLE (from 160mm):**
-Section heading: "MASKING SEQUENCE" Source Sans Pro SemiBold 10pt VioletPrimary uppercase, with 2px violet underline.
+Section heading: "MASKING SEQUENCE" Source Sans Pro SemiBold 10pt TamiyaPrimary uppercase, with 2px primary-color underline.
 
 Table columns: | Order | Zone | Masking Type | Instructions | Remove After |
 
 For each zone in {{maskingZones}} (sorted by maskingOrder):
 
-- Order: C013 step circle 16x16mm GoldAccent (gold, not violet, to distinguish masking from painting steps), Bebas Neue Bold 11pt White.
+- Order: C013 step circle 16x16mm GoldAccent (gold, not primary-color, to distinguish masking from painting steps), Bebas Neue Bold 11pt White.
 - Zone: Source Sans Pro SemiBold 9pt Black.
 - Masking Type: pill badge, background #FFFDF0, border 1px GoldAccent, Source Sans Pro Regular 8pt GoldAccent.
 - Instructions: Source Sans Pro Regular 9pt DarkGray. If zone.notes is set, include it here.
@@ -79,9 +79,9 @@ Masking zones from PROJECT.yaml:
 
 **ZOOM DETAIL C012 (below table or in margin):**
 For the most complex masking zone (highest detail), render a close-up zoom box:
-Box border: 1.5px solid VioletPrimary, border-radius 3px.
-Zoom corner indicator: small "Z" icon in VioletPrimary at top-left of box.
-Label: "DETAIL: [zone name]" Source Sans Pro SemiBold 8pt VioletPrimary above box.
+Box border: 1.5px solid TamiyaPrimary, border-radius 3px.
+Zoom corner indicator: small "Z" icon in TamiyaPrimary at top-left of box.
+Label: "DETAIL: [zone name]" Source Sans Pro SemiBold 8pt TamiyaPrimary above box.
 Content: enlarged view of the zone showing tape placement detail. If not available: [ZOOM PLACEHOLDER - complex zone detail].
 
 **PAINT BLEED WARNING (C008):**

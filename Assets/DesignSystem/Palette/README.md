@@ -18,26 +18,26 @@ For authoritative color philosophy, see `Core/COLOR_SYSTEM.md`.
 
 | Token | Hex | RGB | Usage |
 |-------|-----|-----|-------|
-| `VioletPrimary` | `#5B2D8E` | 91, 45, 142 | Header band, side panel background, primary brand element |
-| `VioletDark` | `#3D1E60` | 61, 30, 96 | Header border-bottom, hover state, deep shadow on violet |
-| `VioletLight` | `#8B5FBF` | 139, 95, 191 | Callout borders, secondary headings on white, tinted elements |
-| `VioletUltraLight` | `#EDE5F5` | 237, 229, 245 | Background fills for callouts, alternating zones (NOT body background) |
+| `TamiyaPrimary` | `#114B69` | 17, 75, 105 | Header band, side panel background, primary brand element |
+| `TamiyaDark` | `#0B2F42` | 11, 47, 66 | Header border-bottom, hover state, deep shadow on primary-color |
+| `TamiyaLight` | `#76ABC7` | 118, 171, 199 | Callout borders, secondary headings on white, tinted elements |
+| `TamiyaUltraLight` | `#E8EFF2` | 232, 239, 242 | Background fills for callouts, alternating zones (NOT body background) |
 
 ### Primary Palette Usage Rules
 
-**VioletPrimary**
+**TamiyaPrimary**
 - ✅ DO: Use for all header bands (C001), all side panel backgrounds, the C013 Step Number badge, C014 Time Box border
 - ❌ DON'T: Use as body background (must remain White), use for body text on white, apply a gradient over it
 
-**VioletDark**
-- ✅ DO: Use as a shadow color within violet zones, use for the footer top-border, use for PanelBorder
+**TamiyaDark**
+- ✅ DO: Use as a shadow color within primary-color zones, use for the footer top-border, use for PanelBorder
 - ❌ DON'T: Use directly on white backgrounds (low contrast), use as a large block color
 
-**VioletLight**
-- ✅ DO: Use for callout left-borders (C006), use for secondary text color when describing a violet-themed element
+**TamiyaLight**
+- ✅ DO: Use for callout left-borders (C006), use for secondary text color when describing a primary-color-themed element
 - ❌ DON'T: Use as body text color on white (insufficient contrast for 11pt text)
 
-**VioletUltraLight**
+**TamiyaUltraLight**
 - ✅ DO: Use for callout box backgrounds (C006), hover-state row fills
 - ❌ DON'T: Use as the main page background (must always be pure white)
 
@@ -62,7 +62,7 @@ For authoritative color philosophy, see `Core/COLOR_SYSTEM.md`.
 
 **DarkGray (#4A4A4A)**
 - ✅ DO: Use for all body text (11pt BodyFont), all caption text, all list items
-- ❌ DON'T: Use for headlines (use Black), use on violet backgrounds (use White)
+- ❌ DON'T: Use for headlines (use Black), use on primary-color backgrounds (use White)
 
 **MidGray (#9B9B9B)**
 - ✅ DO: Use for metadata (page number in footer, SDK version label, secondary annotations)
@@ -110,12 +110,12 @@ The following combinations are explicitly prohibited:
 
 | Forbidden Combination | Reason |
 |-----------------------|--------|
-| VioletLight text on White background | Contrast ratio < 3:1 for 11pt body text (WCAG AA fail) |
+| TamiyaLight text on White background | Contrast ratio < 3:1 for 11pt body text (WCAG AA fail) |
 | MidGray text on White background at body size | Contrast ratio ~3.5:1 — fails WCAG AA for normal text |
 | Gold text on White background | Insufficient contrast |
 | White text on White background | Invisible |
-| Any gradient on the Header band | Violates ADR-007 (solid color rule) |
-| RedWarning on VioletPrimary background | Color conflict, semantic confusion |
+| Any gradient on the Header band | Violates Core/DESIGN_LANGUAGE.md Rule 47 (no decorative gradients) |
+| RedWarning on TamiyaPrimary background | Color conflict, semantic confusion |
 
 ---
 
@@ -125,8 +125,8 @@ For print-ready PDF export (CMYK FOGRA39 profile), use these approximate equival
 
 | Token | Hex | CMYK (approximate) | Pantone (approx.) |
 |-------|-----|---------------------|-------------------|
-| VioletPrimary | #5B2D8E | C:75 M:90 Y:0 K:0 | Pantone 267 C |
-| VioletDark | #3D1E60 | C:80 M:95 Y:0 K:30 | Pantone 2685 C |
+| TamiyaPrimary | #114B69 | C:84 M:29 Y:0 K:59 (sRGB-basis approx., not color-managed) | Not verified |
+| TamiyaDark | #0B2F42 | C:83 M:29 Y:0 K:74 (sRGB-basis approx., not color-managed) | Not verified |
 | GoldAccent | #C8A838 | C:0 M:15 Y:75 K:20 | Pantone 124 C |
 | RedWarning | #D32F2F | C:0 M:85 Y:80 K:15 | Pantone 485 C |
 | GreenSuccess | #388E3C | C:75 M:0 Y:80 K:30 | Pantone 363 C |
@@ -141,8 +141,8 @@ For print-ready PDF export (CMYK FOGRA39 profile), use these approximate equival
 |---------|------|----------------|-------------------------------------|
 | Body text | DarkGray on White | ~8.6:1 | ✅ Passes |
 | Headline | Black on White | ~18.1:1 | ✅ Passes |
-| Header text | White on VioletPrimary | ~7.2:1 | ✅ Passes |
-| Callout text | DarkGray on VioletUltraLight | ~7.4:1 | ✅ Passes |
+| Header text | White on TamiyaPrimary | ~9.4:1 | ✅ Passes |
+| Callout text | DarkGray on TamiyaUltraLight | ~7.4:1 | ✅ Passes |
 | Warning text | DarkGray on RedWarningLight | ~7.0:1 | ✅ Passes |
 | Tips text | DarkGray on GoldLight | ~6.8:1 | ✅ Passes |
 | Secondary label | MidGray on White | ~3.5:1 | ⚠️ Large text only |

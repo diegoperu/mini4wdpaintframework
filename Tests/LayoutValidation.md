@@ -39,7 +39,7 @@ For each generated page image:
 For each page:
 - [ ] Header band present at top of page
 - [ ] Header height = 18mm (212px @300dpi / 106px @150dpi) — tolerance ±4px
-- [ ] Header background = VioletPrimary (`#5B2D8E`) — no other color accepted
+- [ ] Header background = TamiyaPrimary (`#114B69`) — no other color accepted
 - [ ] "Mini4WD Manual" wordmark visible on left side
 - [ ] Page type label visible on right side (e.g., "COVER", "COLOR SCHEME")
 - [ ] No content from page body bleeds into header zone
@@ -87,7 +87,7 @@ Measure from page edge (not header/footer edge):
 
 Identify the layout type for each page and verify the correct pattern is used:
 
-| Page | Expected Layout Pattern | Violet Side Panel | Two Columns | Check |
+| Page | Expected Layout Pattern | TamiyaPrimary Side Panel | Two Columns | Check |
 |------|------------------------|-------------------|-------------|-------|
 | P001 Cover | Full-bleed render | No | No | [ ] |
 | P002 Color Scheme | Two-column (8+4) | Yes | Yes | [ ] |
@@ -104,19 +104,19 @@ Identify the layout type for each page and verify the correct pattern is used:
 
 ---
 
-## TEST-LY-006: Violet Side Panel
+## TEST-LY-006: TamiyaPrimary Side Panel
 
 **Input:** Pages using two-column layout (P002, P003, P006, P007, P008, P009)
 **Reference:** `Assets/DesignSystem/Layout/README.md`
 
 For each two-column page:
 - [ ] Side panel is in RIGHT column (4 of 12 grid columns)
-- [ ] Side panel background = VioletPrimary (`#5B2D8E`) — not VioletLight, not VioletDark
+- [ ] Side panel background = TamiyaPrimary (`#114B69`) — not TamiyaLight, not TamiyaDark
 - [ ] Side panel extends full height of content area
 - [ ] Text in side panel is white (`#FFFFFF`)
 - [ ] Side panel does NOT extend to full page width
 
-**Output:** ✅ PASS if all panels correct | ❌ FAIL (blocking) if full-page violet background used
+**Output:** ✅ PASS if all panels correct | ❌ FAIL (blocking) if full-page primary-color background used
 
 ---
 
@@ -137,5 +137,5 @@ For each two-column page:
 **Common Errors:**
 - Content area touching header band with no gap
 - Footer displaying wrong page ID
-- Violet side panel using VioletLight (#8B5FBF) instead of VioletPrimary (#5B2D8E)
+- TamiyaPrimary side panel using TamiyaLight (#76ABC7) instead of TamiyaPrimary (#114B69)
 - Warning box using gold border instead of red

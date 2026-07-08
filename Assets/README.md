@@ -43,7 +43,7 @@ Assets/
 | Question | Core/ | Assets/ |
 |----------|-------|---------|
 | What color should the header be? | Yes — STYLE_GUIDE.md defines it | No |
-| What hex value does VioletPrimary resolve to? | No | Yes — tokens.example.yaml |
+| What hex value does TamiyaPrimary resolve to? | No | Yes — tokens.example.yaml |
 | What size should the footer be? | Yes — COMPONENT_SYSTEM.md | No |
 | What does a completed P002 page look like? | No | Yes — Examples/ |
 | Where is the reference photo for Proto Emperor? | No | Yes — ReferenceModels/ |

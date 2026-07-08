@@ -22,7 +22,7 @@ This directory contains two files:
 
 ## Why Tokens?
 
-Without tokens, a color change from `#5B2D8E` to a slightly different violet would require searching and replacing every prompt file, every component spec, and every export config. With tokens, you change one line in `tokens.example.yaml` and every reference is resolved correctly at generation time.
+Without tokens, a color change from `#114B69` to a slightly different blue would require searching and replacing every prompt file, every component spec, and every export config. With tokens, you change one line in `tokens.example.yaml` and every reference is resolved correctly at generation time.
 
 ---
 
@@ -30,11 +30,11 @@ Without tokens, a color change from `#5B2D8E` to a slightly different violet wou
 
 | Category | Key Prefix | Description |
 |----------|------------|-------------|
-| Colors — Primary | `colors.primary.*` | Brand violet palette |
+| Colors — Primary | `colors.primary.*` | Brand primary-color palette |
 | Colors — Neutral | `colors.neutral.*` | Grays, white, black |
 | Colors — Accent | `colors.accent.*` | Gold, highlight colors |
 | Colors — Semantic | `colors.semantic.*` | Warning red, success green, info blue |
-| Colors — Panel | `colors.panel.*` | Violet side panel colors |
+| Colors — Panel | `colors.panel.*` | Primary-color side panel colors |
 | Colors — Callout | `colors.callout.*` | Callout box colors and arrow colors |
 | Typography — Fonts | `typography.fonts.*` | Font family stacks |
 | Typography — Scale | `typography.scale.*` | Size and line-height per level |
@@ -57,7 +57,7 @@ In prompt files and component specs, reference tokens with:
 Examples:
 
 ```
-{{token.VioletPrimary}}         → "#5B2D8E"
+{{token.TamiyaPrimary}}         → "#114B69"
 {{token.HeaderHeight}}          → "18mm"
 {{token.BodyFont}}              → "Source Sans Pro, Open Sans, Helvetica Neue, sans-serif"
 {{token.ShadowSubtle}}          → "0 1px 3px rgba(0,0,0,0.12)"

@@ -83,12 +83,12 @@ In render descriptions, never suggest modifications to the physical proportions 
 Only `TitleFont` (Bebas Neue), `BodyFont` (Source Sans Pro), and `MonoFont` (JetBrains Mono) are permitted. No script fonts, novelty fonts, or style-specific typefaces.
 
 **RULE-016 [DESIGN] Never use gradients as backgrounds.**
-All backgrounds must be solid colors. The only valid page background is White (#FFFFFF). Violet panels use solid VioletPrimary (#5B2D8E). No gradient-to-transparent, radial gradients, or textured backgrounds.
+All backgrounds must be solid colors. The only valid page background is White (#FFFFFF). TamiyaPrimary panels use solid TamiyaPrimary (#114B69). No gradient-to-transparent, radial gradients, or textured backgrounds.
 
 **RULE-017 [DESIGN] Maintain visual hierarchy at all times.**
 Title > Subtitle > Section Header > Body > Caption. Do not use body-sized text for titles or title-sized text for captions.
 
-**RULE-018 [DESIGN] The violet header band is mandatory on every page.**
+**RULE-018 [DESIGN] The TamiyaPrimary header band is mandatory on every page.**
 C001 Header must appear on every page (P001–P010) without exception. Never omit, resize below 18mm, or recolor it.
 
 **RULE-019 [DESIGN] Never place sponsor logos or external branding.**
@@ -117,7 +117,7 @@ The 18mm top zone (C001) and 12mm bottom zone (C002) are reserved. No content ma
 All layout decisions must be based on the 12-column grid defined in `Core/STYLE_GUIDE.md §4`. Do not position elements arbitrarily.
 
 **RULE-026 [LAYOUT] Side panel is always 4 columns wide.**
-When a violet side panel is used, it occupies exactly 4 of the 12 columns. Never resize to 3 or 5 columns.
+When a TamiyaPrimary side panel is used, it occupies exactly 4 of the 12 columns. Never resize to 3 or 5 columns.
 
 **RULE-027 [LAYOUT] Step numbers (C013) must be sequential and unambiguous.**
 In any page with numbered steps, steps must be numbered starting from 1 and must be sequential. Never skip a number, never restart numbering mid-page.
@@ -132,8 +132,8 @@ C014 Time Box is always placed at the right edge of its containing column. Never
 **RULE-029 [COLOR] White is always #FFFFFF — never off-white.**
 Page backgrounds must be exactly #FFFFFF. Any value including #FEFEFE, #FAFAFA, or #F8F8F8 is non-compliant for page backgrounds (OffWhite may be used only for alternating table rows).
 
-**RULE-030 [COLOR] VioletPrimary must be exactly #5B2D8E.**
-Never approximate with nearby purples. The header band, violet panels, and primary brand elements must use this exact value.
+**RULE-030 [COLOR] TamiyaPrimary must be exactly #114B69.**
+Never approximate with nearby blues. The header band, TamiyaPrimary panels, and primary brand elements must use this exact value.
 
 **RULE-031 [COLOR] RedWarning (#D32F2F) is reserved for warnings only.**
 Do not use red for decorative purposes, section dividers, or general highlighting. Red means danger/caution exclusively.
@@ -145,7 +145,7 @@ Gold is the visual language of helpful tips (C009). Do not use it for decoration
 Body text uses DarkGray (#4A4A4A). Pure black is reserved for maximum-contrast situations only (e.g., small text on colored background).
 
 **RULE-034 [COLOR] Color on color must pass readability check.**
-White text on VioletPrimary: ✅ (contrast ratio 7.2:1). Black text on GoldAccent: ✅. White text on GoldAccent: ❌. Check contrast before specifying any text-on-color combination.
+White text on TamiyaPrimary: ✅ (contrast ratio 9.4:1). Black text on GoldAccent: ✅. White text on GoldAccent: ❌. Check contrast before specifying any text-on-color combination.
 
 **RULE-035 [COLOR] Paint colors in renders must match PROJECT.yaml.**
 The rendered model must use the exact finish and approximate color of each `paintScheme.colors[]` entry. Do not render a glossy finish as matte, or a pearl as solid.
@@ -221,7 +221,7 @@ Header and Footer are mandatory on every generated page. No exceptions.
 ## [TOKEN] Design Token Rules
 
 **RULE-054 [TOKEN] All visual values must use Design Tokens.**
-Never hardcode a color hex, font size, spacing value, or shadow value. Always reference by token name: `{{token.VioletPrimary}}` not `#5B2D8E`.
+Never hardcode a color hex, font size, spacing value, or shadow value. Always reference by token name: `{{token.TamiyaPrimary}}` not `#114B69`.
 
 **RULE-055 [TOKEN] Tokens are in tokens.example.yaml — do not override.**
 Design Tokens are set globally. Per-project token overrides are not permitted in v2.2.0. Do not create project-level token files.

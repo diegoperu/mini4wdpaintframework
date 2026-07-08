@@ -23,13 +23,13 @@ Verify that all colors in generated pages, configuration files, and project data
 
 | Color Role | Token Name | Required Hex | Location | Check |
 |-----------|------------|--------------|----------|-------|
-| Header background | VioletPrimary | `#5B2D8E` | C001 Header | [ ] |
+| Header background | TamiyaPrimary | `#114B69` | C001 Header | [ ] |
 | Page background | White | `#FFFFFF` | All pages | [ ] |
 | Body text | DarkGray | `#4A4A4A` | All body text | [ ] |
 | Warning borders | RedWarning | `#D32F2F` | C008 Warning (when present) | [ ] |
 | Tip borders | GoldAccent | `#C8A838` | C009 Tips (when present) | [ ] |
 
-**Output:** ✅ PASS if all mandatory colors present and correct | ❌ FAIL (blocking) if VioletPrimary or White are wrong
+**Output:** ✅ PASS if all mandatory colors present and correct | ❌ FAIL (blocking) if TamiyaPrimary or White are wrong
 
 ---
 
@@ -39,9 +39,9 @@ Verify that all colors in generated pages, configuration files, and project data
 **Success Criteria:** Core palette tokens have not been altered from their defined values
 
 Verify exact values (case-insensitive hex):
-- [ ] `tokens.colors.primary.VioletPrimary` = `#5B2D8E`
-- [ ] `tokens.colors.primary.VioletDark` = `#3D1E60`
-- [ ] `tokens.colors.primary.VioletLight` = `#8B5FBF`
+- [ ] `tokens.colors.primary.TamiyaPrimary` = `#114B69`
+- [ ] `tokens.colors.primary.TamiyaDark` = `#0B2F42`
+- [ ] `tokens.colors.primary.TamiyaLight` = `#76ABC7`
 - [ ] `tokens.colors.neutral.White` = `#FFFFFF` — **any other value is an immediate FAIL**
 - [ ] `tokens.colors.neutral.DarkGray` = `#4A4A4A`
 - [ ] `tokens.colors.neutral.Black` = `#1A1A1A`
@@ -49,7 +49,7 @@ Verify exact values (case-insensitive hex):
 - [ ] `tokens.colors.semantic.RedWarning` = `#D32F2F`
 - [ ] `tokens.colors.semantic.GreenSuccess` = `#388E3C`
 
-**Output:** ✅ PASS if all exact | ❌ FAIL (blocking) if White ≠ #FFFFFF or VioletPrimary ≠ #5B2D8E
+**Output:** ✅ PASS if all exact | ❌ FAIL (blocking) if White ≠ #FFFFFF or TamiyaPrimary ≠ #114B69
 
 ---
 
@@ -64,7 +64,7 @@ For each page image:
 - [ ] Cover page (P001) background under render is white
 - [ ] No gradient backgrounds on any page
 - [ ] No environmental backgrounds (no floor, studio, desk)
-- [ ] Violet side panel is in 4-column panel only — not full-page background
+- [ ] TamiyaPrimary side panel is in 4-column panel only — not full-page background
 
 **How to verify:** Sample background pixel in image editor. RGB must be (250–255, 250–255, 250–255) minimum.
 
@@ -73,7 +73,7 @@ For each page image:
 **Common Errors:**
 - AI generates off-white (#FAFAFA = RGB 250,250,250) — borderline, document and monitor
 - AI generates light gray (#F0F0F0) — reject and regenerate
-- Violet side panel accidentally fills full page width
+- TamiyaPrimary side panel accidentally fills full page width
 
 ---
 
@@ -121,7 +121,7 @@ For each color in `paintScheme.colors`:
 **Rule:** Text must meet WCAG AA minimum contrast ratio (4.5:1 for body text)
 
 Key combinations to check:
-- [ ] White text on VioletPrimary (#5B2D8E): contrast ratio ≥ 4.5:1 ✓ (reference: ~7.2:1)
+- [ ] White text on TamiyaPrimary (#114B69): contrast ratio ≥ 4.5:1 ✓ (reference: ~9.4:1)
 - [ ] DarkGray (#4A4A4A) on White (#FFFFFF): ≥ 4.5:1 ✓ (reference: ~9.7:1)
 - [ ] Black (#1A1A1A) on White (#FFFFFF): ≥ 4.5:1 ✓ (reference: ~17.1:1)
 - [ ] White on GoldAccent (#C8A838): ≥ 4.5:1 — **WARN, this combination may fail** (reference: ~2.3:1)

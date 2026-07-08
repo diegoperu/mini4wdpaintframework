@@ -33,11 +33,11 @@ The paint sequence is the technical heart of the manual. Every step must specify
 
 **Page Layout: A4 (210x297mm), white background White**
 
-**HEADER (C001):** Violet band VioletPrimary, 18mm. Left: "Mini4WD Manual". Right: "PAINTING".
+**HEADER (C001):** Primary-color band TamiyaPrimary, 18mm. Left: "Mini4WD Manual". Right: "PAINTING".
 **FOOTER (C002):** LightGray, 12mm. Center: "{{project.modelName}} — Painting  |  P005".
 
 **PAGE TITLE (22mm from top):**
-"Paint Application Sequence" in Bebas Neue Bold 28pt VioletPrimary, left margin 18mm.
+"Paint Application Sequence" in Bebas Neue Bold 28pt TamiyaPrimary, left margin 18mm.
 Subtitle: "Apply in the exact order shown. Respect all drying times." Source Sans Pro Regular 11pt DarkGray, 32mm from top.
 
 **PAINT SEQUENCE TIMELINE (C005, full width minus margins, from 42mm):**
@@ -47,13 +47,13 @@ The sequence is rendered as a vertical timeline. A thin 2px vertical line in Lig
 For each step in {{paintSequence}}, render a SEQUENCE BLOCK:
 
 SEQUENCE BLOCK STRUCTURE:
-- Step Number (C013): circle 20x20mm, background VioletPrimary. If step.colorId refers to a color, use that color's hex as background instead of violet. Text = step number in Bebas Neue Bold 14pt White. Centered on the timeline line.
+- Step Number (C013): circle 20x20mm, background TamiyaPrimary. If step.colorId refers to a color, use that color's hex as background instead of primary-color. Text = step number in Bebas Neue Bold 14pt White. Centered on the timeline line.
 - Color Swatch: 16x10mm rectangle filled with the step's color hex, border 1px LightGray, border-radius 2px. 8mm to the right of the step circle.
-- Paint Code Box (C011): 38mm wide. Brand 7pt MidGray above code 10pt Bebas Neue VioletPrimary. Violet border 1.5px. 8mm to the right of swatch.
+- Paint Code Box (C011): 38mm wide. Brand 7pt MidGray above code 10pt Bebas Neue TamiyaPrimary. Primary-color border 1.5px. 8mm to the right of swatch.
 - Area Label: "Area:" Source Sans Pro Regular 8pt MidGray + area value Source Sans Pro SemiBold 9pt Black. Right of code box.
-- Technique Badge: pill shape, background #F5F0FA, border 1px VioletLight, text Source Sans Pro Regular 8pt VioletPrimary. Values: Brush / Airbrush / Spray Can.
+- Technique Badge: pill shape, background #F5F0FA, border 1px TamiyaLight, text Source Sans Pro Regular 8pt TamiyaPrimary. Values: Brush / Airbrush / Spray Can.
 - Coats: "x{{coats}} coats" Source Sans Pro SemiBold 9pt Black. Right of technique badge.
-- Time Box (C014): pill shape, background #F5F0FA, border 1px VioletPrimary. "{{dryingTime}}" Source Sans Pro Regular 8pt VioletPrimary. Aligned right of block.
+- Time Box (C014): pill shape, background #F5F0FA, border 1px TamiyaPrimary. "{{dryingTime}}" Source Sans Pro Regular 8pt TamiyaPrimary. Aligned right of block.
 - Notes (if set): Source Sans Pro Light Italic 8pt DarkGray, below the main row, indented to color swatch position.
 
 DRYING TIME WARNING (C008) between steps where dryingTime is specified:

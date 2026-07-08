@@ -39,7 +39,7 @@ Before doing anything, internalize these rules:
 2. **content.yaml is the source of truth.** Generate `content.yaml` first. The Render Engine reads `content.yaml` only — never `text.md` directly.
 3. **Do not invent data.** If PROJECT.yaml does not specify a value, use `TODO:` as placeholder. Never fabricate model names, colors, or technical data.
 4. **Do not modify the model's shape.** Renders must match the physical model. No creative liberties with form or structure.
-5. **Design Tokens are mandatory.** All colors, sizes, and spacing must reference token names (e.g., `{{token.PrimaryViolet}}`), never hardcoded values.
+5. **Design Tokens are mandatory.** All colors, sizes, and spacing must reference token names (e.g., `{{token.TamiyaPrimary}}`), never hardcoded values.
 6. **Core/ is authoritative.** Nothing in Docs/, Templates/, or any other directory overrides Core/.
 7. **Page IDs and Component IDs are permanent.** P001–P010 and C001–C015 never change, never get renumbered.
 8. **QA is blocking.** A page cannot be rendered until it passes `Tests/ContentValidation.md` and `Tests/TextValidation.md`. A page cannot be released until it passes `Core/QA_SYSTEM.md`.
@@ -186,12 +186,12 @@ Load documents in this exact sequence. See `Docs/LOAD_ORDER.md` for full details
 
 | ID | Component | Key Rule |
 |----|-----------|----------|
-| C001 | Header | Violet panel, Italian title only |
+| C001 | Header | TamiyaPrimary panel, Italian title only |
 | C002 | Footer | Page ID + model name, never empty |
 | C003 | Color Palette | Swatch grid, Tamiya code + Italian name |
 | C004 | Step Grid | Numbered, left-to-right, Italian labels |
 | C005 | Paint Sequence | Arrow progression, numbered |
-| C006 | Callout Box | Informational, violet border |
+| C006 | Callout Box | Informational, TamiyaLight border |
 | C007 | Exploded View | Dot callouts on render |
 | C008 | Warning Box | Red accent, Italian text |
 | C009 | Tips Box | Star marker, Italian text |
@@ -271,7 +271,7 @@ A complete Mini4WD Manual is:
 | Writing text in English or Japanese | QA failure — page rejected | Apply `Config/LANGUAGE_POLICY.yaml` strictly |
 | Inventing model colors not in PROJECT.yaml | Incorrect manual | Use only values from PROJECT.yaml; use `TODO:` for unknowns |
 | Running Render Engine before Text QA | Invalid render from unvalidated content | Strict pipeline order — Phase 2b/2c before Phase 3 |
-| Hardcoding `#4B0082` instead of `{{token.PrimaryViolet}}` | Token system violation | All values from `Assets/DesignSystem/Tokens/tokens.example.yaml` |
+| Hardcoding `#4B0082` instead of `{{token.TamiyaPrimary}}` | Token system violation | All values from `Assets/DesignSystem/Tokens/tokens.example.yaml` |
 | Modifying the physical shape of the model in renders | Inaccurate technical manual | Render exactly what the reference images show |
 | Skipping LOAD sequence steps | Incomplete context, rule conflicts | Follow `Docs/LOAD_ORDER.md` exactly |
 | Writing content.yaml with incomplete fields | ContentValidation.md failure | All required fields must be populated or marked `TODO:` |

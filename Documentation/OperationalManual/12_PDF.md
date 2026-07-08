@@ -51,7 +51,7 @@ All'interno di `Assets/ApprovedManual/{ModelName}/` la convenzione è diversa (s
 - Versione PDF minima: 1.6
 - Output intent: ISO Coated v2 300% (FOGRA39)
 
-> ⚠️ **Warning:** la conversione del violetto RGB primario (`#5B2D8E`) in CMYK FOGRA39 produce circa C:64 M:84 Y:0 K:12 — una resa meno satura dell'originale sRGB. Richiedere sempre una prova di stampa prima della tiratura. Il riferimento Pantone 2627 C può essere usato come tinta piatta se lo stampatore lo supporta.
+> ⚠️ **Warning:** l'approssimazione CMYK su base sRGB del colore primario TamiyaPrimary (`#114B69`) è C:84 M:29 Y:0 K:59 (`Core/COLOR_SYSTEM.md`) — non è una conversione color-managed FOGRA39. Richiedere sempre una prova di stampa prima della tiratura; nessun riferimento Pantone è stato verificato per questo colore.
 
 > ⚠️ **Warning:** il nero ricco (`#1A1A1A` per il testo body) converte in circa C:0 M:0 Y:0 K:90 in CMYK — corretto per il testo. NON usare un nero ricco a 4 canali (es. C:60 M:40 Y:40 K:100) per il testo: causa disallineamento e sfrangiatura in stampa offset.
 

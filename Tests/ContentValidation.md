@@ -121,7 +121,7 @@ For each `Projects/{Model}/{Variant}/ApprovedText/P{NNN}/manifest.yaml`:
 - [ ] CV-005-A: File is valid YAML — ❌
 - [ ] CV-005-B: `components` list includes C001 and C002 — ❌
 - [ ] CV-005-C: All component IDs in manifest exist in `Config/sdk.yaml §components.permanent_ids` — ❌
-- [ ] CV-005-D: `tokens` list includes at minimum: VioletPrimary, White, DarkGray — ❌
+- [ ] CV-005-D: `tokens` list includes at minimum: TamiyaPrimary, White, DarkGray — ❌
 - [ ] CV-005-E: `prompt_file` references an existing file in `PromptEngine/` — ❌
 - [ ] CV-005-F: For pages with renders: `images[].role` is non-empty — ⚠️
 

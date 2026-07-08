@@ -33,11 +33,11 @@ This page covers all small areas requiring precision painting: windows, cockpit 
 
 **Page Layout: A4 (210x297mm), white background White**
 
-**HEADER (C001):** Violet band VioletPrimary, 18mm. Left: "Mini4WD Manual". Right: "DETAILS".
+**HEADER (C001):** Primary-color band TamiyaPrimary, 18mm. Left: "Mini4WD Manual". Right: "DETAILS".
 **FOOTER (C002):** LightGray, 12mm. Center: "{{project.modelName}} — Details  |  P007".
 
 **PAGE TITLE (22mm from top):**
-"Fine Detail Painting" in Bebas Neue Bold 28pt VioletPrimary, left margin 18mm.
+"Fine Detail Painting" in Bebas Neue Bold 28pt TamiyaPrimary, left margin 18mm.
 Subtitle: "Use a size 000 brush. Work under good light. Thin paints to 50% with appropriate thinner." Source Sans Pro Regular 11pt DarkGray, 32mm from top.
 
 **DETAIL PANELS GRID (from 42mm):**
@@ -51,14 +51,14 @@ For each area in {{detailAreas}}, render a DETAIL PANEL:
 DETAIL PANEL STRUCTURE:
 - Panel border: 1px LightGray, border-radius 4px, padding 8px
 - Panel title bar: background #F5F0FA, padding 4px 8px, border-radius 3px 3px 0 0
-  - Area ID pill: 20x14mm, background VioletPrimary, text = area.id Source Sans Pro SemiBold 8pt White
+  - Area ID pill: 20x14mm, background TamiyaPrimary, text = area.id Source Sans Pro SemiBold 8pt White
   - Area name: Source Sans Pro SemiBold 10pt Black, right of ID pill, 6px gap
-- Zoom image (C012): maximum width within panel, border 1.5px VioletPrimary, border-radius 3px
-  - Label "ZOOM" in Source Sans Pro SemiBold 7pt VioletPrimary, top-right corner inside border
+- Zoom image (C012): maximum width within panel, border 1.5px TamiyaPrimary, border-radius 3px
+  - Label "ZOOM" in Source Sans Pro SemiBold 7pt TamiyaPrimary, top-right corner inside border
   - Content: close-up render of the detail area. If not available: [ZOOM PLACEHOLDER: {{area.name}}]
 - Color reference row below image:
   - Color swatch: 12x8mm filled with color hex (from colorId cross-reference), border 1px LightGray
-  - Color code box (mini C011): 28mm, brand 6pt above code 8pt Bebas Neue VioletPrimary, violet border
+  - Color code box (mini C011): 28mm, brand 6pt above code 8pt Bebas Neue TamiyaPrimary, primary-color border
   - Technique: Source Sans Pro Regular 8pt DarkGray
 - Instructions: Source Sans Pro Regular 9pt DarkGray, line-height 1.5
   - If area.notes is set, include as the primary instruction text

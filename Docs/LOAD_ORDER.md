@@ -89,9 +89,9 @@ Text Engine specification. Defines how editorial text is generated, the `content
 ### Step 6 — DESIGN_LANGUAGE.md
 **Type:** Markdown | **Path:** `Core/DESIGN_LANGUAGE.md`
 
-65 rules defining the visual philosophy of the SDK. Rules 1–54 cover aesthetic identity (Tamiya 1990s reinterpreted with modern sensibility, violet as signature color). Rules 55–65 cover editorial identity (Italian editorial voice vs. Japanese aesthetic).
+65 rules defining the visual philosophy of the SDK. Rules 1–54 cover aesthetic identity (Tamiya 1990s reinterpreted with modern sensibility, TamiyaPrimary as signature color). Rules 55–65 cover editorial identity (Italian editorial voice vs. Japanese aesthetic).
 
-**What you learn:** The visual DNA of every page — violet panel, white background, clean callouts, numbered steps, technical precision.
+**What you learn:** The visual DNA of every page — TamiyaPrimary panel, white background, clean callouts, numbered steps, technical precision.
 
 ---
 

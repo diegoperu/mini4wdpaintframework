@@ -154,7 +154,7 @@ C001, C002, C003, ... C015, C016
 
 | Correct | Incorrect |
 |---|---|
-| `VioletPrimary` | `violet_primary`, `violetPrimary`, `VIOLET_PRIMARY` |
+| `TamiyaPrimary` | `tamiya_primary`, `tamiyaPrimary`, `TAMIYA_PRIMARY` |
 | `HeaderHeight` | `header-height`, `header_h` |
 | `FontScaleBody` | `bodyFontSize`, `body_font` |
 
@@ -227,5 +227,5 @@ Accented characters (é, ü, ñ, etc.) are forbidden in file and folder names. T
 | Color scheme render (front) | `proto-emperor_P002_colorscheme-front_v1.png` | `front.png` |
 | Screen PDF | `proto-emperor_manual_screen_v1.pdf` | `manual.pdf` |
 | PromptEngine file | `ColorScheme.md` | `color-scheme.md` |
-| Token key | `VioletPrimary` | `violet-primary` |
+| Token key | `TamiyaPrimary` | `tamiya-primary` |
 | QA item | `QA-046` | `QA46`, `qa-046` |

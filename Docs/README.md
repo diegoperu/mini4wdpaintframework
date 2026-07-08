@@ -27,7 +27,7 @@ If `Core/` and `Docs/` ever conflict, **`Core/` wins**. `Docs/` is always a deri
 | Workflow walkthrough | Docs/ | Step-by-step tutorial for first-time users |
 | SDK version history | CHANGELOG.md (root) | "v2.1.0 added Design Tokens" |
 | Migration instructions | Docs/migration/ | "Upgrading from v1 to v2" |
-| Design philosophy | Core/DESIGN_LANGUAGE.md | "Rule 12: The violet panel is the SDK's signature" |
+| Design philosophy | Core/DESIGN_LANGUAGE.md | "Rule 14: The TamiyaPrimary header band is the SDK's signature" |
 | Why the philosophy matters | Docs/ | "Understanding the design language" |
 
 ---

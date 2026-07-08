@@ -23,7 +23,7 @@ Once the Proto Emperor "Violet Phantom" manual is approved, this directory will 
 
 | File | Description |
 |------|-------------|
-| `P001.png` | Cover — 3/4 front-left render, violet header, model name |
+| `P001.png` | Cover — 3/4 front-left render, primary-color header, model name |
 | `P002.png` | Color Scheme — front/side/top views, palette, paint codes |
 | `P003.png` | Materials — shopping list, tools, consumables |
 | `P004.png` | Preparation — cleaning, priming, sanding steps |

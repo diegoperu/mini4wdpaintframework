@@ -65,7 +65,7 @@ proto-emperor_manual_archive_v1.pdf
 | Print | n/a | ISO Coated v2 300% (FOGRA39) |
 | Archive | sRGB IEC61966-2.1 | n/a |
 
-> ⚠️ **Warning:** Converting RGB violet (#5B2D8E) to CMYK FOGRA39 produces approximately C:64 M:84 Y:0 K:12. The CMYK equivalent is slightly less saturated than the sRGB original. Always request a print proof before mass printing. The Pantone reference (2627 C) may be used as a spot color specification for the violet if the printer supports it.
+> ⚠️ **Warning:** The sRGB-basis CMYK approximation for TamiyaPrimary (#114B69) is C:84 M:29 Y:0 K:59 (`Core/COLOR_SYSTEM.md`) — this is not a color-managed FOGRA39 conversion. Always request a print proof before mass printing; no Pantone spot-color equivalent has been verified for this color.
 
 ---
 

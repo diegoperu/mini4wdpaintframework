@@ -32,7 +32,7 @@ The SDK provides a specification layer, component system, prompt engine, design 
 
 ## Design Philosophy
 
-This framework draws inspiration from Tamiya's technical catalogs and instruction sheets of the 1990s: clean white backgrounds, precise callout boxes, numbered steps, and a sense of craft that communicated both information and enthusiasm. That foundation is reinterpreted with modern graphic design sensibilities — structured grid systems, a systematic color palette anchored in violet, typographic hierarchy, and render-quality illustrations.
+This framework draws inspiration from Tamiya's technical catalogs and instruction sheets of the 1990s: clean white backgrounds, precise callout boxes, numbered steps, and a sense of craft that communicated both information and enthusiasm. That foundation is reinterpreted with modern graphic design sensibilities — structured grid systems, a systematic color palette derived from the Tamiya "Star Mark" logo, typographic hierarchy, and render-quality illustrations.
 
 The result is a manual system that feels timeless without feeling dated. Every page should look like it was designed by the same studio, whether it was produced in 2024 or 2034.
 

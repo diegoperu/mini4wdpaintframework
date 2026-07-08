@@ -60,7 +60,7 @@ Le regole sono organizzate in 9 categorie (Regole 001–058, aggiunte in v2.2.0)
 | `[DATA]` | RULE-001–010 | RULE-001: mai inventare codici vernice — solo da `PROJECT.yaml § paintScheme.colors[].paintCode` |
 | `[DESIGN]` | RULE-011–020 | RULE-016: nessun gradiente come sfondo — solo colori solidi |
 | `[LAYOUT]` | RULE-021–028 | RULE-022: mai riordinare le pagine — P001–P010 è fisso |
-| `[COLOR]` | RULE-029–035 | RULE-030: `VioletPrimary` deve essere esattamente `#5B2D8E`, mai approssimato |
+| `[COLOR]` | RULE-029–035 | RULE-030: `TamiyaPrimary` deve essere esattamente `#114B69`, mai approssimato |
 | `[CONTENT]` | RULE-036–044 | RULE-040: nessun testo placeholder ("Lorem ipsum", "[TEXT HERE]") nell'output finale |
 | `[RENDER]` | RULE-045–050 | RULE-045: sfondo dei render sempre bianco puro, nessuna eccezione |
 | `[COMPONENT]` | RULE-051–053 | RULE-053: ogni pagina deve avere C001 e C002 |

@@ -36,11 +36,11 @@ Before working on any SDK component, read this document. If a design question is
 
 **Rule 12.** The identity is reinterpreted with modern graphic design: structured grid, systematic color palette, typographic hierarchy, and render-quality illustrations. The result must feel contemporary without feeling fashionable.
 
-**Rule 13.** White is the dominant color on every page. Violet is the accent that marks the framework. Gold is used to highlight excellence and important information. Red is used exclusively for warnings. These roles are fixed and non-negotiable.
+**Rule 13.** White is the dominant color on every page. TamiyaPrimary is the accent that marks the framework. Gold is used to highlight excellence and important information. Red is used exclusively for warnings. These roles are fixed and non-negotiable.
 
-**Rule 14.** The violet header band is the SDK's signature. It must appear on every page. Its presence immediately communicates: "This page was produced by the Mini4WD Manual SDK." A page without a violet header is not an SDK page.
+**Rule 14.** The TamiyaPrimary header band is the SDK's signature. It must appear on every page. Its presence immediately communicates: "This page was produced by the Mini4WD Manual SDK." A page without this header is not an SDK page.
 
-**Rule 15.** The side panel (four columns, violet background) is the secondary structural element. On pages where it appears, it contains supplementary information: callouts, tips, the palette legend. It must never contain the primary narrative.
+**Rule 15.** The side panel (four columns, TamiyaPrimary background) is the secondary structural element. On pages where it appears, it contains supplementary information: callouts, tips, the palette legend. It must never contain the primary narrative.
 
 **Rule 16.** White space is not empty space — it is structure. Margins, gutters, and padding are not defaults to be filled. They define the visual weight and reading rhythm of each page. Crowded pages are failures, not thoroughness.
 
@@ -116,17 +116,17 @@ Before working on any SDK component, read this document. If a design question is
 
 ## 6. Color
 
-**Rule 45.** Color has meaning in this system. Every color role is fixed and documented in `COLOR_SYSTEM.md`. Using red for visual interest violates its role as a warning signal. Using violet for something other than structural elements dilutes the brand signal.
+**Rule 45.** Color has meaning in this system. Every color role is fixed and documented in `COLOR_SYSTEM.md`. Using red for visual interest violates its role as a warning signal. Using TamiyaPrimary for something other than structural elements dilutes the brand signal.
 
 **Rule 46.** The SDK palette is closed. Colors not defined in `COLOR_SYSTEM.md` and `Assets/DesignSystem/Tokens/` may not appear in manual pages. The only exception is paint swatch representations in the C003 Palette component, which must accurately represent real paint colors.
 
 **Rule 47.** No gradient may replace a solid color unless it describes a real-world surface (e.g., a metallic finish transitioning between light and shadow on a curved panel). Gradients used for "visual effect" in structural elements are prohibited.
 
-**Rule 48.** Color contrast must meet WCAG 2.1 AA at minimum for all text-on-background combinations. VioletPrimary on White exceeds this standard. White on VioletPrimary exceeds this standard. Any new color combination introduced in a derivative work must be tested before use.
+**Rule 48.** Color contrast must meet WCAG 2.1 AA at minimum for all text-on-background combinations. TamiyaPrimary on White exceeds this standard. White on TamiyaPrimary exceeds this standard. Any new color combination introduced in a derivative work must be tested before use.
 
-**Rule 49.** Print colors must be validated against CMYK equivalents before approval. Screen color (sRGB) and print color (CMYK FOGRA39) can differ significantly, especially for violet. The CMYK values in `COLOR_SYSTEM.md` are the authoritative print reference.
+**Rule 49.** Print colors must be validated against CMYK equivalents before approval. Screen color (sRGB) and print color (CMYK FOGRA39) can differ significantly, especially for saturated blues. The CMYK values in `COLOR_SYSTEM.md` are the authoritative print reference.
 
-**Rule 50.** The primary violet (#5B2D8E) was chosen because it is not associated with any existing Mini4WD brand color and does not conflict with any of the four reserved functional colors (red, green, blue, gold). This is the reason it is an unusual hue. Do not substitute a more "conventional" color.
+**Rule 50.** The primary color (#114B69) is derived from the blue star of the Tamiya "Star Mark" logo, darkened and desaturated so it does not conflict with any of the four reserved functional colors (red, green, blue, gold) — see `STYLE_DECISIONS.md` ADR-023. This is the reason it is a deep, unusual shade of blue rather than Tamiya's bright logo blue. Do not substitute a more saturated or lighter blue.
 
 **Rule 51.** Black in this system is #1A1A1A, not #000000. Pure black causes visual harshness and appears as a registration mark in some print workflows. The near-black #1A1A1A is softer in print and visually indistinguishable from pure black at reading distance.
 
