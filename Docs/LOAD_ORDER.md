@@ -58,7 +58,7 @@ Operational guide — expands on the rules and workflow introduced in AI_ENTRYPO
 ### Step 3 — AI_OPERATING_RULES.md
 **Type:** Markdown | **Path:** `Core/AI_OPERATING_RULES.md`
 
-100 behavioral rules governing AI model behavior during all phases of production. Rules 001–058 cover design and rendering. Rules 059–100 cover text rendering. All rules are binding.
+102 behavioral rules governing AI model behavior during all phases of production. Rules 001–058 cover design and rendering. Rules 059–100 cover text rendering. Rules 101–102 cover mechanical safety (never paint moving/functional parts; mask rim contact surfaces, not tires). All rules are binding.
 
 **What you learn:** Exactly what an AI model may and may not do, in detail. These rules are the behavioral contract for the entire framework.
 

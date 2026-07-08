@@ -161,6 +161,30 @@ Run after all 10 pages are generated:
 
 ---
 
+## TEST-CV-008: Mechanical Safety Compliance
+
+Applies to `steps[]` (P004), `zones[]` (P006), `areas[]` (P007) — any field naming
+a component to paint, mask, or otherwise finish. Reference: `Knowledge/MechanicalSafety.md`,
+`Knowledge/Masking.md §Mascheratura di Cerchi Ruota`, `Core/AI_OPERATING_RULES.md §RULE-101–102`.
+
+- [ ] CV-008-A: No area/zone/step name or description instructs painting a moving or
+      electrically functional component — gears, motor internals (brushes,
+      commutator, windings), bearing/bushing rolling surfaces, motor/transmission
+      shafts, electrical contacts, tire tread, wheel-axle contact point — ❌
+- [ ] CV-008-B: If a motor-adjacent or drivetrain-adjacent area is named, confirm the
+      description refers to an external/cosmetic part (e.g. motor cover shell), not
+      the internal mechanism itself — ⚠️
+- [ ] CV-008-C: Wheel/rim masking zones instruct REMOVING the tire before painting,
+      not masking the tread — the tire is a removable/interchangeable component. If
+      the rim's tire-contact surface needs protection, only that surface is masked
+      — ❌
+
+**Found a match?** Do not just delete the area — replace it with the safe cosmetic
+equivalent from `Knowledge/MechanicalSafety.md §Componenti sicuri da verniciare` if
+one applies to this model, so the page still covers that visual zone of the kit.
+
+---
+
 ## Validation Log Format
 
 ```yaml

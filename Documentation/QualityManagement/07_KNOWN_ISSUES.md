@@ -27,6 +27,7 @@
 | KI-002 | Pipeline PDF manuale: nessuna automazione pandoc/LaTeX; l'assemblaggio del PDF dipende dall'operatore | 2.x | Seguire `FIRST_PDF.md` passo-passo | Aperto | Pianificato post-v2.5.0 (roadmap) |
 | KI-003 | Documentazione ≤ v2.4.1 non distingueva ChatGPT Web da Claude Code: le istruzioni di bootstrap e caricamento file erano ambigue per operatori ChatGPT Web (UR-0001, score 1/5) | ≤ 2.4.1 | Usare `OperatorGuide/Runtimes/ChatGPT_Web.md` o `Claude_Code.md` — guide autonome per runtime | Risolto in 2.5.0 | — |
 | KI-004 | `Documentation/OperationalManual/` (20 capitoli) e `Documentation/QualityManagement/` contengono ancora riferimenti ai path v2.4.x (`ApprovedAssets/Text/`, `ApprovedAssets/Images/`) — non fanno parte del load order AI ma sono fonti di potenziale confusione per i Maintainer | 2.5.0 | Ignorare i path in quei documenti; usare i path v2.5.0 in tutti gli altri file | Aperto | Aggiornamento pianificato in v2.6.0 |
+| KI-006 | Gemini non legge le immagini di riferimento (`ref_*.jpg`) quando sono solo dentro lo ZIP prodotto da `Scripts/package_handoff.sh` — a differenza di ChatGPT Web, che le estrae correttamente dall'archivio. Confermato da user testing 2026-07-08 su Fase 4 (generazione illustrazione singola, scope `UAT-004`) | 2.5.5 | Su Gemini: caricare le foto `ref_*.jpg` anche come allegati diretti in chat (drag & drop), non affidarsi solo allo ZIP | Aperto | Nessuno pianificato — limite del runtime, non del framework |
 
 ---
 

@@ -67,7 +67,7 @@ Phase 2a: Text Engine
           └─ Output: Projects/{Model}/{Variant}/ApprovedText/P00x/content.yaml
 
 Phase 2b: Content QA
-          └─ Validate content.yaml with Tests/ContentValidation.md (7 suites)
+          └─ Validate content.yaml with Tests/ContentValidation.md (8 suites)
           └─ BLOCKING: fix all failures before proceeding
 
 Phase 2c: Text QA
@@ -150,7 +150,7 @@ Load documents in this exact sequence. See `Docs/LOAD_ORDER.md` for full details
 ```
 1.  SDK_CONTEXT.yaml          ← SDK identity, version, pipeline overview
 2.  BOOTSTRAP.md              ← This file — rules, workflow, how to start
-3.  Core/AI_OPERATING_RULES.md ← 100 behavioral rules for AI models
+3.  Core/AI_OPERATING_RULES.md ← 102 behavioral rules for AI models
 4.  Config/LANGUAGE_POLICY.yaml ← Italian-only policy, forbidden languages
 5.  Core/TEXT_ENGINE.md       ← Text generation rules, content.yaml format
 6.  Core/DESIGN_LANGUAGE.md   ← 65 design philosophy rules
@@ -304,7 +304,7 @@ A complete Mini4WD Manual is:
 - `SDK_CONTEXT.yaml` — machine-readable version of this document
 - `Docs/LOAD_ORDER.md` — explicit loading order with rationale
 - `STATUS.md` — current implementation status and TODO list
-- `Core/AI_OPERATING_RULES.md` — 100 rules this document summarizes
+- `Core/AI_OPERATING_RULES.md` — 102 rules this document summarizes
 - `Core/WORKFLOW.md` — detailed end-to-end workflow
 - `Build/Pipeline.md` — full 8-phase pipeline specification
 - `README.md` — project overview for human contributors

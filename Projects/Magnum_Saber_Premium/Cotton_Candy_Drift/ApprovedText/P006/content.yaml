@@ -33,7 +33,7 @@ zones:
     area: "Cerchi ruote (per verniciatura PC005 — Silver Leaf)"
     masking_type: "nastro"
     order: 3
-    notes: "Mascherare le gomme con nastro 6mm avvolto sul battistrada. Proteggere il mozzo con un dischetto di carta."
+    notes: "Rimuovi le gomme dal cerchio (si sfilano a mano, sono removibili/intercambiabili — non vanno mascherate). Vernicia il cerchio a gomma smontata. Se la superficie di contatto cerchio-gomma rischia vernice, mascherala con un dischetto di nastro/carta per garantire corretto inserimento/rimozione della gomma dopo la verniciatura."
 
 # ============================================================
 # MASKING SEQUENCE — ordered steps
@@ -50,7 +50,7 @@ sequence:
     tip: ""
 
   - step: 3
-    description: "Avvolgi il nastro da 6mm sul battistrada delle gomme per proteggerle durante la verniciatura PC005 (Silver Leaf) dei cerchi. Proteggi il mozzo con un dischetto di carta."
+    description: "Rimuovi le gomme dal cerchio (si sfilano a mano) prima di verniciare in PC005 (Silver Leaf). Se necessario, proteggi la sola superficie di contatto cerchio-gomma con un dischetto di nastro/carta."
     zone_id: "M003"
     tip: ""
 

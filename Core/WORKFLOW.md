@@ -171,7 +171,7 @@ Projects/{Model}/{Variant}/ApprovedText/P{NNN}/content.yaml   ← PRIMARY output
 `content.yaml` is the sole source of truth for page content (Golden Rule G02). A `text.md` human-review copy is derived automatically from it — never edit `text.md` directly.
 
 **2.5** Run the blocking QA gates before sealing:
-- `Tests/ContentValidation.md` (7 suites) — schema, required fields, data accuracy
+- `Tests/ContentValidation.md` (8 suites) — schema, required fields, data accuracy, mechanical safety
 - `Tests/TextValidation.md` (9 tests) — Italian language compliance, forbidden scripts, terminology
 
 Both suites must return zero failures before proceeding.

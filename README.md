@@ -52,7 +52,7 @@ TEXT ENGINE  →  QA ENGINE  →  RENDER ENGINE  →  PDF
 Generates all editorial text from PROJECT.yaml and Knowledge/ inputs. Output is a validated `content.yaml` file — the **primary source of truth** for every page. `text.md` is derived from `content.yaml` and is secondary.
 
 ### QA Engine
-Validates `content.yaml` against the Content Validation suite (7 checks: schema, language, data completeness, metadata, manifest, component mapping, cross-page consistency) and the Text Validation suite (9 Italian-language compliance checks). A page cannot proceed to rendering until both suites pass.
+Validates `content.yaml` against the Content Validation suite (8 checks: schema, language, data completeness, metadata, manifest, component mapping, cross-page consistency, mechanical safety) and the Text Validation suite (9 Italian-language compliance checks). A page cannot proceed to rendering until both suites pass.
 
 ### Render Engine (v2.5.5 — split into deterministic template + AI illustration)
 Reads `content.yaml` exclusively. Never reads `text.md` directly. Page text and
@@ -119,7 +119,7 @@ For each page P001–P010, load the prompt from `PromptEngine/` following the LO
 
 **Step 4 — Run Content and Text QA (Phase 2b–2c)**
 
-Validate each `content.yaml` against `Tests/ContentValidation.md` (7 suites) and `Tests/TextValidation.md` (9 suites). Fix all blocking failures before proceeding.
+Validate each `content.yaml` against `Tests/ContentValidation.md` (8 suites) and `Tests/TextValidation.md` (9 suites). Fix all blocking failures before proceeding.
 
 **Step 5 — Seal Approved Assets (Phase 2d)**
 
@@ -226,7 +226,7 @@ mini4wdpaintframework/
 │   ├── PAGE_SYSTEM.md           ← P001–P010 specifications
 │   ├── COMPONENT_SYSTEM.md      ← C001–C015 specifications with content.yaml field mapping
 │   ├── TEXT_ENGINE.md           ← Text Engine spec; content.yaml as primary output
-│   ├── AI_OPERATING_RULES.md    ← 100 rules for AI model behavior (Rules 059–100: text rendering)
+│   ├── AI_OPERATING_RULES.md    ← 102 rules for AI model behavior (Rules 059–100: text rendering, 101–102: mechanical safety)
 │   ├── RENDER_GUIDE.md          ← Rendering standards and AI render prompts
 │   ├── PDF_MASTER.md            ← Export specification
 │   ├── QA_SYSTEM.md             ← 110-item quality checklist
@@ -297,7 +297,7 @@ mini4wdpaintframework/
 │   └── Pipeline.md              ← 8-phase production pipeline (Phase 0 → Phase 7)
 │
 ├── Tests/                       ← QA test suites (9 suites)
-│   ├── ContentValidation.md     ← 7 suites validating content.yaml (NEW v2.4.0)
+│   ├── ContentValidation.md     ← 8 suites validating content.yaml (NEW v2.4.0; mechanical safety added v2.5.5)
 │   ├── TextValidation.md        ← 9 Italian-language compliance tests
 │   ├── FrameworkIntegrity.md    ← SDK self-consistency
 │   ├── PromptValidation.md
@@ -378,7 +378,7 @@ mini4wdpaintframework/
 | [Core/PAGE_SYSTEM.md](Core/PAGE_SYSTEM.md) | Specification for pages P001–P010 |
 | [Core/COMPONENT_SYSTEM.md](Core/COMPONENT_SYSTEM.md) | Specification for components C001–C015 |
 | [Core/TEXT_ENGINE.md](Core/TEXT_ENGINE.md) | Text Engine spec; content.yaml as primary output |
-| [Core/AI_OPERATING_RULES.md](Core/AI_OPERATING_RULES.md) | 100 behavioral rules for AI models |
+| [Core/AI_OPERATING_RULES.md](Core/AI_OPERATING_RULES.md) | 102 behavioral rules for AI models |
 | [Core/RENDER_GUIDE.md](Core/RENDER_GUIDE.md) | Illustration standards and AI render prompts |
 | [Core/QA_SYSTEM.md](Core/QA_SYSTEM.md) | 110-item quality checklist |
 | [Core/WORKFLOW.md](Core/WORKFLOW.md) | End-to-end production workflow |

@@ -410,3 +410,30 @@ If any PromptEngine prompt, PROJECT.yaml note, or author instruction conflicts w
 | RULE-068 to RULE-078 | Formatting and precision | RULE-069, RULE-072 |
 | RULE-079 to RULE-092 | Component and content rules | RULE-079 to RULE-084 |
 | RULE-093 to RULE-100 | Workflow and governance | RULE-096, RULE-100 |
+
+---
+
+## [SAFETY] Mechanical Safety Rules (v2.5.5)
+
+**RULE-101 [SAFETY] Never instruct painting a moving or electrically functional component.**
+`detailAreas[]` (P007), `maskingZones[]` (P006), and preparation `steps[]` (P004)
+must never target gears, motor internals (brushes, commutator, windings),
+bearing/bushing rolling surfaces, motor/transmission shafts, electrical contacts,
+tire tread, or the wheel-axle contact point — paint on any of these impairs the
+model's function, not just its appearance. See `Knowledge/MechanicalSafety.md` for
+the full list and safe cosmetic alternatives (e.g. external motor cover shell
+instead of the motor itself). Validated by `Tests/ContentValidation.md §TEST-CV-008`.
+
+**RULE-102 [SAFETY] Mask the rim's contact surface, never the tire itself.**
+Mini4WD tires are removable/interchangeable components (different rubber
+compounds for grip/durability) — remove the tire before painting the rim rather
+than masking the tread. If the rim's tire-seat surface risks paint buildup, mask
+that surface instead: excess paint there prevents correct tire insertion/removal.
+See `Knowledge/Masking.md §Mascheratura di Cerchi Ruota`. Validated by
+`Tests/ContentValidation.md §TEST-CV-008`.
+
+## Compliance Summary — Mechanical Safety Rules
+
+| Rule Range | Category | Blocking |
+|-----------|----------|----------|
+| RULE-101 to RULE-102 | Physical/mechanical function safety | All |

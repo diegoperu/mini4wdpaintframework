@@ -264,7 +264,7 @@ maskingZones:
     area: "Cerchi ruote (per verniciatura PC005)"
     maskingType: "tape"
     maskingOrder: 3
-    notes: "Mascherare le gomme con nastro 6mm avvolto sul battistrada. Proteggere il mozzo con un dischetto di carta."
+    notes: "Rimuovi le gomme dal cerchio (si sfilano a mano, sono removibili/intercambiabili — non vanno mascherate). Vernicia il cerchio a gomma smontata. Se la superficie di contatto cerchio-gomma rischia vernice, mascherala con un dischetto di nastro/carta per garantire corretto inserimento/rimozione della gomma dopo la verniciatura."
 
 # ============================================================
 # DETAILS
@@ -277,10 +277,10 @@ detailAreas:
     notes: "Nero come contrasto netto rispetto ad azzurro e rosa della cowling."
 
   - id: "D002"
-    name: "Ingranaggi e meccanica del motore"
+    name: "Cover ingranaggi esterna (guscio Super-II)"
     colorId: "PC006"
     technique: "Pennello tondo n.000, dry-brush"
-    notes: "Gun metal metallizzato per un effetto meccanico realistico sui componenti visibili del motore."
+    notes: "Gun metal metallizzato per un effetto meccanico realistico sulla cover esterna del cambio. NON verniciare ingranaggi o meccanica interna del motore — comprometterebbe il funzionamento del modello (vedi Knowledge/MechanicalSafety.md)."
 
   - id: "D003"
     name: "Cerchi ruote"

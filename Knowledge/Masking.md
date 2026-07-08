@@ -75,6 +75,31 @@ Step 7: Clear coat entire body
 
 ---
 
+## Mascheratura di Cerchi Ruota — NON mascherare la gomma
+
+Le gomme dei Mini4WD sono componenti removibili e intercambiabili (mescole diverse
+per aderenza/durata) — si sfilano dal cerchio senza attrezzi. Mascherare il
+battistrada per proteggerlo mentre si verniciano i cerchi è superfluo: basta
+togliere la gomma.
+
+**Procedura corretta:**
+1. Rimuovi la gomma dal cerchio (si sfila a mano, nessun collante da sciogliere).
+2. Vernicia il cerchio a gomma smontata — nessuna mascheratura del battistrada
+   necessaria.
+3. Se la superficie del cerchio dove la gomma fa presa rischia di ricevere
+   vernice, mascherala con un dischetto di nastro/carta — la vernice in eccesso
+   su quella superficie di contatto impedisce il corretto inserimento/rimozione
+   della gomma.
+4. Rimonta la gomma solo a vernice completamente asciutta (cura completa, non
+   solo flash time).
+
+**Perché non mascherare la gomma:** oltre a essere superfluo (si rimuove), il
+nastro sul battistrada scanalato raramente aderisce in modo uniforme — bordi di
+vernice imprecisi sul cerchio, rischio di residuo di colla sulla gomma. Vedi
+anche `Core/AI_OPERATING_RULES.md §RULE-102`, `Tests/ContentValidation.md §TEST-CV-008`.
+
+---
+
 ## Related Documents
 - `Knowledge/Painting.md`
 - `Knowledge/ClearCoat.md`

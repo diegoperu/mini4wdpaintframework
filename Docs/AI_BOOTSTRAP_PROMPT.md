@@ -234,6 +234,11 @@ l'elenco di tutte le immagini ancora mancanti, col path esatto atteso. Se il rep
 logo, nessun pannello header/footer) da salvare esattamente al path indicato in
 `MISSING_IMAGES_PROMPT.md` per quello slot (es. `Images/P002_front.png`).
 
+> ⚠️ **Gemini:** se stai usando lo ZIP prodotto da `Scripts/package_handoff.sh`,
+> carica le foto `ref_*.jpg` anche come allegati diretti in chat, non solo dentro
+> l'archivio — Gemini non le legge se sono solo nello ZIP (a differenza di ChatGPT
+> Web, che le estrae correttamente). Confermato da user testing 2026-07-08, `KI-006`.
+
 Dopo aver ricevuto l'immagine: salvala al path esatto, poi ripeti 4a per
 confermare che il template la incorpori (lo slot non comparirà più in
 `MISSING_IMAGES.md`/`MISSING_IMAGES_PROMPT.md`).

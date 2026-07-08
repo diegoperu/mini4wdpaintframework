@@ -25,11 +25,11 @@ areas:
     notes: "Nero come contrasto netto rispetto ad azzurro e rosa della cowling."
 
   - id: "D002"
-    name: "Ingranaggi e meccanica del motore"
+    name: "Cover ingranaggi esterna (guscio Super-II)"
     color_id: "PC006"        # → TS-38 Gun Metal, Metallizzato
     technique: "pennello"
-    description: "Applica TS-38 (Gun Metal) su ingranaggi e meccanica del motore con pennello tondo n.000, usando la tecnica dry-brush."
-    notes: "Gun metal metallizzato per un effetto meccanico realistico sui componenti visibili del motore."
+    description: "Applica TS-38 (Gun Metal) sulla cover esterna del cambio con pennello tondo n.000, usando la tecnica dry-brush."
+    notes: "Gun metal metallizzato per un effetto meccanico realistico sulla cover esterna. NON verniciare ingranaggi o meccanica interna del motore — comprometterebbe il funzionamento del modello (vedi Knowledge/MechanicalSafety.md)."
 
   - id: "D003"
     name: "Cerchi ruote"

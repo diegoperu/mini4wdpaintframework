@@ -224,7 +224,7 @@ As of SDK v2.3.0, every prompt must begin with a LOAD sequence that injects the 
 3. **TOKENS** third — provides concrete visual values
 4. **TEXT_ENGINE** fourth — establishes text authorship rules before language policy
 5. **LANGUAGE_POLICY** fifth — enforces Italian-only AFTER text rules are loaded
-6. **AI_OPERATING_RULES** sixth — applies all 100 rules as hard constraints
+6. **AI_OPERATING_RULES** sixth — applies all 102 rules as hard constraints
 7. **PROJECT.yaml** seventh — injects project-specific data
 8. **GENERATE** last — only after all context is loaded
 

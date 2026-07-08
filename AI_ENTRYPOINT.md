@@ -107,7 +107,7 @@ The production pipeline executes in strict sequence. Never skip or reorder phase
            └─ Output: Projects/{Model}/{Variant}/ApprovedText/P00x/content.yaml
 
 [Phase 2b] Content QA   ← BLOCKING GATE
-           └─ Tests/ContentValidation.md (7 suites)
+           └─ Tests/ContentValidation.md (8 suites)
            └─ All failures must be fixed before proceeding
 
 [Phase 2c] Text QA      ← BLOCKING GATE
@@ -270,7 +270,7 @@ CONTENT (Phase 2a)
 [ ] Language: Italian throughout — no Japanese, no English body
 
 QA (Phase 2b–2c)
-[ ] Tests/ContentValidation.md: all 7 suites PASS
+[ ] Tests/ContentValidation.md: all 8 suites PASS
 [ ] Tests/TextValidation.md: all 9 tests PASS
 [ ] All FAIL items resolved and re-tested
 
@@ -369,7 +369,7 @@ After producing this report: **wait**. Do not proceed until the user responds.
 | SDK version and pipeline summary | `SDK_CONTEXT.yaml` |
 | Full operational guide for AI | `BOOTSTRAP.md` |
 | Exact document loading order | `Docs/LOAD_ORDER.md` |
-| 100 behavioral rules | `Core/AI_OPERATING_RULES.md` |
+| 102 behavioral rules | `Core/AI_OPERATING_RULES.md` |
 | Italian language rules | `Config/LANGUAGE_POLICY.yaml` |
 | Text generation and content.yaml | `Core/TEXT_ENGINE.md` |
 | Visual design rules | `Core/DESIGN_LANGUAGE.md` |
