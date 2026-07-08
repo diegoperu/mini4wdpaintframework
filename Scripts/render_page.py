@@ -163,7 +163,7 @@ Regole:
   esistenti. Non aggiungere grafiche (fiamme, strisce, numeri di gara) assenti
   dallo schema colori.
 - Applica Core/DESIGN_LANGUAGE.md e Core/STYLE_GUIDE.md per stile fotografico/
-  illuminazione, non per layout di pagina (quello lo fa il template).
+  illuminazione, non per layout di pagina (quello lo fa il template).{framing_note}
 
 Schema colori ({scheme_name}):
 {colors_block}
@@ -193,10 +193,23 @@ Regole:
   riferimento mostrano una livrea box-art colorata, ignorala: qui il soggetto deve
   apparire neutro/non verniciato, non nella sua colorazione finale.
 - Applica Core/DESIGN_LANGUAGE.md e Core/STYLE_GUIDE.md per stile fotografico/
-  illuminazione, non per layout di pagina (quello lo fa il template).
+  illuminazione, non per layout di pagina (quello lo fa il template).{framing_note}
 
 Dettaglio specifico per questo slot: {descrizione_slot}
 """
+
+# Slot di "dettaglio" (P004 step, P006 zona, P007 area, P008 decal) non hanno mai
+# un angolo di ripresa esplicito come P001 (render.angle) o P002 (vista ortogonale):
+# la sola label generica "foto di dettaglio" ha portato ChatGPT Web a generare, per
+# P007/D001, un'inquadratura 3/4 dell'intero modellino invece di un macro isolato
+# sulla zona richiesta (bug trovato 2026-07-08 da user testing). Fix: istruzione di
+# inquadratura esplicita, iniettata SOLO per questi slot — P001/P002 hanno gia' il
+# loro framing esplicito e non la ricevono.
+DETAIL_FRAMING_NOTE = (
+    "\n- Inquadratura: macro/primo piano ravvicinato, isolato SOLO sulla zona "
+    "descritta sotto — non un'immagine dell'intero modellino. Nessun'altra parte "
+    "del veicolo deve essere visibile nell'inquadratura."
+)
 
 
 def is_primer_step(step: dict) -> bool:
@@ -215,39 +228,41 @@ def colors_block(colors_by_id: dict) -> str:
     return "\n".join(lines) if lines else "(nessuno schema colori trovato in PROJECT.yaml)"
 
 
-def slot_description(page_id: str, slot: str, content: dict) -> tuple[str, str]:
-    """Ritorna (tipo_slot, descrizione_slot) per un singolo slot immagine mancante,
-    compilati dai dati reali del content.yaml — non lasciati come placeholder."""
+def slot_description(page_id: str, slot: str, content: dict) -> tuple[str, str, str]:
+    """Ritorna (tipo_slot, descrizione_slot, framing_note) per un singolo slot immagine
+    mancante, compilati dai dati reali del content.yaml — non lasciati come placeholder.
+    framing_note e' vuoto per gli slot con angolo di ripresa gia' esplicito (P001/P002),
+    DETAIL_FRAMING_NOTE per tutti gli slot di dettaglio (P004/P006/P007/P008)."""
     if page_id == "P001":
         r = content["render"]
-        return "copertina", f"vista {r.get('angle', '3/4 front-left')}, illuminazione {r.get('lighting', 'studio-neutral')}. {r.get('alt', '')}"
+        return "copertina", f"vista {r.get('angle', '3/4 front-left')}, illuminazione {r.get('lighting', 'studio-neutral')}. {r.get('alt', '')}", ""
 
     if page_id == "P002":
         names = {"front": "frontale", "side": "laterale", "top": "dall'alto"}
         r = content["renders"][slot]
-        return f"vista ortogonale {names.get(slot, slot)}", f"nessuna prospettiva, sfondo bianco. {r.get('alt', '')}"
+        return f"vista ortogonale {names.get(slot, slot)}", f"nessuna prospettiva, sfondo bianco. {r.get('alt', '')}", ""
 
     if page_id == "P004" and slot.startswith("step"):
         step_id = int(slot.removeprefix("step"))
         step = next(s for s in content["steps"] if s["id"] == step_id)
-        return "foto di dettaglio/preparazione", f"Step {step_id} — {step['title']}: {step['description']}"
+        return "foto di dettaglio/preparazione", f"Step {step_id} — {step['title']}: {step['description']}", DETAIL_FRAMING_NOTE
 
     if page_id == "P006" and slot.startswith("zone_"):
         zone_id = slot.removeprefix("zone_")
         zone = next(z for z in content["zones"] if z["id"] == zone_id)
-        return "foto di dettaglio/mascheratura", f"Zona {zone_id} — {zone['area']} ({zone['masking_type']}). {zone.get('notes', '')}"
+        return "foto di dettaglio/mascheratura", f"Zona {zone_id} — {zone['area']} ({zone['masking_type']}). {zone.get('notes', '')}", DETAIL_FRAMING_NOTE
 
     if page_id == "P007" and slot.startswith("area_"):
         area_id = slot.removeprefix("area_")
         area = next(a for a in content["areas"] if a["id"] == area_id)
-        return "foto di dettaglio", f"{area['name']}: {area['description']} {area.get('notes', '')}"
+        return "foto di dettaglio", f"{area['name']}: {area['description']} {area.get('notes', '')}", DETAIL_FRAMING_NOTE
 
     if page_id == "P008" and slot.startswith("decal"):
         idx = int(slot.removeprefix("decal"))
         decal = content["decals"][idx - 1]
-        return "foto di dettaglio/decal", str(decal)
+        return "foto di dettaglio/decal", str(decal), DETAIL_FRAMING_NOTE
 
-    return "illustrazione", "(descrizione non disponibile — verifica manualmente content.yaml)"
+    return "illustrazione", "(descrizione non disponibile — verifica manualmente content.yaml)", ""
 
 
 def build_prompt_entries(variant_dir: Path, model: str, variant: str, project: dict, colors_by_id: dict,
@@ -263,7 +278,7 @@ def build_prompt_entries(variant_dir: Path, model: str, variant: str, project: d
 
     entries = []
     for slot, rel_path in missing:
-        tipo_slot, descrizione_slot = slot_description(page_id, slot, content)
+        tipo_slot, descrizione_slot, framing_note = slot_description(page_id, slot, content)
 
         if page_id == "P004" and slot.startswith("step"):
             step_id = int(slot.removeprefix("step"))
@@ -277,6 +292,7 @@ def build_prompt_entries(variant_dir: Path, model: str, variant: str, project: d
                 tipo_slot=tipo_slot,
                 stato_colore=stato_colore,
                 descrizione_slot=descrizione_slot,
+                framing_note=framing_note,
             )
         else:
             prompt = PROMPT_TEMPLATE.format(
@@ -284,6 +300,7 @@ def build_prompt_entries(variant_dir: Path, model: str, variant: str, project: d
                 scheme_name=scheme_name,
                 colors_block=colors_txt,
                 descrizione_slot=descrizione_slot,
+                framing_note=framing_note,
             )
 
         entries.append({

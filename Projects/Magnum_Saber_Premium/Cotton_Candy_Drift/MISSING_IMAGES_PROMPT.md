@@ -1,7 +1,7 @@
 # Prompt per le immagini mancanti
 
 > File generato automaticamente da `Scripts/render_page.py` — non modificare a mano,
-> viene riscritto ad ogni run. Ultimo aggiornamento: 2026-07-07 11:41.
+> viene riscritto ad ogni run. Ultimo aggiornamento: 2026-07-08 13:52.
 > Versione machine-readable (stessi dati, per un futuro nodo di generazione locale in batch): `MISSING_IMAGES.json`.
 
 Progetto: `Magnum_Saber_Premium/Cotton_Candy_Drift`
@@ -43,6 +43,7 @@ Regole:
   dallo schema colori.
 - Applica Core/DESIGN_LANGUAGE.md e Core/STYLE_GUIDE.md per stile fotografico/
   illuminazione, non per layout di pagina (quello lo fa il template).
+- Inquadratura: macro/primo piano ravvicinato, isolato SOLO sulla zona descritta sotto — non un'immagine dell'intero modellino. Nessun'altra parte del veicolo deve essere visibile nell'inquadratura.
 
 Schema colori (Cotton Candy Drift):
 - Light Blue (TS-23, LUCIDO) — hex #8FD3E8 — Colore dominante dello schema. Applicare su primer bianco per mantenere la luminosità pastello. Distanza 25-30cm.
@@ -92,6 +93,7 @@ Regole:
   dallo schema colori.
 - Applica Core/DESIGN_LANGUAGE.md e Core/STYLE_GUIDE.md per stile fotografico/
   illuminazione, non per layout di pagina (quello lo fa il template).
+- Inquadratura: macro/primo piano ravvicinato, isolato SOLO sulla zona descritta sotto — non un'immagine dell'intero modellino. Nessun'altra parte del veicolo deve essere visibile nell'inquadratura.
 
 Schema colori (Cotton Candy Drift):
 - Light Blue (TS-23, LUCIDO) — hex #8FD3E8 — Colore dominante dello schema. Applicare su primer bianco per mantenere la luminosità pastello. Distanza 25-30cm.
@@ -141,6 +143,7 @@ Regole:
   dallo schema colori.
 - Applica Core/DESIGN_LANGUAGE.md e Core/STYLE_GUIDE.md per stile fotografico/
   illuminazione, non per layout di pagina (quello lo fa il template).
+- Inquadratura: macro/primo piano ravvicinato, isolato SOLO sulla zona descritta sotto — non un'immagine dell'intero modellino. Nessun'altra parte del veicolo deve essere visibile nell'inquadratura.
 
 Schema colori (Cotton Candy Drift):
 - Light Blue (TS-23, LUCIDO) — hex #8FD3E8 — Colore dominante dello schema. Applicare su primer bianco per mantenere la luminosità pastello. Distanza 25-30cm.
@@ -190,6 +193,7 @@ Regole:
   dallo schema colori.
 - Applica Core/DESIGN_LANGUAGE.md e Core/STYLE_GUIDE.md per stile fotografico/
   illuminazione, non per layout di pagina (quello lo fa il template).
+- Inquadratura: macro/primo piano ravvicinato, isolato SOLO sulla zona descritta sotto — non un'immagine dell'intero modellino. Nessun'altra parte del veicolo deve essere visibile nell'inquadratura.
 
 Schema colori (Cotton Candy Drift):
 - Light Blue (TS-23, LUCIDO) — hex #8FD3E8 — Colore dominante dello schema. Applicare su primer bianco per mantenere la luminosità pastello. Distanza 25-30cm.

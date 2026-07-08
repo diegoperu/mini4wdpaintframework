@@ -71,8 +71,17 @@ cp "Docs/RENDER_HANDOFF_CONTEXT.md" "$STAGE_DIR/HANDOFF_CONTEXT.md"
 mkdir -p "$STAGE_DIR/$PROJECT_DIR"
 cp "$PROJECT_DIR/PROJECT.yaml" "$STAGE_DIR/$PROJECT_DIR/PROJECT.yaml"
 
+# Solo le foto di riferimento del modello fisico (ref_*.jpg) — MAI le illustrazioni
+# P00x_*.png/jpg gia' generate in chat precedenti. Scripts/render_page.py (source of
+# truth per "File da allegare" in MISSING_IMAGES_PROMPT.md) elenca solo ref_*.jp*g:
+# un pacchetto con dentro anche le altre pagine gia' renderizzate e' piu' pesante del
+# necessario e mette davanti al modello immagini irrilevanti per il nuovo slot da
+# generare — causa sospetta di un'allucinazione totalmente scollegata osservata con
+# Gemini (2026-07-08).
 if [[ -d "$PROJECT_DIR/Images" ]]; then
-  cp -R "$PROJECT_DIR/Images" "$STAGE_DIR/$PROJECT_DIR/Images"
+  mkdir -p "$STAGE_DIR/$PROJECT_DIR/Images"
+  find "$PROJECT_DIR/Images" -maxdepth 1 -type f \( -iname 'ref_*.jpg' -o -iname 'ref_*.jpeg' \) \
+    -exec cp {} "$STAGE_DIR/$PROJECT_DIR/Images/" \;
 fi
 
 # --- Comprimi le foto di riferimento (JPEG qualità 70%) per ridurre la dimensione
