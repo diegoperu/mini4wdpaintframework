@@ -33,23 +33,23 @@
     height: {{ mm(18) }}; background: var(--tamiya-primary); color: var(--white);
     display: flex; align-items: center; padding: 0 {{ mm(6) }};
   }
-  .header .brand { flex: 0 0 25%; font-family: var(--title-font); font-size: 14pt; }
-  .header .series { flex: 1; text-align: center; font-size: 13pt; font-weight: 600; }
-  .header .page-label { flex: 0 0 25%; text-align: right; font-size: 8pt; text-transform: uppercase; letter-spacing: 1px; }
+  .header .brand { flex: 0 0 25%; font-family: var(--title-font); font-size: 18.2pt; }
+  .header .series { flex: 1; text-align: center; font-size: 16.9pt; font-weight: 600; }
+  .header .page-label { flex: 0 0 25%; text-align: right; font-size: 10.4pt; text-transform: uppercase; letter-spacing: 1px; }
 
   .footer {
     position: absolute; bottom: 0; left: 0; right: 0; height: {{ mm(12) }};
     background: var(--white); border-top: 1.5pt solid var(--tamiya-primary);
     display: flex; align-items: center; padding: 0 {{ mm(6) }};
-    font-size: 9pt; color: var(--mid-gray);
+    font-size: 11.7pt; color: var(--mid-gray);
   }
-  .footer .right { margin-left: auto; font-size: 8pt; color: var(--tamiya-primary); font-weight: 600; }
+  .footer .right { margin-left: auto; font-size: 10.4pt; color: var(--tamiya-primary); font-weight: 600; }
 
   .main {
     position: absolute; top: {{ mm(18) }}; bottom: {{ mm(12) }}; left: 0; right: 0;
     padding: {{ mm(6) }}; display: flex; flex-direction: column; gap: {{ mm(3) }};
   }
-  h1.page-title { font-family: var(--title-font); font-size: 22pt; color: var(--black); margin-bottom: {{ mm(1) }}; }
+  h1.page-title { font-family: var(--title-font); font-size: 28.6pt; color: var(--black); margin-bottom: {{ mm(1) }}; }
 
   /* Step sequence (C013 Step Number + C014 Time Box) */
   .step { display: flex; gap: {{ mm(3) }}; }
@@ -57,34 +57,34 @@
     flex: none; width: {{ mm(8) }}; height: {{ mm(8) }};
     background: var(--tamiya-primary); color: var(--white);
     border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 10pt;
+    font-weight: 700; font-size: 16.9pt;
   }
   .step-body { flex: 1; }
   .step-thumb {
     flex: none; width: {{ mm(48) }}; height: {{ mm(34) }};
     border: 1pt dashed var(--light-gray); background: var(--off-white);
-    color: var(--mid-gray); font-size: 6.5pt; text-align: center;
+    color: var(--mid-gray); font-size: 8.5pt; text-align: center;
     display: flex; align-items: center; justify-content: center; overflow: hidden;
   }
   .step-thumb img { width: 100%; height: 100%; object-fit: cover; }
   .step-title-row { display: flex; align-items: baseline; gap: {{ mm(3) }}; }
-  .step-title { font-size: 12pt; font-weight: 700; color: var(--black); }
+  .step-title { font-size: 15.6pt; font-weight: 700; color: var(--black); }
   .time-box {
-    font-size: 7.5pt; color: var(--tamiya-dark); background: var(--off-white);
+    font-size: 9.8pt; color: var(--tamiya-dark); background: var(--off-white);
     border: 1pt solid var(--light-gray); border-radius: 3px; padding: 1px {{ mm(1.5) }};
   }
-  .step-desc { font-size: 9.5pt; margin-top: 2px; line-height: 1.5; }
+  .step-desc { font-size: 12.3pt; margin-top: 2px; line-height: 1.5; }
 
   .warning-inline {
     border-left: 3px solid var(--red-warning); background: var(--white);
     padding: {{ mm(1.5) }} {{ mm(2.5) }}; margin-top: {{ mm(1.5) }};
-    font-size: 8.5pt;
+    font-size: 11.1pt;
   }
 
   .tip-inline {
     border-left: 3px solid var(--gold-accent); background: var(--white);
     padding: {{ mm(1.5) }} {{ mm(2.5) }}; margin-top: {{ mm(1) }};
-    font-size: 8.5pt;
+    font-size: 11.1pt;
   }
 
   .divider { border-bottom: 1pt solid var(--light-gray); margin: {{ mm(1) }} 0; }
