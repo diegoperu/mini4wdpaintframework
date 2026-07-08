@@ -24,7 +24,7 @@ Nome, versione (`2.4.0`), codename (`CMS`), maturità (`beta`), stato (`active`)
 URL del repository, branch di default, release corrente. Usato dal Capitolo 16 (GitHubWorkflow) per i link di contribuzione.
 
 ### `compatibility`
-Dichiara compatibilità con ChatGPT, Claude, Gemini e modelli futuri. Nota esplicita: "All PromptEngine/ prompts are model-agnostic. No model-specific syntax is used." Se in futuro un prompt introducesse sintassi specifica di un modello, questa sezione andrebbe aggiornata e la nota rimossa o corretta.
+Dichiara compatibilità con ChatGPT, Claude e modelli futuri per l'intera pipeline; Gemini è compatibile solo per la Fase 4 (generazione di una singola illustrazione — vedi `UAT/UAT-002.md`, `UAT/UAT-004.md`), non verificato per Fase 1-3. Nota esplicita: "All PromptEngine/ prompts are model-agnostic. No model-specific syntax is used." Se in futuro un prompt introducesse sintassi specifica di un modello, questa sezione andrebbe aggiornata e la nota rimossa o corretta.
 
 ### `pipeline`
 La sequenza `text_engine → qa_engine → render_engine → pdf_builder`, con input, output e documento spec per ciascuna fase. Questa è la versione compatta della pipeline; il dettaglio completo a 8 fasi è in `Build/Pipeline.md` (vedi Capitolo 05).

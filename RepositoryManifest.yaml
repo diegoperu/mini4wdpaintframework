@@ -138,9 +138,9 @@ core:
 
     - path: "Core/AI_OPERATING_RULES.md"
       type: "specification"
-      role: "100 behavioral rules for AI models (Rules 001–058 design, 059–100 text)"
+      role: "102 behavioral rules for AI models (Rules 001–058 design, 059–100 text, 101–102 mechanical safety)"
       status: "current"
-      version: "2.4.0"
+      version: "2.5.5"
       ai_load_order: 3
       depends_on: []
 

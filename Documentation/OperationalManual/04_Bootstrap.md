@@ -69,11 +69,13 @@ Le regole sono organizzate in 9 categorie (Regole 001–058, aggiunte in v2.2.0)
 
 A queste si aggiunge, dalla v2.3.0, la categoria `[TEXT]` (RULE-059–100), interamente dedicata al rendering testuale in italiano: divieto assoluto di script giapponesi anche come decorazione (RULE-060–061), formattazione italiana dei numeri — separatore decimale, interi/percentuali/dimensioni (RULE-070, RULE-085), uso delle virgolette basse «…» (RULE-071), e il principio cardine RULE-072: *"The Render Engine never generates text — it only places text."*
 
+Dalla v2.5.5 si aggiunge la categoria `[SAFETY]` (RULE-101–102), sulla sicurezza meccanica dei contenuti generati: RULE-101 vieta di istruire la verniciatura di parti mobili/funzionali (ingranaggi, meccanica interna del motore), RULE-102 impone di mascherare la superficie di contatto del cerchio, mai la gomma stessa (removibile/intercambiabile). Vedi `Knowledge/MechanicalSafety.md`.
+
 Ogni categoria bloccante è indicata nella tabella "Compliance Summary" del documento — per `[DATA]`, `[DESIGN]`, `[LAYOUT]`, `[COLOR]` tutte le regole sono bloccanti; per le altre categorie solo un sottoinsieme lo è esplicitamente.
 
-## 4. I 100 rules riassunti non sostituiscono la lettura completa
+## 4. Le 102 rules riassunte non sostituiscono la lettura completa
 
-Questo capitolo riassume categorie ed esempi, non riproduce le 100 regole verbatim: farlo violerebbe lo stesso principio di `Core/DOCUMENTATION_STYLE.md § 12` ("Do not pad" — ogni frase deve guadagnarsi il proprio posto) applicato a un documento che già esiste ed è già la fonte primaria. Per la lista completa e vincolante, apri `Core/AI_OPERATING_RULES.md` direttamente.
+Questo capitolo riassume categorie ed esempi, non riproduce le 102 regole verbatim: farlo violerebbe lo stesso principio di `Core/DOCUMENTATION_STYLE.md § 12` ("Do not pad" — ogni frase deve guadagnarsi il proprio posto) applicato a un documento che già esiste ed è già la fonte primaria. Per la lista completa e vincolante, apri `Core/AI_OPERATING_RULES.md` direttamente.
 
 ## 5. Come un nuovo progetto fa bootstrap
 

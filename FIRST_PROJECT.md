@@ -124,7 +124,8 @@ al Maintainer per i progetti di riferimento SDK).
 
 ## PASSO 6 — Bootstrap (prima chat AI)
 
-1. Apri una **nuova chat** con il tuo modello AI (ChatGPT / Claude / Gemini).
+1. Apri una **nuova chat** con il tuo modello AI (ChatGPT o Claude — Gemini non è
+   verificato per questa fase, solo per la Fase 4, vedi `UAT/UAT-004.md`).
 2. Apri `Docs/AI_BOOTSTRAP_PROMPT.md` → **Fase 1 — Bootstrap**.
 3. Allega i file nell'ordine indicato (SDK_CONTEXT.yaml, BOOTSTRAP.md, i Core/ elencati,
    il tuo PROJECT.yaml, le tue foto).
