@@ -16,6 +16,29 @@
 > (testo generato e validato — vedi `FIRST_PROJECT.md` e `OperatorGuide/01_Primo_Manuale.md`).
 > Dove arrivi: tutte le pagine renderizzate, pronte per l'assemblaggio PDF (`FIRST_PDF.md`).
 
+## Prerequisiti (2026-07-09)
+
+Tutti i comandi di questo tutorial (e di `FIRST_PDF.md`) sono script bash —
+`Scripts/render_page.py`, `Scripts/package_handoff.sh`, `sha256sum`, ecc.
+
+| Sistema | Shell richiesta |
+|---|---|
+| Linux / macOS | Terminale nativo — nessuna azione extra |
+| Windows | **Git Bash** (incluso nell'installer di [Git for Windows](https://git-scm.com/downloads/win) — già presente se hai clonato il repo con `git`, nessun secondo download). PowerShell/cmd.exe **non** eseguono questi script: sintassi diversa (`set -euo pipefail`, `mkdir -p {a,b}`, `find -print0`) non supportata nativamente. |
+
+Non sono previste versioni PowerShell separate degli script (vedi `CP-001` per
+il ragionamento: un'unica implementazione bash evita che una correzione futura
+venga applicata a una versione e dimenticata sull'altra).
+
+Strumenti a riga di comando richiesti, oltre a Git Bash:
+
+| Strumento | Serve per | Se mancante |
+|---|---|---|
+| Python 3.9+ e `pip` | `render_page.py` | Blocca — installazione obbligatoria |
+| `playwright install chromium` | `render_page.py` (screenshot headless) | Blocca — installazione obbligatoria (PASSO 2) |
+| ImageMagick (`magick` o `convert`) | `package_handoff.sh` (compressione foto reference) | Blocca solo PASSO 3 — lo script esce con errore esplicito se assente |
+| `pdfunite` (pacchetto `poppler-utils`) | Anteprima PDF unica (`render_page.py … pdf`, vedi `FIRST_PDF.md`) | Non blocca — se assente lo script stampa un avviso e lascia le pagine separate in `Build/Preview/` |
+
 ---
 
 ## PASSO 1 — Verifica il punto di partenza

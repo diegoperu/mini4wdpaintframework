@@ -6,6 +6,9 @@ di produzione) — pochi secondi per un'anteprima unica
 > Da dove parti: tutte le pagine in `status: rendered` (vedi `FIRST_RENDER.md`).
 > Dove arrivi: il manuale PDF nelle 3 varianti (screen / print / archive).
 
+> Prerequisiti shell/strumenti (Git Bash su Windows, `pdfunite`, ecc.): vedi
+> `FIRST_RENDER.md §Prerequisiti` — stessi requisiti, non ripetuti qui.
+
 > ⚠️ **Anteprima veloce (2026-07-07):** `Scripts/render_page.py {Modello}
 > {Variante} pdf` unisce già tutte le pagine in un unico PDF in
 > `Projects/{Modello}/{Variante}/{Modello}_{Variante}.pdf` (via `pdfunite` —

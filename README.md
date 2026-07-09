@@ -100,6 +100,12 @@ LANGUAGE_POLICY → AI_OPERATING_RULES → PROJECT.yaml → GENERATE
 
 ## Quick Start
 
+> **Windows:** the commands below (and `Scripts/render_page.py`/`package_handoff.sh`
+> later in the pipeline) are bash scripts. Use **Git Bash** (bundled with
+> [Git for Windows](https://git-scm.com/downloads/win) — already installed if you
+> cloned with `git`). PowerShell/cmd.exe do not run them natively. Details:
+> `FIRST_RENDER.md §Prerequisiti`.
+
 **Step 1 — Clone the SDK**
 ```bash
 git clone https://github.com/diegoperu/mini4wdpaintframework.git
