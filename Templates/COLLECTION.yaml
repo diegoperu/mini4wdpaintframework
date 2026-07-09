@@ -1,0 +1,52 @@
+# ============================================================
+# Mini4WD Manual SDK — Collana (Series) Configuration Template
+# Version: 2.6.0
+# ============================================================
+# INSTRUCTIONS:
+#   1. Copy this file to Collections/{CollanaSlug}/COLLECTION.yaml
+#   2. Fill in all REQUIRED fields
+#   3. Reference this collana from a project via PROJECT.yaml's
+#      `project.collana` field (see Templates/PROJECT.yaml)
+#   4. Do NOT edit this master template directly
+#
+# Scope (CP-001 / ROADMAP.md Build Order step 2 — "schema only, not the
+# full style catalog"): this file selects a token set for a whole series
+# of manuals. It does NOT declare which projects belong to it — that
+# reference is one-way, from PROJECT.yaml.collana to this file's slug,
+# so changing a collana's graphics never requires touching N projects.
+#
+# See Core/NAMING_CONVENTION.md for collana slug naming rules.
+# ============================================================
+
+sdk_version: "2.6.0"            # REQUIRED — must match SDK version (see VERSION file)
+
+# ============================================================
+# COLLANA METADATA
+# ============================================================
+collana:
+  name: ""                      # REQUIRED — display name
+                                #   Example: "Championship Series 2024"
+  slug: ""                      # REQUIRED — kebab-case identifier, must match the
+                                #   Collections/{slug}/ folder name exactly
+                                #   Example: "championship-series-2024"
+  description: ""               # OPTIONAL — 1-2 sentence description of the series' identity
+
+# ============================================================
+# THEME
+# ============================================================
+# Token-level only. Selects which Assets/DesignSystem/Tokens/tokens.theme-{tokenSet}.yaml
+# file every project in this collana resolves to, unless a project sets
+# project.themeOverride (see Templates/PROJECT.yaml — that always wins).
+theme:
+  tokenSet: ""                  # REQUIRED — must match an existing
+                                #   Assets/DesignSystem/Tokens/tokens.theme-{tokenSet}.yaml
+                                #   Example values today: "dark" | "eva01" | "jehuty"
+
+# ============================================================
+# COMPONENT OVERRIDES (reserved — not active in v2.6.0)
+# ============================================================
+# Placeholder for theme-specific components (e.g. Painting Highlight, CTA
+# footer banner — see ROADMAP.md "Multi-Style / Theme System"). Left empty
+# until a theme actually needs structural changes beyond token swaps —
+# do not populate speculatively (Rule 1, function over decoration).
+componentOverrides: {}

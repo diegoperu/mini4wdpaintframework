@@ -38,6 +38,7 @@
 | Elemento | Motivazione | Evidenza |
 |----------|-------------|----------|
 | Compiler/ e Prompt Orchestrator (v2.5.0) | Già annunciato in `CHANGELOG.md §Unreleased` e `SDK_CONTEXT.yaml`; riduce i prompt ripetuti manualmente | Roadmap pre-QMS |
+| Theme/Collana mechanism — schema di risoluzione (v2.6.0, Build Order step 2) | Nessun modo di applicare/aggiornare un tema a un'intera serie di manuali da un solo punto; oggi solo override CLI manuale per-render | CP-001 |
 
 ## IN SVILUPPO
 

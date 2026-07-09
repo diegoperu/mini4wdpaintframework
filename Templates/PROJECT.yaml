@@ -38,6 +38,15 @@ project:
                                  #   Example: "Studio Mini4WD"
   createdAt: ""                  # REQUIRED — ISO 8601 date: YYYY-MM-DD
   updatedAt: ""                  # REQUIRED — ISO 8601 date: YYYY-MM-DD (same as createdAt for first draft)
+  collana: ""                    # OPTIONAL (v2.6.0, CP-001) — slug reference to
+                                 #   Collections/{slug}/COLLECTION.yaml. When set, this
+                                 #   project's render resolves its token set from that
+                                 #   collana's theme.tokenSet unless themeOverride is
+                                 #   also set below. Leave empty = SDK default theme.
+  themeOverride: ""              # OPTIONAL (v2.6.0, CP-001) — direct tokenSet name,
+                                 #   e.g. "dark". Wins over collana's theme even if
+                                 #   collana is set above. For single-project deviation
+                                 #   from its series' theme. Leave empty = no override.
 
 # ============================================================
 # PAINT SCHEME

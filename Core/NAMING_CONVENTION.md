@@ -111,6 +111,26 @@ Projects/Proto_Emperor/Cotton_Candy_Drift/PROJECT.yaml   ← same model, differe
 
 Multiple variants of the same model are siblings under the model folder.
 
+### 3.1b Collana (Series) Folders (in Collections/) — v2.6.0, CP-001
+
+**Structure:** `Collections/{CollanaSlug}/COLLECTION.yaml`
+
+**{CollanaSlug} folder — format:** kebab-case, matching `collana.slug` in
+`COLLECTION.yaml` exactly (same pattern as `model_slug_pattern` in
+`Config/sdk.yaml` — lowercase, hyphens, no spaces). Unlike Model/Variant
+folders, there is no separate PascalCase display form: the folder name
+*is* the slug.
+
+| collana.name | Folder Name |
+|---|---|
+| Championship Series 2024 | `championship-series-2024` |
+| Brocken Gigant Line | `brocken-gigant-line` |
+
+A project references its collana by slug from `PROJECT.yaml`'s
+`project.collana` field — no filesystem nesting between `Collections/` and
+`Projects/` (see `ROADMAP.md` Multi-Style/Theme System, CP-001: reference by
+ID, not folder parent/child).
+
 ### 3.2 SDK Directory Structure Folders
 **Format:** `PascalCase` for semantic SDK directories.
 
@@ -120,6 +140,7 @@ Multiple variants of the same model are siblings under the model folder.
 | `PromptEngine/` | `prompts/`, `prompt_engine/` |
 | `Templates/` | `templates/` |
 | `Assets/` | `assets/` |
+| `Collections/` | `collections/`, `COLLECTIONS/` |
 | `DesignSystem/` | `design_system/`, `designSystem/` |
 
 ### 3.3 Asset Subdirectories

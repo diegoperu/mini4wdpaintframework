@@ -17,13 +17,17 @@ Esegue in automatico su TUTTE le pagine ApprovedText/P0xx del progetto indicato
 sono nomi di cartella sotto Projects/ — risolti sempre a partire dalla root del
 repository, non dalla directory corrente: lo script funziona da qualunque cwd.
 
-[theme] e' un prototipo di test per confrontare palette colore alternative
-(Build Order step 2 di ROADMAP.md — "Theme/collana mechanism" — NON e' quel
-meccanismo: qui non tocca PROJECT.yaml, non ha gerarchia collana, e' solo uno
-scambio di file token a riga di comando per guardare varianti colore fianco a
-fianco). Omesso -> usa il tema di default (Assets/DesignSystem/Tokens/
-tokens.example.yaml). Se specificato, carica invece Assets/DesignSystem/Tokens/
-tokens.theme-{theme}.yaml — stesse chiavi, valori colore diversi; nessun
+Risoluzione del tema (CP-001, Build Order step 2 di ROADMAP.md —
+"Theme/collana mechanism"), in ordine di precedenza:
+  1. [theme] arg CLI — override esplicito, vince sempre. Utile per confrontare
+     varianti colore fianco a fianco senza toccare PROJECT.yaml.
+  2. PROJECT.yaml -> project.themeOverride — deviazione per questo singolo progetto.
+  3. PROJECT.yaml -> project.collana -> Collections/{collana}/COLLECTION.yaml
+     -> theme.tokenSet — tema ereditato dalla serie/collana.
+  4. Nessuno dei precedenti -> tema di default (Assets/DesignSystem/Tokens/
+     tokens.example.yaml).
+Ogni tema risolto (comunque scelto sopra) carica Assets/DesignSystem/Tokens/
+tokens.theme-{nome}.yaml — stesse chiavi, valori colore diversi; nessun
 template cambia. Richiede che [png|pdf] sia specificato esplicitamente.
 
 Output:
@@ -378,6 +382,45 @@ def load_yaml(path: Path) -> dict:
         return yaml.safe_load(f)
 
 
+def _theme_tokens_path(theme_name: str) -> Path:
+    """Path del file token per un nome di tema risolto (senza il prefisso tokens.theme-)."""
+    path = REPO_ROOT / "Assets/DesignSystem/Tokens" / f"tokens.theme-{theme_name}.yaml"
+    if not path.exists():
+        print(f"Errore: tema '{theme_name}' non trovato — atteso {path}", file=sys.stderr)
+        sys.exit(1)
+    return path
+
+
+def resolve_tokens_path(project: dict, cli_theme: str | None) -> tuple[Path, str | None]:
+    """Risoluzione tema CP-001: CLI [theme] arg > project.themeOverride >
+    project.collana (Collections/{slug}/COLLECTION.yaml -> theme.tokenSet) > default SDK.
+    Ritorna (tokens_path, nome_tema_risolto_o_None) — None significa default, nessun
+    suffisso file di output."""
+    if cli_theme:
+        return _theme_tokens_path(cli_theme), cli_theme
+
+    project_block = project.get("project", {}) if project else {}
+
+    theme_override = project_block.get("themeOverride") or None
+    if theme_override:
+        return _theme_tokens_path(theme_override), theme_override
+
+    collana_slug = project_block.get("collana") or None
+    if collana_slug:
+        collection_path = REPO_ROOT / "Collections" / collana_slug / "COLLECTION.yaml"
+        if not collection_path.exists():
+            print(f"Errore: collana '{collana_slug}' non trovata — atteso {collection_path}", file=sys.stderr)
+            sys.exit(1)
+        collection = load_yaml(collection_path)
+        token_set = collection.get("theme", {}).get("tokenSet")
+        if not token_set:
+            print(f"Errore: {collection_path} non definisce theme.tokenSet", file=sys.stderr)
+            sys.exit(1)
+        return _theme_tokens_path(token_set), token_set
+
+    return TOKENS_PATH, None
+
+
 IMAGE_EXTENSIONS = (".png", ".jpg", ".jpeg")
 
 
@@ -469,17 +512,6 @@ def main() -> None:
         print(f"Errore: cartella ApprovedText non trovata: {approved_text_dir}", file=sys.stderr)
         sys.exit(1)
 
-    if theme is None:
-        tokens_path = TOKENS_PATH
-    else:
-        tokens_path = REPO_ROOT / "Assets/DesignSystem/Tokens" / f"tokens.theme-{theme}.yaml"
-        if not tokens_path.exists():
-            print(f"Errore: tema '{theme}' non trovato — atteso {tokens_path}", file=sys.stderr)
-            sys.exit(1)
-
-    tokens = load_yaml(tokens_path)["tokens"]
-    output_suffix = f"_{theme}" if theme else ""
-
     project_yaml_path = variant_dir / "PROJECT.yaml"
     project = {}
     colors_by_id = {}
@@ -487,6 +519,10 @@ def main() -> None:
         project = load_yaml(project_yaml_path)
         for c in project.get("paintScheme", {}).get("colors", []):
             colors_by_id[c["id"]] = c
+
+    tokens_path, resolved_theme = resolve_tokens_path(project, theme)
+    tokens = load_yaml(tokens_path)["tokens"]
+    output_suffix = f"_{resolved_theme}" if resolved_theme else ""
 
     env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)))
     env.filters["mm"] = mm
@@ -568,7 +604,7 @@ def main() -> None:
 
     total_missing = sum(len(v) for v in missing_by_page.values())
 
-    if theme is None:
+    if resolved_theme is None:
         report_path = variant_dir / "MISSING_IMAGES.md"
         write_missing_report(report_path, model_name, variant_name, missing_by_page, skipped_pages)
 
@@ -576,7 +612,7 @@ def main() -> None:
         prompt_json_path = variant_dir / "MISSING_IMAGES.json"
         write_prompt_files(prompt_md_path, prompt_json_path, model_name, variant_name, prompt_entries)
     else:
-        print(f"Tema '{theme}': MISSING_IMAGES.md/.json/_PROMPT.md non toccati (indipendenti dal colore).")
+        print(f"Tema '{resolved_theme}': MISSING_IMAGES.md/.json/_PROMPT.md non toccati (indipendenti dal colore).")
 
     if fmt == "pdf" and pdf_paths:
         merged_path = variant_dir / f"{model_name}_{variant_name}{output_suffix}.pdf"
@@ -584,7 +620,7 @@ def main() -> None:
         print(f"PDF unico: {merged_path}")
 
     print(f"\n{rendered_count} pagine renderizzate. {total_missing} immagini mancanti.")
-    if theme is None:
+    if resolved_theme is None:
         print(f"Report: {report_path}")
         print(f"Prompt pronti: {prompt_md_path} ({prompt_json_path} per uso batch)")
 
